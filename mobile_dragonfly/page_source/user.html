@@ -1,0 +1,33 @@
+<div data-role="page" id="user">
+    <div data-role="header" data-position="fixed"data-tap-toggle="false">
+        <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+        </div>
+        <h1 id='user_heading'></h1>
+    </div>
+
+    <div data-role="content">
+        <div class="info-message">Saved recordings.</div>
+        <button onclick="app.io.sendAllSavedForms();" data-theme="b">Send all forms</button>
+        <br/>
+        <div id="saved-list-placeholder"></div>
+        <script id="saved-list-template" type="text/x-handlebars-template">
+            <ul data-role="listview" id="saved-list" data-split-icon="gear" data-split-theme="d">
+                {{#each forms}}
+                <li data-corners="false" data-shadow="false" data-iconshadow="true"
+                    data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="b">
+                    <a href="#" onclick="app.controller.user.sendSavedForm({{id}})">
+                        <!--<img src="" />-->
+                        <h3>{{data.common_name}}</h3>
+                        <p>{{data.date}}</p>
+                    </a>
+                    <a href="#" data-icon="delete" data-ajax="false" data-theme="b"
+                       onclick="app.controller.user.deleteSavedForm({{id}})">Send</a>
+                </li>
+                {{/each}}
+            </ul>
+        </script>
+    </div>
+
+    <div data-role="footer" data-position="fixed"data-tap-toggle="false"></div>
+</div>
