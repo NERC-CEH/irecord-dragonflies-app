@@ -115,6 +115,7 @@ $iform_mobile_path = 'sites/all/modules/iform_mobile/';
           src="<?php echo base_path() . $iform_mobile_path; ?>js/image.js"></script>
 
   <!-- APP specific scripts -->
+  <script type="text/javascript" src="<?php echo $theme_path?>/scripts/conf.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/dragonfly.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/abundance-filter.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/sref.js"></script>

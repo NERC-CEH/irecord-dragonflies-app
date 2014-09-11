@@ -1,5 +1,5 @@
 (function($){
-    app.HOME = 'app/';
+    app.HOME = conf_app_home;
 
     //When leaving a page with a form
     window.onbeforeunload = function() {
@@ -18,7 +18,7 @@
 
     //Fixing back buttons
     $(document).on('pagecreate', function(event, ui) {
-        if (browserDetect('Chrome')){
+        if (browserDetect('Safari')){
             var backButtonUrls = {
                 'record'  :  'list',
                 'species'  :  'list',

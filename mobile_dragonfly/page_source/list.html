@@ -4,9 +4,9 @@
             <a href='info' data-role="button" data-icon="info" data-iconpos="notext" data-prefetch>Info</a>
             <a href='user' data-role="button" data-icon="user" data-iconpos="notext" data-prefetch>User</a>
         </div>
-        <h1 id='List_heading'>iRecord Dragonflies</h1>
+        <h1 id='List_heading'></h1>
         <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
-            <a href="#" id="favourite-button" data-role="button" onclick="app.navigation.filterFavourites()"
+            <a href="#" id="fav-button" data-role="button" onclick="app.navigation.filterFavourites()"
                        data-icon="star" data-iconpos="notext">Favourie</a>
             <a href="#" id="list-controls-button" data-role="button" onclick="app.navigation.showListControls()"
                data-icon="bullets" data-iconpos="notext">List Controls</a>
@@ -17,12 +17,12 @@
             <div data-role="tabs" id="list-controls-tabs">
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#filter" data-ajax="false">Filter</a></li>
-                        <li><a href="#sort" data-ajax="false" class="ui-btn-active">Sort</a></li>
+                        <li><a href="#filter" data-ajax="false" class="ui-btn-active">Filter</a></li>
+                        <li><a href="#sort" data-ajax="false">Sort</a></li>
                     </ul>
                 </div>
                 <div id="sort" class="ui-body-d ui-content">
-                    <div class="info-message" id="gps-start-message">
+                    <div class="info-message">
                         <p>Please select the list sorting.</p>
                     </div>
                     <div id="list-controls-sort-placeholder"></div>
@@ -67,7 +67,7 @@
                         <p class="species-list-common-name">{{common_name}}</p>
                         <p>{{taxon}}</p>
                     </a>
-                    <a href="record#record" onclick="app.controller.list.setCurrentSpecies('{{id}}')" data-icon="action" data-ajax="false">Record</a>
+                    <a href="{{../record}}" class="ios-enhanced" onclick="app.controller.list.setCurrentSpecies('{{id}}')" data-icon="plus" data-ajax="false">Record</a>
                 </li>
                 {{/each}}
             </ul>
@@ -77,6 +77,8 @@
     <div data-role="footer" data-position="fixed"data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
             <a href='settings' data-role="button" data-icon="gear" data-iconpos="notext" data-prefetch>Settings</a>
+            <a href='sref' data-prefetch></a>
+
         </div>
         <h1 id='List_footer'></h1>
         <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
@@ -90,9 +92,10 @@
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
             <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
         </div>
-        <h1 id='List_heading'>Species</h1>
+        <h1 id='List_heading'></h1>
         <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
-            <a href="#" onclick="app.controller.list.gallery.show()" data-icon="eye" data-iconpos="notext" data-role="button" role="button">Gallery</a>
+            <a href="#" id="species-profile-fav-button" onclick="app.controller.species.toggleSpeciesFavourite()" data-icon="star" data-iconpos="notext" data-role="button">Gallery</a>
+            <a href="#" onclick="app.controller.list.gallery.show()" data-icon="eye" data-iconpos="notext" data-role="button">Gallery</a>
         </div>
     </div>
 
@@ -109,13 +112,7 @@
 
                 <ul data-role="listview" data-inset="true" style="max-width:800px;">
                     <li>
-                        <div>
-                            <div class="favourite-taxon">{{taxon}}</div>
-                            <div class="favourite-left">
-                               <input type="checkbox" data-role="flipswitch" id="favourite-species-button" {{favourite}}>
-                            </div>
-                        </div>
-
+                        <div class="taxon">{{taxon}}</div>
                     </li>
                     <li>
                         <p style="white-space: normal;">{{description}}</p>

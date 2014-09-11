@@ -19,20 +19,27 @@
             //check for the favourite
             var favourites = app.controller.list.getFavourites();
             if (favourites[species.id] != null){
-                species.favourite = "checked";
+                $("#species-profile-fav-button").addClass("on");
             } else {
-                species.favourite = "";
+                $("#species-profile-fav-button").removeClass("on");
             }
 
             placeholder.html(compiled_template(species));
             placeholder.trigger('create');
 
-            $("#favourite-species-button").on( "change", function () {
-                var species = app.controller.list.getCurrentSpecies();
-                app.controller.list.changeFavourite(species.id, $(this).is(':checked'));
-            });
-
             //app.controller.species.gallery.init($('.gallery').attr('id'));
+        },
+
+        /**
+         * Toggles the current species as favourite by saving it into the
+         * storage and changing the buttons appearance.
+         */
+        toggleSpeciesFavourite: function(){
+            var favButton = $("#species-profile-fav-button");
+            favButton.toggleClass("on");
+
+            var species = app.controller.list.getCurrentSpecies();
+            app.controller.list.changeFavourite(species.id, favButton.hasClass('on'));
         },
 
         /**

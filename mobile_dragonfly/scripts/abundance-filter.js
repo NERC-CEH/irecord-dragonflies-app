@@ -6,7 +6,7 @@
 
     app.filter.abundance = {
         filterOn : false,
-        ABUNDANCE_DATA : Drupal.settings.basePath + "/serv/abundance",
+        ABUNDANCE_DATA : conf_prob_data_src,
         geoloc : null,
 
         gpsRunning : false,
@@ -49,7 +49,13 @@
                     app.filter.abundance.loadingData = false;
                 }
 
-                $.getJSON(this.ABUNDANCE_DATA).done(onSuccess).fail(onError);
+                $.ajax({
+                    url: this.ABUNDANCE_DATA,
+                    dataType: 'jsonp',
+                    async: false,
+                    success: onSuccess,
+                    error: onError
+                });
             }
         },
 
@@ -62,49 +68,32 @@
             this.list = list || this.list;
             this.onFilterSuccess = onFilterSuccess || this.onFilterSuccess;
 
-            if (this.geoloc == null){
-                this.getGPS();
+            var location = app.settings('location');
+            if (location == null){
+                $('body').pagecontainer( "change", "sref");
                 return;
-            } else if (app.data.abundance == null) {
+            }
+
+            app.filter.abundance.sref = getSquare({'lat': location.lat, 'lon': location.lon});
+
+            function getSquare(geoloc){
+                //get translated geoloc
+                var p = new LatLonE(geoloc.lat, geoloc.lon, GeoParams.datum.OSGB36);
+                var grid = OsGridRef.latLonToOsGrid(p);
+                var gref = grid.toString(app.filter.abundance.LOCATION_GRANULARITY);
+                _log('Using gref: ' + gref);
+
+                //remove the spaces
+                return gref.replace(/ /g, '');
+            }
+
+            if (app.data.abundance == null) {
                 this.loadData();
                 return;
             }
             this.onFilterSuccess();
         },
 
-
-        /**
-         * #1.1
-         */
-        getGPS : function (list, onFilterSuccess){
-            if (!this.gpsRunning){
-                this.gpsRunning = true;
-                this.geoloc = {};
-                onSuccess();
-                function onSuccess(){
-                    //simulating GPS
-                    var location = app.settings('location');
-                    app.filter.abundance.geoloc = {'lat': location.lat, 'lon': location.lon};
-                    app.filter.abundance.sref = getSquare(app.filter.abundance.geoloc);
-                    app.filter.abundance.running = false;
-                    app.filter.abundance.runFilter();
-
-                    function getSquare(geoloc){
-                        //get translated geoloc
-                        var p = new LatLonE(geoloc.lat, geoloc.lon, GeoParams.datum.OSGB36);
-                        var grid = OsGridRef.latLonToOsGrid(p);
-                        var gref = grid.toString(app.filter.abundance.LOCATION_GRANULARITY);
-                        //remove the spaces
-                        return gref.replace(/ /g, '');
-                    }
-                }
-
-                function onError(){
-                    _log('GPS abundance error.');
-                    app.filter.abundance.gpsRunning = false;
-                }
-            }
-        },
 
         filterList: function(list){
             var filtered_list  =[];

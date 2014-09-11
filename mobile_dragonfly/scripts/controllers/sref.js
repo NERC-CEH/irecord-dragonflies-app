@@ -11,8 +11,16 @@
 
             if (typeof google == 'undefined'){
                 $('#sref-opts').disableTab(1);
+
+                /*
+                 If the browser is offline then we should not proceed and so the
+                 dummyText controls the caching of the file - always get fresh
+                 */
+                var dummyText = '&' + (new Date).getTime();
                 loadScript('http://maps.googleapis.com/maps/api/js?sensor=false&' +
-                'callback=app.controller.sref.initializeMap');
+                'callback=app.controller.sref.initializeMap' +
+                dummyText
+                );
             }
         },
 
@@ -25,27 +33,48 @@
             if (typeof data.toPage === 'object' && data.toPage[0] != null){
                 nextPage = data.toPage[0].id;
 
-                switch (nextPage) {
-                    case 'record':
-                        if (this.saveData && this.accuracy != -1){
-                            //save in storage
-                            var location = {
-                                'lat' : this.latitude,
-                                'lon' : this.longitude,
-                                'acc' : this.accuracy
-                            };
-                            app.settings('location', location);
-                            app.geoloc.set(location.lat, location.lon, location.acc);
+                if (this.saveData && this.accuracy != -1){
+                    //Save button
+                    switch (nextPage) {
+                        case 'record':
+                            this.saveSref();
                             app.controller.record.saveSref(location);
-                        }
-                        break;
-                    case 'settings':
-
-                        break;
-                    default:
-                        _log('Error, changing to unknown page.')
+                            break;
+                        case 'settings':
+                            this.saveSref();
+                            break;
+                        case 'list':
+                            this.saveSref();
+                            app.filter.abundance.runFilter();
+                            break;
+                        default:
+                            _log('Error, changing to unknown page.')
+                    }
+                } else {
+                    //Cancel button
+                    switch (nextPage) {
+                        case 'list':
+                            //the filter needs to be removed if canceled
+                            // at the location stage
+                            var filter = {'id': 'probability'};
+                            app.controller.list.removeFilter(filter);
+                            break;
+                        default:
+                            _log('Error, changing to unknown page.')
+                    }
                 }
             }
+        },
+
+        saveSref: function(){
+            //save in storage
+            var location = {
+                'lat' : this.latitude,
+                'lon' : this.longitude,
+                'acc' : this.accuracy
+            };
+            app.settings('location', location);
+            app.geoloc.set(location.lat, location.lon, location.acc);
         },
 
         /**
@@ -170,7 +199,7 @@
                     var latLng = event.latLng;
                     marker.setPosition(latLng);
                     marker.setVisible(true);
-                    app.controller.sref.set(latLng.lat(), latLng.lng(), 1);
+                    updateMapCoords(latLng);
                 }, 200);
             });
 
@@ -181,7 +210,7 @@
 
             google.maps.event.addListener(marker, 'dragend', function(){
                 var latLng = marker.getPosition();
-                app.controller.sref.set(latLng.lat(), latLng.lng(), 1);
+                updateMapCoords(latLng);
             });
 
             //Set map centre
@@ -209,6 +238,28 @@
 
             //todo: create event
             $('#sref-opts').enableTab(1);
+
+            function updateMapCoords(mapLatLng){
+                var location = {
+                        'lat': mapLatLng.lat(),
+                        'lon': mapLatLng.lng()
+                };
+                app.controller.sref.set(location.lat, location.lon, 1);
+
+                updateMapInfoMessage('#map-message', location);
+            }
+
+            function updateMapInfoMessage(id, location){
+                //convert coords to Grid Ref
+                var p = new LatLonE(location.lat, location.lon, GeoParams.datum.OSGB36);
+                var grid = OsGridRef.latLonToOsGrid(p);
+                var gref = grid.toString();
+
+                var message = $(id);
+                message.removeClass();
+                message.addClass('success-message');
+                message.empty().append('<p>Grid Ref:<br/>' + gref + '</p>');
+            }
         },
 
         /**
@@ -240,6 +291,12 @@
                 if(!isNaN(gridref.easting) && !isNaN(gridref.northing)){
                     var latLon = OsGridRef.osGridToLatLon(gridref);
                     this.set(latLon.lat, latLon.lon, 1);
+
+                    var gref = val.toUpperCase();
+                    var message = $('#gref-message');
+                    message.removeClass();
+                    message.addClass('success-message');
+                    message.empty().append('<p>Grid Ref:<br/>' + gref + '</p>');
                 }
                 //todo: set accuracy dependant on Gref
         },
@@ -250,11 +307,27 @@
     };
 
     //GPS Event Listeners
-    $(document).on('app.submitRecord.end app.geoloc.lock.timeout', function(e, processed){
+    $(document).on('app.submitRecord.end', function(e, processed){
         if (processed){
             return;
         }
         $.mobile.loading('hide');
+    });
+
+    $(document).on('app.geoloc.lock.timeout app.geoloc.lock.error', function(e, data){
+        if (data != null && data.error != null){
+            $.mobile.loading( 'show', {
+                text: "Sorry! " + data.error.message + '.',
+                theme: "b",
+                textVisible: true,
+                textonly: true
+            });
+            setTimeout(function(){
+                $.mobile.loading('hide');
+            }, 5000);
+        } else {
+            $.mobile.loading('hide');
+        }
     });
 
     $(document).on('app.geoloc.lock.start', function(){
@@ -283,10 +356,18 @@
                 var location = app.geoloc.get();
                 app.controller.sref.set(location.lat, location.lon, location.acc);
 
+                var p = new LatLonE(location.lat, location.lon, GeoParams.datum.OSGB36);
+                var grid = OsGridRef.latLonToOsGrid(p);
+                var gref = grid.toString();
+
                 var message = $('#gps-start-message');
                 message.removeClass();
                 message.addClass('success-message');
-                message.empty().append('<p>Success! <br/> Accurracy: ' + location.acc + 'm</p>');
+                message.empty().append(
+                    '<p>Success!</p> ' +
+                    '<p>Grid Ref:<br/> ' +
+                        gref + '<br/>' +
+                        'Accurracy: ' + location.acc + 'm</p>');
                 break;
             case 'setup':
                 break;

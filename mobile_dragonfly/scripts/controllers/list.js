@@ -29,7 +29,7 @@
             {
                 'id' : 'abundance',
                 'group' : 'abundance',
-                'label': 'Abundance'
+                'label': 'Probability'
             },
             {
                 'id' : 'favourites',
@@ -61,7 +61,7 @@
             },
             {
                 'id' : 'abundance_sort',
-                'label' : 'Abundance'
+                'label' : 'Probability'
             }
         ],
 
@@ -73,8 +73,8 @@
 
             //load species data
             $.ajax({
-                url: Drupal.settings.basePath + "serv/species",
-                dataType: 'json',
+                url: conf_species_data_src,
+                dataType: 'jsonp',
                 async: false,
                 success: function (species){
                     var data = varInit('app.data');
@@ -123,6 +123,8 @@
          * @param filters
          */
         renderListCore: function(list, sort, filters){
+            //todo: might need to move UI functionality to higher grounds
+            $.mobile.loading("show");
             //filter list
             if(filters.length > 0){
                 var filter = filters.pop();
@@ -139,6 +141,7 @@
             function onSortSuccess(){
                 if (list != null){
                     app.controller.list.printList(list);
+                    $.mobile.loading("hide");
                 }
             }
         },
@@ -166,8 +169,19 @@
 
             var compiled_template = Handlebars.compile(template);
 
-            placeholder.html(compiled_template({'species': s}));
+            var record = Drupal.settings.basePath + app.HOME + 'record#record';
+            placeholder.html(compiled_template({'species': s, 'record': record}));
             placeholder.trigger('create');
+
+            /*
+             iOS app mode a link fix, making the HOME-MODE app not to redirect
+             browser window to Safari's new tab.
+             Will fix all a tagged elements with the class 'ios-enhanced'
+             */
+            $("a.ios-enhanced").click(function (event) {
+                event.preventDefault();
+                window.location = jQuery(this).attr("href");
+            });
         },
 
         /**
@@ -400,6 +414,7 @@
 
             switch(filter.group){
                 case 'favourites':
+                    $("#fav-button").addClass("on");
                     var keys = Object.keys(this.getFavourites());
                     for(var i = 0; i < keys.length; i++){
                         for(var j = 0; j < list.length; j++){
@@ -495,6 +510,14 @@
      *
      */
     $(document).ready(function() {
+        //initial list control button setup
+        var filters = app.controller.list.getCurrentFilters();
+        if (filters.length == 1 && filters[0].id == 'favourites'){
+            filters = [];
+        }
+
+        $('#list-controls-button').toggleClass('on', filters.length > 0);
+
         $('.sort').on('change', function() {
             app.controller.list.setSortType(this.id);
             app.controller.list.renderList();
@@ -503,6 +526,13 @@
         $('.filter').on('change', function() {
             var filter = app.controller.list.getFilterById(this.id);
             app.controller.list.setFilter(filter);
+
+            var filters = app.controller.list.getCurrentFilters();
+            if (filters.length == 1 && filters[0].id == 'favourites'){
+                filters = [];
+            }
+            $('#list-controls-button').toggleClass('on', filters.length > 0);
+
             app.controller.list.renderList();
         });
     });
@@ -514,6 +544,8 @@
     app.navigation.filterFavourites = function(){
         var filter = app.controller.list.getFilterById('favourites');
         app.controller.list.setFilter(filter);
+        $("#fav-button").toggleClass("on");
+
         app.controller.list.renderList();
     };
 
