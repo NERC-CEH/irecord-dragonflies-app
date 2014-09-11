@@ -37,7 +37,7 @@
                     //Save button
                     switch (nextPage) {
                         case 'record':
-                            this.saveSref();
+                            var location = this.saveSref();
                             app.controller.record.saveSref(location);
                             break;
                         case 'settings':
@@ -75,6 +75,7 @@
             };
             app.settings('location', location);
             app.geoloc.set(location.lat, location.lon, location.acc);
+            return location;
         },
 
         /**
