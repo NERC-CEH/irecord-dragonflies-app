@@ -121,6 +121,7 @@ $iform_mobile_path = 'sites/all/modules/iform_mobile/';
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/sref.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/record.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/user.js"></script>
+  <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/login.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/list.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/species.js"></script>
 
