@@ -115,16 +115,16 @@ $iform_mobile_path = 'sites/all/modules/iform_mobile/';
           src="<?php echo base_path() . $iform_mobile_path; ?>js/image.js"></script>
 
   <!-- APP specific scripts -->
-  <script type="text/javascript" src="<?php echo $theme_path?>/scripts/conf.js"></script>
-  <script type="text/javascript" src="<?php echo $theme_path?>/scripts/dragonfly.js"></script>
-  <script type="text/javascript" src="<?php echo $theme_path?>/scripts/abundance-filter.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/sref.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/record.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/user.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/login.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/list.js"></script>
+  <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/list.prob.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/species.js"></script>
 
+  <script type="text/javascript" src="<?php echo $theme_path?>/scripts/conf.js"></script>
+  <script type="text/javascript" src="<?php echo $theme_path?>/scripts/dragonfly.js"></script>
 
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes; ?>>

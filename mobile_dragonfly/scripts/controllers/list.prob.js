@@ -6,7 +6,7 @@
 
     app.filter.abundance = {
         filterOn : false,
-        ABUNDANCE_DATA : conf_prob_data_src,
+        ABUNDANCE_DATA : app.controller.list.CONF.PROB_DATA_SRC,
         geoloc : null,
 
         gpsRunning : false,

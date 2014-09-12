@@ -1,6 +1,4 @@
 (function($){
-    app.HOME = conf_app_home;
-
     //When leaving a page with a form
     window.onbeforeunload = function() {
         _log('Leaving.');
@@ -10,7 +8,6 @@
      ## START APP ##
      ##############*/
 
-    app.DEBUG = true;
     app.initialise();
     $.mobile.page.prototype.options.domCache = true;
     $.mobile.defaultDialogTransition = "none"; //old jQuery

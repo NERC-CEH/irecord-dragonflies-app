@@ -9,10 +9,18 @@
  * could also be done on the website UI.
  */
 
+    //app wide settings
+    app.CONF.HOME = "";
+    app.CONF.DEBUG = true;
 
-var conf_app_home = "dragonfly/";
+    app.io.CONF.APPNAME = "";
+    app.io.CONF.APPSECRET = "";
 
-var conf_prob_data_src = "http://192.171.199.230/dragonfly/serv/abundance";
-var conf_species_data_src = "http://192.171.199.230/dragonfly/serv/species";
+    //controllers
+    var c = app.controller;
+    c.list.CONF.PROB_DATA_SRC = "";
+    c.list.CONF.SPECIES_DATA_SRC = "";
 
-var conf_login_url = Drupal.settings.basePath + "user/mobile/register";
+    c.login.CONF.URL = Drupal.settings.basePath + "user/mobile/register";
+    c.login.CONF.APPNAME = app.io.CONF.APPNAME;
+    c.login.CONF.APPSECRET = app.io.CONF.APPSECRET;

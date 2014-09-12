@@ -4,8 +4,14 @@
 (function($){
     app.controller = app.controller || {};
     app.controller.login = {
-        LOGIN_URL: conf_login_url,
-        LOGIN_TIMEOUT: 20000,
+        //controller configuration should be set up in an app config file
+        CONF: {
+            APPNAME: "",
+            APPSECRET: "",
+
+            URL: "",
+            TIMEOUT: 20000
+        },
 
         pagecontainershow: function(){
 
@@ -27,17 +33,17 @@
             var data = new FormData(form);
 
             //app logins
-            data.append('appname', 'dragonfly');
-            data.append('appsecret', 'mydragonfly');
+            data.append('appname', this.CONF.APPNAME);
+            data.append('appsecret', this.CONF.APPSECRET);
 
             $.ajax({
-                url : this.LOGIN_URL,
+                url : this.CONF.URL,
                 type : 'POST',
                 data : data,
                 dataType: 'text',
                 contentType: false,
                 processData: false,
-                timeout: this.LOGIN_TIMEOUT,
+                timeout: this.CONF.TIMEOUT,
                 success: this.onLoginSuccess,
                 error: this.onLoginError,
                 beforeSend: this.onLogin
