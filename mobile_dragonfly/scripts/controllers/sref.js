@@ -45,7 +45,7 @@
                             break;
                         case 'list':
                             this.saveSref();
-                            app.filter.abundance.runFilter();
+                            app.controller.list.prob.runFilter();
                             break;
                         default:
                             _log('Error, changing to unknown page.')

@@ -10,16 +10,16 @@
  */
 
     //app wide settings
-    app.CONF.HOME = "";
+    app.CONF.HOME = "dragonfly/";
     app.CONF.DEBUG = true;
 
-    app.io.CONF.APPNAME = "";
-    app.io.CONF.APPSECRET = "";
+    app.io.CONF.APPNAME = "dragonfly";
+    app.io.CONF.APPSECRET = "mydragonfly";
 
     //controllers
     var c = app.controller;
-    c.list.CONF.PROB_DATA_SRC = "";
-    c.list.CONF.SPECIES_DATA_SRC = "";
+    c.list.prob.CONF.PROB_DATA_SRC = "http://192.171.199.230/dragonfly/serv/abundance";
+    c.list.CONF.SPECIES_DATA_SRC = "http://192.171.199.230/dragonfly/serv/species";
 
     c.login.CONF.URL = Drupal.settings.basePath + "user/mobile/register";
     c.login.CONF.APPNAME = app.io.CONF.APPNAME;

@@ -34,8 +34,8 @@
                 'label' : 'Dragonflies'
             },
             {
-                'id' : 'abundance',
-                'group' : 'abundance',
+                'id' : 'probability',
+                'group' : 'probability',
                 'label': 'Probability'
             },
             {
@@ -67,7 +67,7 @@
                 'label' : 'Taxonomic Reverse'
             },
             {
-                'id' : 'abundance_sort',
+                'id' : 'probability_sort',
                 'label' : 'Probability'
             }
         ],
@@ -80,7 +80,7 @@
 
             //load species data
             $.ajax({
-                url: conf_species_data_src,
+                url: this.CONF.SPECIES_DATA_SRC,
                 dataType: 'jsonp',
                 async: false,
                 success: function (species){
@@ -99,8 +99,8 @@
                 }
             });
 
-            app.controller.list.makeListControls();
-            app.filter.abundance.loadData();
+            this.makeListControls();
+            this.prob.loadData();
         },
 
         /**
@@ -440,9 +440,9 @@
                         }
                     }
                     break;
-                case 'abundance':
-                    app.filter.abundance.runFilter(list, function(){
-                        filtered_list = app.filter.abundance.filterList(list);
+                case 'probability':
+                    app.controller.list.prob.runFilter(list, function(){
+                        filtered_list = app.controller.list.prob.filterList(list);
                         onSuccess(filtered_list);
                     });
                     return;
@@ -461,9 +461,9 @@
          */
         sortList: function (list, sort, onSuccess){
             switch(sort){
-                case 'abundance_sort':
-                    app.filter.abundance.runFilter(list, function(){
-                        list.sort(app.filter.abundance.sort);
+                case 'probability_sort':
+                    app.controller.list.prob.runFilter(list, function(){
+                        list.sort(app.controller.list.prob.sort);
                         onSuccess(list);
                         return;
                     });

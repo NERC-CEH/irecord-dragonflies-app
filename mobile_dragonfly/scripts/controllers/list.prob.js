@@ -2,11 +2,12 @@
  * Created by darkstar on 16/08/14.
  */
 (function($){
-    app.filter = app.filter || {};
+    app.controller.list.prob = {
+        CONF: {
+            PROB_DATA_SRC: ""
+        },
 
-    app.filter.abundance = {
         filterOn : false,
-        ABUNDANCE_DATA : app.controller.list.CONF.PROB_DATA_SRC,
         geoloc : null,
 
         gpsRunning : false,
@@ -15,7 +16,7 @@
         LOCATION_GRANULARITY : 2, //Precision of returned grid reference (6 digits = metres).
 
         /**
-         * #0.1 Gets the abundance data from the server.
+         * #0.1 Gets the probability data from the server.
          */
         loadData : function (){
             if (!this.loadingData){
@@ -23,8 +24,8 @@
                 app.data = app.data || {};//TODO: varInit call
 
                 function onSuccess(json){
-                    app.filter.abundance.loadingData = false;
-                    app.data.abundance = optimiseData(json);
+                    app.controller.list.prob.loadingData = false;
+                    app.data.prob = optimiseData(json);
 
                     function optimiseData(json){
                         //optimise data
@@ -37,8 +38,8 @@
                         return data;
                     }
 
-                    if (app.filter.abundance.filterOn){
-                        app.filter.abundance.runFilter();
+                    if (app.controller.list.prob.filterOn){
+                        app.controller.list.prob.runFilter();
                     }
                 }
 
@@ -46,11 +47,11 @@
                     var err = textStatus + ", " + error;
                     console.log( "Request Failed: " + err );
 
-                    app.filter.abundance.loadingData = false;
+                    app.controller.list.prob.loadingData = false;
                 }
 
                 $.ajax({
-                    url: this.ABUNDANCE_DATA,
+                    url: this.CONF.PROB_DATA_SRC,
                     dataType: 'jsonp',
                     async: false,
                     success: onSuccess,
@@ -74,20 +75,20 @@
                 return;
             }
 
-            app.filter.abundance.sref = getSquare({'lat': location.lat, 'lon': location.lon});
+            app.controller.list.prob.sref = getSquare({'lat': location.lat, 'lon': location.lon});
 
             function getSquare(geoloc){
                 //get translated geoloc
                 var p = new LatLonE(geoloc.lat, geoloc.lon, GeoParams.datum.OSGB36);
                 var grid = OsGridRef.latLonToOsGrid(p);
-                var gref = grid.toString(app.filter.abundance.LOCATION_GRANULARITY);
+                var gref = grid.toString(app.controller.list.prob.LOCATION_GRANULARITY);
                 _log('Using gref: ' + gref);
 
                 //remove the spaces
                 return gref.replace(/ /g, '');
             }
 
-            if (app.data.abundance == null) {
+            if (app.data.prob == null) {
                 this.loadData();
                 return;
             }
@@ -98,7 +99,7 @@
         filterList: function(list){
             var filtered_list  =[];
 
-            var location_data = app.data.abundance[this.sref];
+            var location_data = app.data.prob[this.sref];
             if(location_data != null){
                 var speciesIds = Object.keys(location_data);
                 for(var i = 0; i < speciesIds.length; i++){
@@ -116,8 +117,8 @@
         sort: function(a, b){
                 function getProb(species){
                     var id = species.id;
-                    var sref = app.filter.abundance.sref;
-                    var data = app.data.abundance;
+                    var sref = app.controller.list.prob.sref;
+                    var data = app.data.prob;
                     return (data[sref] && data[sref][id]) || 0;
                 }
                 var a_prob = getProb(a);
