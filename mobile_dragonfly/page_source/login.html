@@ -7,22 +7,20 @@
     </div>
 
     <div data-role="content">
-        <div>
-            <form id="login-form">
-                <input type="email" placeholder="Email" name="email" value="">
-                <input type="password" placeholder="Password" name="password" value="">
+        <form id="login-form">
+            <input type="email" placeholder="Email" name="email" value="">
+            <input type="password" placeholder="Password" name="password" value="">
 
-                <input type="button" onclick="app.controller.login.signIn()" value="Sign in">
-            </form>
-            <ul data-role="listview" data-inset="true" data-theme="a" data-divider-theme="a" data-count-theme="a" data-split-theme="a" data-split-icon="arrow-r">
-                <li data-icon="arrow-r" class="first">
-                    <a href="/drupal/user/register" rel="external" title="Create a new user account.">Create new account</a>
-                </li>
-                <li data-icon="arrow-r" class="last">
-                    <a href="/drupal/user/password" rel="external" title="Request new password via e-mail.">Request new password</a>
-                </li>
-            </ul>
-        </div>
+            <input type="button" onclick="app.controller.login.signIn()" value="Sign in">
+        </form>
+        <ul data-role="listview" data-inset="true" data-theme="a" data-divider-theme="a" data-count-theme="a" data-split-theme="a" data-split-icon="arrow-r">
+            <li data-icon="arrow-r" class="first">
+                <a href="register#register" data-role="button" title="Create new account.">Create new account</a>
+            </li>
+            <li data-icon="arrow-r" class="last">
+                <a href="/drupal/user/password" data-role="button" rel="external" title="Request new password via e-mail.">Request new password</a>
+            </li>
+        </ul>
     </div>
 
     <div data-role="footer" data-position="fixed" data-tap-toggle="false"></div>
