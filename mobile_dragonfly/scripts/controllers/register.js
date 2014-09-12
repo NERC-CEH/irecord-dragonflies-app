@@ -3,7 +3,7 @@
  */
 (function($){
     app.controller = app.controller || {};
-    app.controller.login = {
+    app.controller.register = {
         //controller configuration should be set up in an app config file
         CONF: {
             APPNAME: "",
@@ -14,22 +14,28 @@
         },
 
         pagecontainershow: function(){
-
+            //enable 'Create account' button on Terms agreement
+            $('#terms-agreement').click(function(){
+               if ($(this).prop('checked')){
+                   $('#register-button').prop('disabled', false);
+               }
+            });
         },
 
         /**
-         * Starts an app sign in to the Drupal site process.
-         * The sign in endpoint is specified by LOGIN_URL -
+         * Starts an app user registration.
+         *
+         * The registration endpoint is specified by LOGIN_URL -
          * should be a Drupal sight using iForm Mobile Auth Module.
          *
          * It is important that the app authorises itself providing
          * appname and appsecret for the mentioned module.
          */
-        signIn: function(){
-            _log('Sign in.');
+        register: function(){
+            _log('Register.');
 
             //user logins
-            var form = document.getElementById('login-form');
+            var form = document.getElementById('register-form');
             var data = new FormData(form);
 
             //app logins
@@ -55,12 +61,12 @@
         },
 
         onLoginSuccess: function(data){
-            _log('Sign in success.');
+            _log('Registration success.');
             $.mobile.loading('hide');
         },
 
         onLoginError: function(xhr, ajaxOptions, thrownError){
-            _log("Sign in error "  + xhr.status+ " " + thrownError);
+            _log("Registration error "  + xhr.status+ " " + thrownError);
             _log(xhr.responseText);
             $.mobile.loading('hide');
         }
