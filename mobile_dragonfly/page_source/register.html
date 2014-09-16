@@ -7,29 +7,23 @@
     </div>
 
     <div data-role="content">
-        <p>Registering with iRecord is quick and easy and makes submitting
-            biological records much easier. It provides you with a means of viewing
-            all the records you have submitted and accessing feedback on them,
-            as well as allowing you to view others’ records. You can also
-            download all of your records here.</p>
+        <div class="info-message" style="text-align: left">
+            <p>Registering with iRecord is quick and easy and makes submitting
+                biological records much easier. It provides you with a means of viewing
+                all the records you have submitted and accessing feedback on them,
+                as well as allowing you to view others’ records. You can also
+                download all of your records here.</p>
+        </div>
 
-        <p>It is important that you <a target="_blank" rel="external" href="http://www.brc.ac.uk/irecord/">register with iRecord</a>
-            before submitting mammal records through this app, as this is the database
-            where all of The Mammal Society’s records are stored for use in atlases and
-            ultimately mammal conservation. Records that are available on iRecord
-            are also much more likely to be used by other organisations interested in
-            using them for conservation and research (such as Environmental Local
-            Record Centres).</p>
-
-        <form>
+        <form id="register-form">
             <input type="email" placeholder="Email" name="email" value="" required>
             <input type="text" placeholder="Firstname" name="firstname" value="" required>
-            <input type="text" placeholder="Surname" name="surname" value="" required>
+            <input type="text" placeholder="Surname" name="secondname" value="" required>
             <input type="password" placeholder="Password" name="password" value="" required>
             <input type="password" placeholder="Confirm password" name="password-confirm" value="" required>
             <br/>
 
-            <a href="#terms">iRecord Terms and Conditions</a>
+            <a href="#terms" data-role="button" role="button">iRecord Terms and Conditions</a>
             <label>
                 <input name="terms-agreement" id="terms-agreement" type="checkbox"> I agree to the iRecord Terms and Conditions
             </label>

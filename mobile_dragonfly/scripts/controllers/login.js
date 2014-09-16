@@ -6,9 +6,6 @@
     app.controller.login = {
         //controller configuration should be set up in an app config file
         CONF: {
-            APPNAME: "",
-            APPSECRET: "",
-
             URL: "",
             TIMEOUT: 20000
         },
@@ -25,24 +22,25 @@
          * It is important that the app authorises itself providing
          * appname and appsecret for the mentioned module.
          */
-        signIn: function(){
+        login: function(){
             _log('Sign in.');
+            var form = jQuery('#login-form');
+            var person = {
+                //user logins
+                'email': form.find('input[name=email]').val(),
+                'password': form.find('input[name=password]').val(),
 
-            //user logins
-            var form = document.getElementById('login-form');
-            var data = new FormData(form);
-
-            //app logins
-            data.append('appname', this.CONF.APPNAME);
-            data.append('appsecret', this.CONF.APPSECRET);
+                //app logins
+                'appname': app.auth.CONF.APPNAME,
+                'appsecret': app.auth.CONF.APPSECRET
+            };
 
             $.ajax({
                 url : this.CONF.URL,
                 type : 'POST',
-                data : data,
+                data : person,
+                callback_data: person,
                 dataType: 'text',
-                contentType: false,
-                processData: false,
                 timeout: this.CONF.TIMEOUT,
                 success: this.onLoginSuccess,
                 error: this.onLoginError,
@@ -56,15 +54,57 @@
 
         onLoginSuccess: function(data){
             _log('Sign in success.');
+
+            var lines = (data && data.split(/\r\n|\r|\n/g));
+            if (lines && lines.length >= 3 && lines[0].length > 0) {
+                var user = {
+                    'secret': lines[0],
+                    'name': lines[1] + " " + lines[2],
+                    'email': this.callback_data.email
+                }
+            }
+
             $.mobile.loading('hide');
+            app.controller.login.setLogin(user);
+            history.back();
         },
 
         onLoginError: function(xhr, ajaxOptions, thrownError){
             _log("Sign in error "  + xhr.status+ " " + thrownError);
             _log(xhr.responseText);
             $.mobile.loading('hide');
-        }
+        },
 
+        /**
+         * Logs the user out of the system.
+         */
+        logout: function(){
+            app.auth.removeUser();
+        },
+
+        /**
+         * Sets the app login state of the user account.
+         *
+         * Saves the user account details into storage for permanent availability.
+         * @param user User object or empty object
+         */
+        setLogin: function(user){
+            if(!$.isEmptyObject(user)) {
+                _log('Logged in');
+                app.auth.setUser(user);
+            } else {
+                _log('Logged out');
+               app.auth.removeUser();
+            }
+        },
+
+        /**
+         * Brings the state of the user being logged in.
+         * @returns boolean true if the user is logged in, or false if not
+         */
+        getLoginState: function(){
+            return app.auth.isUser();
+        }
     };
 
 }(jQuery));

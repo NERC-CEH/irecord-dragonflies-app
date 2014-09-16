@@ -106,6 +106,8 @@ $iform_mobile_path = 'sites/all/modules/iform_mobile/';
   <script type="text/javascript"
           src="<?php echo base_path() . $iform_mobile_path; ?>js/io.js"></script>
   <script type="text/javascript"
+          src="<?php echo base_path() . $iform_mobile_path; ?>js/auth.js"></script>
+  <script type="text/javascript"
           src="<?php echo base_path() . $iform_mobile_path; ?>js/storage.js"></script>
   <script type="text/javascript"
           src="<?php echo base_path() . $iform_mobile_path; ?>js/geoloc.js"></script>
@@ -120,6 +122,7 @@ $iform_mobile_path = 'sites/all/modules/iform_mobile/';
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/user.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/login.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/register.js"></script>
+  <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/settings.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/list.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/list.prob.js"></script>
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/species.js"></script>

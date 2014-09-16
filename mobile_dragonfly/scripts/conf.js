@@ -13,8 +13,8 @@
     app.CONF.HOME = "dragonfly/";
     app.CONF.DEBUG = true;
 
-    app.io.CONF.APPNAME = "dragonfly";
-    app.io.CONF.APPSECRET = "mydragonfly";
+    app.auth.CONF.APPNAME = "dragonfly";
+    app.auth.CONF.APPSECRET = "mydragonfly";
 
     //controllers
     var c = app.controller;
@@ -22,5 +22,4 @@
     c.list.CONF.SPECIES_DATA_SRC = "http://192.171.199.230/dragonfly/serv/species";
 
     c.login.CONF.URL = Drupal.settings.basePath + "user/mobile/register";
-    c.login.CONF.APPNAME = app.io.CONF.APPNAME;
-    c.login.CONF.APPSECRET = app.io.CONF.APPSECRET;
+    c.register.CONF.URL = c.login.CONF.URL;

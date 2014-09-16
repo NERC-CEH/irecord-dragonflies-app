@@ -5,6 +5,7 @@
     app.controller = app.controller || {};
     app.controller.user = {
         pagecontainershow: function(){
+            this.printUserControls();
             this.printList();
         },
 
@@ -40,6 +41,19 @@
         deleteSavedForm: function(formStorageId){
             app.form.removeSaved(formStorageId);
             this.printList();
+        },
+
+        printUserControls: function(){
+            var template = $('#user-template').html();
+            var placeholder = $('#user-placeholder');
+
+            var compiled_template = Handlebars.compile(template);
+
+            var user = {
+                'loggedout': !app.controller.login.getLoginState()
+            };
+            placeholder.html(compiled_template({'user': user}));
+            placeholder.trigger('create');
         },
 
         printList: function(){
@@ -90,7 +104,5 @@
     $(document).on('app.form.sentall.success', function(e){
         app.controller.user.printList();
     });
-
-    //$(document).on('pagecreate', '#list', app.controller.list.pagecreate);
 
 }(jQuery));

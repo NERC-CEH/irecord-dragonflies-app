@@ -1,5 +1,5 @@
-.ui-page {
-    min-height: 85vh !important;
+body {
+    margin: 0;
 }
 
 .splash-box {
@@ -166,10 +166,6 @@ input.numberInput{
 
 form, body {
     background: #DBDDC7 !important;
-}
-
-body {
-    /*height: 96%;*/
 }
 
 .ui-page {

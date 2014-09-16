@@ -6,9 +6,6 @@
     app.controller.register = {
         //controller configuration should be set up in an app config file
         CONF: {
-            APPNAME: "",
-            APPSECRET: "",
-
             URL: "",
             TIMEOUT: 20000
         },
@@ -16,8 +13,11 @@
         pagecontainershow: function(){
             //enable 'Create account' button on Terms agreement
             $('#terms-agreement').click(function(){
+                var button = $('#register-button');
                if ($(this).prop('checked')){
-                   $('#register-button').prop('disabled', false);
+                   button.prop('disabled', false);
+               } else {
+                   button.prop('disabled', true);
                }
             });
         },
@@ -39,8 +39,8 @@
             var data = new FormData(form);
 
             //app logins
-            data.append('appname', this.CONF.APPNAME);
-            data.append('appsecret', this.CONF.APPSECRET);
+            data.append('appname', app.auth.CONF.APPNAME);
+            data.append('appsecret', app.auth.CONF.APPSECRET);
 
             $.ajax({
                 url : this.CONF.URL,
