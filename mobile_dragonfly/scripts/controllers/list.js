@@ -136,21 +136,22 @@
             if(filters.length > 0){
                 var filter = filters.pop();
 
-                list = this.filterList(list, filter, onFilterSuccess);
                 function onFilterSuccess (species){
                     app.controller.list.renderListCore(species, sort, filters);
                 }
 
+                list = this.filterList(list, filter, onFilterSuccess);
                 return;
             }
 
-            list = this.sortList(list, sort, onSortSuccess);
             function onSortSuccess(){
                 if (list != null){
                     app.controller.list.printList(list);
                     $.mobile.loading("hide");
                 }
             }
+
+            list = this.sortList(list, sort, onSortSuccess);
         },
 
         /**
