@@ -15,6 +15,8 @@
 
     app.auth.CONF.APPNAME = "dragonfly";
     app.auth.CONF.APPSECRET = "mydragonfly";
+    app.auth.CONF.WEBSITE_ID = 77;
+    app.auth.CONF.SURVEY_ID = 135;
 
     //controllers
     var c = app.controller;
