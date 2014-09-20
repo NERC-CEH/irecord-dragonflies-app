@@ -39,7 +39,7 @@
         },
 
         deleteSavedForm: function(formStorageId){
-            app.form.removeSaved(formStorageId);
+            app.form.storage.remove(formStorageId);
             this.printList();
         },
 
@@ -57,7 +57,7 @@
         },
 
         printList: function(){
-            var savedForms = app.form.getAllSaved();
+            var savedForms = app.form.storage.getAll();
             var keys = Object.keys(savedForms);
             var forms = [];
             for(var i = 0; i < keys.length; i++){
@@ -66,16 +66,16 @@
                     var name = savedForms[keys[i]][j].name;
                     var value = savedForms[keys[i]][j].value;
                     switch (name) {
-                        case app.form.INPUT_KEYS.DATE_KEY:
+                        case app.form.inputs.KEYS.DATE:
                             name = 'date';
                             break;
-                        case app.form.INPUT_KEYS.TAXON_KEY:
+                        case app.form.inputs.KEYS.TAXON:
                             var species = app.data.species;
                             for(var k = 0; k < species.length; k++){
                                 if(species[k].warehouse_id == value){
                                     name = 'common_name';
                                     value = species[k].common_name;
-                                    break;
+                                     break;
                                 }
                             }
                             break;

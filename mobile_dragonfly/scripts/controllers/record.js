@@ -15,7 +15,7 @@
             app.image.setImage('input[type="file"]', '#sample-image');
 
             //assigns the form submit button handler to use submitStart()
-            $("#entry-form-submit").click(app.submitRecord);
+            $("#entry-form-submit").click(app.form.submit);
 
             var warehouse_id = app.controller.list.getCurrentSpecies().warehouse_id;
             if(warehouse_id != null && warehouse_id != ""){

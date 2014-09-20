@@ -10,7 +10,7 @@
  */
 
     //app wide settings
-    app.CONF.HOME = "dragonfly/";
+    app.CONF.HOME = "app/";
     app.CONF.DEBUG = true;
 
     app.auth.CONF.APPNAME = "dragonfly";
