@@ -38,6 +38,9 @@
         },
 
         saveSref : function(location){
+            if (location == null){
+                return app.ERROR;
+            }
             var sref = $('#imp-sref');
             var accuracy = $('#sref_accuracy');
             if(sref.length > 0 ){

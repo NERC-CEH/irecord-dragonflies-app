@@ -1,0 +1,195 @@
+<form method="post" enctype="multipart/form-data" id="entry_form"
+      action="mobile/submit" data-ajax="false">
+    <input id="appname" name="appname" type="hidden" value="dragonfly">
+    <input id="appsecret" name="appsecret" type="hidden" value="mydragonfly">
+    <input type="hidden" id="website_id" name="website_id" value="77" />
+    <input type="hidden" id="survey_id" name="survey_id" value="135" />
+    <input type="hidden" id="occurrence:record_status" name="occurrence:record_status" value="C" />
+    <div data-role="page" id="record">
+        <div data-role="header" data-position="fixed"data-tap-toggle="false">
+            <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+                <a href='#' data-rel='back' data-role="button" data-icon="home" data-iconpos="notext">Back</a>
+            </div>
+            <h1 id='record_heading'></h1>
+            <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
+                <a href="#date" id="date-top-button" data-role="button" onclick="{onclick}"
+                   data-icon="calendar"  data-iconpos="notext" >Date</a>
+                <a href="sref" id="sref-top-button" data-role="button" onclick="{onclick}"
+                   data-icon="location"  data-iconpos="notext" data-prefetch>GPS</a>
+            </div>
+        </div>
+        <div data-role="content" >
+            <a  href="#date" id="date-button" data-role="button" data-icon="arrow-r" data-iconpos="right">
+                <h1>Date</h1>
+            </a><input type="hidden" id="imp-sref" name="sample:entered_sref"  value="" />
+            <input type="hidden" id="imp-sref-system" name="sample:entered_sref_system"  value="4326" />
+            <input type="hidden" id="sref_accuracy" name="smpAttr:273"  value="-1" />
+            <label for="occurrence:taxa_taxon_list_id">Species:</label>
+            <select id="occurrence:taxa_taxon_list_id" name="occurrence:taxa_taxon_list_id" class=" {required:true}"  >
+                <option value="">Please select</option>
+                <option value="112907"  >Southern Migrant Hawker</option>
+                <option value="112906"  >Aeshna affinis</option>
+                <option value="112909"  >Azure Hawker</option>
+                <option value="112908"  >Aeshna caerulea</option>
+                <option value="112911"  >Southern Hawker</option>
+                <option value="112910"  >Aeshna cyanea</option>
+                <option value="112913"  >Brown Hawker</option>
+                <option value="112912"  >Aeshna grandis</option>
+                <option value="112915"  >Norfolk Hawker</option>
+                <option value="112914"  >Aeshna isosceles</option>
+                <option value="112917"  >Common Hawker</option>
+                <option value="112916"  >Aeshna juncea</option>
+                <option value="112919"  >Migrant Hawker</option>
+                <option value="112918"  >Aeshna mixta</option>
+                <option value="112921"  >Emperor Dragonfly</option>
+                <option value="112920"  >Anax imperator</option>
+                <option value="112923"  >Green Darner</option>
+                <option value="112922"  >Anax junius</option>
+                <option value="112925"  >Lesser Emperor</option>
+                <option value="112924"  >Anax parthenope</option>
+                <option value="112927"  >Hairy Dragonfly</option>
+                <option value="112926"  >Brachytron pratense</option>
+                <option value="112929"  >Banded Demoiselle</option>
+                <option value="112928"  >Calopteryx splendens</option>
+                <option value="112931"  >Beautiful Demoiselle</option>
+                <option value="112930"  >Calopteryx virgo</option>
+                <option value="112933"  >Small Red Damselfly</option>
+                <option value="112932"  >Ceriagrion tenellum</option>
+                <option value="112935"  >Northern Damselfly</option>
+                <option value="112934"  >Coenagrion hastulatum</option>
+                <option value="112937"  >Irish Damselfly</option>
+                <option value="112936"  >Coenagrion lunulatum</option>
+                <option value="112939"  >Southern Damselfly</option>
+                <option value="112938"  >Coenagrion mercuriale</option>
+                <option value="112941"  >Azure Damselfly</option>
+                <option value="112940"  >Coenagrion puella</option>
+                <option value="112943"  >Variable Damselfly</option>
+                <option value="112942"  >Coenagrion pulchellum</option>
+                <option value="112945"  >Dainty Damselfy</option>
+                <option value="112944"  >Coenagrion scitulum</option>
+                <option value="112947"  >Golden-ringed Dragonfly</option>
+                <option value="112946"  >Cordulegaster boltonii</option>
+                <option value="112949"  >Downy Emerald</option>
+                <option value="112948"  >Cordulia aenea</option>
+                <option value="112951"  >Scarlet Darter</option>
+                <option value="112950"  >Crocothemis erythraea</option>
+                <option value="112953"  >Common Blue Damselfly</option>
+                <option value="112952"  >Enallagma cyathigerum</option>
+                <option value="112955"  >Red-eyed Damselfly</option>
+                <option value="112954"  >Erythromma najas</option>
+                <option value="112957"  >Small Red-eyed Damselfly</option>
+                <option value="112956"  >Erythromma viridulum</option>
+                <option value="112959"  >Yellow-legged Club-tail</option>
+                <option value="112958"  >Gomphus flavipes</option>
+                <option value="112961"  >Common Club-tail</option>
+                <option value="112960"  >Gomphus vulgatissimus</option>
+                <option value="112963"  >Vagrant Emperor</option>
+                <option value="112962"  >Hemianax ephippiger</option>
+                <option value="112965"  >Blue-tailed Damselfly</option>
+                <option value="112964"  >Ischnura elegans</option>
+                <option value="112967"  >Scarce Blue-tailed Damselfly</option>
+                <option value="112966"  >Ischnura pumilio</option>
+                <option value="112969"  >Southern Emerald Damselfly</option>
+                <option value="112968"  >Lestes barbarus</option>
+                <option value="112971"  >Scarce Emerald Damselfly</option>
+                <option value="112970"  >Lestes dryas</option>
+                <option value="112973"  >Emerald Damselfly</option>
+                <option value="112972"  >Lestes sponsa</option>
+                <option value="112975"  >Willow Emerald Damselfly</option>
+                <option value="112974"  >Lestes viridis</option>
+                <option value="112977"  >White-faced Darter</option>
+                <option value="112976"  >Leucorrhinia dubia</option>
+                <option value="112979"  >Broad-bodied Chaser</option>
+                <option value="112978"  >Libellula depressa</option>
+                <option value="112981"  >Scarce Chaser</option>
+                <option value="112980"  >Libellula fulva</option>
+                <option value="112983"  >Four-spotted Chaser</option>
+                <option value="112982"  >Libellula quadrimaculata</option>
+                <option value="112985"  >Black-tailed Skimmer</option>
+                <option value="112984"  >Orthetrum cancellatum</option>
+                <option value="112987"  >Keeled Skimmer</option>
+                <option value="112986"  >Orthetrum coerulescens</option>
+                <option value="112989"  >Orange-spotted Emerald</option>
+                <option value="112988"  >Oxygastra curtisii</option>
+                <option value="112991"  >Wandering Glider</option>
+                <option value="112990"  >Pantala flavescens</option>
+                <option value="112993"  >White-legged Damselfly</option>
+                <option value="112992"  >Platycnemis pennipes</option>
+                <option value="112995"  >Large Red Damselfly</option>
+                <option value="112994"  >Pyrrhosoma nymphula</option>
+                <option value="112997"  >Northern Emerald</option>
+                <option value="112996"  >Somatochlora arctica</option>
+                <option value="112999"  >Brilliant Emerald</option>
+                <option value="112998"  >Somatochlora metallica</option>
+                <option value="113001"  >Winter Damselfly</option>
+                <option value="113000"  >Sympecma fusca</option>
+                <option value="113003"  >Black Darter</option>
+                <option value="113002"  >Sympetrum danae</option>
+                <option value="113005"  >Yellow-winged Darter</option>
+                <option value="113004"  >Sympetrum flaveolum</option>
+                <option value="113007"  >Red-veined Darter</option>
+                <option value="113006"  >Sympetrum fonscolombii</option>
+                <option value="113009"  >Banded Darter</option>
+                <option value="113008"  >Sympetrum pedemontanum</option>
+                <option value="113011"  >Ruddy Darter</option>
+                <option value="113010"  >Sympetrum sanguineum</option>
+                <option value="113013"  >Common Darter</option>
+                <option value="113012"  >Sympetrum striolatum</option>
+                <option value="113015"  >Vagrant Darter</option>
+                <option value="113014"  >Sympetrum vulgatum</option></select>
+            <div id="photo"><div id="photo-picker">
+                <input type="file" id="sample:image" name="sample:image" accept="png|jpg|gif|jpeg|mp3|wav" />
+                <input type="hidden" id="sample_medium:path" name="sample_medium:path" value=""/>
+            </div>
+            </div>
+            <table  class="numberInput ">
+                <tr  class="numberInput ">
+                    <td  class="numberInput ">
+                        <b>Number</b>
+                    </td><td>
+                    <input type="number" name="occAttr:222" id="occAttr:222"
+                           min="1" max="50" value="1" data-role="none"  class="numberInput ">
+                </td>
+                </tr>
+            </table>
+            <label>
+                <input type="checkbox" data-iconpos="right" id="occAttr:223"
+                       name="occAttr:223" value="1">Certain</label>
+            <a  href="#comment" id="comment-button" data-role="button" data-icon="arrow-r" data-iconpos="right">
+                Comment
+            </a>
+        </div>
+        <div data-role="footer" data-position="fixed"data-tap-toggle="false">
+            <div align="right">
+                <input id="entry-form-submit" type="button" value="Save" data-icon="check" data-theme="b"  data-iconpos="right">
+            </div>
+        </div>
+    </div>
+    <div data-role="page" id="comment">
+        <div data-role="header" data-position="fixed"data-tap-toggle="false">
+            <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+                <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+            </div>
+            <h1>Comment</h1>
+        </div>
+        <div data-role="content" >
+            <textarea id="sample:comment" name="sample:comment" class=" "  cols="80" rows="4" ></textarea>
+        </div>
+        <div data-role="footer" data-position="fixed"data-tap-toggle="false"></div>
+    </div>
+    <div data-role="page" id="date">
+        <div data-role="header" data-position="fixed"data-tap-toggle="false">
+            <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+                <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+            </div>
+            <h1>Date</h1>
+        </div>
+        <div data-role="content" >
+            <div class="info-message"><p>Please enter the date of the recording.</p></div>
+            <input id="sample:date" name="sample:date" type="date" value="0">
+        </div>
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+
+        </div>
+    </div>
+</form>
