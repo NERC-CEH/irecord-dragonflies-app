@@ -77,48 +77,48 @@ $iform_mobile_path = 'sites/all/modules/iform_mobile/';
 
   <!-- APP libs-->
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/libs/fastclick.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>libs/fastclick.js"></script>
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/libs/latlon/vector3d.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>libs/latlon/vector3d.js"></script>
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/libs/latlon/geo.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>libs/latlon/geo.js"></script>
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/libs/latlon/latlon-ellipsoid.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>libs/latlon/latlon-ellipsoid.js"></script>
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/libs/latlon/osgridref.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>libs/latlon/osgridref.js"></script>
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/libs/photoswipe-3.0.4/klass.min.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>libs/photoswipe-3.0.4/klass.min.js"></script>
   <link type="text/css"
-        href="<?php echo base_path() . $iform_mobile_path; ?>js/libs/photoswipe-3.0.4/photoswipe.css" rel="stylesheet" />
+        href="<?php echo base_path() . $iform_mobile_path; ?>libs/photoswipe-3.0.4/photoswipe.css" rel="stylesheet" />
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/libs/photoswipe-3.0.4/code.photoswipe.jquery-3.0.4.min.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>libs/photoswipe-3.0.4/code.photoswipe.jquery-3.0.4.min.js"></script>
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/libs/handlebars.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>libs/handlebars.js"></script>
 
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/app.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>src/app.js"></script>
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/helper.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>src/helper.js"></script>
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/appcache_back_button_fix.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>src/appcache_back_button_fix.js"></script>
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/form.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>src/form.js"></script>
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/form.storage.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>src/form.storage.js"></script>
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/form.inputs.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>src/form.inputs.js"></script>
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/io.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>src/io.js"></script>
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/auth.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>src/auth.js"></script>
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/storage.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>src/storage.js"></script>
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/geoloc.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>src/geoloc.js"></script>
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/navigation.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>src/navigation.js"></script>
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>js/image.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>src/image.js"></script>
 
   <!-- APP specific scripts -->
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/sref.js"></script>
