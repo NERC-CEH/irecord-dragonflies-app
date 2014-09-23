@@ -94,31 +94,11 @@ $iform_mobile_path = 'sites/all/modules/iform_mobile/';
           src="<?php echo base_path() . $iform_mobile_path; ?>libs/photoswipe-3.0.4/code.photoswipe.jquery-3.0.4.min.js"></script>
   <script type="text/javascript"
           src="<?php echo base_path() . $iform_mobile_path; ?>libs/handlebars.js"></script>
+  <script type="text/javascript"
+          src="<?php echo base_path() . $iform_mobile_path; ?>libs/jquery.validate.js"></script>
 
   <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>src/app.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>src/helper.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>src/appcache_back_button_fix.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>src/form.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>src/form.storage.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>src/form.inputs.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>src/io.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>src/auth.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>src/storage.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>src/geoloc.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>src/navigation.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>src/image.js"></script>
+          src="<?php echo base_path() . $iform_mobile_path; ?>dist/iform-mobile.js"></script>
 
   <!-- APP specific scripts -->
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/controllers/sref.js"></script>

@@ -348,13 +348,13 @@
     $(document).on('app.geoloc.lock.ok', function(){
         $.mobile.loading('hide');
         var page_id = $.mobile.activePage.attr('id');
+        var location = app.geoloc.get();
 
         switch(page_id){
             case 'record':
-                app.controller.record.saveSref();
+                app.controller.record.saveSref(location);
                 break;
             case 'sref':
-                var location = app.geoloc.get();
                 app.controller.sref.set(location.lat, location.lon, location.acc);
 
                 var p = new LatLonE(location.lat, location.lon, GeoParams.datum.OSGB36);

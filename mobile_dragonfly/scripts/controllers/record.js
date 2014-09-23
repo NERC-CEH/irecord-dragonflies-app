@@ -4,48 +4,119 @@
 (function($){
     app.controller = app.controller || {};
     app.controller.record = {
+        /**
+         * Setting up a recording page.
+         */
         pagecreate : function(){
-            _log('Page Init');
-            app.geoloc.run();
-            var formPath = $('#entry_form').attr('action');
-            if(formPath != undefined){
-                app.settings('formPath', formPath);
-            }
-
+            _log('Initialising: recording page');
             app.image.setImage('input[type="file"]', '#sample-image');
+            this.addRecordValidation();
 
             //assigns the form submit button handler to use submitStart()
             $("#entry-form-submit").click(app.form.submit);
 
-            var warehouse_id = app.controller.list.getCurrentSpecies().warehouse_id;
-            if(warehouse_id != null && warehouse_id != ""){
-                //Fix/clear URL for other pages
-                //history.replaceState({ foo: "bar" }, "Page", "record");
+            //Current record setup and attaching listeners to record inputs
+            app.form.inputs.clearRecord();
+            app.geoloc.run();
 
-                //todo: return if invalid or empty
-                //select input option
-                var option = $('option[value="' + warehouse_id + '"]');
-                $(option).prop('selected', 'true');
+            this.saveSpecies();
+            this.saveDate();
 
-                //add header to the page
-                var name = $(option).text();
-                $('#record_heading').text(name);
-            }
-        },
-
-        pagecontainershow : function(type, match, ui, page){
-            _log('Page Beforeshow');
+            var ele = document.getElementById('occAttr:223');
+            $(ele).change(function(){
+                var checked = $(this).prop('checked');
+                app.form.inputs.set('occAttr:223', checked);
+            });
         },
 
         saveSref : function(location){
             if (location == null){
                 return app.ERROR;
             }
-            var sref = $('#imp-sref');
-            var accuracy = $('#sref_accuracy');
-            if(sref.length > 0 ){
-                sref.val(location.lat + ', ' + location.lon);
-                accuracy.val(location.acc);
+            var sref = location.lat + ', ' + location.lon;
+            var sref_system = "4326";
+            var sref_accuracy = location.acc;
+            app.form.inputs.set(app.form.inputs.KEYS.SREF, sref);
+            app.form.inputs.set(app.form.inputs.KEYS.SREF_SYSTEM, sref_system);
+            app.form.inputs.set(app.form.inputs.KEYS.SREF_ACCURACY, sref_accuracy);
+        },
+
+        /**
+         * Saves the user comment into current record.
+         */
+        saveInput: function(name){
+            if (name == null && name == ""){
+                _log('Error, no input name provided.');
+                return app.ERROR;
+            }
+            var ele = document.getElementById(name);
+            var value = $(ele).val();
+            if (value != "") {
+                app.form.inputs.set(name, value);
+            }
+        },
+
+        /**
+         * Saves the selected species into current record.
+         */
+        saveSpecies: function(){
+            var specie = app.controller.list.getCurrentSpecies();
+            if (specie != null && specie.warehouse_id != null && specie.warehouse_id != ""){
+                var name = 'occurrence:taxa_taxon_list_id';
+                var value = specie.warehouse_id;
+                app.form.inputs.set(name, value);
+
+                //add header to the page
+                $('#record_heading').text(specie.common_name);
+            } else {
+                _log('Error, no species was found. Nothing attached to the recording.');
+            }
+        },
+
+        /**
+         * Saves the current date and populates the date input.
+         */
+        saveDate: function(){
+            var now = new Date();
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+            var value = now.getFullYear()+"-"+(month)+"-"+(day) ;
+            var name = 'sample:date';
+
+            var ele = document.getElementById(name);
+            $(ele).val(value);
+
+            app.form.inputs.set(name, value);
+        },
+
+        /**
+         * Sets up specific validation for the form.
+         */
+        addRecordValidation: function(){
+            //overwrite default validator
+            app.form.validate = function(){
+                var invalids = [];
+
+                if(!app.form.inputs.is('sample:date')){
+                    invalids.push({
+                        'id': 'sample:date',
+                        'name': 'Date'
+                    })
+                }
+                if(!app.form.inputs.is('sample:entered_sref')){
+                    invalids.push({
+                        'id': 'sample:entered_sref',
+                        'name': 'Date'
+                    })
+                }
+                if(!app.form.inputs.is('occurrence:taxa_taxon_list_id')){
+                    invalids.push({
+                        'id': 'occurrence:taxa_taxon_list_id',
+                        'name': 'Date'
+                    })
+                }
+                return invalids;
             }
         }
     };

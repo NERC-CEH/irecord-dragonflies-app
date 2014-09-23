@@ -10,13 +10,15 @@
  */
 
     //app wide settings
-    app.CONF.HOME = "app/";
+    app.CONF.HOME = "dragonfly/";
     app.CONF.DEBUG = true;
 
     app.auth.CONF.APPNAME = "dragonfly";
     app.auth.CONF.APPSECRET = "mydragonfly";
     app.auth.CONF.WEBSITE_ID = 77;
     app.auth.CONF.SURVEY_ID = 135;
+
+    app.io.CONF.RECORD_URL = "mobile/submit";
 
     //controllers
     var c = app.controller;
@@ -25,3 +27,6 @@
 
     c.login.CONF.URL = Drupal.settings.basePath + "user/mobile/register";
     c.register.CONF.URL = c.login.CONF.URL;
+
+    //GPS
+    app.geoloc.CONF.GPS_ACCURACY_LIMIT = 130000;
