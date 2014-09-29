@@ -23,6 +23,8 @@
          * appname and appsecret for the mentioned module.
          */
         login: function(){
+            //todo: add validation
+
             _log('Sign in.');
             var form = jQuery('#login-form');
             var person = {
@@ -72,7 +74,16 @@
         onLoginError: function(xhr, ajaxOptions, thrownError){
             _log("Sign in error "  + xhr.status+ " " + thrownError);
             _log(xhr.responseText);
-            $.mobile.loading('hide');
+            $.mobile.loading( 'show', {
+                text: "Wrong email or password." +
+                " Please double-check and try again.",
+                theme: "b",
+                textVisible: true,
+                textonly: true
+            });
+            setTimeout(function(){
+                $.mobile.loading('hide');
+            }, 3000);
         },
 
         /**

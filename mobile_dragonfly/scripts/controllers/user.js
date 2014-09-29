@@ -9,6 +9,10 @@
             this.printList();
         },
 
+        sendAllSavedForms: function(){
+            app.io.sendAllSavedForms();
+        },
+
         sendSavedForm: function(formStorageId){
             if (navigator.onLine) {
                 $.mobile.loading('show');
