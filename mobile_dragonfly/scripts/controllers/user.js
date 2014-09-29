@@ -9,17 +9,17 @@
             this.printList();
         },
 
-        sendAllSavedForms: function(){
-            app.io.sendAllSavedForms();
+        sendAllSavedRecords: function(){
+            app.io.sendAllSavedRecords();
         },
 
-        sendSavedForm: function(formStorageId){
+        sendSavedRecord: function(recordStorageId){
             if (navigator.onLine) {
                 $.mobile.loading('show');
 
                 function onSuccess(){
                     $.mobile.loading('hide');
-                    app.form.removeSaved(formStorageId);
+                    app.record.removeSaved(recordStorageId);
                     app.controller.user.printList();
                 }
 
@@ -27,7 +27,7 @@
                     $.mobile.loading('hide');
                 }
 
-                app.io.sendSavedForm(formStorageId, onSuccess, onError);
+                app.io.sendSavedRecord(recordStorageId, onSuccess, onError);
             } else {
                 $.mobile.loading( 'show', {
                     text: "Looks like you are offline!",
@@ -42,8 +42,8 @@
             }
         },
 
-        deleteSavedForm: function(formStorageId){
-            app.form.storage.remove(formStorageId);
+        deleteSavedRecord: function(recordStorageId){
+            app.record.storage.remove(recordStorageId);
             this.printList();
         },
 
@@ -61,19 +61,19 @@
         },
 
         printList: function(){
-            var savedForms = app.form.storage.getAll();
-            var keys = Object.keys(savedForms);
-            var forms = [];
+            var savedRecords = app.record.storage.getAll();
+            var keys = Object.keys(savedRecords);
+            var records = [];
             for(var i = 0; i < keys.length; i++){
                 var data = {};
-                for(var j = 0; j < savedForms[keys[i]].length; j++){
-                    var name = savedForms[keys[i]][j].name;
-                    var value = savedForms[keys[i]][j].value;
+                for(var j = 0; j < savedRecords[keys[i]].length; j++){
+                    var name = savedRecords[keys[i]][j].name;
+                    var value = savedRecords[keys[i]][j].value;
                     switch (name) {
-                        case app.form.inputs.KEYS.DATE:
+                        case app.record.inputs.KEYS.DATE:
                             name = 'date';
                             break;
-                        case app.form.inputs.KEYS.TAXON:
+                        case app.record.inputs.KEYS.TAXON:
                             var species = app.data.species;
                             for(var k = 0; k < species.length; k++){
                                 if(species[k].warehouse_id == value){
@@ -88,7 +88,7 @@
                     data[name] = value;
 
                 }
-                forms.push({
+                records.push({
                         'id': keys[i],
                         'data' : data
                     }
@@ -100,12 +100,12 @@
 
             var compiled_template = Handlebars.compile(template);
 
-            placeholder.html(compiled_template({'forms': forms}));
+            placeholder.html(compiled_template({'records': records}));
             placeholder.trigger('create');
         }
     };
 
-    $(document).on('app.form.sentall.success', function(e){
+    $(document).on('app.record.sentall.success', function(e){
         app.controller.user.printList();
     });
 

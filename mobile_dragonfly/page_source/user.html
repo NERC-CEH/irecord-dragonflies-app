@@ -5,7 +5,7 @@
         </div>
         <h1 id='user_heading'></h1>
         <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
-            <a href="#" id="sendall-button" data-role="button" onclick="app.controller.user.sendAllSavedForms()"
+            <a href="#" id="sendall-button" data-role="button" onclick="app.controller.user.sendAllSavedRecords()"
              data-theme="b">Send All</a>
         </div>
     </div>
@@ -23,20 +23,20 @@
 
         <div id="saved-list-placeholder"></div>
         <script id="saved-list-template" type="text/x-handlebars-template">
-            {{#if forms.length}}
+            {{#if records.length}}
                 <div class="info-message">Saved recordings.</div>
                 <br/>
                 <ul data-role="listview" id="saved-list" data-split-icon="gear" data-split-theme="d">
-                    {{#each forms}}
+                    {{#each records}}
                     <li data-corners="false" data-shadow="false" data-iconshadow="true"
                         data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="b">
-                        <a href="#" onclick="app.controller.user.sendSavedForm({{id}})">
+                        <a href="#" onclick="app.controller.user.sendSavedRecord({{id}})">
                             <!--<img src="" />-->
                             <h3>{{data.common_name}}</h3>
                             <p>{{data.date}}</p>
                         </a>
                         <a href="#" data-icon="delete" data-ajax="false" data-theme="b"
-                           onclick="app.controller.user.deleteSavedForm({{id}})">Send</a>
+                           onclick="app.controller.user.deleteSavedRecord({{id}})">Send</a>
                     </li>
                     {{/each}}
                 </ul>
