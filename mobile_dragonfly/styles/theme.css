@@ -320,3 +320,6 @@ form, body {
     width: 3.5em;
 }
 
+label.filter, label.sort {
+    width: 100%
+}

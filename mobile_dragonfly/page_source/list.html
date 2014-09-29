@@ -11,8 +11,6 @@
             <a href="#" id="list-controls-button" data-role="button" onclick="app.navigation.showListControls()"
                data-icon="bullets" data-iconpos="notext">List Controls</a>
         </div>
-    </div>
-    <div data-role="content" >
         <div id="list-controls-placeholder">
             <div data-role="tabs" id="list-controls-tabs">
                 <div data-role="navbar">
@@ -35,12 +33,14 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div data-role="content" >
         <script id="list-controls-sort-template" type="text/x-handlebars-template">
             <div class="ui-field-contain list-controls">
                 <fieldset data-role="controlgroup" >
                     {{#each this}}
                     <input name="sort" type="radio" id="{{id}}" class="sort" {{checked}} data-iconpos="right">
-                    <label for="{{id}}">{{label}}</label>
+                    <label for="{{id}}" class="sort">{{label}}</label>
                     {{/each}}
                 </fieldset>
             </div>
@@ -50,7 +50,7 @@
                 <fieldset data-role="controlgroup" >
                     {{#each this}}
                     <input type="checkbox" id="{{id}}" class="filter" {{checked}} data-iconpos="right">
-                    <label for="{{id}}">{{label}}</label>
+                    <label for="{{id}}" class="filter">{{label}}</label>
                     {{/each}}
                 </fieldset>
             </div>
@@ -73,7 +73,7 @@
             </ul>
 
         </script>
-        <a href='sref' data-prefetch></a>
+        <a href='sref' style="display:none" data-prefetch></a>
     </div>
 </div>
 
