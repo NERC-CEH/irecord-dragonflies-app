@@ -25,8 +25,8 @@
         <script id="saved-list-template" type="text/x-handlebars-template">
             {{#if records.length}}
                 <div class="info-message">Saved recordings.</div>
-                <br/>
-                <ul data-role="listview" id="saved-list" data-split-icon="gear" data-split-theme="d">
+                <ul data-role="listview" id="saved-list" data-split-icon="gear"
+                    data-inset="true" data-split-theme="d">
                     {{#each records}}
                     <li data-corners="false" data-shadow="false" data-iconshadow="true"
                         data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="b">
