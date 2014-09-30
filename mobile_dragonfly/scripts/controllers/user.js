@@ -18,14 +18,36 @@
                 $.mobile.loading('show');
 
                 function onSuccess(){
-                    $.mobile.loading('hide');
-                    app.record.removeSaved(recordStorageId);
+                    $.mobile.loading( 'show', {
+                        text: "Done!",
+                        theme: "b",
+                        textVisible: true,
+                        textonly: true
+                    });
+
+                    setTimeout(function(){
+                        $.mobile.loading('hide');
+                    }, 3000);
+
+                    app.record.storage.remove(recordStorageId);
                     app.controller.user.printList();
                 }
 
-                function onError(){
-                    $.mobile.loading('hide');
-                }
+                function onError (xhr, ajaxOptions, thrownError) {
+                        _log("SEND - record ajax (ERROR "  + xhr.status+ " " + thrownError +")");
+                        _log(xhr.responseText);
+
+                        $.mobile.loading( 'show', {
+                            text: xhr.responseText.replace(/<br\/>/g, ' '),
+                            theme: "b",
+                            textVisible: true,
+                            textonly: true
+                        });
+
+                        setTimeout(function(){
+                            $.mobile.loading('hide');
+                        }, 10000);
+                    }
 
                 app.io.sendSavedRecord(recordStorageId, onSuccess, onError);
             } else {

@@ -12,9 +12,6 @@
             app.image.setImage('input[type="file"]', '#sample-image');
             this.addRecordValidation();
 
-            //assigns the record submit button handler to use submitStart()
-            $("#entry-form-submit").click(app.record.submit);
-
             //Current record setup and attaching listeners to record inputs
             app.record.clear();
             app.geoloc.run();
@@ -118,8 +115,84 @@
                 }
                 return invalids;
             }
+        },
+
+        /*
+         * Starts the record submission process.
+         */
+        submit: function(recordId) {
+            _log("DEBUG: SUBMIT - start");
+            var processed = false;
+            $(document).trigger('app.submitRecord.start');
+            //validate record
+            var invalids = app.record.validate(recordId);
+            if(invalids.length == 0){
+                //validate GPS lock
+                var gps = app.geoloc.validate();
+                switch(gps){
+                    case app.TRUE:
+                        _log("DEBUG: GPS Validation - accuracy Good Enough");
+                        processed = true;
+                        this.process();
+                        break;
+                    case app.FALSE:
+                        _log("DEBUG: GPS Validation - accuracy " );
+                        $(document).trigger('app.geoloc.lock.bad');
+                        break;
+                    case app.ERROR:
+                        _log("DEBUG: GPS Validation - accuracy -1");
+                        $(document).trigger('app.geoloc.lock.no');
+                        break;
+                    default:
+                        _log('DEBUG: GPS validation unknown');
+                }
+            } else {
+                jQuery(document).trigger('app.record.invalid', [invalids]);
+            }
+            $(document).trigger('app.submitRecord.end', [processed]);
+        },
+
+        /**
+         * Processes the record either by saving it and sending (online) or simply saving (offline).
+         */
+        process: function(){
+            if (navigator.onLine) {
+                this.processOnline();
+            } else {
+                this.processOffline()
+            }
+        },
+
+        /**
+         * Saves and submits the record.
+         */
+        processOnline: function(){
+            _log("DEBUG: SUBMIT - online");
+            var onSaveSuccess = function(savedRecordId){
+                //#2 Post the record
+                app.io.sendSavedRecord(savedRecordId);
+            };
+            //#1 Save the record first
+            //app.record.storage.saveUsingRecordId('#entry_record', onSaveSuccess);
+            app.record.storage.save(onSaveSuccess);
+        },
+
+        /**
+         * Saves the record.
+         */
+        processOffline: function(){
+            _log("DEBUG: SUBMIT - offline");
+            $.mobile.loading('show');
+            // if (app.record.storage.saveUsingRecordId('#entry_record') > 0){
+            if (app.record.storage.save() > 0){
+                $(document).trigger('app.submitRecord.save');
+            } else {
+                $(document).trigger('app.submitRecord.error');
+            }
         }
+
     };
+
 
     //ADD ONLY ON SUBMIT START
     $(document).on('app.submitRecord.start', function(e){
