@@ -1,12 +1,10 @@
+//APP LOGIC.
+
 (function($){
     //When leaving a page with a form
     window.onbeforeunload = function() {
         _log('Leaving.');
     };
-
-    /*##############
-     ## START APP ##
-     ##############*/
 
     app.initialise();
     $.mobile.page.prototype.options.domCache = true;

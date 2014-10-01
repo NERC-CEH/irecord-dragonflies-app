@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
 
-    var  banner = "/*!\n" +
+    var  controller_banner = "/*!\n" +
         " * Mobile App page controllers. \n" +
         " * Version: <%= pkg.version %>\n" +
         " *\n" +
@@ -9,6 +9,17 @@ module.exports = function(grunt) {
         " * Author <%= grunt.template.today('yyyy') %> <%= pkg.author.name %>\n" +
         " * Released under the <%= _.pluck(pkg.licenses, 'type').join(', ') %> license.\n" +
         " */\n";
+
+    var  app_banner = "/*!\n" +
+        " * App wide configuration and controls. \n" +
+        " * Version: <%= pkg.version %>\n" +
+        " *\n" +
+        " * <%= pkg.homepage %>\n" +
+        " *\n" +
+        " * Author <%= grunt.template.today('yyyy') %> <%= pkg.author.name %>\n" +
+        " * Released under the <%= _.pluck(pkg.licenses, 'type').join(', ') %> license.\n" +
+        " */\n";
+
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -24,22 +35,43 @@ module.exports = function(grunt) {
             },
             dist: {
                 options: {
-                    banner: banner
+                    banner: controller_banner
                 },
                 // the files to concatenate
-                src: ['controllers/*.js'],
+                src: ['src/controllers/*.js'],
                 // the location of the resulting JS file
-                dest: '<%= pkg.name %>.js'
+                dest: 'dist/controllers.js'
+            },
+            dist2: {
+                options: {
+                    banner: app_banner
+                },
+                // the files to concatenate
+                src: [
+                    'src/conf.js',
+                    'src/app.js'
+                ],
+                // the location of the resulting JS file
+                dest: 'dist/app.js'
             }
         },
         uglify: {
-            options: {
-                // the banner is inserted at the top of the output
-                banner: banner
-            },
             dist: {
+                options: {
+                    // the banner is inserted at the top of the output
+                    banner: controller_banner
+                },
                 files: {
-                    '<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+                    'dist/controllers.min.js': ['<%= concat.dist.dest %>']
+                }
+            },
+            dist2: {
+                options: {
+                    // the banner is inserted at the top of the output
+                    banner: app_banner
+                },
+                files: {
+                    'dist/app.min.js': ['<%= concat.dist2.dest %>']
                 }
             }
         }
