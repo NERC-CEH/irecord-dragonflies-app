@@ -21,11 +21,14 @@
         loadData : function (){
             if (!this.loadingData){
                 this.loadingData = true;
-                app.data = app.data || {};//TODO: varInit call
 
                 function onSuccess(json){
                     app.controller.list.prob.loadingData = false;
-                    app.data.prob = optimiseData(json);
+                    var prob = optimiseData(json);
+                    app.data.prob = prob;
+
+                    //store for quicker loading
+                    app.storage.set('probability', prob);
 
                     function optimiseData(json){
                         //optimise data
@@ -50,13 +53,17 @@
                     app.controller.list.prob.loadingData = false;
                 }
 
-                $.ajax({
-                    url: this.CONF.PROB_DATA_SRC,
-                    dataType: 'jsonp',
-                    async: false,
-                    success: onSuccess,
-                    error: onError
-                });
+                if(!app.storage.is('probability')) {
+                    $.ajax({
+                        url: this.CONF.PROB_DATA_SRC,
+                        dataType: 'jsonp',
+                        async: false,
+                        success: onSuccess,
+                        error: onError
+                    });
+                } else {
+                    app.data.prob = app.storage.get('probability');
+                }
             }
         },
 

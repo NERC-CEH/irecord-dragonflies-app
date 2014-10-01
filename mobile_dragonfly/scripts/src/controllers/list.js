@@ -79,25 +79,32 @@
             _log('List init');
 
             //load species data
-            $.ajax({
-                url: this.CONF.SPECIES_DATA_SRC,
-                dataType: 'jsonp',
-                async: false,
-                success: function (species){
-                    var data = varInit('app.data');
-                    data['species'] = species;
-                    //todo: what if data comes first before pagecontainershow
-                    app.controller.list.renderList();
-                    /**
-                     * Prints species data for probability table mapping
-                     */
-//                      var text = '';
-//                      for(var i=0; i < species.length; i++){
-//                          text += "\n" + species[i].taxon + ', ' + species[i].id + ', ' +  species[i].warehouse_id;
-//                      }
-//                      console.log(text);
-                }
-            });
+            if(!app.storage.is('species')) {
+                $.ajax({
+                    url: this.CONF.SPECIES_DATA_SRC,
+                    dataType: 'jsonp',
+                    async: false,
+                    success: function (species) {
+                        app.data.species = species;
+
+                        //saves for quicker loading
+                        app.storage.set('species', species);
+
+                        //todo: what if data comes first before pagecontainershow
+                        app.controller.list.renderList();
+                        /**
+                         * Prints species data for probability table mapping
+                         */
+                        //                      var text = '';
+                        //                      for(var i=0; i < species.length; i++){
+                        //                          text += "\n" + species[i].taxon + ', ' + species[i].id + ', ' +  species[i].warehouse_id;
+                        //                      }
+                        //                      console.log(text);
+                    }
+                });
+            } else {
+                app.data.species = app.storage.get('species');
+            }
 
             this.makeListControls();
             this.prob.loadData();
