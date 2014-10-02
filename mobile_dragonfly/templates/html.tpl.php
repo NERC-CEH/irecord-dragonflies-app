@@ -69,38 +69,7 @@ $iform_mobile_path = 'sites/all/modules/iform_mobile/';
   <?php print $styles; ?>
 
   <!-- JavaScript -->
-  <?php
-   // drupal_add_js(base_path() . "sites/all/modules/iform/media/js/mobile/libs/jquery.mobile.router.js");
-   // print drupal_get_js();
-    print $scripts;
-  ?>
-
-  <!-- APP libs-->
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>libs/IndexedDBShim.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>libs/fastclick.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>libs/latlon/vector3d.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>libs/latlon/geo.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>libs/latlon/latlon-ellipsoid.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>libs/latlon/osgridref.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>libs/photoswipe-3.0.4/klass.min.js"></script>
-  <link type="text/css"
-        href="<?php echo base_path() . $iform_mobile_path; ?>libs/photoswipe-3.0.4/photoswipe.css" rel="stylesheet" />
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>libs/photoswipe-3.0.4/code.photoswipe.jquery-3.0.4.min.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>libs/handlebars.js"></script>
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>libs/jquery.validate.js"></script>
-
-  <script type="text/javascript"
-          src="<?php echo base_path() . $iform_mobile_path; ?>dist/iform-mobile.js"></script>
+  <?php print $scripts; ?>
 
   <!-- APP specific scripts -->
   <script type="text/javascript" src="<?php echo $theme_path?>/scripts/dist/controllers.js"></script>

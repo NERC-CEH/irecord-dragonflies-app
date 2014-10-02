@@ -16,6 +16,12 @@
  * @see html.tpl.php
  */
 function mobile_dragonfly_preprocess_html(&$vars) {
+
+  // Add iForm Mobile module's library
+  if (module_exists('iform_mobile')) {
+    drupal_add_library('iform_mobile', 'main');
+  }
+
   // Add local css with weight greater than jquery-mobile.css so it can override.
   $css_options = array(
     'type' => 'file', 
