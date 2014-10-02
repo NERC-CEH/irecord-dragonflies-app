@@ -77,6 +77,8 @@ $iform_mobile_path = 'sites/all/modules/iform_mobile/';
 
   <!-- APP libs-->
   <script type="text/javascript"
+          src="<?php echo base_path() . $iform_mobile_path; ?>libs/IndexedDBShim.js"></script>
+  <script type="text/javascript"
           src="<?php echo base_path() . $iform_mobile_path; ?>libs/fastclick.js"></script>
   <script type="text/javascript"
           src="<?php echo base_path() . $iform_mobile_path; ?>libs/latlon/vector3d.js"></script>
