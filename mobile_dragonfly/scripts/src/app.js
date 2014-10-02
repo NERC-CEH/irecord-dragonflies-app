@@ -7,9 +7,6 @@
     };
 
     app.initialise();
-    $.mobile.page.prototype.options.domCache = true;
-    $.mobile.defaultDialogTransition = "none"; //old jQuery
-    $.mobile.defaultPageTransition = "none";
 
     //Fixing back buttons
     $(document).on('pagecreate', function(event, ui) {

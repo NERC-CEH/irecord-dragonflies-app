@@ -71,10 +71,6 @@ $iform_mobile_path = 'sites/all/modules/iform_mobile/';
   <!-- JavaScript -->
   <?php print $scripts; ?>
 
-  <!-- APP specific scripts -->
-  <script type="text/javascript" src="<?php echo $theme_path?>/scripts/dist/controllers.js"></script>
-  <script type="text/javascript" src="<?php echo $theme_path?>/scripts/dist/app.js"></script>
-
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes; ?>>
 <?php print $page_top; ?>
