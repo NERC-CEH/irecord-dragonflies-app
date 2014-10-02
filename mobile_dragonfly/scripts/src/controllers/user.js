@@ -13,7 +13,7 @@
             app.io.sendAllSavedRecords();
         },
 
-        sendSavedRecord: function(recordStorageId){
+        sendSavedRecord: function(recordKey){
             if (navigator.onLine) {
                 $.mobile.loading('show');
 
@@ -29,8 +29,9 @@
                         $.mobile.loading('hide');
                     }, 3000);
 
-                    app.record.storage.remove(recordStorageId);
-                    app.controller.user.printList();
+                    app.record.db.remove(recordKey, function(){
+                        app.controller.user.printList();
+                    });
                 }
 
                 function onError (xhr, ajaxOptions, thrownError) {
@@ -49,7 +50,7 @@
                         }, 10000);
                     }
 
-                app.io.sendSavedRecord(recordStorageId, onSuccess, onError);
+                app.io.sendSavedRecord(recordKey, onSuccess, onError);
             } else {
                 $.mobile.loading( 'show', {
                     text: "Looks like you are offline!",
@@ -64,9 +65,10 @@
             }
         },
 
-        deleteSavedRecord: function(recordStorageId){
-            app.record.storage.remove(recordStorageId);
-            this.printList();
+        deleteSavedRecord: function(recordKey){
+            app.record.db.remove(recordKey, function(){
+                app.controller.user.printList();
+            });
         },
 
         printUserControls: function(){
@@ -83,47 +85,42 @@
         },
 
         printList: function(){
-            var savedRecords = app.record.storage.getAll();
-            var keys = Object.keys(savedRecords);
-            var records = [];
-            for(var i = 0; i < keys.length; i++){
-                var data = {};
-                for(var j = 0; j < savedRecords[keys[i]].length; j++){
-                    var name = savedRecords[keys[i]][j].name;
-                    var value = savedRecords[keys[i]][j].value;
-                    switch (name) {
-                        case app.record.inputs.KEYS.DATE:
-                            name = 'date';
-                            break;
-                        case app.record.inputs.KEYS.TAXON:
-                            var species = app.data.species;
-                            for(var k = 0; k < species.length; k++){
-                                if(species[k].warehouse_id == value){
-                                    name = 'common_name';
-                                    value = species[k].common_name;
-                                     break;
+            function onSuccess(savedRecords) {
+                var records = [];
+                for (var i = 0; i < savedRecords.length; i++) {
+                    var record = {};
+                    for (var j = 0; j < savedRecords[i].length; j++) {
+                        var name = savedRecords[i][j].name;
+                        var value = savedRecords[i][j].value;
+                        switch (name) {
+                            case app.record.inputs.KEYS.DATE:
+                                record['date']= value;
+                                break;
+                            case app.record.inputs.KEYS.TAXON:
+                                var species = app.data.species;
+                                for (var k = 0; k < species.length; k++) {
+                                    if (species[k].warehouse_id == value) {
+                                        record['common_name']= species[k].common_name;
+                                        break;
+                                    }
                                 }
-                            }
-                            break;
-                        default:
+                                break;
+                            default:
+                        }
                     }
-                    data[name] = value;
-
+                    record['id'] = savedRecords[i].id;
+                    records.push(record);
                 }
-                records.push({
-                        'id': keys[i],
-                        'data' : data
-                    }
-                );
+
+                var template = $('#saved-list-template').html();
+                var placeholder = $('#saved-list-placeholder');
+
+                var compiled_template = Handlebars.compile(template);
+
+                placeholder.html(compiled_template({'records': records}));
+                placeholder.trigger('create');
             }
-
-            var template = $('#saved-list-template').html();
-            var placeholder = $('#saved-list-placeholder');
-
-            var compiled_template = Handlebars.compile(template);
-
-            placeholder.html(compiled_template({'records': records}));
-            placeholder.trigger('create');
+            app.record.db.getAll(onSuccess);
         }
     };
 

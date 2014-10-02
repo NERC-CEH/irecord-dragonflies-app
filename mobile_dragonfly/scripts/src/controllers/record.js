@@ -9,7 +9,7 @@
          */
         pagecreate : function(){
             _log('Initialising: recording page');
-            app.image.setImage('input[type="file"]', '#sample-image');
+            this.setImage('input[type="file"]', '#sample-image');
             this.addRecordValidation();
 
             //Current record setup and attaching listeners to record inputs
@@ -155,40 +155,80 @@
         /**
          * Processes the record either by saving it and sending (online) or simply saving (offline).
          */
-        process: function(){
+        process: function(callback){
             if (navigator.onLine) {
-                this.processOnline();
+                this.processOnline(callback);
             } else {
-                this.processOffline()
+                this.processOffline(callback)
             }
         },
 
         /**
          * Saves and submits the record.
          */
-        processOnline: function(){
+        processOnline: function(callback){
             _log("DEBUG: SUBMIT - online");
             var onSaveSuccess = function(savedRecordId){
+                app.record.clear();
                 //#2 Post the record
-                app.io.sendSavedRecord(savedRecordId);
+                app.io.sendSavedRecord(savedRecordId, callback);
             };
             //#1 Save the record first
-            //app.record.storage.saveUsingRecordId('#entry_record', onSaveSuccess);
-            app.record.storage.save(onSaveSuccess);
+            app.record.db.save(onSaveSuccess);
         },
 
         /**
          * Saves the record.
          */
-        processOffline: function(){
+        processOffline: function(callback){
             _log("DEBUG: SUBMIT - offline");
             $.mobile.loading('show');
-            // if (app.record.storage.saveUsingRecordId('#entry_record') > 0){
-            if (app.record.storage.save() > 0){
-                $(document).trigger('app.submitRecord.save');
-            } else {
-                $(document).trigger('app.submitRecord.error');
+            app.record.db.save(callback);
+            // if (app.record.db.saveUsingRecordId('#entry_record') > 0){
+            //if ( > 0){
+            //    $(document).trigger('app.submitRecord.save');
+            //} else {
+            //    $(document).trigger('app.submitRecord.error');
+            //}
+        },
+
+        setImage: function(input, output){
+            var img_holder = 'sample-image-placeholder';
+            var upload = $(input);
+
+            if (typeof window.FileReader === 'undefined') {
+                return false;
             }
+
+            // upload.before(sample_tmpl);
+            $('#photo').append('<div id="' + img_holder + '"></div>');
+
+            $('#' + img_holder).on('click', function(){
+                upload.click();
+            });
+
+            upload.change(function (e) {
+                e.preventDefault();
+                var file = this.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function (event) {
+                    var img = new Image();
+                    img.src = event.target.result;
+                    // note: no onload required since we've got the dataurl...I think! :)
+                    if (img.width > 560) { // holder width
+                        img.width = 560;
+                    }
+                    $('#sample-image-placeholder').empty().append(img);
+                    $('#' + img_holder).css('border', '0px');
+                    //$('#' + img_holder).css('background-color', 'transparent');
+                    $('#' + img_holder).css('background-image', 'none');
+                };
+                reader.readAsDataURL(file);
+
+                return false;
+            });
+
         }
 
     };
