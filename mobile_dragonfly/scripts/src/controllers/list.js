@@ -121,6 +121,37 @@
         /**
          *
          */
+        setListControlsListeners: function(){
+            //initial list control button setup
+            var filters = app.controller.list.getCurrentFilters();
+            if (filters.length == 1 && filters[0].id == 'favourites'){
+                filters = [];
+            }
+
+            $('#list-controls-button').toggleClass('on', filters.length > 0);
+
+            $('.sort').on('change', function() {
+                app.controller.list.setSortType(this.id);
+                app.controller.list.renderList();
+            });
+
+            $('.filter').on('change', function() {
+                var filter = app.controller.list.getFilterById(this.id);
+                app.controller.list.setFilter(filter);
+
+                var filters = app.controller.list.getCurrentFilters();
+                if (filters.length == 1 && filters[0].id == 'favourites'){
+                    filters = [];
+                }
+                $('#list-controls-button').toggleClass('on', filters.length > 0);
+
+                app.controller.list.renderList();
+            });
+        },
+
+        /**
+         *
+         */
         renderList : function(){
             var filters = this.getCurrentFilters();
             var sort = this.getSortType();
@@ -205,6 +236,7 @@
         makeListControls : function(){
             this.makeListSortControls();
             this.makeListFilterControls();
+            this.setListControlsListeners();
         },
 
         /**
@@ -520,37 +552,6 @@
             onSuccess(list);
         }
     };
-
-    /**
-     *
-     */
-    $(document).ready(function() {
-        //initial list control button setup
-        var filters = app.controller.list.getCurrentFilters();
-        if (filters.length == 1 && filters[0].id == 'favourites'){
-            filters = [];
-        }
-
-        $('#list-controls-button').toggleClass('on', filters.length > 0);
-
-        $('.sort').on('change', function() {
-            app.controller.list.setSortType(this.id);
-            app.controller.list.renderList();
-        });
-
-        $('.filter').on('change', function() {
-            var filter = app.controller.list.getFilterById(this.id);
-            app.controller.list.setFilter(filter);
-
-            var filters = app.controller.list.getCurrentFilters();
-            if (filters.length == 1 && filters[0].id == 'favourites'){
-                filters = [];
-            }
-            $('#list-controls-button').toggleClass('on', filters.length > 0);
-
-            app.controller.list.renderList();
-        });
-    });
 
     app.navigation.showListControls = function(){
         $('#list-controls-placeholder').slideToggle('slow');
