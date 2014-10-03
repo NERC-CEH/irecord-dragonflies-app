@@ -303,83 +303,52 @@
         },
 
         startGeoloc : function(){
-            app.geoloc.start();
+            $.mobile.loading('show');
+
+            function onSuccess(location){
+                $.mobile.loading('hide');
+                var page_id = $.mobile.activePage.attr('id');
+
+                switch(page_id){
+                    case 'record':
+                        app.controller.record.saveSref(location);
+                        break;
+                    case 'sref':
+                        app.controller.sref.set(location.lat, location.lon, location.acc);
+
+                        var p = new LatLonE(location.lat, location.lon, GeoParams.datum.OSGB36);
+                        var grid = OsGridRef.latLonToOsGrid(p);
+                        var gref = grid.toString();
+
+                        var message = $('#gps-start-message');
+                        message.removeClass();
+                        message.addClass('success-message');
+                        message.empty().append(
+                            '<p>Success!</p> ' +
+                            '<p>Grid Ref:<br/> ' +
+                            gref + '<br/>' +
+                            'Accurracy: ' + location.acc + 'm</p>');
+                        break;
+                    case 'setup':
+                        break;
+                    default:
+                        _log('Error, gps save success - unknown page to go.');
+                }
+
+            }
+            function onError(err){
+                $.mobile.loading( 'show', {
+                    text: "Sorry! " + err.message + '.',
+                    theme: "b",
+                    textVisible: true,
+                    textonly: true
+                });
+                setTimeout(function(){
+                    $.mobile.loading('hide');
+                }, 5000);
+            }
+            app.geoloc.run(onSuccess, onError);
         }
     };
-
-    //GPS Event Listeners
-    $(document).on('app.submitRecord.end', function(e, processed){
-        if (processed){
-            return;
-        }
-        $.mobile.loading('hide');
-    });
-
-    $(document).on('app.geoloc.lock.timeout app.geoloc.lock.error', function(e, data){
-        if (data != null && data.error != null){
-            $.mobile.loading( 'show', {
-                text: "Sorry! " + data.error.message + '.',
-                theme: "b",
-                textVisible: true,
-                textonly: true
-            });
-            setTimeout(function(){
-                $.mobile.loading('hide');
-            }, 5000);
-        } else {
-            $.mobile.loading('hide');
-        }
-    });
-
-    $(document).on('app.geoloc.lock.start', function(){
-        $.mobile.loading('show');
-        $('#sref-top-button').click();
-    } );
-
-    $(document).on('app.geoloc.lock.no app.geoloc.lock.bad', function(){
-        $.mobile.loading('hide');
-        $('#sref-top-button').click();
-    } );
-
-    /**
-     * Custom response to Successful GPS lock
-     * depending on which page the geoloc was used
-     */
-    $(document).on('app.geoloc.lock.ok', function(){
-        $.mobile.loading('hide');
-        var page_id = $.mobile.activePage.attr('id');
-        var location = app.geoloc.get();
-
-        switch(page_id){
-            case 'record':
-                app.controller.record.saveSref(location);
-                break;
-            case 'sref':
-                app.controller.sref.set(location.lat, location.lon, location.acc);
-
-                var p = new LatLonE(location.lat, location.lon, GeoParams.datum.OSGB36);
-                var grid = OsGridRef.latLonToOsGrid(p);
-                var gref = grid.toString();
-
-                var message = $('#gps-start-message');
-                message.removeClass();
-                message.addClass('success-message');
-                message.empty().append(
-                    '<p>Success!</p> ' +
-                    '<p>Grid Ref:<br/> ' +
-                        gref + '<br/>' +
-                        'Accurracy: ' + location.acc + 'm</p>');
-                break;
-            case 'setup':
-                break;
-            default:
-                _log('Error, unknown page.');
-        }
-    } );
-
-    $(document).on('app.geoloc.noGPS', function(){
-        $.mobile.loading('hide');
-
-    } );
 
 }(jQuery));

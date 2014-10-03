@@ -10,7 +10,10 @@
         },
 
         sendAllSavedRecords: function(){
-            app.io.sendAllSavedRecords();
+            function onSuccess(){
+                app.controller.user.printList();
+            }
+            app.io.sendAllSavedRecords(onSuccess);
         },
 
         sendSavedRecord: function(recordKey){
@@ -123,9 +126,5 @@
             app.record.db.getAll(onSuccess);
         }
     };
-
-    $(document).on('app.record.sentall.success', function(e){
-        app.controller.user.printList();
-    });
 
 }(jQuery));

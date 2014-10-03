@@ -10,11 +10,14 @@
         pagecreate : function(){
             _log('Initialising: recording page');
             this.setImage('input[type="file"]', '#sample-image');
-            this.addRecordValidation();
 
             //Current record setup and attaching listeners to record inputs
             app.record.clear();
-            app.geoloc.run();
+
+            function onGeolocSuccess(location){
+                app.controller.record.saveSref(location);
+            }
+            app.geoloc.run(onGeolocSuccess);
 
             this.saveSpecies();
             this.saveDate();
@@ -24,6 +27,166 @@
                 var checked = $(this).prop('checked');
                 app.record.inputs.set('occAttr:223', checked);
             });
+        },
+
+        /*
+         * Validates and sends the record. Saves it if no network.
+         */
+        send: function() {
+            $.mobile.loading('show');
+
+            if (!this.valid()){
+                $.mobile.loading('hide');
+                return;
+            }
+
+            function onError(err){
+                $.mobile.loading('hide');
+                var message = "<center><h3>Sorry!</h3></center>" +
+                    "<p>" + err.message + "</p>";
+                app.navigation.makePopup(message, true);
+                $('#app-popup').popup().popup('open');
+            }
+
+            if (navigator.onLine) {
+                //online
+                function onOnlineSuccess(){
+                    $.mobile.loading('hide');
+                    app.navigation.popup("<center><h2>Submitted successfully. </br>Thank You!</h2></center>", false);
+                    app.navigation.go(4000, 'list');
+                }
+                this.processOnline(onOnlineSuccess, onError);
+            } else {
+                //offline
+                function onSaveSuccess(){
+                    $.mobile.loading('hide');
+                    app.navigation.popup("<center><h2>No Internet. Record saved.</h2></center>", false);
+                    app.navigation.go(4000, 'list');
+                }
+                this.processOffline(onSaveSuccess, onError)
+            }
+        },
+
+        /*
+         * Validates and saves the record.
+         */
+        save: function() {
+            $.mobile.loading('show');
+
+            if (!this.valid()){
+                $.mobile.loading('hide');
+                return;
+            }
+
+            function onSuccess(){
+                $.mobile.loading('hide');
+                app.navigation.popup("<center><h2>Record saved.</h2></center>", false);
+                app.navigation.go(4000, 'list');
+            }
+            function onError(err){
+                $.mobile.loading('hide');
+                var message = "<center><h3>Sorry!</h3></center>" +
+                    "<p>" + err.message +  "</p>";
+                //xhr.status+ " " + thrownError + "</p><p>" + xhr.responseText +
+                app.navigation.makePopup(message, true);
+                $('#app-popup').popup().popup('open');
+            }
+
+            this.processOffline(onSuccess, onError);
+        },
+
+        /**
+         * Saves and submits the record.
+         */
+        processOnline: function(callback, onError){
+            _log("DEBUG: SUBMIT - online");
+            var onSaveSuccess = function(savedRecordId){
+                app.record.clear();
+
+                function onSendSuccess(){
+                    app.record.db.remove(savedRecordId);
+                    if (callback != null){
+                        callback();
+                    }
+                }
+                //#2 Post the record
+                app.io.sendSavedRecord(savedRecordId, onSendSuccess, onError);
+            };
+            //#1 Save the record first
+            app.record.db.save(onSaveSuccess, onError);
+        },
+
+        /**
+         * Saves the record.
+         */
+        processOffline: function(callback, onError){
+            _log("DEBUG: SUBMIT - offline");
+            var onSaveSuccess = function(savedRecordId){
+                app.record.clear();
+
+                if (callback != null){
+                    callback();
+                }
+            };
+            app.record.db.save(onSaveSuccess, onError);
+        },
+
+        /**
+         * Validates the record and GPS lock. If not valid then
+         * takes some action - popup/gps page redirect.
+         * @returns {*}
+         */
+        valid: function(){
+            //validate record
+            var invalids = this.validateInputs();
+            if (invalids.length > 0) {
+                var message =
+                    " <p>The following is still missing:</p><ul>";
+
+                for (var i=0; i < invalids.length; i++){
+                    message += "<li>" + invalids[i].name + "</li>";
+                }
+
+                message += "</ul>";
+                app.navigation.popup(message, true);
+                return app.FALSE;
+            }
+
+            //validate gps
+            var gps = app.geoloc.valid();
+            if (gps == app.ERROR || gps == app.FALSE){
+                //redirect to gps page
+                $('#sref-top-button').click();
+                return app.FALSE;
+            }
+            return app.TRUE;
+        },
+
+        /**
+         * Validates the record inputs.
+         */
+        validateInputs: function(){
+            var invalids = [];
+
+            if(!app.record.inputs.is('sample:date')){
+                invalids.push({
+                    'id': 'sample:date',
+                    'name': 'Date'
+                })
+            }
+            if(!app.record.inputs.is('sample:entered_sref')){
+                invalids.push({
+                    'id': 'sample:entered_sref',
+                    'name': 'Location'
+                })
+            }
+            if(!app.record.inputs.is('occurrence:taxa_taxon_list_id')){
+                invalids.push({
+                    'id': 'occurrence:taxa_taxon_list_id',
+                    'name': 'Species'
+                })
+            }
+            return invalids;
         },
 
         saveSref : function(location){
@@ -87,111 +250,6 @@
             app.record.inputs.set(name, value);
         },
 
-        /**
-         * Sets up specific validation for the record.
-         */
-        addRecordValidation: function(){
-            //overwrite default validator
-            app.record.validate = function(){
-                var invalids = [];
-
-                if(!app.record.inputs.is('sample:date')){
-                    invalids.push({
-                        'id': 'sample:date',
-                        'name': 'Date'
-                    })
-                }
-                if(!app.record.inputs.is('sample:entered_sref')){
-                    invalids.push({
-                        'id': 'sample:entered_sref',
-                        'name': 'Date'
-                    })
-                }
-                if(!app.record.inputs.is('occurrence:taxa_taxon_list_id')){
-                    invalids.push({
-                        'id': 'occurrence:taxa_taxon_list_id',
-                        'name': 'Date'
-                    })
-                }
-                return invalids;
-            }
-        },
-
-        /*
-         * Starts the record submission process.
-         */
-        submit: function(recordId) {
-            _log("DEBUG: SUBMIT - start");
-            var processed = false;
-            $(document).trigger('app.submitRecord.start');
-            //validate record
-            var invalids = app.record.validate(recordId);
-            if(invalids.length == 0){
-                //validate GPS lock
-                var gps = app.geoloc.validate();
-                switch(gps){
-                    case app.TRUE:
-                        _log("DEBUG: GPS Validation - accuracy Good Enough");
-                        processed = true;
-                        this.process();
-                        break;
-                    case app.FALSE:
-                        _log("DEBUG: GPS Validation - accuracy " );
-                        $(document).trigger('app.geoloc.lock.bad');
-                        break;
-                    case app.ERROR:
-                        _log("DEBUG: GPS Validation - accuracy -1");
-                        $(document).trigger('app.geoloc.lock.no');
-                        break;
-                    default:
-                        _log('DEBUG: GPS validation unknown');
-                }
-            } else {
-                jQuery(document).trigger('app.record.invalid', [invalids]);
-            }
-            $(document).trigger('app.submitRecord.end', [processed]);
-        },
-
-        /**
-         * Processes the record either by saving it and sending (online) or simply saving (offline).
-         */
-        process: function(callback){
-            if (navigator.onLine) {
-                this.processOnline(callback);
-            } else {
-                this.processOffline(callback)
-            }
-        },
-
-        /**
-         * Saves and submits the record.
-         */
-        processOnline: function(callback){
-            _log("DEBUG: SUBMIT - online");
-            var onSaveSuccess = function(savedRecordId){
-                app.record.clear();
-                //#2 Post the record
-                app.io.sendSavedRecord(savedRecordId, callback);
-            };
-            //#1 Save the record first
-            app.record.db.save(onSaveSuccess);
-        },
-
-        /**
-         * Saves the record.
-         */
-        processOffline: function(callback){
-            _log("DEBUG: SUBMIT - offline");
-            $.mobile.loading('show');
-            app.record.db.save(callback);
-            // if (app.record.db.saveUsingRecordId('#entry_record') > 0){
-            //if ( > 0){
-            //    $(document).trigger('app.submitRecord.save');
-            //} else {
-            //    $(document).trigger('app.submitRecord.error');
-            //}
-        },
-
         setImage: function(input, output){
             var img_holder = 'sample-image-placeholder';
             var upload = $(input);
@@ -228,51 +286,7 @@
 
                 return false;
             });
-
         }
-
     };
-
-
-    //ADD ONLY ON SUBMIT START
-    $(document).on('app.submitRecord.start', function(e){
-        $.mobile.loading('show');
-    });
-
-    $(document).on('app.record.sent.success', function(e){
-        $.mobile.loading('hide');
-        app.navigation.popup("<center><h2>Submitted successfully. </br>Thank You!</h2></center>", false);
-        app.navigation.go(4000, 'list');
-    });
-
-    $(document).on('app.record.sent.error', function(e, xhr, thrownError){
-        $.mobile.loading('hide');
-        var message = "<center><h3>Sorry!</h3></center>" +
-            "<p>" + xhr.status+ " " + thrownError + "</p><p>" + xhr.responseText + "</p>";
-        app.navigation.makePopup(message, true);
-        $('#app-popup').popup().popup('open');
-    });
-
-    $(document).on('app.record.invalid', function(e, invalids){
-        var message = " <center><h3>Validation</h3></center>" +
-            " <p>The following is still missing:</p><ul>";
-
-        for (var i=0; i < invalids.length; i++)
-            if (invalids[i].name.indexOf(app.record.MULTIPLE_GROUP_KEY) != 0){
-                message += "<li>" + $("label[for='" + invalids[i].id + "']").text() + "</li>";
-            } else {
-                message += "<li>" + $("label[data-for='" + invalids[i].id + "']").text() + "</li>";
-            }
-
-        message += "</ul>";
-        $.mobile.loading('hide');
-        app.navigation.popup(message, true);
-    });
-
-    $(document).on('app.submitRecord.save', function(e){
-        $.mobile.loading('hide');
-        app.navigation.popup("<center><h2>No Internet. Record saved.</h2></center>", false);
-        app.navigation.go(4000, 'list');
-    });
 
 }(jQuery));
