@@ -9,24 +9,44 @@
          */
         pagecreate : function(){
             _log('Initialising: recording page');
-            this.setImage('input[type="file"]', '#sample-image');
 
-            //Current record setup and attaching listeners to record inputs
-            app.record.clear();
-
-            function onGeolocSuccess(location){
-                app.controller.record.saveSref(location);
-            }
-            app.geoloc.run(onGeolocSuccess);
-
-            this.saveSpecies();
-            this.saveDate();
-
+            //set button event handlers
             var ele = document.getElementById('occAttr:223');
             $(ele).change(function(){
                 var checked = $(this).prop('checked');
                 app.record.inputs.set('occAttr:223', checked);
             });
+
+            //start geolocation
+            function onGeolocSuccess(location){
+                app.controller.record.saveSref(location);
+            }
+            app.geoloc.run(onGeolocSuccess);
+        },
+
+        pagecontainershow: function(e, data){
+            _log('Beforeshow recording page.');
+
+            var prevPageId = data.prevPage[0].id;
+            switch(prevPageId){
+                case 'list':
+                    this.clear();
+                    break;
+                default:
+            }
+        },
+
+        /**
+         * Clears the recording page from existing inputs.
+         */
+        clear: function(){
+            _log('Clearing recording page');
+            this.setImage('input[type="file"]', '#sample-image');
+
+            app.record.clear();
+
+            this.saveSpecies();
+            this.saveDate();
         },
 
         /*
@@ -53,7 +73,9 @@
                 function onOnlineSuccess(){
                     $.mobile.loading('hide');
                     app.navigation.popup("<center><h2>Submitted successfully. </br>Thank You!</h2></center>", false);
-                    app.navigation.go(4000, 'list');
+                    setTimeout(function(){
+                        $("body").pagecontainer( "change", "#list");
+                    }, 3000);
                 }
                 this.processOnline(onOnlineSuccess, onError);
             } else {
@@ -61,7 +83,9 @@
                 function onSaveSuccess(){
                     $.mobile.loading('hide');
                     app.navigation.popup("<center><h2>No Internet. Record saved.</h2></center>", false);
-                    app.navigation.go(4000, 'list');
+                    setTimeout(function(){
+                        $("body").pagecontainer( "change", "#list");
+                    }, 3000);
                 }
                 this.processOffline(onSaveSuccess, onError)
             }
@@ -81,7 +105,9 @@
             function onSuccess(){
                 $.mobile.loading('hide');
                 app.navigation.popup("<center><h2>Record saved.</h2></center>", false);
-                app.navigation.go(4000, 'list');
+                setTimeout(function(){
+                    $("body").pagecontainer( "change", "#list");
+                }, 3000);
             }
             function onError(err){
                 $.mobile.loading('hide');
