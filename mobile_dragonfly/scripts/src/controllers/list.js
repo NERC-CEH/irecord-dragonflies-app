@@ -215,7 +215,8 @@
 
             var compiled_template = Handlebars.compile(template);
 
-            var record = Drupal.settings.basePath + app.CONF.HOME + 'record#record';
+            //var record = Drupal.settings.basePath + app.CONF.HOME + 'record#record';
+            var record = '#record';
             placeholder.html(compiled_template({'species': s, 'record': record}));
             placeholder.trigger('create');
 
