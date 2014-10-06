@@ -1,8 +1,8 @@
 <div data-role="page" id="list">
     <div data-role="header" data-position="fixed"data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
-            <a href='info' data-role="button" data-icon="info" data-iconpos="notext" data-prefetch>Info</a>
-            <a href='user' data-role="button" data-icon="user" data-iconpos="notext" data-prefetch>User</a>
+            <a href='info' data-role="button" data-icon="info" data-iconpos="notext">Info</a>
+            <a href='user' data-role="button" data-icon="user" data-iconpos="notext">User</a>
         </div>
         <h1 id='List_heading'></h1>
         <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
@@ -17,6 +17,7 @@
                     <ul>
                         <li><a href="#filter" data-ajax="false" class="ui-btn-active">Filter</a></li>
                         <li><a href="#sort" data-ajax="false">Sort</a></li>
+                    </ul>
                     </ul>
                 </div>
                 <div id="sort" class="ui-body-d ui-content">
@@ -67,18 +68,16 @@
                         <p class="species-list-common-name">{{common_name}}</p>
                         <p>{{taxon}}</p>
                     </a>
-                    <a href="{{../record}}" class="ios-enhanced" onclick="app.controller.list.setCurrentSpecies('{{id}}')" data-icon="plus" data-ajax="false">Record</a>
+                    <a href="{{../record}}" class="ios-enhanced" onclick="app.controller.list.setCurrentSpecies('{{id}}')" data-icon="plus">Record</a>
                 </li>
                 {{/each}}
             </ul>
-
         </script>
-        <a href='sref' style="display:none" data-prefetch></a>
     </div>
 </div>
 
 <div data-role="page" id="species">
-    <div data-role="header" data-position="fixed"data-tap-toggle="false">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
             <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
         </div>

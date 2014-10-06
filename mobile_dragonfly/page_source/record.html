@@ -1,18 +1,18 @@
-<input type="hidden" id="occurrence:record_status" name="occurrence:record_status" value="C" />
 <div data-role="page" id="record">
-    <div data-role="header" data-position="fixed"data-tap-toggle="false">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
             <a href='#' data-rel='back' data-role="button" data-icon="home" data-iconpos="notext">Back</a>
         </div>
         <h1 id='record_heading'></h1>
         <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
-            <a href="#date" id="date-top-button" data-role="button" onclick="{onclick}"
-               data-icon="calendar"  data-iconpos="notext" >Date</a>
-            <a href="sref" id="sref-top-button" data-role="button" onclick="{onclick}"
-               data-icon="location"  data-iconpos="notext" data-prefetch>GPS</a>
+            <a href="#date" id="date-top-button" data-role="button"
+               data-icon="calendar" data-iconpos="notext" >Date</a>
+            <a href="sref" id="sref-top-button" data-role="button" data-prefetch
+               data-icon="location" data-iconpos="notext">GPS</a>
         </div>
     </div>
     <div data-role="content" >
+        <input type="hidden" id="occurrence:record_status" name="occurrence:record_status" value="C" />
         <a  href="#date" id="date-button" data-role="button" data-icon="arrow-r" data-iconpos="right">
             <h1>Date</h1>
         </a><input type="hidden" id="imp-sref" name="sample:entered_sref" required />
