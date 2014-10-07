@@ -41,7 +41,7 @@
          */
         clear: function(){
             _log('Clearing recording page');
-            this.setImage('input[type="file"]', '#sample-image');
+            this.setImage('input[type="file"]');
 
             app.record.clear();
 
@@ -276,7 +276,7 @@
             app.record.inputs.set(name, value);
         },
 
-        setImage: function(input, output){
+        setImage: function(input){
             var img_holder = 'sample-image-placeholder';
             var upload = $(input);
 
@@ -284,11 +284,11 @@
                 return false;
             }
 
-            // upload.before(sample_tmpl);
+            $('#' + img_holder).remove();
             $('#photo').append('<div id="' + img_holder + '"></div>');
 
-            $('#' + img_holder).on('click', function(){
-                upload.click();
+            $('#sample-image-placeholder').on('click', function(){
+                $('input[type="file"]').click();
             });
 
             upload.change(function (e) {

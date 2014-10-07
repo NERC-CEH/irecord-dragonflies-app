@@ -2,12 +2,12 @@
 Species list Page
 ----------------->
 <div data-role="page" id="list">
-    <div data-role="header" data-position="fixed"data-tap-toggle="false">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
             <a href='info' data-role="button" data-icon="info" data-iconpos="notext">Info</a>
             <a href='#user' data-role="button" data-icon="user" data-iconpos="notext">User</a>
         </div>
-        <h1 id='List_heading'></h1>
+        <h1 id='list_heading'></h1>
         <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
             <a href="#" id="fav-button" data-role="button" onclick="app.navigation.filterFavourites()"
                        data-icon="star" data-iconpos="notext">Favourie</a>
@@ -20,7 +20,6 @@ Species list Page
                     <ul>
                         <li><a href="#filter" data-ajax="false" class="ui-btn-active">Filter</a></li>
                         <li><a href="#sort" data-ajax="false">Sort</a></li>
-                    </ul>
                     </ul>
                 </div>
                 <div id="sort" class="ui-body-d ui-content">
@@ -84,7 +83,7 @@ Species list Page
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
             <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
         </div>
-        <h1 id='List_heading'></h1>
+        <h1 id='species_heading'></h1>
         <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
             <a href="#" id="species-profile-fav-button" onclick="app.controller.species.toggleSpeciesFavourite()" data-icon="star" data-iconpos="notext" data-role="button">Gallery</a>
             <a href="#" onclick="app.controller.list.gallery.show()" data-icon="eye" data-iconpos="notext" data-role="button">Gallery</a>
@@ -143,7 +142,7 @@ Recording Page
         <input type="hidden" id="imp-sref-system" name="sample:entered_sref_system"  value="4326" />
         <input type="hidden" id="sref_accuracy" name="smpAttr:273"  value="-1" />
         <div id="photo"><div id="photo-picker">
-            <input type="file" id="sample:image" name="sample:image" accept="png|jpg|gif|jpeg|mp3|wav"/>
+            <input type="file" id="sample:image" name="sample:image" accept="png|jpg|gif|jpeg"/>
             <input type="hidden" id="sample_medium:path" name="sample_medium:path" value=""/>
         </div>
         </div>
