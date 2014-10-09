@@ -128,6 +128,11 @@
                 filters = [];
             }
 
+            function toggleListControls(){
+                $('#list-controls-placeholder').slideToggle('slow');
+            }
+            $('#list-controls-save-button').on('click', toggleListControls);
+            $('#list-controls-button').on('click', toggleListControls);
             $('#list-controls-button').toggleClass('on', filters.length > 0);
 
             $('.sort').on('change', function() {
@@ -552,10 +557,6 @@
             }
             onSuccess(list);
         }
-    };
-
-    app.navigation.showListControls = function(){
-        $('#list-controls-placeholder').slideToggle('slow');
     };
 
     app.navigation.filterFavourites = function(){

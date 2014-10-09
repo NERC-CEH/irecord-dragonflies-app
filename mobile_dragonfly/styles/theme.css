@@ -78,11 +78,6 @@ label, form label {
     .ui-field-contain > .ui-rangeslider > label {
         width: 30%;
     }
-
-    .ui-field-contain > label ~ [class*="ui-"],
-    .ui-field-contain .ui-controlgroup-controls {
-        width: 68%;
-    }
 }
 
 /* Wide screens CSS */
@@ -247,7 +242,6 @@ form, body {
 }
 
 .list-controls fieldset{
-    width: 80% !important;
     margin-left: auto !important;
     margin-right: auto !important;
     margin-bottom: 20px !important;
@@ -321,5 +315,9 @@ form, body {
 }
 
 label.filter, label.sort {
-    width: 100%
+    width: 70%
+}
+
+#list-controls-save-button{
+    width: 30%;
 }
