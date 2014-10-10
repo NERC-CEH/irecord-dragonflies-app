@@ -182,7 +182,7 @@
             var gps = app.geoloc.valid();
             if (gps == app.ERROR || gps == app.FALSE){
                 //redirect to gps page
-                $('#sref-top-button').click();
+                $('body').pagecontainer( "change", "#sref");
                 return app.FALSE;
             }
             return app.TRUE;

@@ -106,8 +106,10 @@
                 app.data.species = app.storage.get('species');
             }
 
-            this.makeListControls();
             this.prob.loadData();
+
+            $('#list-controls-save-button').on('click', this.toggleListControls);
+            $('#list-controls-button').on('click', this.toggleListControls);
 
             //ask user to appcache
             setTimeout(app.controller.list.download, 1000);
@@ -118,43 +120,8 @@
          */
         pagecontainershow: function(){
             _log('Beforeshow list');
+            this.makeListControls();
             this.renderList();
-        },
-
-        /**
-         *
-         */
-        setListControlsListeners: function(){
-            //initial list control button setup
-            var filters = app.controller.list.getCurrentFilters();
-            if (filters.length == 1 && filters[0].id == 'favourites'){
-                filters = [];
-            }
-
-            function toggleListControls(){
-                $('#list-controls-placeholder').slideToggle('slow');
-            }
-            $('#list-controls-save-button').on('click', toggleListControls);
-            $('#list-controls-button').on('click', toggleListControls);
-            $('#list-controls-button').toggleClass('on', filters.length > 0);
-
-            $('.sort').on('change', function() {
-                app.controller.list.setSortType(this.id);
-                app.controller.list.renderList();
-            });
-
-            $('.filter').on('change', function() {
-                var filter = app.controller.list.getFilterById(this.id);
-                app.controller.list.setFilter(filter);
-
-                var filters = app.controller.list.getCurrentFilters();
-                if (filters.length == 1 && filters[0].id == 'favourites'){
-                    filters = [];
-                }
-                $('#list-controls-button').toggleClass('on', filters.length > 0);
-
-                app.controller.list.renderList();
-            });
         },
 
         /**
@@ -285,6 +252,8 @@
                     for(var j = 0; j < currentFilters.length; j++){
                         if(currentFilters[j].id == this.filters[i].id){
                             this.filters[i]['checked'] = "checked";
+                        } else {
+                            this.filters[i]['checked'] = "";
                         }
                     }
                     filtersToRender.push(this.filters[i]);
@@ -298,6 +267,48 @@
 
             placeholder.html(compiled_template(filtersToRender));
             placeholder.trigger('create');
+        },
+
+        /**
+         * Has to be done once on list creation.
+         */
+        setListControlsListeners: function(){
+            //initial list control button setup
+            var filters = app.controller.list.getCurrentFilters();
+            if (filters.length == 1 && filters[0].id == 'favourites'){
+                filters = [];
+            }
+            $('#list-controls-button').toggleClass('on', filters.length > 0);
+
+            $('.sort').on('change', function() {
+                app.controller.list.setSortType(this.id);
+                app.controller.list.renderList();
+            });
+
+            $('.filter').on('change', function() {
+                var filter = app.controller.list.getFilterById(this.id);
+                app.controller.list.setFilter(filter);
+
+                var filters = app.controller.list.getCurrentFilters();
+                if (filters.length == 1 && filters[0].id == 'favourites'){
+                    filters = [];
+                }
+                $('#list-controls-button').toggleClass('on', filters.length > 0);
+
+                app.controller.list.renderList();
+            });
+        },
+
+        /**
+         * Shows/closes list controlls.
+         */
+        toggleListControls: function(){
+            var controls = $('#list-controls-placeholder');
+            if (controls.is( ":hidden" ) ) {
+                controls.slideDown( "slow" );
+            } else {
+                controls.slideUp( "slow" );
+            }
         },
 
         /**

@@ -78,6 +78,10 @@
 
             var location = app.settings('location');
             if (location == null){
+                //todo: maybe the sort type was not even selected, clean this up
+                app.controller.list.removeFilter({'id': 'probability'});
+                app.controller.list.setSortType(app.controller.list.DEFAULT_SORT);
+
                 $('body').pagecontainer( "change", "#sref");
                 return;
             }

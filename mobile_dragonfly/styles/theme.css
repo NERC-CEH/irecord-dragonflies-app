@@ -321,3 +321,9 @@ label.filter, label.sort {
 #list-controls-save-button{
     width: 30%;
 }
+
+/* This is needed for expanding header not to make a gap in the list
+ if the list is left and returned. */
+.ui-page-header-fixed {
+    padding-top: 2.5em !important;
+}
