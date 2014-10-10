@@ -108,6 +108,9 @@
 
             this.makeListControls();
             this.prob.loadData();
+
+            //ask user to appcache
+            setTimeout(app.controller.list.download, 1000);
         },
 
         /**
@@ -157,12 +160,12 @@
         /**
          *
          */
-        renderList : function(){
+        renderList : function(callback){
             var filters = this.getCurrentFilters();
             var sort = this.getSortType();
             var species = app.data.species;
             if (species != null){
-                this.renderListCore(species, sort, filters);
+                this.renderListCore(species, sort, filters, callback);
             }
         },
 
@@ -172,7 +175,7 @@
          * @param sort
          * @param filters
          */
-        renderListCore: function(list, sort, filters){
+        renderListCore: function(list, sort, filters, callback){
             //todo: might need to move UI functionality to higher grounds
             $.mobile.loading("show");
             //filter list
@@ -191,6 +194,10 @@
                 if (list != null){
                     app.controller.list.printList(list);
                     $.mobile.loading("hide");
+
+                    if (callback != null){
+                        callback();
+                    }
                 }
             }
 
@@ -556,6 +563,70 @@
                     });
             }
             onSuccess(list);
+        },
+
+        /**
+         * Asks the user to start an appcache download
+         * process.
+         */
+        download: function(){
+            var OFFLINE = 'offline';
+            var offline = app.settings(OFFLINE);
+
+            if (offline == null || (!offline['downloaded'] && !offline['dontAsk'])){
+                var donwloadBtnId = "download-button";
+                var donwloadCancelBtnId = "download-cancel-button";
+                var downloadCheckbox = "download-checkbox";
+
+                //ask the user
+                var message =
+                    'Start downloading the app for offline use?</br>'+
+
+                    '<label><input id="' + downloadCheckbox + '" type="checkbox" name="checkbox-0 ">Don\'t ask again'+
+                    '</label> </br>'+
+
+                    '<a href="#" id="' + donwloadBtnId + '"' +
+                    'class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Download</a>' +
+                    '<a href="#" id="' + donwloadCancelBtnId + '"'+
+                    'class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">Cancel</a>';
+
+                app.navigation.popup(message);
+
+                $('#' + donwloadBtnId).on('click', function(){
+                    _log('Starting Downloading process.');
+
+                    //for some unknown reason on timeout the popup does not disappear
+                    setTimeout(function(){
+                        function onSuccess(){
+                            offline = {
+                                'downloaded': true,
+                                'dontAsk': false
+                            };
+                            app.settings(OFFLINE, offline);
+                            location.reload();
+                        }
+
+                        function onError(){
+                            _log('Appcache Error occurred.');
+                        }
+
+                        startManifestDownload('appcache', 114,
+                            'sites/all/modules/iform_mobile/libs/offline.php', onSuccess, onError);
+                    }, 500);
+
+                });
+
+                $('#' + donwloadCancelBtnId).on('click', function(){
+                    _log('Dowload canceled.');
+                    var dontAsk = $('#' + downloadCheckbox).prop('checked');
+                    offline = {
+                        'downloaded': false,
+                        'dontAsk': dontAsk
+                    };
+
+                    app.settings(OFFLINE, offline);
+                });
+            }
         }
     };
 
