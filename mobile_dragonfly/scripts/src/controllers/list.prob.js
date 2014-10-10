@@ -78,7 +78,7 @@
 
             var location = app.settings('location');
             if (location == null){
-                $('body').pagecontainer( "change", "sref");
+                $('body').pagecontainer( "change", "#sref");
                 return;
             }
 
