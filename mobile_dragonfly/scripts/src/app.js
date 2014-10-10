@@ -12,11 +12,12 @@
     $(document).on('pagecreate', function(event, ui) {
         if (browserDetect('Safari')){
             var backButtonUrls = {
-                'record'  :  'list',
-                'species'  :  'list',
-                'info'  :  'list',
-                'settings'  :  'list',
-                'helpers'  :  'list'
+                'record'  :  '#list',
+                'species'  :  '#list',
+                'info'  :  '#list',
+                'settings'  :  'info',
+                'privacy'  :  'info',
+                'login'  :  'settings'
             };
             fixPageBackButtons(event.target.id, backButtonUrls);
         }
