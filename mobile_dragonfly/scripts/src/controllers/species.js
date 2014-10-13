@@ -6,7 +6,7 @@
         },
 
         pagecontainershow: function(event, ui){
-            _log('Species init');
+            _log('species: pagecontainershow.');
             //var id = app.controller.list.getCurrentSpecies().id;
 
             var template = $('#species-template').html();

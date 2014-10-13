@@ -32,7 +32,7 @@
          * appname and appsecret for the mentioned module.
          */
         register: function(){
-            _log('Register.');
+            _log('register: start.');
 
             //user logins
             var form = document.getElementById('register-form');
@@ -61,12 +61,12 @@
         },
 
         onLoginSuccess: function(data){
-            _log('Registration success.');
+            _log('register: success.');
             $.mobile.loading('hide');
         },
 
         onLoginError: function(xhr, ajaxOptions, thrownError){
-            _log("Registration error "  + xhr.status+ " " + thrownError);
+            _log("register: ERROR "  + xhr.status+ " " + thrownError);
             _log(xhr.responseText);
             $.mobile.loading('hide');
         }

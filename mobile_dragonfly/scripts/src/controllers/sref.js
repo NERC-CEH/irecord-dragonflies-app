@@ -7,7 +7,7 @@
         saveData: false,
 
         pagecreate : function(){
-            _log('Sref Create');
+            _log('sref: pagecreate.');
 
             if (typeof google == 'undefined'){
                 $('#sref-opts').disableTab(1);
@@ -29,7 +29,7 @@
         },
 
         pagecontainerbeforechange: function(e, data){
-            _log('Changing page.');
+            _log('sref: pagecontainerbeforechange.');
             if (typeof data.toPage === 'object' && data.toPage[0] != null){
                 nextPage = data.toPage[0].id;
 
@@ -48,7 +48,7 @@
                             app.controller.list.prob.runFilter();
                             break;
                         default:
-                            _log('Error, changing to unknown page.')
+                            _log('sref: ERROR changing to unknown page.')
                     }
                 } else {
                     //Cancel button
@@ -60,7 +60,7 @@
                             app.controller.list.removeFilter(filter);
                             break;
                         default:
-                            _log('Error, changing to unknown page.')
+                            _log('sref: ERROR changing to unknown page.')
                     }
                 }
             }
@@ -82,7 +82,7 @@
          * Should be overwritten by page-specific saving procedure
          */
         save : function(){
-            _log('Saving Sref');
+            _log('sref: saving Sref.');
             this.saveData = true;
         },
 
@@ -114,7 +114,7 @@
          * Mapping
          */
         initializeMap : function() {
-            _log("initialising map");
+            _log("sref: initialising map.");
             //todo: add checking
             var mapCanvas = $('#map-canvas')[0];
             var mapOptions = {
@@ -332,7 +332,7 @@
                     case 'setup':
                         break;
                     default:
-                        _log('Error, gps save success - unknown page to go.');
+                        _log('sref: ERROR gps save success - unknown page to go.');
                 }
 
             }

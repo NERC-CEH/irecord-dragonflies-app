@@ -8,7 +8,7 @@
          * Setting up a recording page.
          */
         pagecreate : function(){
-            _log('Initialising: recording page');
+            _log('record: pagecreate.');
 
             //set button event handlers
             var ele = document.getElementById('occAttr:223');
@@ -25,7 +25,7 @@
         },
 
         pagecontainershow: function(e, data){
-            _log('Beforeshow recording page.');
+            _log('record: pagecontainershow.');
 
             var prevPageId = data.prevPage[0].id;
             switch(prevPageId){
@@ -40,7 +40,7 @@
          * Clears the recording page from existing inputs.
          */
         clear: function(){
-            _log('Clearing recording page');
+            _log('record: clearing recording page.');
             this.setImage('input[type="file"]');
 
             app.record.clear();
@@ -125,7 +125,7 @@
          * Saves and submits the record.
          */
         processOnline: function(callback, onError){
-            _log("DEBUG: SUBMIT - online");
+            _log("record: process online.");
             var onSaveSuccess = function(savedRecordId){
                 app.record.clear();
 
@@ -146,7 +146,7 @@
          * Saves the record.
          */
         processOffline: function(callback, onError){
-            _log("DEBUG: SUBMIT - offline");
+            _log("record: process offline");
             var onSaveSuccess = function(savedRecordId){
                 app.record.clear();
 
@@ -232,7 +232,7 @@
          */
         saveInput: function(name){
             if (name == null && name == ""){
-                _log('Error, no input name provided.');
+                _log('record: ERROR, no input name provided.');
                 return app.ERROR;
             }
             var ele = document.getElementById(name);
@@ -255,7 +255,7 @@
                 //add header to the page
                 $('#record_heading').text(specie.common_name);
             } else {
-                _log('Error, no species was found. Nothing attached to the recording.');
+                _log('record: ERROR no species was found. Nothing attached to the recording.');
             }
         },
 

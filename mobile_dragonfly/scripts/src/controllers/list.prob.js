@@ -93,7 +93,7 @@
                 var p = new LatLonE(geoloc.lat, geoloc.lon, GeoParams.datum.OSGB36);
                 var grid = OsGridRef.latLonToOsGrid(p);
                 var gref = grid.toString(app.controller.list.prob.LOCATION_GRANULARITY);
-                _log('Using gref: ' + gref);
+                _log('list.prob: using gref: ' + gref + ".");
 
                 //remove the spaces
                 return gref.replace(/ /g, '');

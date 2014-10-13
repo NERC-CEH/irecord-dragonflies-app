@@ -76,7 +76,7 @@
          *
          */
         pagecreate : function(){
-            _log('List init');
+            _log('list: pagecreate.');
 
             //load species data
             if(!app.storage.is('species')) {
@@ -119,7 +119,7 @@
          *
          */
         pagecontainershow: function(){
-            _log('Beforeshow list');
+            _log('list: pagecontainershow.');
             this.makeListControls();
             this.renderList();
         },
@@ -512,7 +512,7 @@
                     return;
                     break;
                 default:
-                    _log('Error: Unknown list filter.');
+                    _log('list: ERROR unknown list filter.');
             }
             onSuccess(filtered_list);
         },
@@ -604,7 +604,7 @@
                 app.navigation.popup(message);
 
                 $('#' + donwloadBtnId).on('click', function(){
-                    _log('Starting Downloading process.');
+                    _log('list: starting appcache downloading process.');
 
                     //for some unknown reason on timeout the popup does not disappear
                     setTimeout(function(){
@@ -618,7 +618,7 @@
                         }
 
                         function onError(){
-                            _log('Appcache Error occurred.');
+                            _log('list: ERROR appcache.');
                         }
 
                         startManifestDownload('appcache', 114,
@@ -628,7 +628,7 @@
                 });
 
                 $('#' + donwloadCancelBtnId).on('click', function(){
-                    _log('Dowload canceled.');
+                    _log('list: appcache dowload canceled.');
                     var dontAsk = $('#' + downloadCheckbox).prop('checked');
                     offline = {
                         'downloaded': false,

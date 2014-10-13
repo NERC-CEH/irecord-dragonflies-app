@@ -38,7 +38,7 @@
                 }
 
                 function onError (xhr, ajaxOptions, thrownError) {
-                        _log("SEND - record ajax (ERROR "  + xhr.status+ " " + thrownError +")");
+                        _log("user: ERROR record ajax ("  + xhr.status+ " " + thrownError +").");
                         _log(xhr.responseText);
 
                         $.mobile.loading( 'show', {

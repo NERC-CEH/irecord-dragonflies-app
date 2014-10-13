@@ -25,7 +25,7 @@
         login: function(){
             //todo: add validation
 
-            _log('Sign in.');
+            _log('login: start.');
             var form = jQuery('#login-form');
             var person = {
                 //user logins
@@ -55,7 +55,7 @@
         },
 
         onLoginSuccess: function(data){
-            _log('Sign in success.');
+            _log('login: success.');
 
             var lines = (data && data.split(/\r\n|\r|\n/g));
             if (lines && lines.length >= 3 && lines[0].length > 0) {
@@ -72,7 +72,7 @@
         },
 
         onLoginError: function(xhr, ajaxOptions, thrownError){
-            _log("Sign in error "  + xhr.status+ " " + thrownError);
+            _log("login: ERROR "  + xhr.status+ " " + thrownError + ".");
             _log(xhr.responseText);
             $.mobile.loading( 'show', {
                 text: "Wrong email or password." +
@@ -101,10 +101,10 @@
          */
         setLogin: function(user){
             if(!$.isEmptyObject(user)) {
-                _log('Logged in');
+                _log('login: logged in.');
                 app.auth.setUser(user);
             } else {
-                _log('Logged out');
+                _log('login: logged out.');
                app.auth.removeUser();
             }
         },
