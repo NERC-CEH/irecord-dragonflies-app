@@ -243,12 +243,40 @@ Location Page
                 </ul>
             </div>
             <div id="gps" class="ui-body-d ui-content">
-                <div class="info-message" id="gps-start-message">
-                    <p>We will try to determine your location
-                        using the inbuilt phone GPS.</p><p> Please make sure you have turned the phone's
-                    geolocation on and are well away from large objects.<br/> e.g. <i>trees, buildings </i></p>
-                </div>
-                <input type="button" id="gps-start-button" onclick="app.controller.sref.startGeoloc()" value="Locate">
+                <script id="sref-gps" type="text/x-handlebars-template">
+                    <div class="info-message" id="gps-message">
+                        <p>We will try to determine your location
+                            using the inbuilt phone GPS.</p><p> Please make sure you have turned the phone's
+                        geolocation on and are well away from large objects.<br/> e.g. <i>trees, buildings </i></p>
+                    </div>
+                    <input type="button" id="gps-start-button" value="Locate">
+                </script>
+                <script id="sref-gps-running" type="text/x-handlebars-template">
+                    <div class="info-message" id="gps-message">
+                        <p>We are trying to get your location. This might take a
+                        few minutes...</p>
+                        {{#if location}}
+                            <p> Grid Ref: {{location.gref}} <br/>
+                                Lat:({{location.lat}} <br/>
+                                Lon:{{location.lon}} <br/> <br/>
+                                Accuracy:{{location.acc}}
+                            </p>
+                        {{/if}}
+                    </div>
+                    <input type="button" id="gps-stop-button" value="Stop">
+                </script>
+                <script id="sref-gps-finished" type="text/x-handlebars-template">
+                    <div class="info-message" id="gps-message">
+                        <p>Success!</p>
+                        <p> Grid Ref: {{location.gref}} <br/><br/>
+                            Lat:{{location.lat}} <br/>
+                            Lon:{{location.lon}} <br/><br/>
+                            Accuracy:{{location.acc}}
+                        </p>
+                    </div>
+                    <input type="button" id="gps-improve-button" value="Improve">
+                </script>
+                <div id="sref-gps-placeholder"></div>
             </div>
             <div id="map" class="ui-body-d ui-content">
                 <div class="info-message" id="map-message">
