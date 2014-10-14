@@ -22,10 +22,10 @@
                     dummyText
                 );
             }
-            this.renderGPStab('init');
         },
 
         pagecontainerbeforeshow: function (e, data) {
+            app.controller.sref.renderGPStab('init');
             this.saveData = false; //reset
         },
 
@@ -117,16 +117,15 @@
             var gref = "";
             var data = {};
 
-            if (location != null){
-                var p = new LatLonE(location.lat, location.lon, GeoParams.datum.OSGB36);
-                var grid = OsGridRef.latLonToOsGrid(p);
-                gref = grid.toString();
-                location['gref'] = gref;
-                data['location'] = location;
-            }
-
             switch(state){
                 case 'init':
+                    var currentLocation = app.controller.sref.get();
+                    if (currentLocation.acc == -1){
+                        currentLocation = null;
+                    } else {
+                        location = currentLocation;
+                    }
+
                     template = $('#sref-gps').html();
                     break;
                 case 'running':
@@ -139,7 +138,13 @@
                     _log('sref: unknown render gps tab.');
             }
 
-
+            if (location != null){
+                var p = new LatLonE(location.lat, location.lon, GeoParams.datum.OSGB36);
+                var grid = OsGridRef.latLonToOsGrid(p);
+                gref = grid.toString();
+                location['gref'] = gref;
+                data['location'] = location;
+            }
 
             var compiled_template = Handlebars.compile(template);
             placeholder.html(compiled_template(data));
@@ -148,7 +153,7 @@
             //attach event listeners
             $('#gps-start-button').on('click', app.controller.sref.startGeoloc);
             $('#gps-stop-button').on('click', app.controller.sref.stopGeoloc);
-            $('#gps-improve-button').on('click', app.controller.sref.stopGeoloc);
+            $('#gps-improve-button').on('click', app.controller.sref.startGeoloc);
 
         },
 
@@ -159,19 +164,24 @@
             $.mobile.loading('show');
 
             function onUpdate(location){
+                //if improved update current location
+                var currentLocation = app.controller.sref.get();
+                if (currentLocation.acc == -1 || location.acc <= currentLocation.acc) {
+                    currentLocation = location;
+                    app.controller.sref.set(location.lat, location.lon, location.acc);
+                } else {
+                    location = currentLocation;
+                }
+
                 //modify the UI
                 app.controller.sref.renderGPStab('running', location);
             }
 
             function onSuccess(location) {
                 $.mobile.loading('hide');
-                var currentLocation = app.controller.sref.get();
-                if (currentLocation.acc == -1 || location.acc <= currentLocation.acc) {
-                    app.controller.sref.set(location.lat, location.lon, location.acc);
 
-                    //modify the UI
-                    app.controller.sref.renderGPStab('finished', location);
-                }
+                app.controller.sref.set(location.lat, location.lon, location.acc);
+                app.controller.sref.renderGPStab('finished', location);
             }
 
             function onError(err) {
@@ -184,13 +194,23 @@
                 setTimeout(function () {
                     $.mobile.loading('hide');
                 }, 5000);
+
+                //modify the UI
+
+                app.controller.sref.renderGPStab('init');
             }
 
             //start geoloc
             app.geoloc.run(onUpdate, onSuccess, onError);
 
+            var location = null;
+            var currentLocation = app.controller.sref.get();
+            if (currentLocation.acc != -1){
+                location = currentLocation;
+            }
+
             //modify the UI
-            app.controller.sref.renderGPStab('running');
+            app.controller.sref.renderGPStab('running', location);
         },
 
         /**

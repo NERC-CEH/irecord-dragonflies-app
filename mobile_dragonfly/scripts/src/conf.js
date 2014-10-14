@@ -18,6 +18,8 @@ app.auth.CONF.APPSECRET = "mydragonfly";
 app.auth.CONF.WEBSITE_ID = 77;
 app.auth.CONF.SURVEY_ID = 135;
 
+app.geoloc.CONF.GPS_ACCURACY_LIMIT = 25001; //meters
+
 app.io.CONF.RECORD_URL = "mobile/submit";
 
 //controllers

@@ -20,8 +20,9 @@
             //start geolocation
             function onGeolocSuccess(location){
                 app.controller.record.saveSref(location);
+                app.controller.sref.set(location.lat, location.lon, location.acc);
             }
-            app.geoloc.run(onGeolocSuccess);
+            app.geoloc.run(null, onGeolocSuccess);
         },
 
         pagecontainershow: function(e, data){

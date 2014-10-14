@@ -244,34 +244,53 @@ Location Page
             </div>
             <div id="gps" class="ui-body-d ui-content">
                 <script id="sref-gps" type="text/x-handlebars-template">
-                    <div class="info-message" id="gps-message">
-                        <p>We will try to determine your location
-                            using the inbuilt phone GPS.</p><p> Please make sure you have turned the phone's
-                        geolocation on and are well away from large objects.<br/> e.g. <i>trees, buildings </i></p>
-                    </div>
-                    <input type="button" id="gps-start-button" value="Locate">
+                    {{#if location}}
+                        <div class="info-message">
+                            <p>We will try to determine your location
+                                using the inbuilt phone GPS.</p><p> Please make sure you have turned the phone's
+                            geolocation on and are well away from large objects.<br/> e.g. <i>trees, buildings </i></p>
+                        </div>
+                        <div class="success-message">
+                            <p> Grid Ref: {{location.gref}} <br/><br/>
+                                Lat: {{location.lat}} <br/>
+                                Lon: {{location.lon}} <br/><br/>
+                                Accuracy: {{location.acc}}
+                            </p>
+                        </div>
+                        <input type="button" id="gps-improve-button" value="Improve">
+                    {{#else}}
+                        <div class="info-message">
+                            <p>We will try to determine your location
+                                using the inbuilt phone GPS.</p><p> Please make sure you have turned the phone's
+                            geolocation on and are well away from large objects.<br/> e.g. <i>trees, buildings </i></p>
+                        </div>
+                        <input type="button" id="gps-start-button" value="Locate">
+                    {{/if}}
                 </script>
                 <script id="sref-gps-running" type="text/x-handlebars-template">
-                    <div class="info-message" id="gps-message">
+                    <div class="info-message">
                         <p>We are trying to get your location. This might take a
                         few minutes...</p>
-                        {{#if location}}
-                            <p> Grid Ref: {{location.gref}} <br/>
-                                Lat:({{location.lat}} <br/>
-                                Lon:{{location.lon}} <br/> <br/>
-                                Accuracy:{{location.acc}}
-                            </p>
-                        {{/if}}
                     </div>
+                    {{#if location}}
+                        <div class="success-message">
+                            <p> Grid Ref: {{location.gref}} <br/><br/>
+                                Lat: {{location.lat}} <br/>
+                                Lon: {{location.lon}} <br/><br/>
+                                Accuracy: {{location.acc}}
+                            </p>
+                        </div>
+                    {{/if}}
+
                     <input type="button" id="gps-stop-button" value="Stop">
                 </script>
                 <script id="sref-gps-finished" type="text/x-handlebars-template">
-                    <div class="info-message" id="gps-message">
+                    <div class="success-message">
                         <p>Success!</p>
                         <p> Grid Ref: {{location.gref}} <br/><br/>
-                            Lat:{{location.lat}} <br/>
-                            Lon:{{location.lon}} <br/><br/>
-                            Accuracy:{{location.acc}}
+                            Lat: {{location.lat}} <br/>
+                            Lon: {{location.lon}} <br/><br/>
+                            Accuracy: {{location.acc}}
                         </p>
                     </div>
                     <input type="button" id="gps-improve-button" value="Improve">
