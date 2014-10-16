@@ -18,7 +18,7 @@ module.exports = function(grunt) {
         " *\n" +
         " * Author <%= grunt.template.today('yyyy') %> <%= pkg.author.name %>\n" +
         " * Released under the <%= _.pluck(pkg.licenses, 'type').join(', ') %> license.\n" +
-        " */\n";
+        " */\n\n";
 
 
     grunt.initConfig({
@@ -55,6 +55,18 @@ module.exports = function(grunt) {
                 dest: 'dist/app.js'
             }
         },
+        replace: {
+            main: {
+                src: [
+                    'dist/app.js'
+                ],
+                overwrite: true,                 // overwrite matched source files
+                replacements: [{
+                    from: /(app\.controller\.version =) \'0\';/g,                   // string replacement
+                    to: '$1 \'<%= pkg.version %>\';'
+                }]
+            }
+        },
         uglify: {
             dist: {
                 options: {
@@ -78,10 +90,10 @@ module.exports = function(grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-text-replace');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-karma');
 
     // the default task can be run just by typing "grunt" on the command line
-    grunt.registerTask('default', ['concat', 'uglify']);
+    grunt.registerTask('default', ['concat', 'replace', 'uglify']);
 
 };

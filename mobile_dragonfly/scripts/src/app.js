@@ -1,5 +1,4 @@
 //APP LOGIC.
-
 (function($){
     //When leaving a page with a form
     window.onbeforeunload = function() {

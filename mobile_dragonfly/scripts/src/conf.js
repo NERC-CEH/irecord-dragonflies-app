@@ -1,5 +1,6 @@
-
 //CONFIGURATION.
+app.controller.version = '0'; //application controllers version
+
 
 //Because a development/testing and production sites differ - URL paths,
 //environment etc. It is important to extract the hardcoded metadata and
