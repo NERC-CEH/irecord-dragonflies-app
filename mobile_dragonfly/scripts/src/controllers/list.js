@@ -614,6 +614,7 @@
                                 'dontAsk': false
                             };
                             app.settings(OFFLINE, offline);
+                            app.navigation.closePopup();
                             location.reload();
                         }
 

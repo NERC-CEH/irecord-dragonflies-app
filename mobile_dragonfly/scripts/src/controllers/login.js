@@ -68,7 +68,10 @@
 
             $.mobile.loading('hide');
             app.controller.login.setLogin(user);
-            history.back();
+
+            $.mobile.changePage('#user');
+            //history does not work in iOS 7.*
+            //history.back();
         },
 
         onLoginError: function(xhr, ajaxOptions, thrownError){

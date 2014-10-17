@@ -7,18 +7,20 @@
 
     app.initialise();
 
-    //Fixing back buttons
+    //Fixing back buttons for Mac 7.* History bug.
     $(document).on('pagecreate', function(event, ui) {
         if (browserDetect('Safari')){
-            var backButtonUrls = {
-                'record'  :  '#list',
-                'species'  :  '#list',
-                'info'  :  '#list',
-                'settings'  :  'info',
-                'privacy'  :  'info',
-                'login'  :  'settings'
-            };
-            fixPageBackButtons(event.target.id, backButtonUrls);
+            if (jQuery.mobile.activePage != null) {
+                var nextPageid = event.target.id;
+                var currentPageURL = null;
+
+                var external = jQuery.mobile.activePage.attr('data-external-page');
+                if (external == null) {
+                    currentPageURL = '#' + jQuery.mobile.activePage.attr('id');
+                }
+
+                fixPageBackButtons(currentPageURL, nextPageid);
+            }
         }
     });
 

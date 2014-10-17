@@ -19,7 +19,7 @@ app.auth.CONF.APPSECRET = "mydragonfly";
 app.auth.CONF.WEBSITE_ID = 77;
 app.auth.CONF.SURVEY_ID = 135;
 
-app.geoloc.CONF.GPS_ACCURACY_LIMIT = 25001; //meters
+app.geoloc.CONF.GPS_ACCURACY_LIMIT = 10; //meters
 
 app.io.CONF.RECORD_URL = "mobile/submit";
 
@@ -31,5 +31,3 @@ c.list.CONF.SPECIES_DATA_SRC = "http://192.171.199.230/dragonfly/serv/species";
 c.login.CONF.URL = Drupal.settings.basePath + "user/mobile/register";
 c.register.CONF.URL = c.login.CONF.URL;
 
-//gps
-app.geoloc.CONF.GPS_ACCURACY_LIMIT = 130000;
