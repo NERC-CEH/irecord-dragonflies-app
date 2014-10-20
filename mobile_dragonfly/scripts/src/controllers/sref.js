@@ -41,7 +41,7 @@
                             var location = this.saveSref();
                             app.controller.record.saveSref(location);
                             break;
-                        case 'settings':
+                        case 'info':
                             this.saveSref();
                             break;
                         case 'list':
