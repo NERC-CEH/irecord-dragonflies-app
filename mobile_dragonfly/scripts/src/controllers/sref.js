@@ -35,17 +35,13 @@
                 nextPage = data.toPage[0].id;
 
                 if (this.saveData && this.accuracy != -1) {
+                    var location = this.saveSref();
                     //Save button
                     switch (nextPage) {
                         case 'record':
-                            var location = this.saveSref();
                             app.controller.record.saveSref(location);
                             break;
-                        case 'info':
-                            this.saveSref();
-                            break;
                         case 'list':
-                            this.saveSref();
                             app.controller.list.prob.runFilter();
                             break;
                         default:
