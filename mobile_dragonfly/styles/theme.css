@@ -2,6 +2,11 @@ body {
     margin: 0;
 }
 
+/* Buttons in fixed footer control group are shifted down. This lifts them up.*/
+.ui-controlgroup{
+    margin: 0;
+}
+
 .splash-box {
     background-color: rgba(255, 255, 255, 0.8);
     border: #555 solid 2px;
@@ -281,6 +286,18 @@ form, body {
     font-weight: bold;
 }
 
+
+#sref-top-button.none:after {
+    background-color: rgb(188, 143, 143);
+}
+#sref-top-button.running:after {
+    background-color: rgb(205, 155, 0);
+}
+#sref-top-button.done:after {
+    background-color: rgb(46, 139, 87);
+}
+
+
 @media only screen and (max-width: 400px) {
     .species-list-common-name{
         font-size: smaller !important;
@@ -326,4 +343,33 @@ label.filter, label.sort {
  if the list is left and returned. */
 .ui-page-header-fixed {
     padding-top: 2.5em !important;
+}
+
+.list-normal-white-space > li > p,
+ul[data-role="listview"] > li > strong,
+ul[data-role="listview"] > li > p {
+    white-space: normal;
+}
+
+.app-logo{
+    margin: 0 auto;
+    width: 100%;
+    height: 200px;
+    background: url('../images/app_logo.png') center center no-repeat;
+    background-size: contain;
+}
+
+.brc-approved-logo{
+    max-width: 100%;
+    height: 144px;
+    background: url('../images/BRC_approved_logo.png') center center no-repeat;
+    background-size: contain;
+}
+
+.sponsor-logo{
+    margin: 0 auto;
+    width: 100%;
+    height: 200px;
+    background: url('../images/sponsor_logo.png') center center no-repeat;
+    background-size: contain;
 }

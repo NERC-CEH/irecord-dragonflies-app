@@ -16,13 +16,6 @@
                 var checked = $(this).prop('checked');
                 app.record.inputs.set('occAttr:223', checked);
             });
-
-            //start geolocation
-            function onGeolocSuccess(location){
-                app.controller.record.saveSref(location);
-                app.controller.sref.set(location.lat, location.lon, location.acc);
-            }
-            app.geoloc.run(null, onGeolocSuccess);
         },
 
         pagecontainershow: function(e, data){
@@ -32,8 +25,38 @@
             switch(prevPageId){
                 case 'list':
                     this.clear();
+                    //start geolocation
+                    function onGeolocSuccess(location){
+                        app.controller.record.saveSref(location);
+                        app.controller.sref.set(location.lat, location.lon, location.acc);
+                        app.controller.record.gpsButtonState('done');
+                    }
+
+                    function onError(err) {
+                        $.mobile.loading('show', {
+                            text: "Sorry! " + err.message + '.',
+                            theme: "b",
+                            textVisible: true,
+                            textonly: true
+                        });
+                        setTimeout(function () {
+                            $.mobile.loading('hide');
+                        }, 5000);
+
+                        //modify the UI
+                        app.controller.record.gpsButtonState('none');
+                    }
+                    app.geoloc.run(null, onGeolocSuccess);
+                    this.gpsButtonState('running');
+
                     break;
                 default:
+                    //update GPS button color
+                    if(app.record.inputs.is('sample:entered_sref')) {
+                        this.gpsButtonState('done');
+                    } else {
+                        this.gpsButtonState('none');
+                    }
             }
         },
 
@@ -313,6 +336,29 @@
 
                 return false;
             });
+        },
+
+        gpsButtonState: function(state){
+            var button = $('#sref-top-button');
+            switch(state){
+                case 'running':
+                    button.addClass('running');
+                    button.removeClass('done');
+                    button.removeClass('none');
+                    break;
+                case 'done':
+                    button.addClass('done');
+                    button.removeClass('running');
+                    button.removeClass('none');
+                    break;
+                case 'none':
+                    button.addClass('none');
+                    button.removeClass('done');
+                    button.removeClass('running');
+                    break;
+                default:
+                    _log('record: ERROR no such GPS button state.');
+            }
         }
     };
 
