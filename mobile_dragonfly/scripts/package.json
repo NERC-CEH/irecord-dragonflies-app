@@ -2,7 +2,7 @@
 	"name": "controllers",
 	"title": "App Controllers",
 	"description": "Mobile application page specific functionality.",
-	"version": "0.0.1",
+	"version": "0.0.4",
 	"homepage": "http://www.indicia.org.uk/",
 	"author": {
 		"name": "Karols Kazlauskis",

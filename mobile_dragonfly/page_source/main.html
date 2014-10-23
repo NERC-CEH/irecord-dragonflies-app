@@ -89,7 +89,8 @@ Species list Page
         <h1 id='species_heading'></h1>
         <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
             <a href="#" id="species-profile-fav-button" onclick="app.controller.species.toggleSpeciesFavourite()" data-icon="star" data-iconpos="notext" data-role="button">Gallery</a>
-            <a href="#" onclick="app.controller.list.gallery.show()" data-icon="eye" data-iconpos="notext" data-role="button">Gallery</a>
+            <!--<a href="#" onclick="app.controller.list.gallery.show()" data-icon="eye" data-iconpos="notext" data-role="button">Gallery</a>-->
+            <a href="#" onclick="app.navigation.message('I have no pictures to show :(')" data-icon="eye" data-iconpos="notext" data-role="button">Gallery</a>
         </div>
     </div>
 

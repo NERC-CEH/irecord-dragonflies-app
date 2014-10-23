@@ -1,6 +1,7 @@
 /**
  * Created by darkstar on 16/08/14.
  */
+
 (function($){
     app.controller.list.prob = {
         CONF: {
