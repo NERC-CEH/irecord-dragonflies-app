@@ -12,7 +12,7 @@ app.controller.version = '0'; //application controllers version
 
 //app wide settings
 app.CONF.HOME = "dragonfly/";
-app.CONF.DEBUG = true;
+app.CONF.LOG = app.LOG_DEBUG;
 
 app.auth.CONF.APPNAME = "dragonfly";
 app.auth.CONF.APPSECRET = "mydragonfly";
@@ -31,3 +31,4 @@ c.list.CONF.SPECIES_DATA_SRC = "http://192.171.199.230/dragonfly/serv/species";
 c.login.CONF.URL = Drupal.settings.basePath + "user/mobile/register";
 c.register.CONF.URL = c.login.CONF.URL;
 
+window.onerror = _onerror;
