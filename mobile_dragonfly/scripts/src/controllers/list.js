@@ -92,14 +92,6 @@
 
                         //todo: what if data comes first before pagecontainershow
                         app.controller.list.renderList();
-                        /**
-                         * Prints species data for probability table mapping
-                         */
-                        //                      var text = '';
-                        //                      for(var i=0; i < species.length; i++){
-                        //                          text += "\n" + species[i].taxon + ', ' + species[i].id + ', ' +  species[i].warehouse_id;
-                        //                      }
-                        //                      console.log(text);
                     }
                 });
             } else {
@@ -113,6 +105,24 @@
 
             //ask user to appcache
             setTimeout(app.controller.list.download, 1000);
+
+            this.printSpeciesData();
+        },
+
+        printSpeciesData: function(){
+            /**
+             * Prints species data for probability table mapping
+             */
+            console.log('list: Printing Species data.');
+
+            var text = '';
+            for(var i=0; i < app.data.species.length; i++){
+                text += "\n" + app.data.species[i].taxon + ', ' + app.data.species[i].id + ', ' +  app.data.species[i].warehouse_id;
+            }
+            console.log (app.data.species.length);
+            console.log (app.data.species);
+
+            console.log(text);
         },
 
         /**
