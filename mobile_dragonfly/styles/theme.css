@@ -186,8 +186,8 @@ form, body {
     display:none;
 }
 
-/* Comment button */
-#comment-button{
+/* Record button */
+.record-button{
     text-align: left;
 }
 

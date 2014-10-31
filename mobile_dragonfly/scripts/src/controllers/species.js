@@ -27,7 +27,7 @@
             placeholder.html(compiled_template(species));
             placeholder.trigger('create');
 
-            //app.controller.species.gallery.init($('.gallery').attr('id'));
+            app.controller.species.gallery.init();
         },
 
         /**
@@ -49,16 +49,26 @@
 
             gallery : {},
             init : function(gallery_id){
-                this.gallery =  $('#' + gallery_id + ' a').photoSwipe({
-                    jQueryMobile: true,
-                    loop: false,
-                    enableMouseWheel: false,
-                    enableKeyboard: false
-                });
+                var images = $('#species_gallery a');
+
+                if (images.length > 0){
+                    this.gallery =  images.photoSwipe({
+                        jQueryMobile: true,
+                        loop: false,
+                        enableMouseWheel: false,
+                        enableKeyboard: false
+                    });
+                }
+
             },
 
             show : function(){
-                this.gallery.show(0);
+                if ($('.gallery')){
+                    this.gallery.show(0);
+                } else {
+                    app.navigation.message('I have no pictures to show :(');
+                }
+
             }
         }
     };

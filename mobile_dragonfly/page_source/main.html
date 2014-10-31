@@ -45,8 +45,8 @@ Species list Page
             <div class="ui-field-contain list-controls">
                 <fieldset data-role="controlgroup" >
                     {{#each this}}
-                    <input name="sort" type="radio" id="{{id}}" class="sort" {{checked}} data-iconpos="right">
-                    <label for="{{id}}" class="sort">{{label}}</label>
+                        <input name="sort" type="radio" id="{{id}}" class="sort" {{checked}} data-iconpos="right">
+                        <label for="{{id}}" class="sort">{{label}}</label>
                     {{/each}}
                 </fieldset>
             </div>
@@ -55,8 +55,8 @@ Species list Page
             <div class="ui-field-contain list-controls">
                 <fieldset data-role="controlgroup" >
                     {{#each this}}
-                    <input type="checkbox" id="{{id}}" class="filter" {{checked}} data-iconpos="right">
-                    <label for="{{id}}" class="filter">{{label}}</label>
+                        <input type="checkbox" id="{{id}}" class="filter" {{checked}} data-iconpos="right">
+                        <label for="{{id}}" class="filter">{{label}}</label>
                     {{/each}}
                 </fieldset>
             </div>
@@ -89,21 +89,23 @@ Species list Page
         <h1 id='species_heading'></h1>
         <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
             <a href="#" id="species-profile-fav-button" onclick="app.controller.species.toggleSpeciesFavourite()" data-icon="star" data-iconpos="notext" data-role="button">Gallery</a>
-            <!--<a href="#" onclick="app.controller.list.gallery.show()" data-icon="eye" data-iconpos="notext" data-role="button">Gallery</a>-->
-            <a href="#" onclick="app.navigation.message('I have no pictures to show :(')" data-icon="eye" data-iconpos="notext" data-role="button">Gallery</a>
+            <a href="#" onclick="app.controller.species.gallery.show()" data-icon="eye" data-iconpos="notext" data-role="button">Gallery</a>
         </div>
     </div>
 
     <div data-role="content">
         <div id="species-placeholder"></div>
         <script id="species-template" type="text/x-handlebars-template">
-            <div class="gallery" id="species_gallery" style="display:none">
-                {{#each gallery}}
-                <a href="{{this}}"><img src="{{this}}" /></a>
-                {{/each}}
-            </div>
+                <div class="gallery" id="species_gallery" style="display:none">
+                    <a href="{{profile_pic}}"><img src="{{profile_pic}}" /></a>
+                    {{#each gallery}}
+                    <a href="{{this}}"><img src="{{this}}" /></a>
+                    {{/each}}
+                </div>
             <center>
-                <img src="{{profile_pic}}">
+                <a href="#" onclick="app.controller.species.gallery.show()">
+                    <img src="{{profile_pic}}">
+                </a>
 
                 <ul data-role="listview" data-inset="true" style="max-width:800px;">
                     <li>
@@ -140,7 +142,7 @@ Recording Page
     </div>
     <div data-role="content" >
         <input type="hidden" id="occurrence:record_status" name="occurrence:record_status" value="C" />
-        <a  href="#date" id="date-button" data-role="button" data-icon="arrow-r" data-iconpos="right">
+        <a href="#date" id="date-button" data-role="button" data-icon="arrow-r" data-iconpos="right">
             <h1>Date</h1>
         </a><input type="hidden" id="imp-sref" name="sample:entered_sref" required />
         <input type="hidden" id="imp-sref-system" name="sample:entered_sref_system"  value="4326" />
@@ -150,22 +152,17 @@ Recording Page
             <input type="hidden" id="sample_medium:path" name="sample_medium:path" value=""/>
         </div>
         </div>
-        <table  class="numberInput ">
-            <tr  class="numberInput ">
-                <td  class="numberInput ">
-                    <b>Number</b>
-                </td><td>
-                <input type="number" name="occAttr:222" id="occAttr:222"
-                       min="1" max="50" value="1" data-role="none"  class="numberInput ">
-            </td>
-            </tr>
-        </table>
+        <a href="#number" id="number-button" class="record-button" data-role="button"
+             data-icon="arrow-r" data-iconpos="right"> Number </a>
+        <a href="#stage" id="number-button" class="record-button" data-role="button"
+            data-icon="arrow-r" data-iconpos="right"> Life Stage </a>
+        <a href="#comment" id="comment-button" class="record-button" data-role="button"
+            data-icon="arrow-r" data-iconpos="right"> Comment </a>
+        </br>
         <label>
             <input type="checkbox" data-iconpos="right" id="occAttr:223"
-                   name="occAttr:223" value="1">Certain</label>
-        <a  href="#comment" id="comment-button" data-role="button" data-icon="arrow-r" data-iconpos="right">
-            Comment
-        </a>
+                   name="occAttr:223" value="1"> Certain
+        </label>
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
@@ -198,7 +195,7 @@ Recording Page
     <div data-role="footer" data-position="fixed"data-tap-toggle="false"></div>
 </div>
 <div data-role="page" id="date">
-    <div data-role="header" data-position="fixed"data-tap-toggle="false">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
             <a href='#' data-rel="back" data-role="button" data-iconpos="notext"
                onclick="app.controller.record.saveInput('sample:date')"
@@ -214,8 +211,81 @@ Recording Page
         <div class="info-message"><p>Please enter the date of the recording.</p></div>
         <input id="sample:date" name="sample:date" type="date" required>
     </div>
-    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+</div>
+<div data-role="page" id="number">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+            <a href='#' data-rel="back" data-role="button" data-iconpos="notext"
+               onclick="app.controller.record.saveInput('sample:date')"
+               data-icon="check" >Save</a>
+        </div>
+        <h1>Number</h1>
+        <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
+            <a href='#' data-rel="back" data-role="button" data-iconpos="notext"
+               data-icon="delete">Cancel</a>
+        </div>
+    </div>
+    <div data-role="content" >
+        <div class="info-message">
+            <p>Please select how many individuals you see.</p>
+        </div>
+        <fieldset data-role="controlgroup">
+            <input name="num" id="num-0" value="1" data-label="1" type="radio">
+            <label for="num-0" >1</label>
 
+            <input name="num" id="num-1" value="2-5" data-label="2-5" type="radio">
+            <label for="num-1" >2-5</label>
+
+            <input name="num" id="num-2" value="6-20" data-label="6-20" type="radio" >
+            <label for="num-2" >6-20</label>
+
+            <input name="num" id="num-3" value="21-100" data-label="21-100" type="radio">
+            <label for="num-3" >21-100</label>
+
+            <input name="num" id="num-4" value="101-500" data-label="101-500" type="radio">
+            <label for="num-4" >101-500</label>
+
+            <input name="num" id="num-5" value="500+" data-label="500+" type="radio">
+            <label for="num-5" >500+</label>
+        </fieldset>
+    </div>
+</div>
+<div data-role="page" id="stage">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
+            <a href='#' data-rel="back" data-role="button" data-iconpos="notext"
+               onclick="app.controller.record.saveInput('sample:date')"
+               data-icon="check" >Save</a>
+        </div>
+        <h1>Stage</h1>
+        <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
+            <a href='#' data-rel="back" data-role="button" data-iconpos="notext"
+               data-icon="delete">Cancel</a>
+        </div>
+    </div>
+    <div data-role="content" >
+        <div class="info-message">
+            <p>Please pick the life stage.</p>
+        </div>
+        <fieldset data-role="controlgroup">
+            <input name="stage" id="stage-0" value="1" data-label="Adult" type="radio">
+            <label for="stage-0" >Adult</label>
+
+            <input name="stage" id="stage-1" value="2-5" data-label="Copulating pair" type="radio">
+            <label for="stage-1" >Copulating pair</label>
+
+            <input name="stage" id="stage-2" value="6-20" data-label="Ovipositing" type="radio">
+            <label for="stage-2" >Ovipositing</label>
+
+            <input name="stage" id="stage-3" value="21-100" data-label="Larva" type="radio">
+            <label for="stage-3" >Larva</label>
+
+            <input name="stage" id="stage-4" value="101-500" data-label="Exuvia" type="radio">
+            <label for="stage-4" >Exuvia</label>
+
+            <input name="stage" id="stage-5" value="500+" data-label="Emergent" type="radio">
+            <label for="stage-5" >Emergent</label>
+        </fieldset>
     </div>
 </div>
 

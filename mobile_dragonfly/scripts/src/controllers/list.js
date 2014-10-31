@@ -11,7 +11,7 @@
             SPECIES_DATA_SRC: ""
         },
 
-        DEFAULT_SORT : 'common_name',
+        DEFAULT_SORT : 'taxonomic',
         FILTERS_KEY : 'listFilters',
         SORT_KEY : 'listSort',
 
