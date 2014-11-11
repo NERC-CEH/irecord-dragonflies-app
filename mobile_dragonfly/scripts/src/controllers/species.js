@@ -7,14 +7,20 @@
 
         pagecontainershow: function(event, ui){
             _log('species: pagecontainershow.');
-            //var id = app.controller.list.getCurrentSpecies().id;
 
+            var species = app.controller.list.getCurrentSpecies();
+
+            var heading = $('#species_heading');
+            heading.text(species.common_name);
+
+            this.renderSpecies(species);
+        },
+
+        renderSpecies: function(species){
             var template = $('#species-template').html();
             var placeholder = $('#species-placeholder');
 
             var compiled_template = Handlebars.compile(template);
-
-            var species = app.controller.list.getCurrentSpecies();
 
             //check for the favourite
             var favourites = app.controller.list.getFavourites();

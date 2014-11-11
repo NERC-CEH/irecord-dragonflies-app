@@ -1,6 +1,6 @@
 {
-	"name": "controllers",
-	"title": "App Controllers",
+	"name": "dragonfly_app",
+	"title": "Dragonfly App Controllers",
 	"description": "Mobile application page specific functionality.",
 	"version": "0.0.4",
 	"homepage": "http://www.indicia.org.uk/",

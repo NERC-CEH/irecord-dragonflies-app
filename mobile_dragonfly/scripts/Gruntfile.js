@@ -62,9 +62,13 @@ module.exports = function(grunt) {
                 ],
                 overwrite: true,                 // overwrite matched source files
                 replacements: [{
-                    from: /(app\.controller\.version =) \'0\';/g,                   // string replacement
-                    to: '$1 \'<%= pkg.version %>\';'
-                }]
+                        from: /(app\.controller\.version =) \'0\';/g,                   // string replacement
+                        to: '$1 \'<%= pkg.version %>\';'
+                    },
+                    {
+                        from: /(app\.name =) \'app\';/g,                   // string replacement
+                        to: '$1 \'<%= pkg.name %>\';'
+                    }]
             }
         },
         uglify: {

@@ -92,10 +92,17 @@
 
                         //todo: what if data comes first before pagecontainershow
                         app.controller.list.renderList();
+
+                        //ask user to appcache
+                        setTimeout(app.controller.list.download, 1000);
                     }
                 });
             } else {
                 app.data.species = app.storage.get('species');
+                app.controller.list.renderList();
+
+                //ask user to appcache
+                setTimeout(app.controller.list.download, 1000);
             }
 
             this.prob.loadData();
@@ -103,10 +110,7 @@
             $('#list-controls-save-button').on('click', this.toggleListControls);
             $('#list-controls-button').on('click', this.toggleListControls);
 
-            //ask user to appcache
-            setTimeout(app.controller.list.download, 1000);
-
-            this.printSpeciesData();
+            //this.printSpeciesData();
         },
 
         printSpeciesData: function(){
@@ -599,22 +603,21 @@
                 var donwloadCancelBtnId = "download-cancel-button";
                 var downloadCheckbox = "download-checkbox";
 
-                //ask the user
                 var message =
-                    'Start downloading the app for offline use?</br>'+
+                    '<h3>Start downloading the app for offline use?</h3></br>'+
 
                     '<label><input id="' + downloadCheckbox + '" type="checkbox" name="checkbox-0 ">Don\'t ask again'+
                     '</label> </br>'+
 
-                    '<a href="#" id="' + donwloadBtnId + '"' +
-                    'class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Download</a>' +
-                    '<a href="#" id="' + donwloadCancelBtnId + '"'+
-                    'class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">Cancel</a>';
+                    '<button id="' + donwloadBtnId + '" class="ui-btn">Download</button>' +
+                    '<button id="' + donwloadCancelBtnId + '" class="ui-btn">Cancel</button>';
 
-                app.navigation.popup(message);
+                app.navigation.message(message, 0);
 
                 $('#' + donwloadBtnId).on('click', function(){
-                    _log('list: starting appcache downloading process.');
+                    _log('list: starting appcache downloading process.', app.LOG_DEBUG);
+
+                    $.mobile.loading('hide');
 
                     //for some unknown reason on timeout the popup does not disappear
                     setTimeout(function(){
@@ -624,7 +627,6 @@
                                 'dontAsk': false
                             };
                             app.settings(OFFLINE, offline);
-                            app.navigation.closePopup();
                             location.reload();
                         }
 
@@ -635,11 +637,12 @@
                         startManifestDownload('appcache', 114,
                             'sites/all/modules/iform_mobile/libs/offline.php', onSuccess, onError);
                     }, 500);
-
                 });
 
                 $('#' + donwloadCancelBtnId).on('click', function(){
-                    _log('list: appcache dowload canceled.');
+                    _log('list: appcache dowload canceled.', app.LOG_DEBUG);
+                    $.mobile.loading('hide');
+
                     var dontAsk = $('#' + downloadCheckbox).prop('checked');
                     offline = {
                         'downloaded': false,

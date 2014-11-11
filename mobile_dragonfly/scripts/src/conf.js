@@ -1,5 +1,6 @@
 //CONFIGURATION.
 app.controller.version = '0'; //application controllers version
+app.name = 'app'; //application computer name
 
 
 //Because a development/testing and production sites differ - URL paths,
