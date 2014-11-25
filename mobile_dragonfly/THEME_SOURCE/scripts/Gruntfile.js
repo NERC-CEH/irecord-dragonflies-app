@@ -1,17 +1,9 @@
 module.exports = function(grunt) {
+    var DEST = '../../scripts/';
+    var NAME = 'theme.js';
 
-    var  controller_banner = "/*!\n" +
-        " * Mobile App page controllers. \n" +
-        " * Version: <%= pkg.version %>\n" +
-        " *\n" +
-        " * <%= pkg.homepage %>\n" +
-        " *\n" +
-        " * Author <%= grunt.template.today('yyyy') %> <%= pkg.author.name %>\n" +
-        " * Released under the <%= _.pluck(pkg.licenses, 'type').join(', ') %> license.\n" +
-        " */\n";
-
-    var  app_banner = "/*!\n" +
-        " * App wide configuration and controls. \n" +
+    var  banner = "/*!\n" +
+        " * <%= pkg.title %>. \n" +
         " * Version: <%= pkg.version %>\n" +
         " *\n" +
         " * <%= pkg.homepage %>\n" +
@@ -35,59 +27,41 @@ module.exports = function(grunt) {
             },
             dist: {
                 options: {
-                    banner: controller_banner
-                },
-                // the files to concatenate
-                src: ['src/controllers/*.js'],
-                // the location of the resulting JS file
-                dest: 'dist/controllers.js'
-            },
-            dist2: {
-                options: {
-                    banner: app_banner
+                    banner: banner
                 },
                 // the files to concatenate
                 src: [
+                    'src/controllers/*.js',
                     'src/conf.js',
                     'src/app.js'
                 ],
                 // the location of the resulting JS file
-                dest: 'dist/app.js'
+                dest: DEST + NAME
             }
         },
         replace: {
             main: {
-                src: [
-                    'dist/app.js'
-                ],
-                overwrite: true,                 // overwrite matched source files
+                src: ['../../scripts/theme.js'],
+                overwrite: true, // overwrite matched source files
                 replacements: [{
-                        from: /(app\.controller\.version =) \'0\';/g,                   // string replacement
-                        to: '$1 \'<%= pkg.version %>\';'
-                    },
+                    from: /(app\.version =) \'0\';/g, // string replacement
+                    to: '$1 \'<%= pkg.version %>\';'
+                },
                     {
-                        from: /(app\.name =) \'app\';/g,                   // string replacement
+                        from: /(app\.name =) \'\';/g,  // string replacement
                         to: '$1 \'<%= pkg.name %>\';'
-                    }]
+                    }
+                ]
             }
         },
         uglify: {
             dist: {
                 options: {
                     // the banner is inserted at the top of the output
-                    banner: controller_banner
+                    banner: banner
                 },
                 files: {
-                    'dist/controllers.min.js': ['<%= concat.dist.dest %>']
-                }
-            },
-            dist2: {
-                options: {
-                    // the banner is inserted at the top of the output
-                    banner: app_banner
-                },
-                files: {
-                    'dist/app.min.js': ['<%= concat.dist2.dest %>']
+                    '../../scripts/theme.min.js' : ['<%= concat.dist.dest %>']
                 }
             }
         }

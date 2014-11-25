@@ -11,8 +11,7 @@ regions[content] = 'Content'
 
 ;Include
 ;js
-scripts[] = scripts/dist/controllers.js
-scripts[] = scripts/dist/app.js
+scripts[] = scripts/theme.js
 
 ;Settings
 settings[rebuild_registry] = 0
