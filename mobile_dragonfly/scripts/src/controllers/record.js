@@ -191,7 +191,7 @@
             var invalids = this.validateInputs();
             if (invalids.length > 0) {
                 var message =
-                    " <p>The following is still missing:</p><ul>";
+                    "<br/> <p>The following is still missing:</p><ul>";
 
                 for (var i=0; i < invalids.length; i++){
                     message += "<li>" + invalids[i].name + "</li>";
