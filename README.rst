@@ -1,12 +1,28 @@
 This is a Drupal Mobile Dragonfly app theme consisting of pages
 source and controllers, as well as styling and configuration.
 
-Building
---------
+## Building
 
-* Install `NodeJS <http://nodejs.org/>`_
-* Open terminal in module's ``THEME_SOURCE/scripts`` directory
-* ``npm install``
-* ``grunt``
+- Install [NodeJS](http://nodejs.org/)
+- Open terminal in module's `THEME_SOURCE/scripts` directory
+- `npm install`
+- `grunt`
 
 This will create a scripts folder with the javascript code (theme.js) used by the theme.
+
+## Bugs and feature requests
+
+Have a bug or a feature request? search for existing and closed issues. [Please open a new issue](issues).
+
+
+## Creators
+
+** Karolis Kazlauskis **
+
+- <https://github.com/kazlauskis>
+
+
+
+## Copyright and license
+
+Code and documentation copyright 2014 CEH. Code released under [the GNU GPL v3 license](LICENSE).
