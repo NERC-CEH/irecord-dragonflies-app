@@ -1,6 +1,6 @@
-<!---------------
-Species list Page
------------------>
+<!--#############
+    Species Page
+    #############-->
 <div data-role="page" id="list" data-update-page-padding="false">
     <div data-role="header" id="list-header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
@@ -80,7 +80,7 @@ Species list Page
         </script>
     </div>
 </div>
-
+<!-- Species -->
 <div data-role="page" id="species">
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
@@ -124,9 +124,9 @@ Species list Page
     </div>
 </div>
 
-<!------------
-Recording Page
--------------->
+<!--#############
+    Record Page
+    #############-->
 <div data-role="page" id="record">
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
@@ -177,16 +177,17 @@ Recording Page
 
     </div>
 </div>
+<!-- Comment -->
 <div data-role="page" id="comment">
     <div data-role="header" data-position="fixed"data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
             <a href='#' data-rel="back" data-role="button" data-iconpos="notext"
-               data-icon="check" onclick="app.controller.record.saveInput('sample:comment')" >Save</a>
+               data-icon="delete">Cancel</a>
         </div>
         <h1>Comment</h1>
         <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
             <a href='#' data-rel="back" data-role="button" data-iconpos="notext"
-               data-icon="delete">Cancel</a>
+               data-icon="check" onclick="app.controller.record.saveInput('sample:comment')" >Save</a>
         </div>
     </div>
     <div data-role="content" >
@@ -194,17 +195,18 @@ Recording Page
     </div>
     <div data-role="footer" data-position="fixed"data-tap-toggle="false"></div>
 </div>
+<!-- Number -->
 <div data-role="page" id="date">
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
             <a href='#' data-rel="back" data-role="button" data-iconpos="notext"
-               onclick="app.controller.record.saveInput('sample:date')"
-               data-icon="check" >Save</a>
+               data-icon="delete">Cancel</a>
         </div>
         <h1>Date</h1>
         <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
             <a href='#' data-rel="back" data-role="button" data-iconpos="notext"
-               data-icon="delete">Cancel</a>
+               onclick="app.controller.record.saveInput('sample:date')"
+               data-icon="check" >Save</a>
         </div>
     </div>
     <div data-role="content" >
@@ -212,17 +214,18 @@ Recording Page
         <input id="sample:date" name="sample:date" type="date" required>
     </div>
 </div>
+<!-- Number -->
 <div data-role="page" id="number">
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
             <a href='#' data-rel="back" data-role="button" data-iconpos="notext"
-               onclick="app.controller.record.saveInput('sample:date')"
-               data-icon="check" >Save</a>
+               data-icon="delete">Cancel</a>
         </div>
         <h1>Number</h1>
         <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
             <a href='#' data-rel="back" data-role="button" data-iconpos="notext"
-               data-icon="delete">Cancel</a>
+               onclick="app.controller.record.saveInput('sample:date')"
+               data-icon="check" >Save</a>
         </div>
     </div>
     <div data-role="content" >
@@ -250,17 +253,18 @@ Recording Page
         </fieldset>
     </div>
 </div>
+<!-- Stage -->
 <div data-role="page" id="stage">
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
             <a href='#' data-rel="back" data-role="button" data-iconpos="notext"
-               onclick="app.controller.record.saveInput('sample:date')"
-               data-icon="check" >Save</a>
+               data-icon="delete">Cancel</a>
         </div>
         <h1>Stage</h1>
         <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
             <a href='#' data-rel="back" data-role="button" data-iconpos="notext"
-               data-icon="delete">Cancel</a>
+               onclick="app.controller.record.saveInput('sample:date')"
+               data-icon="check" >Save</a>
         </div>
     </div>
     <div data-role="content" >
@@ -289,19 +293,19 @@ Recording Page
     </div>
 </div>
 
-<!------------
-Location Page
--------------->
+<!--#############
+    Location Page
+    #############-->
 <div data-role="page" id="sref">
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
             <a href='#' data-rel="back" data-role="button" data-iconpos="notext"
-               data-icon="check" onclick="app.controller.sref.save()" >Save</a>
+               data-icon="delete">Cancel</a>
         </div>
         <h1>Location</h1>
         <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
             <a href='#' data-rel="back" data-role="button" data-iconpos="notext"
-               data-icon="delete">Cancel</a>
+               data-icon="check" onclick="app.controller.sref.save()" >Save</a>
         </div>
     </div>
     <div data-role="content" >
@@ -382,10 +386,9 @@ Location Page
     </div>
 </div>
 
-
-<!-------
-User Page
---------->
+<!--#############
+    User Page
+    #############-->
 <div data-role="page" id="user">
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>

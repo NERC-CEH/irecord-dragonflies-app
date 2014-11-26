@@ -8,3 +8,5 @@ Building
 * Open terminal in module's ``THEME_SOURCE/scripts`` directory
 * ``npm install``
 * ``grunt``
+
+This will create a scripts folder with the javascript code (theme.js) used by the theme.
