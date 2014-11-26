@@ -12,12 +12,12 @@ This will create a scripts folder with the javascript code (theme.js) used by th
 
 ## Bugs and feature requests
 
-Have a bug or a feature request? search for existing and closed issues. [Please open a new issue](issues).
+Have a bug or a feature request? search for existing and closed issues. [Please open a new issue](https://github.com/NERC-CEH/mobile_dragonfly/issues).
 
 
 ## Creators
 
-** Karolis Kazlauskis **
+**Karolis Kazlauskis**
 
 - <https://github.com/kazlauskis>
 
