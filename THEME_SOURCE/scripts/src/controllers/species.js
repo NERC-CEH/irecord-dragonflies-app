@@ -58,6 +58,10 @@
             this.renderSpecies(species);
         },
 
+        /**
+         * Renders the species profile page.
+         * @param species
+         */
         renderSpecies: function(species){
             var template = $('#species-template').html();
             var placeholder = $('#species-placeholder');
@@ -75,6 +79,10 @@
             placeholder.html(compiled_template(species));
             placeholder.trigger('create');
 
+            //add Flight data
+            this.addFlightData();
+
+            //add Gallery
             app.controller.species.gallery.init();
 
             //add button listeners
@@ -100,6 +108,91 @@
                 _log('species: no filght data was found for: ' + species.id, app.LOG_ERROR);
                 return;
             }
+
+            var data = [];
+
+            var WEEKS_IN_YEAR = 52;
+            for (var i=0; i <  WEEKS_IN_YEAR; i++ ){
+                data.push({
+                    'x': i,
+                    'y': flight_data[i] / 10|| 0
+                });
+            }
+            this.renderFlightData(data);
+        },
+
+        /**
+         * Creates SVG using D3 lib and attaches it to the Species profile.
+         *
+         * Code from: http://www.sitepoint.com/creating-simple-line-bar-charts-using-d3-js/
+         */
+        renderFlightData: function(barData){
+            var container = $('#species-flight');
+
+
+            var WIDTH = container.width(),
+                HEIGHT = container.height(),
+                MARGINS = {
+                    top: 20,
+                    right: 5,
+                    bottom: 20,
+                    left: 0
+                },
+                xRange = d3.scale.ordinal().rangeRoundBands([MARGINS.left, WIDTH - MARGINS.right], 0.1).domain(barData.map(function (d) {
+                    return d.x;
+                })),
+
+
+                yRange = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0,
+                    d3.max(barData, function (d) {
+                        return d.y;
+                    })
+                ]),
+
+                xAxis = d3.svg.axis()
+                    .scale(xRange)
+                    .tickValues([1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50]),
+
+                yAxis = d3.svg.axis()
+                    .scale(yRange)
+                    .tickValues([0, 100])
+                    .orient("left");
+
+            // Add an SVG element with the desired dimensions and margin.
+            var graph = d3.select("#species-flight").append("svg:svg")
+                .attr("width", WIDTH + MARGINS.right + MARGINS.left)
+                .attr("height", HEIGHT + MARGINS.top + MARGINS.bottom)
+                .append("svg:g")
+                .attr("transform", "translate(" + MARGINS.bottomleft + "," + MARGINS.top + ")");
+
+            graph.append('svg:g')
+                .attr('class', 'x axis')
+                .attr('transform', 'translate(0,' + (HEIGHT - MARGINS.bottom) + ')')
+                .call(xAxis);
+
+            graph.selectAll('rect')
+                .data(barData)
+                .enter()
+                .append('rect')
+                .attr('x', function (d) {
+                    return xRange(d.x);
+                })
+                .attr('y', function (d) {
+                    return yRange(d.y);
+                })
+                .attr('width', xRange.rangeBand())
+                .attr('height', function (d) {
+                    return ((HEIGHT - MARGINS.bottom) - yRange(d.y));
+                })
+                .attr('fill', 'grey')
+                .on('mouseover',function(d){
+                    d3.select(this)
+                        .attr('fill','blue');
+                })
+                .on('mouseout',function(d){
+                    d3.select(this)
+                        .attr('fill','grey');
+                });
 
 
         },
