@@ -1,8 +1,50 @@
 (function($){
     app.controller = app.controller || {};
     app.controller.species = {
-        pagecreate: function(){
 
+        //controller configuration should be set up in an app config file
+        CONF: {
+            FLIGHT_DATA_SRC: ""
+        },
+
+        pagecreate: function(){
+            //fetch flight data from the server
+            //load species data
+            if(!app.storage.is('flight')) {
+                $.mobile.loading("show");
+
+                $.ajax({
+                    url: this.CONF.FLIGHT_DATA_SRC,
+                    dataType: 'jsonp',
+                    async: false,
+                    success: function (json) {
+                        $.mobile.loading("hide");
+
+                        var flight = optimiseData(json);
+                        app.data.flight = flight;
+
+                        function optimiseData(json){
+                            //optimise data
+                            var data = {};
+                            for (var i = 0; i < json.length; i++){
+                                var a = json[i];
+                                data[a['s']] = data[a['s']] || {};
+                                data[a['s']][a['m']] = a['c'];
+                            }
+                            return data;
+                        }
+
+                        //render flight data
+                        app.controller.species.addFlightData();
+
+                        //saves for quicker loading
+                        app.storage.set('flight', flight);
+
+                    }
+                });
+            } else {
+                app.data.flight = app.storage.get('flight');
+            }
         },
 
         pagecontainershow: function(event, ui){
@@ -39,6 +81,27 @@
             $('#species-map-button, #species-map').on('click', function(){
                 $('#species-map').toggle('slow');
             })
+        },
+
+        /**
+         * Adds fight histograms to the species profile.
+         */
+        addFlightData: function(){
+            var container = $('#species-flight');
+
+            //if server data came earlier than the page was rendered
+            if (container.length == 0){
+                return;
+            }
+            var species = app.controller.list.getCurrentSpecies();
+            var flight_data = app.data.flight[species.id];
+
+            if(flight_data == null){
+                _log('species: no filght data was found for: ' + species.id, app.LOG_ERROR);
+                return;
+            }
+
+
         },
 
         /**

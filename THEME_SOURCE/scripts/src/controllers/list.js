@@ -110,7 +110,7 @@
             $('#list-controls-save-button').on('click', this.toggleListControls);
             $('#list-controls-button').on('click', this.toggleListControls);
 
-            //this.printSpeciesData();
+           // this.printSpeciesData();
         },
 
         printSpeciesData: function(){
@@ -121,7 +121,7 @@
 
             var text = '';
             for(var i=0; i < app.data.species.length; i++){
-                text += "\n" + app.data.species[i].taxon + ', ' + app.data.species[i].id + ', ' +  app.data.species[i].warehouse_id;
+                text += "\n" + app.data.species[i].taxon + ', ' + app.data.species[i].id + ', ' +  app.data.species[i].common_name + ', ' + app.data.species[i].warehouse_id;
             }
             console.log (app.data.species.length);
             console.log (app.data.species);

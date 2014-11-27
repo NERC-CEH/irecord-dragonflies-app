@@ -29,6 +29,8 @@ var c = app.controller;
 c.list.prob.CONF.PROB_DATA_SRC = "http://192.171.199.230/dragonfly/serv/abundance";
 c.list.CONF.SPECIES_DATA_SRC = "http://192.171.199.230/dragonfly/serv/species";
 
+c.species.CONF.FLIGHT_DATA_SRC = "http://192.171.199.230/dragonfly/serv/flight";
+
 c.login.CONF.URL = Drupal.settings.basePath + "user/mobile/register";
 c.register.CONF.URL = c.login.CONF.URL;
 
