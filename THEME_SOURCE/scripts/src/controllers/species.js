@@ -34,6 +34,11 @@
             placeholder.trigger('create');
 
             app.controller.species.gallery.init();
+
+            //add button listeners
+            $('#species-map-button, #species-map').on('click', function(){
+                $('#species-map').toggle('slow');
+            })
         },
 
         /**

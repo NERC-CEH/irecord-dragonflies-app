@@ -107,6 +107,14 @@
                     <img src="{{profile_pic}}">
                 </a>
 
+                {{#if map}}
+                <button id="species-map-button">Show Distribution</button>
+
+                <div id="species-map" style="display:none">
+                    <img src="{{map}}">
+                </div>
+                {{/if}}
+
                 <ul data-role="listview" data-inset="true" style="max-width:800px;">
                     <li>
                         <div class="taxon">{{taxon}}</div>
