@@ -1,4 +1,5 @@
-(function($){
+(function ($)
+{
     app.controller = app.controller || {};
     app.controller.species = {
 
@@ -7,26 +8,29 @@
             FLIGHT_DATA_SRC: ""
         },
 
-        pagecreate: function(){
+        pagecreate: function ()
+        {
             //fetch flight data from the server
             //load species data
-            if(!app.storage.is('flight')) {
+            if (!app.storage.is('flight')) {
                 $.mobile.loading("show");
 
                 $.ajax({
                     url: this.CONF.FLIGHT_DATA_SRC,
                     dataType: 'jsonp',
                     async: false,
-                    success: function (json) {
+                    success: function (json)
+                    {
                         $.mobile.loading("hide");
 
                         var flight = optimiseData(json);
                         app.data.flight = flight;
 
-                        function optimiseData(json){
+                        function optimiseData(json)
+                        {
                             //optimise data
                             var data = {};
-                            for (var i = 0; i < json.length; i++){
+                            for (var i = 0; i < json.length; i++) {
                                 var a = json[i];
                                 data[a['s']] = data[a['s']] || {};
                                 data[a['s']][a['m']] = a['c'];
@@ -47,7 +51,8 @@
             }
         },
 
-        pagecontainershow: function(event, ui){
+        pagecontainershow: function (event, ui)
+        {
             _log('species: pagecontainershow.');
 
             var species = app.controller.list.getCurrentSpecies();
@@ -62,7 +67,8 @@
          * Renders the species profile page.
          * @param species
          */
-        renderSpecies: function(species){
+        renderSpecies: function (species)
+        {
             var template = $('#species-template').html();
             var placeholder = $('#species-placeholder');
 
@@ -70,7 +76,7 @@
 
             //check for the favourite
             var favourites = app.controller.list.getFavourites();
-            if (favourites[species.id] != null){
+            if (favourites[species.id] != null) {
                 $("#species-profile-fav-button").addClass("on");
             } else {
                 $("#species-profile-fav-button").removeClass("on");
@@ -86,7 +92,8 @@
             app.controller.species.gallery.init();
 
             //add button listeners
-            $('#species-map-button, #species-map').on('click', function(){
+            $('#species-map-button, #species-map').on('click', function ()
+            {
                 $('#species-map').toggle('slow');
             })
         },
@@ -94,17 +101,18 @@
         /**
          * Adds fight histograms to the species profile.
          */
-        addFlightData: function(){
+        addFlightData: function ()
+        {
             var container = $('#species-flight');
 
             //if server data came earlier than the page was rendered
-            if (container.length == 0){
+            if (container.length == 0) {
                 return;
             }
             var species = app.controller.list.getCurrentSpecies();
             var flight_data = app.data.flight[species.id];
 
-            if(flight_data == null){
+            if (flight_data == null) {
                 _log('species: no filght data was found for: ' + species.id, app.LOG_ERROR);
                 return;
             }
@@ -112,10 +120,10 @@
             var data = [];
 
             var WEEKS_IN_YEAR = 52;
-            for (var i=0; i <  WEEKS_IN_YEAR; i++ ){
+            for (var i = 0; i < WEEKS_IN_YEAR; i++) {
                 data.push({
                     'x': i,
-                    'y': flight_data[i] / 10|| 0
+                    'y': flight_data[i] / 10 || 0
                 });
             }
             this.renderFlightData(data);
@@ -126,9 +134,9 @@
          *
          * Code from: http://www.sitepoint.com/creating-simple-line-bar-charts-using-d3-js/
          */
-        renderFlightData: function(barData){
+        renderFlightData: function (barData)
+        {
             var container = $('#species-flight');
-
 
             var WIDTH = container.width(),
                 HEIGHT = container.height(),
@@ -137,33 +145,49 @@
                     right: 5,
                     bottom: 20,
                     left: 0
-                },
-                xRange = d3.scale.ordinal().rangeRoundBands([MARGINS.left, WIDTH - MARGINS.right], 0.1).domain(barData.map(function (d) {
-                    return d.x;
-                })),
+                };
 
+            var xScale = d3.scale.ordinal().rangeRoundBands([MARGINS.left, WIDTH - MARGINS.right], 0.1)
+                .domain(barData.map(
+                    function (d){
+                        return d.x;
+                    }
+                ));
 
-                yRange = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0,
-                    d3.max(barData, function (d) {
+            var yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom])
+                .domain([0, d3.max(barData,
+                    function (d) {
                         return d.y;
-                    })
-                ]),
+                    }
+                )]);
 
-                xAxis = d3.svg.axis()
-                    .scale(xRange)
-                    .tickValues([1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50]),
+            var xAxis = d3.svg.axis()
+                .scale(xScale)
+                .tickFormat(function(weekNum){
+                    var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
 
-                yAxis = d3.svg.axis()
-                    .scale(yRange)
-                    .tickValues([0, 100])
-                    .orient("left");
+                    var d = ( (weekNum) * 7); // 1st of January + 7 days for each week
+                    var monthNum = new Date(2014, 0, d).getMonth();
+                    var month = monthNames[monthNum];
+
+                    return month;
+                })
+                .tickValues([1, 5, 10, 14, 18, 22, 27, 31, 35, 40, 44, 48]);
+
+
+            var yAxis = d3.svg.axis()
+                .scale(yScale)
+                .tickValues([0, 100])
+                .orient("left");
+
 
             // Add an SVG element with the desired dimensions and margin.
             var graph = d3.select("#species-flight").append("svg:svg")
                 .attr("width", WIDTH + MARGINS.right + MARGINS.left)
                 .attr("height", HEIGHT + MARGINS.top + MARGINS.bottom)
-                .append("svg:g")
-                .attr("transform", "translate(" + MARGINS.bottomleft + "," + MARGINS.top + ")");
+                .append("svg:g");
+               // .attr("transform", "translate(" + MARGINS.bottom + "," + MARGINS.top + ")");
 
             graph.append('svg:g')
                 .attr('class', 'x axis')
@@ -174,24 +198,29 @@
                 .data(barData)
                 .enter()
                 .append('rect')
-                .attr('x', function (d) {
-                    return xRange(d.x);
-                })
+                .attr('x', function (d){
+                        return xScale(d.x);
+                    }
+                 )
                 .attr('y', function (d) {
-                    return yRange(d.y);
-                })
-                .attr('width', xRange.rangeBand())
-                .attr('height', function (d) {
-                    return ((HEIGHT - MARGINS.bottom) - yRange(d.y));
+                        return yScale(d.y);
+                    }
+                )
+                .attr('width', xScale.rangeBand())
+                .attr('height', function (d)
+                {
+                    return ((HEIGHT - MARGINS.bottom) - yScale(d.y));
                 })
                 .attr('fill', 'grey')
-                .on('mouseover',function(d){
+                .on('mouseover', function (d)
+                {
                     d3.select(this)
-                        .attr('fill','blue');
+                        .attr('fill', 'blue');
                 })
-                .on('mouseout',function(d){
+                .on('mouseout', function (d)
+                {
                     d3.select(this)
-                        .attr('fill','grey');
+                        .attr('fill', 'grey');
                 });
 
 
@@ -201,7 +230,8 @@
          * Toggles the current species as favourite by saving it into the
          * storage and changing the buttons appearance.
          */
-        toggleSpeciesFavourite: function(){
+        toggleSpeciesFavourite: function ()
+        {
             var favButton = $("#species-profile-fav-button");
             favButton.toggleClass("on");
 
@@ -214,12 +244,13 @@
          */
         gallery: {
 
-            gallery : {},
-            init : function(gallery_id){
+            gallery: {},
+            init: function (gallery_id)
+            {
                 var images = $('#species_gallery a');
 
-                if (images.length > 0){
-                    this.gallery =  images.photoSwipe({
+                if (images.length > 0) {
+                    this.gallery = images.photoSwipe({
                         jQueryMobile: true,
                         loop: false,
                         enableMouseWheel: false,
@@ -229,8 +260,9 @@
 
             },
 
-            show : function(){
-                if ($('.gallery')){
+            show: function ()
+            {
+                if ($('.gallery')) {
                     this.gallery.show(0);
                 } else {
                     app.navigation.message('I have no pictures to show :(');
