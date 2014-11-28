@@ -391,7 +391,7 @@ ul[data-role="listview"] > li > p {
 /* Flight Graph */
 #species-flight {
     width: 100%;
-    height: 10vh;
+    height: 12vh;
 }
 .axis path, .axis line
 {

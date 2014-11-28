@@ -141,9 +141,9 @@
             var WIDTH = container.width(),
                 HEIGHT = container.height(),
                 MARGINS = {
-                    top: 20,
-                    right: 5,
-                    bottom: 20,
+                    top: 0,
+                    right: WIDTH * 0.05,
+                    bottom: HEIGHT * 0.2,
                     left: 0
                 };
 
@@ -164,8 +164,15 @@
             var xAxis = d3.svg.axis()
                 .scale(xScale)
                 .tickFormat(function(weekNum){
+                    var MONTH_SPACE = 8; //display tick every so weeks
+
+                    var width = $('#species-flight').width();
+                    if (width > 300) {
+                        MONTH_SPACE = 4;
+                    }
+
                     //display only monthly tick labels
-                    if (weekNum % 4 > 0 || weekNum == 0){
+                    if (weekNum % MONTH_SPACE > 0 || weekNum == 0){
                         return;
                     }
                     var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -213,16 +220,16 @@
                 {
                     return ((HEIGHT - MARGINS.bottom) - yScale(d.y));
                 })
-                .attr('fill', 'grey')
+                .attr('fill', '#C6C99F')
                 .on('mouseover', function (d)
                 {
                     d3.select(this)
-                        .attr('fill', 'blue');
+                        .attr('fill', '#E2E4CD');
                 })
                 .on('mouseout', function (d)
                 {
                     d3.select(this)
-                        .attr('fill', 'grey');
+                        .attr('fill', '#C6C99F');
                 });
 
             //attach graph bar count label
