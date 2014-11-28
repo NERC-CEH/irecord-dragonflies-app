@@ -164,6 +164,10 @@
             var xAxis = d3.svg.axis()
                 .scale(xScale)
                 .tickFormat(function(weekNum){
+                    //display only monthly tick labels
+                    if (weekNum % 4 > 0 || weekNum == 0){
+                        return;
+                    }
                     var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
 
@@ -172,9 +176,7 @@
                     var month = monthNames[monthNum];
 
                     return month;
-                })
-                .tickValues([1, 5, 10, 14, 18, 22, 27, 31, 35, 40, 44, 48]);
-
+                });
 
             var yAxis = d3.svg.axis()
                 .scale(yScale)
@@ -223,7 +225,26 @@
                         .attr('fill', 'grey');
                 });
 
+            //attach graph bar count label
+            graph.append("text")
+                .attr('id', 'bar-count')
+                .attr('font-size', 10)
+                .attr("y", -20) //hide in the beginning
+                .attr("x", -20)
+                .attr("dy", "1em")
+                .style("text-anchor", "middle")
+                .text("");
 
+            //attach bar click listeners
+            $('rect').on('click', function(){
+                var count = this.height.baseVal.value;
+                var x = this.x.baseVal.value;
+
+                var counter = $('#bar-count');
+                counter.attr('y', (HEIGHT - count  - MARGINS.bottom) - 15); // -15 to lift it slightly up
+                counter.attr('x', x + 5); //needs slight incrementation to stay in middle of bar
+                counter.text(count.toFixed(0));
+            });
         },
 
         /**
