@@ -97,6 +97,7 @@
                                     'url' : profile_pic_url,
                                     'author': json[i].profile_pic_author
                                 };
+                                delete json[i].profile_pic_author;
 
                                 for (var pic_count = 0; pic_count < json[i].gallery.length; pic_count++){
                                     var pic_url = json[i].gallery[pic_count];
