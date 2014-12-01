@@ -84,8 +84,31 @@
                     url: this.CONF.SPECIES_DATA_SRC,
                     dataType: 'jsonp',
                     async: false,
-                    success: function (species) {
+                    success: function (json) {
+                        var species = optimiseData(json);
                         app.data.species = species;
+
+                        function optimiseData(json){
+                            //optimise data
+                            for (var i = 0; i < json.length; i++){
+                                //merge pics and authors
+                                var profile_pic_url = json[i].profile_pic;
+                                json[i].profile_pic = {
+                                    'url' : profile_pic_url,
+                                    'author': json[i].profile_pic_author
+                                };
+
+                                for (var pic_count = 0; pic_count < json[i].gallery.length; pic_count++){
+                                    var pic_url = json[i].gallery[pic_count];
+                                    json[i].gallery[pic_count] = {
+                                        'url': pic_url,
+                                        'author': json[i].gallery_authors[pic_count]
+                                    }
+                                }
+                                delete json[i].gallery_authors;
+                            }
+                            return json;
+                        }
 
                         //saves for quicker loading
                         app.storage.set('species', species);
