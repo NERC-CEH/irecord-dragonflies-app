@@ -216,18 +216,17 @@
                     }
                 )
                 .attr('width', xScale.rangeBand())
-                .attr('height', function (d)
-                {
-                    return ((HEIGHT - MARGINS.bottom) - yScale(d.y));
+                .attr('height', function (d) {
+                    //trim negative ones
+                    var height = ((HEIGHT - MARGINS.bottom) - yScale(d.y));
+                    return height > 0 ? height : 0;
                 })
                 .attr('fill', '#C6C99F')
-                .on('mouseover', function (d)
-                {
+                .on('mouseover', function (d) {
                     d3.select(this)
                         .attr('fill', '#E2E4CD');
                 })
-                .on('mouseout', function (d)
-                {
+                .on('mouseout', function (d) {
                     d3.select(this)
                         .attr('fill', '#C6C99F');
                 });
