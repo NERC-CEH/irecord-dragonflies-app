@@ -8,7 +8,8 @@
         //controller configuration should be set up in an app config file
         CONF: {
             PROB_DATA_SRC: "",
-            SPECIES_DATA_SRC: ""
+            SPECIES_DATA_SRC: "",
+            NATIONAL_BOUNDARY_SRC: ""
         },
 
         DEFAULT_SORT : 'taxonomic',

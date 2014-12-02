@@ -82,6 +82,9 @@
                 $("#species-profile-fav-button").removeClass("on");
             }
 
+            //add national boundary
+            species['national_boundary'] = Drupal.settings.basePath + app.controller.list.CONF.NATIONAL_BOUNDARY_SRC;
+
             placeholder.html(compiled_template(species));
             placeholder.trigger('create');
 

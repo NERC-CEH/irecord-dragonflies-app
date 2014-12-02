@@ -111,10 +111,14 @@
                 <button id="species-map-button">Show Distribution</button>
 
                 <div id="species-map" style="display:none">
-                    <img src="{{map}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="378pt" height="504pt" viewBox="0 0 378 504" version="1.1">
+                        <use xlink:href="{{map}}#surface101" />
+                        <use xlink:href="{{national_boundary}}#boundary" />
+                    </svg>
                 </div>
                 {{/if}}
 
+                <ul data-role="listview" data-inset="true" style="max-width:800px;">
                 <ul data-role="listview" data-inset="true" style="max-width:800px;">
                     <li>
                         <div class="taxon">{{taxon}}</div>

@@ -59,10 +59,11 @@ function mobile_dragonfly_preprocess_html(&$vars) {
  * @see template_process_page()
  * @see page.tpl.php
  */
-/* -- Delete this line if you want to use this function
 function mobile_dragonfly_preprocess_page(&$vars) {
+  //add drupal theme path
+  drupal_add_js('jQuery.extend(Drupal.settings, { "pathToTheme": "' . path_to_theme() . '/" });', 'inline');
 }
-// */
+
 
 
 /**
