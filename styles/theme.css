@@ -173,12 +173,20 @@ form, body {
 }
 
 .ui-header-fixed, .ui-footer-fixed {
+    min-height: 45px;
+
     background-color: #C6C99F !important;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     overflow: hidden;
 }
+
+/* Move loader dialog up */
+.ui-loader{
+    top: 30% !important;
+}
+
 
 /* Date, SRef and Taxon Inputs */
 #date-button, #sref-button,
@@ -300,6 +308,7 @@ form, body {
 
 @media only screen and (max-width: 400px) {
     .ui-header .ui-title, .ui-footer .ui-title {
+        margin-left: 15%;
         font-size: small !important;
     }
 

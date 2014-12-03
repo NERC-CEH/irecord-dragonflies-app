@@ -227,6 +227,10 @@
                 .attr('transform', 'translate(0,' + (HEIGHT - MARGINS.bottom) + ')')
                 .call(xAxis);
 
+            var BAR_WIDTH = xScale.rangeBand();
+            if (WIDTH < 300) {
+                BAR_WIDTH = 3; //small bar width for small screens
+            }
             graph.selectAll('rect')
                 .data(barData)
                 .enter()
@@ -239,7 +243,7 @@
                         return yScale(d.y);
                     }
                 )
-                .attr('width', xScale.rangeBand())
+                .attr('width', BAR_WIDTH)
                 .attr('height', function (d) {
                     //trim negative ones
                     var height = ((HEIGHT - MARGINS.bottom) - yScale(d.y));
