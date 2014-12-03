@@ -111,16 +111,16 @@
                     left: WIDTH * 1.1
                 };
 
-            map.attr('width', WIDTH);
-            map.attr('height', HEIGHT);
-            map.attr('viewBox',
-                MARGINS.top + ',' +
-                MARGINS.right + ',' +
-                MARGINS.bottom + ',' +
-                MARGINS.left
-            );
+          //  map.attr('width', WIDTH);
+          //  map.attr('height', HEIGHT);
+//            map.attr('viewBox',
+//                MARGINS.top + ',' +
+//                MARGINS.right + ',' +
+//                MARGINS.bottom  + ',' +
+//                MARGINS.left
+//            );
 
-            var scale = WIDTH / 350;
+            var scale = WIDTH / 345;
             var map_boundary = $('#species-map-boundary');
             map_boundary.attr('transform', 'scale(' + scale + ')');
             var map_data = $('#species-map-data');
