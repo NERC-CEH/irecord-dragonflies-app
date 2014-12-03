@@ -16,6 +16,7 @@ app.name = 'app'; //application computer name
 //app wide settings
 app.CONF.HOME = "dragonfly/";
 app.CONF.LOG = app.LOG_DEBUG;
+app.CONF.APPCACHE_FILES = 250;
 
 app.auth.CONF.APPNAME = "dragonfly";
 app.auth.CONF.APPSECRET = "mydragonfly";

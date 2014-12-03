@@ -10,6 +10,25 @@
 
         pagecreate: function ()
         {
+
+        },
+
+        pagecontainershow: function (event, ui)
+        {
+            _log('species: pagecontainershow.');
+
+            var species = app.controller.list.getCurrentSpecies();
+
+            var heading = $('#species_heading');
+            heading.text(species.common_name);
+
+            this.renderSpecies(species);
+        },
+
+        /**
+         * Loads the species flight data.
+         */
+        loadFlightData: function(){
             //fetch flight data from the server
             //load species data
             if (!app.storage.is('flight')) {
@@ -51,18 +70,6 @@
             }
         },
 
-        pagecontainershow: function (event, ui)
-        {
-            _log('species: pagecontainershow.');
-
-            var species = app.controller.list.getCurrentSpecies();
-
-            var heading = $('#species_heading');
-            heading.text(species.common_name);
-
-            this.renderSpecies(species);
-        },
-
         /**
          * Renders the species profile page.
          * @param species
@@ -100,31 +107,14 @@
                 $('#species-map').toggle('slow');
             });
 
-            var map = $('#species-map');
+            var scale = $('#species-map').width() / 345;
+            var margin = $('#species-map').height() * 0.05;
+            $('#species-map-boundary')
+                .attr('transform', 'scale(' + scale + ')')
+                .attr('y', -margin);
+            $('#species-map-data').attr('transform', 'scale(' + scale + ')')
+                .attr('y', -margin);
 
-            var WIDTH = map.width(),
-                HEIGHT = map.height(),
-                MARGINS = {
-                    top: HEIGHT * 0.04,
-                    right: WIDTH * 0.05,
-                    bottom: HEIGHT * 0.55,
-                    left: WIDTH * 1.1
-                };
-
-          //  map.attr('width', WIDTH);
-          //  map.attr('height', HEIGHT);
-//            map.attr('viewBox',
-//                MARGINS.top + ',' +
-//                MARGINS.right + ',' +
-//                MARGINS.bottom  + ',' +
-//                MARGINS.left
-//            );
-
-            var scale = WIDTH / 345;
-            var map_boundary = $('#species-map-boundary');
-            map_boundary.attr('transform', 'scale(' + scale + ')');
-            var map_data = $('#species-map-data');
-            map_data.attr('transform', 'scale(' + scale + ')');
         },
 
         /**
@@ -132,6 +122,11 @@
          */
         addFlightData: function ()
         {
+            //gracefully fallback and not break anything else if not found.
+            if(app.data.flight == null || app.data.flight == 'undefined'){
+                _log('species: app.data.flight not found', app.LOG_ERROR);
+                return;
+            }
             var container = $('#species-flight');
 
             //if server data came earlier than the page was rendered

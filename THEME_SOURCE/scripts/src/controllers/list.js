@@ -131,6 +131,7 @@
             }
 
             this.prob.loadData();
+            app.controller.species.loadFlightData();
 
             $('#list-controls-save-button').on('click', this.toggleListControls);
             $('#list-controls-button').on('click', this.toggleListControls);
@@ -152,6 +153,24 @@
             console.log (app.data.species);
 
             console.log(text);
+        },
+
+        printAppcacheData: function() {
+            var url = 'http://192.171.199.230';
+            //print pictures & maps
+            for (var i=0; i< app.data.species.length; i++){
+                //pics
+                _log(app.data.species[i].profile_pic.url.replace(url, ''));
+                for (var j = 0; j < app.data.species[i].gallery.length; j++){
+                    _log(app.data.species[i].gallery[j].url.replace(url, ''));
+
+                }
+                //maps
+                _log(app.data.species[i].map.replace(url, ''));
+
+            }
+
+
         },
 
         /**
@@ -659,7 +678,7 @@
                             _log('list: ERROR appcache.');
                         }
 
-                        startManifestDownload('appcache', 114,
+                        startManifestDownload('appcache', app.CONF.APPCACHE_FILES,
                             'sites/all/modules/iform_mobile/libs/offline.php', onSuccess, onError);
                     }, 500);
                 });

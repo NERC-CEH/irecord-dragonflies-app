@@ -419,6 +419,6 @@ ul[data-role="listview"] > li > p {
 
 /* Species Map */
 #species-map{
-    width: 60%;
-    height: 53vh;
+    width: 80%;
+    height: 65vh;
 }
