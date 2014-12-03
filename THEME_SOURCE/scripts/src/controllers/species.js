@@ -98,7 +98,33 @@
             $('#species-map-button, #species-map').on('click', function ()
             {
                 $('#species-map').toggle('slow');
-            })
+            });
+
+            var map = $('#species-map');
+
+            var WIDTH = map.width(),
+                HEIGHT = map.height(),
+                MARGINS = {
+                    top: HEIGHT * 0.04,
+                    right: WIDTH * 0.05,
+                    bottom: HEIGHT * 0.55,
+                    left: WIDTH * 1.1
+                };
+
+            map.attr('width', WIDTH);
+            map.attr('height', HEIGHT);
+            map.attr('viewBox',
+                MARGINS.top + ',' +
+                MARGINS.right + ',' +
+                MARGINS.bottom + ',' +
+                MARGINS.left
+            );
+
+            var scale = WIDTH / 350;
+            var map_boundary = $('#species-map-boundary');
+            map_boundary.attr('transform', 'scale(' + scale + ')');
+            var map_data = $('#species-map-data');
+            map_data.attr('transform', 'scale(' + scale + ')');
         },
 
         /**

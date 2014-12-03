@@ -416,3 +416,9 @@ ul[data-role="listview"] > li > p {
 {
     fill: FireBrick;
 }
+
+/* Species Map */
+#species-map{
+    width: 60%;
+    height: 55vh;
+}
