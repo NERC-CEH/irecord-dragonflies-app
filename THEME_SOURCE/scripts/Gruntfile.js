@@ -43,12 +43,13 @@ module.exports = function(grunt) {
             main: {
                 src: ['../../scripts/theme.js'],
                 overwrite: true, // overwrite matched source files
-                replacements: [{
-                    from: /(app\.version =) \'0\';/g, // string replacement
-                    to: '$1 \'<%= pkg.version %>\';'
-                },
+                replacements: [
                     {
-                        from: /(app\.name =) \'\';/g,  // string replacement
+                        from: /(app\.controller\.version =) \'0\';/g, // string replacement
+                        to: '$1 \'<%= pkg.version %>\';'
+                    },
+                    {
+                        from: /(app\.name =) \'app\';/g,  // string replacement
                         to: '$1 \'<%= pkg.name %>\';'
                     }
                 ]
