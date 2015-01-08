@@ -679,7 +679,7 @@
                         }
 
                         startManifestDownload('appcache', app.CONF.APPCACHE_FILES,
-                            'sites/all/modules/iform_mobile/libs/offline.php', onSuccess, onError);
+                            'sites/all/modules/iform_mobile/js/libs/offline.php', onSuccess, onError);
                     }, 500);
                 });
 
