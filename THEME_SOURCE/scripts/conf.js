@@ -1,7 +1,4 @@
 //CONFIGURATION.
-app.controller.version = '0'; //application controllers version
-app.name = 'app'; //application computer name
-
 
 //Because a development/testing and production sites differ - URL paths,
 //environment etc. It is important to extract the hardcoded metadata and
@@ -14,6 +11,9 @@ app.name = 'app'; //application computer name
 //while Drupal.settings.pathToTheme comes before.
 
 //app wide settings
+app.CONF.VERSION = '0'; //grunt replaced. Application (controllers and data) version
+app.CONF.NAME = 'app'; //grunt replaced.
+
 app.CONF.HOME = "dragonfly/";
 app.CONF.LOG = app.LOG_DEBUG;
 app.CONF.APPCACHE_FILES = 250;

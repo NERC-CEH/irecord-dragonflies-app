@@ -80,7 +80,6 @@ $iform_mobile_path = 'sites/all/modules/iform_mobile/';
 
     ga('create', 'UA-58378803-2', 'auto');
     ga('send', 'pageview');
-
   </script>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes; ?>>
