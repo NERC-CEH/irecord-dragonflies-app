@@ -2,7 +2,7 @@
 	"name": "dragonfly_app",
 	"title": "Dragonfly App Controllers",
 	"description": "Mobile application page specific functionality.",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"homepage": "http://www.indicia.org.uk/",
 	"author": {
 		"name": "Karolis Kazlauskis",
