@@ -48,5 +48,6 @@ function checkForUpdates(){
         app.storage.remove('flight');
 
         app.storage.tmpClear();
+        app.settings(CONTROLLER_VERSION_KEY, app.CONF.VERSION);
     }
 }
