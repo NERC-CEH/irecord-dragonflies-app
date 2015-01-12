@@ -17,6 +17,7 @@ app.CONF.NAME = 'app'; //grunt replaced.
 app.CONF.HOME = "dragonfly/";
 app.CONF.LOG = app.LOG_DEBUG;
 app.CONF.APPCACHE_FILES = 250;
+app.CONF.APPCACHE_LOADER_URL = 'sites/all/modules/iform_mobile/php/offline.php';
 
 app.auth.CONF.APPNAME = "dragonfly";
 app.auth.CONF.APPSECRET = "mydragonfly";
