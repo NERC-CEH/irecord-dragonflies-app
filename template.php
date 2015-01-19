@@ -32,7 +32,11 @@ function mobile_dragonfly_preprocess_html(&$vars) {
     'weight' => 102,
   );
   $css_path = drupal_get_path('theme', 'mobile_dragonfly') . '/styles/theme.css';
+  $photoswipe_css_path = drupal_get_path('theme', 'mobile_dragonfly') . '/styles/photoswipe.css';
+  
   drupal_add_css($css_path, $css_options);
+  drupal_add_css($photoswipe_css_path, $css_options);
+  
   $vars['styles'] = drupal_get_css();
   
   // Add jQuery Mobile plugins.
