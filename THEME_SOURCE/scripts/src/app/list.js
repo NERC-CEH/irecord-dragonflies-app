@@ -57,11 +57,11 @@
       },
       {
         'id': 'taxonomic',
-        'label': 'Taxonomic'
+        'label': 'Scientific Name'
       },
       {
         'id': 'taxonomic_r',
-        'label': 'Taxonomic Reverse'
+        'label': 'Scientific Name Reverse'
       },
       {
         'id': 'probability_sort',
