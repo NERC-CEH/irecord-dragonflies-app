@@ -1,32 +1,39 @@
-This is a Drupal Mobile Dragonfly app theme consisting of pages
-source and controllers, as well as styling and configuration.
-
-## Requirements
-
- - This theme uses Drupal 7 [`iform_mobile_auth`](http://indicia-docs.readthedocs.org/en/latest/site-building/iform/modules/mobile-auth/) module for interacting with Indicia Biological Records database (default iRecord).
- - `jQuery Mobile` script should be loaded after the theme scripts.
- - Data sources (`species`, `flight`, `abundance`) endpoints should be configured (read Configuration). Data examples are provided in `THEME_SOURCE/data` folder.
-
+This is a Rare Arable Flowers mobile web application. HTML5 based offline mobile 
+app dedicated to plant recording.
 
 ## Configuration
 
-App configuration hosted in `THEME_SOURCE/scripts/conf.js`.
+App configuration hosted in `scr/conf.js`.
 
 **Note:** it should be done *before* building the code.
 
 ## Building
 
 - Install [NodeJS](http://nodejs.org/)
-- Open terminal in module's `THEME_SOURCE/scripts` directory
-- `npm install`
-- `grunt`
+- Clone a copy of the main rare-arable-flowers git repo by running:
 
-This will create a `scripts` folder with the javascript code (`theme.js`) used by the theme.
+```bash
+git clone git://github.com/NERC-CEH/rare-arable-flowers.git
+```
+
+- Enter the `morel` directory and install the npm build dependancies:
+
+```bash
+cd rare-arable-flowers && npm install
+```
+
+- Build the library: 
+
+```bash
+grunt
+```
+
+This will create a `dist` folder with the app code.
 
 
 ## Bugs and feature requests
 
-Have a bug or a feature request? search for existing and closed issues. [Please open a new issue](https://github.com/NERC-CEH/mobile_dragonfly/issues).
+Have a bug or a feature request? search for existing and closed issues. [Please open a new issue](https://github.com/NERC-CEH/rare-arable-flowers/issues).
 
 
 ## Creators
