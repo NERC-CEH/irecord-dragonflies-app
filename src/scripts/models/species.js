@@ -13,7 +13,10 @@ app.collections = app.collections || {};
       common_name: "",
       profile_pic: "images/sample.jpg",
       description: "",
-      management: "",
+      distribution: "",
+      habitat: "",
+      map: "",
+      gallery: [],
       favourite: false
     }
   });

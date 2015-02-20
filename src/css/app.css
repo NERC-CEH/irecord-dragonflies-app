@@ -165,17 +165,17 @@ input.numberInput{
 }
 
 form, body {
-    background: #FCFFD9 !important;
+    background: #DBDDC7 !important;
 }
 
 .ui-page {
-    background: #EFF2CD;
+    background: #E2E4CD;
 }
 
 .ui-header-fixed, .ui-footer-fixed {
     min-height: 45px;
 
-    background-color: #D5CB5F !important;
+    background-color: #C6C99F !important;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;

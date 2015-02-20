@@ -1,5 +1,5 @@
-This is a Rare Arable Flowers mobile web application. HTML5 based offline mobile 
-app dedicated to plant recording.
+This is a Dragonfly mobile web application. HTML5 based offline mobile
+app dedicated to UK dragonfly recording.
 
 ## Configuration
 
@@ -13,13 +13,13 @@ App configuration hosted in `scr/conf.js`.
 - Clone a copy of the main rare-arable-flowers git repo by running:
 
 ```bash
-git clone git://github.com/NERC-CEH/rare-arable-flowers.git
+git clone git://github.com/NERC-CEH/mobile_dragonfly.git
 ```
 
 - Enter the `morel` directory and install the npm build dependancies:
 
 ```bash
-cd rare-arable-flowers && npm install
+cd mobile_dragonfly && npm install
 ```
 
 - Build the library: 
@@ -33,7 +33,7 @@ This will create a `dist` folder with the app code.
 
 ## Bugs and feature requests
 
-Have a bug or a feature request? search for existing and closed issues. [Please open a new issue](https://github.com/NERC-CEH/rare-arable-flowers/issues).
+Have a bug or a feature request? search for existing and closed issues. [Please open a new issue](https://github.com/NERC-CEH/mobile_dragonfly/issues).
 
 
 ## Creators

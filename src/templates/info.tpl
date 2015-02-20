@@ -6,6 +6,7 @@
 </div>
 
 <div data-role="content">
+    <div class="app-logo"></div>
     <ul data-role="listview" data-inset="true">
         <li>
             <a href='#about' data-role="button" data-icon="info" data-prefetch>About App</a>
@@ -20,4 +21,5 @@
             <a href='#credits' data-role="button" data-icon="heart" data-prefetch>Credits</a>
         </li>
     </ul>
+    <div class="sponsor-logo"></div>
 </div>

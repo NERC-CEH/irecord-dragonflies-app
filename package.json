@@ -1,7 +1,7 @@
 {
-	"name": "rare-arable-plants",
-	"title": "Rare Arable Plants",
-	"description": "Rare Arable Plants mobile web application.",
+	"name": "irecord-dragonfly",
+	"title": "iRecord Dragonfly",
+	"description": "iRecord Dragonfly mobile web application.",
 	"version": "0.1.0",
 	"homepage": "",
 	"author": {
@@ -11,10 +11,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/NERC-CEH/rare-arable-plants-app"
+		"url": "https://github.com/NERC-CEH/mobile_dragonfly"
 	},
 	"bugs": {
-		"url": "https://github.com/NERC-CEH/rare-arable-plants-app/issues"
+		"url": "https://github.com/NERC-CEH/mobile_dragonfly/issues"
 	},
 	"licenses": [
 		{
@@ -39,13 +39,11 @@
 		"grunt-contrib-jst": "0.6.0"
 	 },
 	"keywords": [
-		"rare",
-		"arable",
-		"plants",
+		"indicia",
 		"mobile",
 		"app",
-		"plantlife",
-		"bsbi",
+		"dragonfly",
+		"bds",
 		"ceh",
 		"iRecord"
 	]

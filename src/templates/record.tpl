@@ -47,13 +47,6 @@
                 </a>
             </li>
             <li>
-                <a href="#locationdetails" id="locationdetails-button" class="record-button" data-role="button"
-                   data-icon="arrow-r" data-iconpos="right">
-                    <h3 class="heading">Location Details</h3>
-                    <p class="descript"></p>
-                </a>
-            </li>
-            <li>
                 <a href="#comment" id="comment-button" class="record-button"
                    data-role="button"
                    data-icon="arrow-r" data-iconpos="right">
@@ -62,6 +55,11 @@
                 </a>
             </li>
         </ul>
+
+        <label>
+            <input type="checkbox" data-iconpos="right" id="certain-button"
+                   name="certain" value="1"> Certain
+        </label>
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>

@@ -1,8 +1,8 @@
     <div data-role="header" id="list-header" data-position="fixed"
          data-tap-toggle="false">
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
-            <a href='#' data-rel='back' data-role="button" data-icon="arrow-l"
-               data-iconpos="notext">Back</a>
+            <a href='#info' data-role="button" data-icon="info"
+               data-iconpos="notext">Info</a>
             <a href="#user" data-role="button"
                data-icon="user" data-iconpos="notext">User</a>
         </div>

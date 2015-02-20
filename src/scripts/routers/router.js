@@ -10,11 +10,10 @@
 
     routes: {
       "": function () {
-        this.navigateToStandardPage('welcome');
-      },
-
-      "welcome": function () {
-        this.navigateToStandardPage('welcome');
+        if (!app.views.listPage){
+          app.views.listPage = new app.views.ListPage();
+        }
+        this.changePage(app.views.listPage);
       },
 
       "list": function () {
@@ -78,13 +77,6 @@
         app.views.locationPage.update();
       },
 
-      "comment": function () {
-        if (!app.views.commentPage){
-          app.views.commentPage = new app.views.CommentPage({model: app.models.record});
-        }
-        this.changePage(app.views.commentPage);
-      },
-
       "number": function () {
         if (!app.views.numberPage){
           app.views.numberPage = new app.views.NumberPage({model: app.models.record});
@@ -92,18 +84,18 @@
         this.changePage(app.views.numberPage);
       },
 
-      "locationdetails": function () {
-        if (!app.views.locationDetailsPage){
-          app.views.locationDetailsPage = new app.views.LocationdetailsPage({model: app.models.record});
-        }
-        this.changePage(app.views.locationDetailsPage);
-      },
-
       "stage": function () {
-        if (!app.views.stagePage){
+        if (!app.views.stagePage) {
           app.views.stagePage = new app.views.StagePage({model: app.models.record});
         }
         this.changePage(app.views.stagePage);
+      },
+
+      "comment": function () {
+        if (!app.views.commentPage){
+          app.views.commentPage = new app.views.CommentPage({model: app.models.record});
+        }
+        this.changePage(app.views.commentPage);
       },
 
       "date": function () {
@@ -111,22 +103,6 @@
           app.views.datePage = new app.views.DatePage({model: app.models.record});
         }
         this.changePage(app.views.datePage);
-      },
-
-      "mgmt": function () {
-        this.navigateToStandardPage('mgmt');
-      },
-
-      "mgmthotspot": function () {
-        this.navigateToStandardPage('mgmthotspot');
-      },
-
-      "mgmtrequirements": function () {
-        this.navigateToStandardPage('mgmtrequirements');
-      },
-
-      "mgmtwhere": function () {
-        this.navigateToStandardPage('mgmtwhere');
       },
 
       "info": function () {
@@ -137,7 +113,11 @@
         this.navigateToStandardPage('about');
       },
 
-      "credits": function () {
+      "species-info": function () {
+        this.navigateToStandardPage('species-info');
+      },
+
+     "credits": function () {
         this.navigateToStandardPage('credits');
       },
 
