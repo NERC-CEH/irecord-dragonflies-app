@@ -48,8 +48,8 @@ module.exports = function (grunt) {
             expand: true, flatten: true
           },
           {
-            src:  "src/images/*", dest: 'dist/images/',
-            expand: true, flatten: true
+            src:  "src/images/**", dest: 'dist/images/',
+            expand: true, flatten: true, filter: 'isFile'
           },
           {
             src: ['src/appcache.mf'], dest: 'dist/appcache.mf'
