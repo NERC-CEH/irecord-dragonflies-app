@@ -202,6 +202,7 @@ app.views = app.views || {};
                 filter.checked = "";
               }
             }
+            filter.id = filterID;
             filtersToRender.push(filter);
           }
         });
@@ -216,7 +217,6 @@ app.views = app.views || {};
     //TODO: DUPLICATE FROM ListView
     getCurrentFilters: function (filters) {
       var filtersIDs =  app.models.user.get('filters');
-      var filters = filters;
       var currentFilters = [];
       for (var j = 0; j < filtersIDs.length; j++) {
         for (var i = 0; i < filters.length; i++) {
@@ -245,10 +245,9 @@ app.views = app.views || {};
 
       var that = this;
       this.$el.find('.filter').on('change', function () {
-        var filter = app.views.listPage.getFilterById(this.id);
-        app.models.user.toggleListFilter(filter);
+        app.models.user.toggleListFilter(this.id);
 
-        var filters = app.views.listPage.getCurrentFilters();
+        var filters = that.getCurrentFilters(that.filters);
         if (filters.length === 1 && filters[0].id === 'favourites') {
           filters = [];
         }

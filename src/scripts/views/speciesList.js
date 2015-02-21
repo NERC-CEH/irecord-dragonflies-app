@@ -28,10 +28,34 @@ app.views = app.views || {};
       //      });
       //    }
       //}},
+      suborder: {
+        anisoptera: {
+          label: 'Dragonflies',
+          filter: function (list, onSuccess) {
+            var filtered_list = [];
+            for (var j = 0; j < list.length; j++) {
+              if (list[j].attributes.type === 'anisoptera') {
+                filtered_list.push(list[j]);
+              }
+            }
+            onSuccess(filtered_list);
+          }
+        },
+        zygoptera: {
+          label: 'Damseflies',
+          filter: function (list, onSuccess) {
+            var filtered_list = [];
+            for (var j = 0; j < list.length; j++) {
+              if (list[j].attributes.type === 'zygoptera') {
+                filtered_list.push(list[j]);
+              }
+            }
+            onSuccess(filtered_list);
+          }
+        }
+      },
       favourites: {
         favourites: {
-          id: 'favourites',
-          group: 'favourites',
           filter: function (list, onSuccess) {
             var filtered_list = [];
             var keys = app.models.user.get('favourites');
