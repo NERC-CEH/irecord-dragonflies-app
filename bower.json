@@ -11,7 +11,8 @@
     "latlon": "chrisveness/geodesy#ddde271a16c06f9c0696c76a989e04140c2790f5",
     "IndexedDBShim": "axemclion/IndexedDBShim",
     "photoswipe": "https://github.com/downloads/codecomputerlove/PhotoSwipe/code.photoswipe-3.0.5.zip",
-    "fastclick": "1.0.3"
+    "fastclick": "1.0.3",
+    "d3": "3.5.3"
   },
   "exportsOverride": {
     "backbone": {
@@ -22,6 +23,9 @@
     },
     "fastclick": {
       "js": "lib/fastclick.js"
+    },
+    "d3": {
+      "js": "d3.js"
     },
     "IndexedDBShim": {
       "js": ["dist/IndexedDBShim.js", "dist/IndexedDBShim.min.js"]

@@ -1,4 +1,5 @@
-app.data = [{"p": "0.8299", "s": "NBNSYS0000005602", "l": "HP40"}, {
+app.data = app.data || {};
+app.data.abundance = [{"p": "0.8299", "s": "NBNSYS0000005602", "l": "HP40"}, {
   "p": "1",
   "s": "NBNSYS0000005602",
   "l": "HP50"
