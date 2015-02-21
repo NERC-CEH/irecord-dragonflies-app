@@ -47,3 +47,4 @@ Have a bug or a feature request? search for existing and closed issues. [Please 
 ## Copyright and license
 
 Code and documentation copyright 2015 CEH. Code released under the [GNU GPL v3 license](LICENSE).
+Media (photos, maps) all rights reserved.
