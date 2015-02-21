@@ -57,6 +57,7 @@ app.views = app.views || {};
       var sref = location.lat + ', ' + location.lon;
       app.models.record.set(morel.record.inputs.KEYS.SREF, sref);
       app.models.record.set(morel.record.inputs.KEYS.SREF_ACCURACY, location.acc);
+      app.models.user.saveLocation(location);
 
       window.history.back();
     },
