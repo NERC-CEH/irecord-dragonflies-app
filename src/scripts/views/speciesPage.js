@@ -10,7 +10,10 @@ app.views = app.views || {};
     template: app.templates.species,
 
     events: {
-      'click #species-profile-fav-button': 'toggleSpeciesFavourite'
+      'click #species-profile-fav-button': 'toggleSpeciesFavourite',
+      'click #species-map': 'toggleMap',
+      'click #species-map-button': 'toggleMap',
+      'click #profile_pic': 'showGallery'
     },
 
     initialize: function () {
@@ -48,7 +51,7 @@ app.views = app.views || {};
       }
 
       //add Gallery
-      this.gallery.init();
+      this.initGallery();
     },
 
     /**
@@ -86,11 +89,6 @@ app.views = app.views || {};
       //add Gallery
       app.controller.species.gallery.init();
 
-      //add button listeners
-      $('#species-map-button, #species-map').on('click', function () {
-        $('#species-map').toggle('slow');
-      });
-
       var scale = $('#species-map').width() / 345;
       var margin = $('#species-map').height() * 0.05;
 
@@ -101,33 +99,30 @@ app.views = app.views || {};
         .attr('y', -margin);
     },
 
-    /**
-     *
-     */
-    gallery: {
-      gallery: {},
-      init: function (gallery_id) {
-        var images = $('#species_gallery a');
+    toggleMap: function () {
+      $('#species-map').toggle('slow');
+    },
 
-        if (images.length > 0) {
-          this.gallery = images.photoSwipe({
-            jQueryMobile: true,
-            loop: false,
-            enableMouseWheel: false,
-            enableKeyboard: false
-          });
-        }
-      },
+    showGallery: function () {
+      if ($('.gallery')) {
+        this.gallery.show(0);
+      } else {
+        app.message('I have no pictures to show :(');
+      }
+    },
 
-      show: function () {
-        if ($('.gallery')) {
-          this.gallery.show(0);
-        } else {
-          app.message('I have no pictures to show :(');
-        }
+    initGallery: function () {
+      var images = $('#species_gallery a');
+
+      if (images.length > 0) {
+        this.gallery = images.photoSwipe({
+          jQueryMobile: true,
+          loop: false,
+          enableMouseWheel: false,
+          enableKeyboard: false
+        });
       }
     }
-
   });
 
   var SpeciesProfile = Backbone.View.extend({

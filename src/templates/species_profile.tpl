@@ -1,20 +1,22 @@
 <center>
-    <div class="gallery" id="species_gallery">
+    <img id='profile_pic' src="<%- profile_pic %>">
+
+    <div class="gallery" id="species_gallery" style="display:none">
         <a href="<%- profile_pic %>">
-            <img src="<%- profile_pic %>">
+            <img src="<%- profile_pic %>" alt="&copy; <%- profile_pic_author %>">
         </a>
-        <% //_.each( gallery, function ( pic ) { %>
-        <a href="<% //pic.url %>"><img src="<% //pic.url %>" alt="&copy; <% // pic.author %>"/></a>
-        <% //}); %>
+        <% _.each( _.zip(gallery, gallery_authors), function ( pic ) { %>
+        <a href="<%- pic[0] %>"><img src="<%- pic[0] %>" alt="&copy; <%- pic[1] %>"/></a>
+        <% }); %>
     </div>
 
-    <% if (map == 2) { %>
+    <% if (map) { %>
         <button id="species-map-button">Show Distribution</button>
 
         <svg id="species-map" preserveAspectRatio="none" style="display:none" xmlns="http://www.w3.org/2000/svg"
              xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
-            <use id="species-map-data" xlink:href="<%-map%>#data"/>
-            <use id="species-map-boundary" xlink:href="<%-national_boundary%>#boundary"/>
+            <use id="species-map-data" xlink:href="<%- map %>#data"/>
+            <use id="species-map-boundary" xlink:href="images/national_boundary.svg#boundary"/>
         </svg>
     <% } %>
 
