@@ -2,6 +2,7 @@
   "name": "rare_arable_flowers",
   "version": "0.0.0",
   "dependencies": {
+    "requirejs": "latest",
     "backbone": "latest",
     "jquery": "latest",
     "backbone.localStorage": "jeromegn/Backbone.localStorage",
@@ -15,6 +16,9 @@
     "d3": "3.5.3"
   },
   "exportsOverride": {
+    "requirejs": {
+      "js": "require.js"
+    },
     "backbone": {
       "js": "backbone.js"
     },

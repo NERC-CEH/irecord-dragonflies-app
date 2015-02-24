@@ -27,6 +27,11 @@ module.exports = function (grunt) {
     copy: {
       main: {
         files: [
+          {
+            src: 'src/scripts/*.js',
+            dest: 'dist/scripts/',
+            expand: true, flatten: true
+          },
           // includes files within path
           {
             src:  "src/*.html", dest: 'dist/',
@@ -44,7 +49,7 @@ module.exports = function (grunt) {
             expand: true, flatten: true
           },
           {
-            src:  "src/scripts/libs/**/js/*", dest: 'dist/scripts/lib/',
+            src:  "src/scripts/libs/**/js/*", dest: 'dist/scripts/libs/',
             expand: true, flatten: true
           },
           {
@@ -94,21 +99,30 @@ module.exports = function (grunt) {
         // define a string to put between each file in the concatenated output
         separator: '\n\n'
       },
-      app: {
-        options: {
-          banner: banner
-        },
-        // the files to concatenate
-        src: [
-          'src/scripts/conf.js',
-          'src/scripts/views/*.js',
-          'src/scripts/models/*.js',
-          'src/scripts/routers/*.js',
-          'src/scripts/helpers.js',
-          'src/scripts/app.js'
-        ],
-        // the location of the resulting JS file
-        dest: DEST + APP_NAME
+      //app: {
+      //  options: {
+      //    banner: banner
+      //  },
+      //  // the files to concatenate
+      //  src: [
+      //    'src/scripts/conf.js',
+      //    'src/scripts/views/*.js',
+      //    'src/scripts/models/*.js',
+      //    'src/scripts/routers/*.js',
+      //    'src/scripts/helpers.js',
+      //    'src/scripts/app.js'
+      //  ],
+      //  // the location of the resulting JS file
+      //  dest: DEST + APP_NAME
+      //},
+      views: {
+        src: 'scr/scripts/views/*.js', dest: DEST + 'views.js'
+      },
+      models: {
+        src: 'scr/scripts/models/*.js', dest: DEST + 'models.js'
+      },
+      routers: {
+        src: 'scr/scripts/routers/*.js', dest: DEST + 'routers.js'
       },
       data: {
         // the files to concatenate
