@@ -10,7 +10,7 @@ app.models = app.models || {};
     defaults: {
       name: '',
       email: '',
-      password: '',
+      secret: '',
       location: null,
       location_acc: -1,
       sort: 'common_name',
@@ -27,8 +27,21 @@ app.models = app.models || {};
 
     signOut: function () {
       this.set('email', '');
-      this.set('password', '');
+      this.set('secret', '');
       this.save();
+    },
+
+    /**
+     * Sets the app login state of the user account.
+     *
+     * Saves the user account details into storage for permanent availability.
+     * @param user User object or empty object
+     */
+    signIn: function (user) {
+      this.set('email', user.email);
+      this.set('secret', user.secret);
+      this.set('name', user.name);
+      this.save()
     },
 
     saveLocation: function (location) {

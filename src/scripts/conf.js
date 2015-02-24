@@ -9,6 +9,9 @@ app.CONF = {};
 app.CONF.SPECIES_DATA_SRC = "data/species.json";
 app.CONF.PROB_DATA_SRC = "data/abundance.json";
 app.CONF.APPCACHE_SRC = "appcache.html";
+app.CONF.LOGIN_URL = "http://192.171.199.230/iRecord/user/mobile/register";
+app.CONF.LOGIN_TIMEOUT = 20000;
+
 
 //morel configuration
 app.CONF.VERSION = '0'; //grunt replaced. Application (controllers and data) version

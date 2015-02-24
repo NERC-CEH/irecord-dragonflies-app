@@ -19,6 +19,8 @@ app.views = app.views || {};
     initialize: function () {
       _log('views.UserPage: initialize', app.LOG_DEBUG);
 
+      this.listenTo(app.models.user, 'change:email', this.update);
+
       this.render();
       this.appendBackButtonListeners();
     },

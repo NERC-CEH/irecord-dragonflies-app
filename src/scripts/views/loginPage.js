@@ -9,6 +9,10 @@ app.views = app.views || {};
 
     template: app.templates.login,
 
+    events: {
+      'click #login-button': 'login'
+    },
+
     initialize: function () {
       _log('views.LoginPage: initialize', app.LOG_DEBUG);
 
@@ -25,13 +29,6 @@ app.views = app.views || {};
       return this;
     },
 
-    //controller configuration should be set up in an app config file
-    CONF: {
-      URL: "",
-      TIMEOUT: 20000
-    },
-
-
     /**
      * Starts an app sign in to the Drupal site process.
      * The sign in endpoint is specified by LOGIN_URL -
@@ -43,7 +40,7 @@ app.views = app.views || {};
     login: function () {
       //todo: add validation
 
-      _log('login: start.');
+      _log('views.LoginPage: start.', morel.LOG_DEBUG);
       var form = jQuery('#login-form');
       var person = {
         //user logins
@@ -56,12 +53,12 @@ app.views = app.views || {};
       };
 
       $.ajax({
-        url: this.CONF.URL,
+        url: app.CONF.LOGIN_URL,
         type: 'POST',
         data: person,
         callback_data: person,
         dataType: 'text',
-        timeout: this.CONF.TIMEOUT,
+        timeout: app.CONF.LOGIN_TIMEOUT,
         success: this.onLoginSuccess,
         error: this.onLoginError,
         beforeSend: this.onLogin
@@ -73,7 +70,7 @@ app.views = app.views || {};
     },
 
     onLoginSuccess: function (data) {
-      _log('login: success.');
+      _log('views.LoginPage: success.', morel.LOG_DEBUG);
 
       var lines = (data && data.split(/\r\n|\r|\n/g));
       if (lines && lines.length >= 3 && lines[0].length > 0) {
@@ -83,18 +80,16 @@ app.views = app.views || {};
           'email': this.callback_data.email
         };
         $.mobile.loading('hide');
-        app.views.loginPage.setLogin(user);
+        app.models.user.signIn(user);
 
-        $.mobile.changePage('#user');
-        //history does not work in iOS 7.*
-        //history.back();
+        Backbone.history.navigate('user', {trigger:true});
       } else {
-        _log('login', morel.LOG_WARNING);
+        _log('views.LoginPage: problems with received secret.', morel.LOG_WARNING);
       }
     },
 
     onLoginError: function (xhr, ajaxOptions, thrownError) {
-      _log("login: ERROR " + xhr.status + " " + thrownError + ".");
+      _log("views.LoginPage: ERROR " + xhr.status + " " + thrownError + ".", morel.LOG_ERROR);
       _log(xhr.responseText);
       $.mobile.loading('show', {
         text: "Wrong email or password." +
@@ -113,22 +108,6 @@ app.views = app.views || {};
      */
     logout: function () {
       morel.auth.removeUser();
-    },
-
-    /**
-     * Sets the app login state of the user account.
-     *
-     * Saves the user account details into storage for permanent availability.
-     * @param user User object or empty object
-     */
-    setLogin: function (user) {
-      if (!$.isEmptyObject(user)) {
-        _log('login: logged in.');
-        morel.auth.setUser(user);
-      } else {
-        _log('login: logged out.');
-        morel.auth.removeUser();
-      }
     },
 
     /**
