@@ -24,7 +24,7 @@ app.views = app.views || {};
           filter: function (list, onSuccess) {
             var sref = app.models.user.getLocationSref();
             if (sref == null) {
-              app.models.user.toggleFilter('probability');
+              app.models.user.toggleListFilter('probability');
 
               Backbone.history.navigate('location', {trigger:true});
               return;
