@@ -192,7 +192,7 @@ app.collections.species = new app.collections.Species([
     "description": "The Southern Damselfly, Coenagrion mercuriale, is one of five members of the genus Coenagrion currently to be found in the British Isles (two others have gone extinct in the last 40 years) and one of eleven members of the family Coenagrionidae.    C. mercuriale mercury markThe Southern Damselfly, Coenagrion mercuriale, is one of five members of the genus Coenagrion currently to be found in the British Isles (two others have gone extinct in the last 40 years) and one of eleven members of the family Coenagrionidae. Together with Common Blue Damselfly (Enallagma cyathigerum) and White-legged Damselfly (Platycnemis pennipes), the Coenagrion species constitute the blue damselflies, which are all blue and black in colour. Male Southern Damselflies can only be identified from examination of the anal appendages, though the mercury mark on the second abdominal segment is a useful guide. Female Coenagrion species are very similar making them difficult to identify. Adults are on the wing from mid May to August. The flight is weak and low; they stay close to the breeding site and do not appear to disperse easily to colonise new areas. Low shrubs and Juncus spp. are used for perching, roosting and feeding forays.    Eggs are laid in submerged tissues of aquatic and emergent vegetation and the plant dwelling larvae usually take two years to mature. The larvae are distinctive in that they have very small, un-patterned caudal lamellae.", 
     "habitat": "In the UK the Southern Damselfly is primarily a species of base-rich runnels and streams often within acid heathland areas. However, it also occurs on water meadows in the flood plains of two chalk rivers, a habitat said to be more typical of many continental sites. At breeding sites the water is typically shallow and slow-flowing over a gravel or marl bed with patches of organic detritus. It may be that a more or less constant, relatively high, water temperature in winter in the spring-fed sites is particularly important in determining site suitability.", 
     "map": "images/Coenagrion_mercuriale_new_final_.svg", 
-    "id": "11", 
+    "id": "10", 
     "taxon": "Coenagrion mercuriale", 
     "warehouse_id": "112938", 
     "gallery_authors": [
@@ -213,7 +213,7 @@ app.collections.species = new app.collections.Species([
     "description": "The male has a characteristic flat-bottomed \"U\" shaped mark on S2. S8 is blue and S9 has black markings towards the rear. The female is green or pale blue with extensive black markings.", 
     "habitat": "Small ponds and streams and sometimes at the edges of larger water bodies..", 
     "map": "images/Coenagrion_puella_new_final_.svg", 
-    "id": "12", 
+    "id": "11", 
     "taxon": "Coenagrion puella", 
     "warehouse_id": "112940", 
     "gallery_authors": [
@@ -234,7 +234,7 @@ app.collections.species = new app.collections.Species([
     "description": "In the male, the ante-humeral stripes are usually broken, like two exclamation marks. S2 has a \"wine-goblet\" shaped marked, usually joined to the inter-segmental line by its stalk, though this character is quite variable. S8 is blue but S9 is mainly black. The female is blue with more or less extensive black markings.", 
     "habitat": "Well-vegetated ditches, canals and ponds. Rarely in flowing water.", 
     "map": "images/Coenagrion_pulchellum_new_final_.svg", 
-    "id": "13", 
+    "id": "12", 
     "taxon": "Coenagrion pulchellum", 
     "warehouse_id": "112942", 
     "gallery_authors": [
@@ -255,7 +255,7 @@ app.collections.species = new app.collections.Species([
     "description": "Both sexes appear yellowish when viewed from the underside. The pale brown pterostigma is longer than in other Coenagrion species.  In the male, S2 has a \"wine-goblet\" shaped mark, occasionally reduced to a bar or crescent. S8 is blue but S9 has black markings towards the rear. S6 and S7 are entirely black.  The female is blue with black \"rocket-shaped\" markings on the abdomen.", 
     "habitat": "Open but well-vegetated waters. It can tolerate some salinity.", 
     "map": "images/Coenagrion_scitulum_new_final_.svg", 
-    "id": "14", 
+    "id": "13", 
     "taxon": "Coenagrion scitulum", 
     "warehouse_id": "112944", 
     "gallery_authors": [
@@ -276,7 +276,7 @@ app.collections.species = new app.collections.Species([
     "description": "In many ways this could be considered to be the most typical British damselfly. It shares its blue and black colouration with several other species. It can be distinguished from the others by its broad ante-humeral stripes. In the male, S2 has a characteristic mark of a spot linked to the inter segment suture by a short line. S8 and S9 are entirely blue.  The female occurs in two colour forms, one blue, as in the male, the other dull green. The mark on S2 is thistle shaped and there is a \"Christmas tree\" shaped stepped triangle on S8.  They often perch gregariously on emergent plant stems, all facing the same way.", 
     "habitat": "It occurs in most waters and on large lakes is usually the most abundant species.", 
     "map": "images/Enallagma_cyathigerum_new_final_.svg", 
-    "id": "15", 
+    "id": "14", 
     "taxon": "Enallagma cyathigerum", 
     "warehouse_id": "112952", 
     "gallery_authors": [
@@ -297,7 +297,7 @@ app.collections.species = new app.collections.Species([
     "description": "A robust looking damselfly with a dark greyish abdomen and a blue \"tail\" in the male. The eyes of the male are deep red and the thorax in both sexes is bronze black on top. The female has short, yellowish ante-humeral lines.  Male have a blue thorax and tip to the abdomen. The female has a green thorax.", 
     "habitat": "Found in lakes, gravel pits, canals and slow-flowing rivers. The males often sit on water lily leaves defending their leaf from allcomers.", 
     "map": "images/Erythromma_najas_new_final_.svg", 
-    "id": "16", 
+    "id": "15", 
     "taxon": "Erythromma najas", 
     "warehouse_id": "112954", 
     "gallery_authors": [
@@ -318,7 +318,7 @@ app.collections.species = new app.collections.Species([
     "description": "A small damselfly with a dark abdomen and a blue tip in the male. The eyes of the male are brownish red and the thorax in both sexes is bronze black on top. The female has complete, thin green or blue ante-humeral lines.", 
     "habitat": "Found on ponds, lakes and ditches and sometimes on brackish water. It seems to be associated with floating vegetation such as Hornwort and Water Milfoil.", 
     "map": "images/Erythromma_viridulum_new_final_.svg", 
-    "id": "17", 
+    "id": "16", 
     "taxon": "Erythromma viridulum", 
     "warehouse_id": "112956", 
     "gallery_authors": [
@@ -339,7 +339,7 @@ app.collections.species = new app.collections.Species([
     "description": "Mature males always have a blue spot at the \"tail\" (S8), blue ante-humeral stripes on the thorax and blue eyes. Females vary with at least 5 different colour forms. The thoracic markings and the tail spot are violet in the immature form violacea, but salmon pink thorax and blue spot in the form \"rufescens\". When mature the female may be blue (like the male) in the form \"typica\", olive green thorax and brown spot in the form \"infuscans\" or pale brown thorax and brown spot in the form \"infuscans-obseleta\". Male and female both have bi-coloured pterostigma on the front wings.", 
     "habitat": "Found in a very wide range of lowland habitats including brackish or polluted water where it may be the only species present.", 
     "map": "images/Ischnura_elegans_new_final_.svg", 
-    "id": "18", 
+    "id": "17", 
     "taxon": "Ischnura elegans", 
     "warehouse_id": "112965", 
     "gallery_authors": [
@@ -360,7 +360,7 @@ app.collections.species = new app.collections.Species([
     "description": "The Scarce Blue-tailed is one of a number of small British Damselflies. Typically Males have a black abdomen with green or blue sides and a small patch of blue near the tip covering segments eight and nine. Females are either greeny-brown when mature or bright orange in the immature aurantiaca phase. Identification can be difficult as there are often age related colour changes in this species that are not always described in the literature.", 
     "habitat": "I. pumilio is usually found in shallow wetland sites such as bog pools or slow flowing water, fed by seepages and flushes. It appears to prefer early successional habitats with minimal vegetation, although some emergent plants are required at breeding sites. A common feature of most sites is a degree of habitat disturbance, which maintains bare substrate, and the openness of the vegetation", 
     "map": "images/Ischnura_pumilio_new_final_.svg", 
-    "id": "19", 
+    "id": "18", 
     "taxon": "Ischnura pumilio", 
     "warehouse_id": "112966", 
     "gallery_authors": [
@@ -381,7 +381,7 @@ app.collections.species = new app.collections.Species([
     "description": "A large, active, deep red damselfly with black legs and a bronze-black top to the thorax which has broad red or yellow stripes. The female exists in several colour forms varying in the amount of red and black on the abdomen from nearly all black in f. melanotum to mainly red in f. fulvipes. The pterostigma is black. This is one of the earliest species to appear each spring.", 
     "habitat": "Can be found in almost any freshwater habitat but rarely on fast-flowing rivers or streams.", 
     "map": "images/Pyrrhosoma_nymphula_new_final_.svg", 
-    "id": "20", 
+    "id": "19", 
     "taxon": "Pyrrhosoma nymphula", 
     "warehouse_id": "112994", 
     "gallery_authors": [
@@ -402,7 +402,7 @@ app.collections.species = new app.collections.Species([
     "description": "This small Hawker is superficially similar to the Migrant Hawker but the mark on S2 is blue in the male and the sides of the thorax are blue-green with fine dark lines. The blue markings on the abdomen are a little more prominent than in Migrant Hawker.", 
     "habitat": "Can often be found hawking along damp reedy ditches. Breeds in standing water in its normal, Mediterranean habitat.", 
     "map": "images/Aeshna_affinis_new_final_.svg", 
-    "id": "21", 
+    "id": "20", 
     "taxon": "Aeshna affinis", 
     "warehouse_id": "112907", 
     "gallery_authors": [
@@ -423,7 +423,7 @@ app.collections.species = new app.collections.Species([
     "description": "The eyes of this medium sized Hawker touch for only a short distance. The costa is brown in both sexes. The male has extensive blue markings on the abdomen but only narrow stripes on the sides of the thorax. Ante-humerals are short and eyes are blue. The female occurs in two colour forms, brown or blue. Ante-humeral stripes are absent and the eyes are brown. The abdominal markings are smaller than in the male, giving the female a darker appearence.", 
     "habitat": "Only in Scotland, found flying near boggy pools in moorland. Both sexes settle readily on tree trunks and rocks in cool conditions.", 
     "map": "images/Aeshna_caerulea_new_final_.svg", 
-    "id": "22", 
+    "id": "21", 
     "taxon": "Aeshna caerulea", 
     "warehouse_id": "112908", 
     "gallery_authors": [
@@ -444,7 +444,7 @@ app.collections.species = new app.collections.Species([
     "description": "A large, inquisitive Hawker usually seen individually. It may fly quite close to investigate observers. The spots on segments S8-10 are joined, unlike other Hawkers. Have large, round, apple green antehumeral stripes on the thorax behind the eye (both sexes), broad and strongly coloured. The costa is dark and there is an elongated triangular mark on S2. The male is brightly marked on a dark background, usually apple green except for S8-10, which are pale blue. Occasionally, all pale blue marked individuals are seen.  The female is brown with bright green markings.", 
     "habitat": "Breeds in water line vegetation in well-vegetated, small ponds, often in garden ponds. Hunts well away from water and may be found hawking woodland rides well into the evening.", 
     "map": "images/Aeshna_cyanea_new_final_.svg", 
-    "id": "23", 
+    "id": "22", 
     "taxon": "Aeshna cyanea", 
     "warehouse_id": "112910", 
     "gallery_authors": [
@@ -465,7 +465,7 @@ app.collections.species = new app.collections.Species([
     "description": "A large Hawker with obvious golden brown wings. Both sexes have strong yellow stripes on the sides of the thorax and no ante-humeral stripes. The male is chocolate brown with small blue and yellow markings. It has a noticeable waisted appearence.  The female has small yellow markings and lacks the males waist.", 
     "habitat": "Breeds in standing or slow-flowing water laying its eggs in floating or emergent vegetation or timber. Hunts well away from water and may be found hawking woodland rides well into the evening.", 
     "map": "images/Aeshna_grandis_new_final_.svg", 
-    "id": "24", 
+    "id": "23", 
     "taxon": "Aeshna grandis", 
     "warehouse_id": "112912", 
     "gallery_authors": [
@@ -486,7 +486,7 @@ app.collections.species = new app.collections.Species([
     "description": "This Hawker has paired spots on each abdominal segment, two broad stripes on the sides of the thorax and the costa is yellow in both sexes. The male has quite small blue spots on each segment of the abdomen and appears quite dark. The yellow ante-humerals are narrow and eyes are blue.  The female is brown with similar markings to the male but the spots are yellow, or occasionally green or blue (Scotland). The ante-humerals are insignificant or absent and eyes are brownish.", 
     "habitat": "In moorland habitats with acidic pools. Sometimes seen hunting woodland rides at dusk.", 
     "map": "images/Aeshna_juncea_new_final_.svg", 
-    "id": "25", 
+    "id": "24", 
     "taxon": "Aeshna juncea", 
     "warehouse_id": "112917", 
     "gallery_authors": [
@@ -507,7 +507,7 @@ app.collections.species = new app.collections.Species([
     "description": "A small Hawker, not aggressive towards other individuals and occasionally seen in large feeding swarms. It flies late into the autumn and is likely to be the only Hawker found in November. The costa is brown and there is a \"golf-tee\" shaped, yellow mark on S2. The male looks quite dark with blue, paired spots along the abdomen. The pale yellow ante-humerals are indistinct and short and eyes are blue.  The female is brown with similar markings to the male but the spots are smaller and often yellow, occasionally blue. The ante-humerals are insignificant or absent and eyes are brownish.", 
     "habitat": "Breeds in standing water but may be found well away from water along hedgerows or woodland edges. Frequently resting low in vegetation.", 
     "map": "images/Aeshna_mixta_new_final_.svg", 
-    "id": "26", 
+    "id": "25", 
     "taxon": "Aeshna mixta", 
     "warehouse_id": "112918", 
     "gallery_authors": [
@@ -528,7 +528,7 @@ app.collections.species = new app.collections.Species([
     "description": "The Norfolk Hawker is one of 2 brown hawker dragonflies found in Britain. It has clear untinted wings, green eyes and a yellow triangular mark on the second abdominal segment.", 
     "habitat": "The optimum conditions for breeding appear to be unspoilt grazing marsh dyke systems with clean, non-saline water, rushy margins, preferably with an abundance of water soldier as well as other aquatic plants.", 
     "map": "images/Aeshna_isosceles_new_final_.svg", 
-    "id": "27", 
+    "id": "26", 
     "taxon": "Aeshna isosceles", 
     "warehouse_id": "112914", 
     "gallery_authors": [
@@ -547,7 +547,7 @@ app.collections.species = new app.collections.Species([
     "description": "Britain's bulkiest Dragonfly. Its bright colours and active habit make it very obvious when hunting over medium to large water bodies. It rarely settles, even eating its prey in flight. Both sexes have a bright, apple-green thorax and green or blue eyes. The costa is bright yellow. They often fly with the rear of the abdomen bent slightly downwards.  The male has a sky blue abdomen with a central dark line.  The female has a green abdomen, similarly marked, which may become blue in warm weather.", 
     "habitat": "Mostly associated with large, well vegetated ponds and lakes, but may be found over canals and slow moving rivers. The female lays her eggs, alone, in floating pondweed.", 
     "map": "images/Anax_imperator_new_final_.svg", 
-    "id": "28", 
+    "id": "27", 
     "taxon": "Anax imperator", 
     "warehouse_id": "112920", 
     "gallery_authors": [
@@ -568,7 +568,7 @@ app.collections.species = new app.collections.Species([
     "description": "This relative of the much more common Emperor Dragonfly is smaller and duller in colour but the bright blue \"saddle\" at S2 is very noticeable. The rest of the abdomen is brownish, as is the thorax. The eyes are green.", 
     "habitat": "Breeds in ponds and small lakes and can tolerate brackish water.", 
     "map": "images/Anax_parthenope_new_final_.svg", 
-    "id": "29", 
+    "id": "28", 
     "taxon": "Anax parthenope", 
     "warehouse_id": "112924", 
     "gallery_authors": [
@@ -589,7 +589,7 @@ app.collections.species = new app.collections.Species([
     "description": "The UK's smallest Hawker, emerging before other Hawkers in May. It has a distinctly hairy thorax (see photos), oval spots on each abdominal segment and a long, thin pterostigma. The male is dark in appearence and the spots on the abdomen are blue. It has green ante-humeral stripes. The female has yellow markings and much shorter ante-humeral stripes.", 
     "habitat": "Mainly found near unpolluted, well-vegetated water bodies.", 
     "map": "images/Brachytron_pratense_new_final_.svg", 
-    "id": "30", 
+    "id": "29", 
     "taxon": "Brachytron pratense", 
     "warehouse_id": "112926", 
     "gallery_authors": [
@@ -610,7 +610,7 @@ app.collections.species = new app.collections.Species([
     "description": "The Common Club-tail (Gomphus vulgatissimus) is a medium sized species with a distinctively club-shaped abdomen as suggested by its common name. Females and teneral males are mainly black with extensive yellow markings on the thorax and abdomen. As the male matures most of the yellow markings turn green although the spots on the sides of abdominal segments 7-9 remain bright yellow. Unlike most dragonflies the eyes are separate and do not meet at the top of the head, which aids identification, and in mature adults the eyes are dull green.", 
     "habitat": "In Britain the Common Club-tail is a riverine species typically associated with moderate to slow flowing water. It breeds in unpolluted, meandering rivers, which have a depositional nature.", 
     "map": "images/Gomphus_vulgatissimus_new_final_.svg", 
-    "id": "31", 
+    "id": "30", 
     "taxon": "Gomphus vulgatissimus", 
     "warehouse_id": "112960", 
     "gallery_authors": [
@@ -631,7 +631,7 @@ app.collections.species = new app.collections.Species([
     "description": "A striking, black insect with yellow rings along the length of the abdomen. The female is the UKs longest dragonfly because of her long ovipositor. The bright green eyes meet only at a point on the top of the head.  The male has a waisted appearance around S2-3 and a slight club shape to the abdomen.  The female is more parallel sided and has a very long ovipositor.", 
     "habitat": "Breeds in acidic rivers and streams of all sizes. May be found away from its breeding habitat over heathland.", 
     "map": "images/Cordulegaster_boltonii_new_final_.svg", 
-    "id": "32", 
+    "id": "31", 
     "taxon": "Cordulegaster boltonii", 
     "warehouse_id": "112946", 
     "gallery_authors": [
@@ -652,7 +652,7 @@ app.collections.species = new app.collections.Species([
     "description": "The Downy Emerald is one of three Emerald dragonflies found in Britain. It is a metallic green dragonfly with a copper sheen and noticeable bright apple green eyes. The male has a slightly club shaped abdomen and as the name suggests a downy thorax.", 
     "habitat": "A pond within or close to deciduous woodland with scattered bankside trees, sparse stands of emergent vegetation and a carpet of leaf litter on the pond floor will offer the best conditions for breeding.", 
     "map": "images/Cordulia_aenea_new_final_.svg", 
-    "id": "33", 
+    "id": "32", 
     "taxon": "Cordulia aenea", 
     "warehouse_id": "112948", 
     "gallery_authors": [
@@ -673,7 +673,7 @@ app.collections.species = new app.collections.Species([
     "description": "The Northern Emerald has bluish-green (sometimes yellowish) eyes. The wings are faintly suffused with saffron. The thorax are metallic bronze green but the abdomen is quite dark.   The male has an obviously waisted abdomen with calliper-like appendages.   Females have a short vulvar scale and are more parallel sided.", 
     "habitat": "Breeds in moorland bogs and pools, often with much Sphagnum. Adults patrol wet meadows and open areas in pine woods or on moors with scattered trees.", 
     "map": "images/Somatochlora_arctica_new_final_.svg", 
-    "id": "34", 
+    "id": "33", 
     "taxon": "Somatochlora arctica", 
     "warehouse_id": "112996", 
     "gallery_authors": [
@@ -694,7 +694,7 @@ app.collections.species = new app.collections.Species([
     "description": "The Brilliant Emerald has apple green eyes and the abdomen and thorax are dark metallic emerald green with a bright bronze sheen. The wings are suffused by saffron, particularly in the female. In the male the abdomen is slightly club-shaped. In females the vulvar scale is the most distinctive feature as it is long and pointing downwards from the base of the abdomen. Both sexes have long anal appendages which may be visible in flight.", 
     "habitat": "Habitats occupied by S. metallica in Scotland and in southeast England are only broadly similar: sheltered, standing or slow-flowing waters usually, but not always, edged with good tree cover.  Larvae need a place to hide underwater and ideally need the dark - i.e. shade provided by trees, overhanging banks, etc.  Water bodies ideally but not exclusively need to have a soft peaty or muddy substrate, often overlaid with leaf litter.", 
     "map": "images/Somatochlora_metallica_new_final_.svg", 
-    "id": "35", 
+    "id": "34", 
     "taxon": "Somatochlora metallica", 
     "warehouse_id": "112998", 
     "gallery_authors": [
@@ -715,7 +715,7 @@ app.collections.species = new app.collections.Species([
     "description": "The White-faced Darter is a small dark dragonfly, with a pale creamy white frons. The wings have small black patches at the base and dark brown pterostigma.  The male has a narrow black abdomen, marked with red and orange on the dorsal and lateral segments. The thorax is black with faint red antehumeral stripes and lateral markings.  The female is patterned like the male but yellow replaces the red markings.", 
     "habitat": "The White Faced Darter is a species of lowland peatbogs. It requires relatively deep, oligotrophic, acidic bog pools with considerable rafts of Sphagnum at the edges in which to breed. Larvae also occur among waterlogged Sphagnum in depressions devoid of standing water. The larvae live within the matrix of submerged and floating sphagnum and are confined to waters without fish. Away from its aquatic habitat it also requires scrub or woodland, which provides important roosting and feeding sites.", 
     "map": "images/Leucorrhinia_dubia_new_final_.svg", 
-    "id": "36", 
+    "id": "35", 
     "taxon": "Leucorrhinia dubia", 
     "warehouse_id": "112976", 
     "gallery_authors": [
@@ -734,7 +734,7 @@ app.collections.species = new app.collections.Species([
     "description": "The very broad, flattened abdomen is characteristic making the insect appear \"fat\". Both sexes have pale blue, thin ante-humeral stripes and brown eyes. The wing bases are very dark brown.  The males quickly develop a blue pruinescence on the abdomen with yellow spots along the segment sides.  Females are a golden brown on the abdomen, again with yellow spots at the margins.", 
     "habitat": "This dragonfly is usually found at ponds and may be the first to colonise new ponds. It regularly returns to the same low perch after swift flights along the pond margins.", 
     "map": "images/Libellula_depressa_new_final_.svg", 
-    "id": "37", 
+    "id": "36", 
     "taxon": "Libellula depressa", 
     "warehouse_id": "112978", 
     "gallery_authors": [
@@ -755,7 +755,7 @@ app.collections.species = new app.collections.Species([
     "description": "The mature male Scarce Chaser possesses pale blue pruinescence on the abdomen. Its eyes are blue. However, prior to maturation the male and female look very similar and are highly distinctive with vivid orange colouration, black triangular shaped markings on the upper surface of each abdominal segment and dark bases to the wings.  Synchronised emergence usually begins towards the end of May, and adults can be seen on the wing until early August.", 
     "habitat": "The Scarce Chaser is a species of Lowland river floodplains and usually inhabits slow-flowing, meandering rivers and large dykes. Occasionally mature gravel pits and nearby ponds also support populations. Inhabited sites characteristically have good water quality, which supports submerged and floating plants as well as prolific stands of emergent vegetation. Ovipositing females require areas of slow flowing open water, and the adults require some shrub or tree shelter.", 
     "map": "images/Libellula_fulva_new_final_.svg", 
-    "id": "38", 
+    "id": "37", 
     "taxon": "Libellula fulva", 
     "warehouse_id": "112980", 
     "gallery_authors": [
@@ -776,7 +776,7 @@ app.collections.species = new app.collections.Species([
     "description": "This rather uniformly brown dragonfly is quite active in late spring and summer. The sexes are alike with a brown abdomen becoming darker towards the rear, a brown thorax and brown eyes. The is a row of yellow spots along each side of the abdomen. The most noticeable feature is the colouring of the wings. The nodus (half-way along the leading edge of each wing) has a very dark spot, which gives the insect its name. The wing bases are also very dark and a colour form praenubila has a general darkening of the wing tips.", 
     "habitat": "Found at the margins of shallow ponds and lakes which have good emergent vegetation and some open water.", 
     "map": "images/Libellula_quadrimaculata_new_final_.svg", 
-    "id": "39", 
+    "id": "38", 
     "taxon": "Libellula quadrimaculata", 
     "warehouse_id": "112982", 
     "gallery_authors": [
@@ -797,7 +797,7 @@ app.collections.species = new app.collections.Species([
     "description": "Females and immatures are pale, yellowish brown with tho bold lines running along the length of the abdomen. The wings have a yellow costa and a very dark brown or black pterostigma.  The males develop a blue pruinescence on the abdomen darkening to the rear with with S8-10 becoming black. Its eyes are very dark green. They fly swift and low, skimming the water surface.  Females retain their colur and markings though they become quite greyish brown with age.  Dr. Chris Thomas photographed and timed the hatching sequence of a female Black-tailed Skimmer and has placed it on the web as part of a longer photo tour of the BBC Springwatch East Day at Marston Vale, June 2006. The first photo of the sequence can be found here.", 
     "habitat": "This dragonfly is found at any open water with bare patches along the shore where the patrolling males frequently rest in the sun.", 
     "map": "images/Orthetrum_cancellatum_new_final_.svg", 
-    "id": "40", 
+    "id": "39", 
     "taxon": "Orthetrum cancellatum", 
     "warehouse_id": "112984", 
     "gallery_authors": [
@@ -816,7 +816,7 @@ app.collections.species = new app.collections.Species([
     "description": "The abdomen appears quite slim and has a pronounced dorsal keel. The wings have a straw yellow costa and yellow or brown pterostigma. At rest, the wings are often held well forward. The thorax has pale yellow ante-humeral stripes which fade with age in the male.  The males develop a blue pruinescence over the whole length of the abdomen. Its eyes are blue-grey.  Females have a pale, yellowish-brown abdomen with a medial black line.", 
     "habitat": "Pools and streams in wet heathland sites are favoured. May be found resting low in heather at such sites.", 
     "map": "images/Orthetrum_coerulescens_new_final_.svg", 
-    "id": "41", 
+    "id": "40", 
     "taxon": "Orthetrum coerulescens", 
     "warehouse_id": "112986", 
     "gallery_authors": [
@@ -837,7 +837,7 @@ app.collections.species = new app.collections.Species([
     "description": "This small heathland and moorland species is the only UK black dragonfly (males). The legs are entirely black. There is a constriction of the abdomen around S4, giving a club-shaped appearence. The pterostigma is black.  The males become extensively black with maturity with a black frons and thorax. Some yellow markings remain along the sides of the abdomen and thorax.  Females and immature males have a yellow abdomen and brown thorax marked with a black triangle on top. The side of the thorax and the lower part of the abdomen is strongly marked in black.", 
     "habitat": "A species of peat moss and moorland, breeding in ponds, bog pools and drainage ditches.", 
     "map": "images/Sympetrum_danae_new_final_.svg", 
-    "id": "42", 
+    "id": "41", 
     "taxon": "Sympetrum danae", 
     "warehouse_id": "113002", 
     "gallery_authors": [
@@ -858,7 +858,7 @@ app.collections.species = new app.collections.Species([
     "description": "The bright red males and clear yellow-brown females are attractive. The eyes are brown above and blue below and the wing bases are yellow. The pterostigma is yellow to orange strongly outlined in black.  The males become a deep red with maturity with red veins on the wings, particularly on the leading edges. The frons and the thorax are red-brown.  Females have a ochre yellow abdomen with two black lines along each side. The wing veins are yellow at the costa, leading edge and base.  Immature males are coloured as the females but have only a single line along each side of the abdomen.", 
     "habitat": "Breeds in large shallow water bodies such as rice paddies in Sothern Europe.", 
     "map": "images/Sympetrum_fonscolombii_new_final_.svg", 
-    "id": "43", 
+    "id": "42", 
     "taxon": "Sympetrum fonscolombii", 
     "warehouse_id": "113007", 
     "gallery_authors": [
@@ -879,7 +879,7 @@ app.collections.species = new app.collections.Species([
     "description": "This species is smaller than the Common Darter. The legs are entirely black. An intense orange colouration can be seen only at the very base of the wings. The pterostigma is brown. There are usually two prominent black marks on S8 and S9.  The males become blood-red with maturity with a red frons and red-brown thorax. There is a very noticeable constriction of the abdomen around S4, giving a club-shaped appearence.  Females have a ochre yellow abdomen and thorax. There is no red panel on the side of the thorax. Older females may develop some red along the midline and segment boundaries of the abdomen.", 
     "habitat": "Inhabits weedy ponds and ditches, frequently in woodland.", 
     "map": "images/Sympetrum_sanguineum_new_final_.svg", 
-    "id": "44", 
+    "id": "43", 
     "taxon": "Sympetrum sanguineum", 
     "warehouse_id": "113010", 
     "gallery_authors": [
@@ -900,7 +900,7 @@ app.collections.species = new app.collections.Species([
     "description": "A summer and autumn species, this dragonfly can be found well into November and may be one of the last on the wing in the UK. The thorax in both sexes is brown above with poorly defined antehumeral stripes and yellow panels on the sides. The eyes are brown above and yellow below. The legs are black with a diagnostic yellow stripe along their length.  The males become a bright orange-red with maturity with small black spots on S8 and S9.  Females have a pale, yellowish-brown abdomen often developing red markings along the segment boundaries and medial line as they age.", 
     "habitat": "Ponds and other still, stagnant or even brackish waters are used and they are frequently found at small garden ponds. They are frequently found away from water, resting on the tops of plants in woodland rides.", 
     "map": "images/Sympetrum_striolatum_new_final_.svg", 
-    "id": "45", 
+    "id": "44", 
     "taxon": "Sympetrum striolatum", 
     "warehouse_id": "113012", 
     "gallery_authors": [
