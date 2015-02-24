@@ -12,6 +12,9 @@
             <a href='#about' data-role="button" data-icon="info" data-prefetch>About App</a>
         </li>
         <li>
+            <a href='#species-info' data-role="button" data-icon="bars" data-prefetch>Species</a>
+        </li>
+        <li>
             <a href='#privacy' data-role="button" data-icon="lock" data-prefetch>Privacy Policy</a>
         </li>
         <li>

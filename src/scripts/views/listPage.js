@@ -195,8 +195,9 @@ app.views = app.views || {};
         _.each(filterGroup, function (filter, filterID) {
           //only render those that have label
           if (filter.label) {
-            for (var j = 0; j < currentFilters.length; j++) {
-              if (currentFilters[j].id === filter.id) {
+            var currentFiltersIDs = Object.keys(currentFilters);
+            for (var j = 0; j < currentFiltersIDs.length; j++) {
+              if (currentFiltersIDs[j] === filterID) {
                 filter.checked = "checked";
               } else {
                 filter.checked = "";
@@ -217,11 +218,12 @@ app.views = app.views || {};
     //TODO: DUPLICATE FROM ListView
     getCurrentFilters: function (filters) {
       var filtersIDs =  app.models.user.get('filters');
-      var currentFilters = [];
+      var currentFilters = {};
       for (var j = 0; j < filtersIDs.length; j++) {
-        for (var i = 0; i < filters.length; i++) {
-          if (filters[i].id === filtersIDs[j]) {
-            currentFilters.push(filters[i]);
+        var filterGroupIDS = Object.keys(filters);
+        for (var i = 0, length = filterGroupIDS.length; i < length; i++) {
+          if (filters[filterGroupIDS[i]][filtersIDs[j]]) {
+            currentFilters[filtersIDs[j]] = filters[filterGroupIDS[i]][filtersIDs[j]];
           }
         }
       }
