@@ -89,7 +89,7 @@ app.views = app.views || {};
         }}
     },
 
-    DEFAULT_SORT: 'scientific',
+    DEFAULT_SORT: 'taxonomic',
 
     /**
      * A collection of sorting options used to manage lists.
@@ -97,6 +97,20 @@ app.views = app.views || {};
      * label - label to represent the filter in the UI
      */
     sorts: {
+      taxonomic: {
+        label: 'Taxonomic',
+        sort: function (list, onSuccess) {
+          list.sort(function (a, b) {
+            a = parseInt(a.attributes.id);
+            b = parseInt(b.attributes.id);
+            if (a === b) {
+              return 0;
+            }
+            return a > b ? 1 : -1;
+          });
+          onSuccess(list);
+        }
+      },
       common_name: {
         label: 'Common Name',
         sort: function (list, onSuccess) {
