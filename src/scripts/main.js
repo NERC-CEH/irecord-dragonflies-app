@@ -21,11 +21,12 @@
     shim: {
       'backbone': {depts: ['jquery', 'underscore'], "exports": "Backbone"},
       'morel': {depts: ['IndexedDBShim']},
-      'photoswipe': {depts: ['klass']}
+      'photoswipe': {depts: ['jquery', 'klass'], exports : 'Code.PhotoSwipe'}
     }
   });
 
-  require(['jquery'], function() {
+  require(['jquery', 'klass'], function($) {
+
     $( document ).one( "mobileinit", function() {
       //JQM configuration
       jQuery.mobile.ns = "";
@@ -94,7 +95,7 @@
         app.fixIOSbuttons();
         FastClick.attach(document.body);
 
-        $('.loading').removeClass('loading');
+        $('.loading').css('display', 'none');
       });
 
   });

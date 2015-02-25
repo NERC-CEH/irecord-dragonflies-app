@@ -39,8 +39,7 @@
     },
     "jquery-mobile": {
       "js": ["js/jquery.mobile-1.4.5.js", "js/jquery.mobile-1.4.5.min.js"],
-      "css": "css/jquery.mobile-1.4.5.css",
-      "css/images": "css/images/ajax-loader.gif"
+      "css": "css/jquery.mobile-1.4.5.css"
     },
     "latlon": {
       "js": [

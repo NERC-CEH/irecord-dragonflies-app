@@ -60,7 +60,7 @@ module.exports = function (grunt) {
             expand: true, flatten: true
           },
           {
-            src:  "src/scripts/libs/**/css/images/*", dest: 'dist/css/images/',
+            src:  "src/images/ajax-loader.gif", dest: 'dist/css/images/',
             expand: true, flatten: true
           },
           {

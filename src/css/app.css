@@ -462,17 +462,12 @@ ul[data-role="listview"] > li > p {
     padding-right: 40px;
 }
 
-body.loading {
-    background: #EFF2CD url('../images/app_logo.png') 50% 30% no-repeat !important;
-    background-size: 70% !important;
+div.loading {
+    max-width: 500px;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10%;
 }
 
-#loader {
-    display: none;
-}
 
-#loader.loading {
-    display: block;
-    margin-left: 50%;
-    margin-top: 70%;
-}
