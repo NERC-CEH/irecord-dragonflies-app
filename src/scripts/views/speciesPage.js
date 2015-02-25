@@ -36,7 +36,7 @@ define([
       this.model = app.collections.species.find({id: speciesID});
 
       var $heading = $('#species_heading');
-      $heading.text(this.model.attributes.common_name);
+      $heading.text(this.model.attributes.taxon);
 
       //append the profile
       var $profile = this.$el.find('#species-profile-placeholder');
@@ -69,41 +69,6 @@ define([
       $favButton.toggleClass("on");
       var speciesID = this.model.get('id');
       app.models.user.toggleFavouriteSpecies(speciesID);
-    },
-
-    /**
-     * Renders the species profile page.
-     * @param species
-     */
-      //todo: old
-    renderSpecies: function (species) {
-      var placeholder = $('#species-placeholder');
-
-      //check for the favourite
-      var favourites = app.controller.list.getFavourites();
-      var $favButton = $("#species-profile-fav-button");
-      if (favourites[species.id]) {
-        $favButton.addClass("on");
-      } else {
-        $favButton.removeClass("on");
-      }
-
-      placeholder.html(app.templates.species_profile(species));
-      placeholder.trigger('create');
-
-      //add Gallery
-      app.controller.species.gallery.init();
-
-      this.addFlightData();
-
-      var scale = $('#species-map').width() / 345;
-      var margin = $('#species-map').height() * 0.05;
-
-      $('#species-map-boundary')
-        .attr('transform', 'scale(' + scale + ')')
-        .attr('y', -margin);
-      $('#species-map-data').attr('transform', 'scale(' + scale + ')')
-        .attr('y', -margin);
     },
 
     /**
@@ -179,7 +144,7 @@ define([
           var MONTH_SPACE = 8; //display tick every so weeks
 
           var width = $('#species-flight').width();
-          if (width > 300) {
+          if (width > 400) {
             MONTH_SPACE = 4;
           }
 
@@ -216,7 +181,7 @@ define([
         .call(xAxis);
 
       var BAR_WIDTH = xScale.rangeBand();
-      if (WIDTH < 300) {
+      if (WIDTH < 400) {
         BAR_WIDTH = 3; //small bar width for small screens
       }
       graph.selectAll('rect')

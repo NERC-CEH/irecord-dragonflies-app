@@ -13,7 +13,7 @@
     <% if (map) { %>
         <button id="species-map-button">Show Distribution</button>
 
-        <svg id="species-map" preserveAspectRatio="none" style="display:none" xmlns="http://www.w3.org/2000/svg"
+        <svg viewBox="0 0 400 500" id="species-map" preserveAspectRatio="none" style="display:none" xmlns="http://www.w3.org/2000/svg"
              xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
             <use id="species-map-data" xlink:href="<%- map %>#data"/>
             <use id="species-map-boundary" xlink:href="images/national_boundary.svg#boundary"/>
@@ -23,6 +23,7 @@
     <ul data-role="listview" data-inset="true" style="max-width:800px;">
 
         <li>
+            <div class="common-name"><%- common_name %></div>
             <div class="taxon"><%- taxon %></div>
         </li>
         <li id="species-flight"></li>

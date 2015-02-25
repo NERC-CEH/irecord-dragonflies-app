@@ -22,7 +22,8 @@
       'backbone': {depts: ['jquery', 'underscore'], "exports": "Backbone"},
       'morel': {depts: ['IndexedDBShim']},
       'photoswipe': {depts: ['jquery', 'klass'], exports : 'Code.PhotoSwipe'}
-    }
+    },
+    waitSeconds: 20
   });
 
   require(['jquery', 'klass'], function($) {
