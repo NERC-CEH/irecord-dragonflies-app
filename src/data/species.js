@@ -1,7 +1,7 @@
-app = app || {};
-app.collections = app.collections || {};
+app = window.app || {};
+app.data = app.data || [];
 
-app.collections.species = new app.collections.Species([
+app.data.species = [
   {
     "profile_pic": "images/Chalcolestes_viridis_Jorg_Hempel.jpg", 
     "description": "This damselfly is metallic green, with no blue pruinescence on the male. At rest, the Emerald damselflies all spread their wings at an angle to the body, unlike other damselflies. The pterostigma is pale brown with a black border, and the sides of the thorax show a spur-shaped marking. The male upper appendages are distinctively pale cream with dark tips.", 
@@ -916,4 +916,4 @@ app.collections.species = new app.collections.Species([
     ], 
     "profile_pic_author": "David Kitching"
   }
-]);
+];

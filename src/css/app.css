@@ -461,3 +461,18 @@ ul[data-role="listview"] > li > p {
     width: 30%;
     padding-right: 40px;
 }
+
+body.loading {
+    background: #EFF2CD url('../images/app_logo.png') 50% 30% no-repeat !important;
+    background-size: 70% !important;
+}
+
+#loader {
+    display: none;
+}
+
+#loader.loading {
+    display: block;
+    margin-left: 50%;
+    margin-top: 70%;
+}

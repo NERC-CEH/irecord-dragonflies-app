@@ -1,7 +1,25 @@
-(function () {
+define([
+  'views/_page',
+  'views/listPage',
+  'views/speciesPage',
+  'views/userPage',
+  'views/loginPage',
+  'views/registerPage',
+  'views/recordPage',
+  'views/datePage',
+  'views/locationPage',
+  'views/numberPage',
+  'views/stagePage',
+  'views/locationdetailsPage',
+  'views/commentPage'
+], function(Page, ListPage, SpeciesPage, UserPage, LoginPage, RegisterPage,
+            RecordPage, DatePage, LocationPage, NumberPage, StagePage, LocationdetailsPage,
+            CommentPage) {
   'use strict';
 
-  app.Router = Backbone.Router.extend({
+  app.views = {};
+
+  var Router = Backbone.Router.extend({
     initialize: function () {
       _log('app.Router: initialize.', app.LOG_DEBUG);
 
@@ -10,22 +28,22 @@
 
     routes: {
       "": function () {
-        if (!app.views.listPage){
-          app.views.listPage = new app.views.ListPage();
+        if (!app.views.listPage) {
+          app.views.listPage = new ListPage();
         }
         this.changePage(app.views.listPage);
       },
 
       "list": function () {
-        if (!app.views.listPage){
-          app.views.listPage = new app.views.ListPage();
+        if (!app.views.listPage) {
+          app.views.listPage = new ListPage();
         }
         this.changePage(app.views.listPage);
       },
 
       "species/:id": function (id) {
-        if (!app.views.speciesPage){
-          app.views.speciesPage = new app.views.SpeciesPage();
+        if (!app.views.speciesPage) {
+          app.views.speciesPage = new SpeciesPage();
         }
         this.changePage(app.views.speciesPage);
 
@@ -33,8 +51,8 @@
       },
 
       "user": function () {
-        if (!app.views.userPage){
-          app.views.userPage = new app.views.UserPage();
+        if (!app.views.userPage) {
+          app.views.userPage = new UserPage();
         }
         this.changePage(app.views.userPage);
 
@@ -46,22 +64,22 @@
       },
 
       "login": function () {
-        if (!app.views.loginPage){
-          app.views.loginPage = new app.views.LoginPage();
+        if (!app.views.loginPage) {
+          app.views.loginPage = new LoginPage();
         }
         this.changePage(app.views.loginPage);
       },
 
       "register": function () {
-        if (!app.views.registerPage){
-          app.views.registerPage = new app.views.RegisterPage();
+        if (!app.views.registerPage) {
+          app.views.registerPage = new RegisterPage();
         }
         this.changePage(app.views.registerPage);
       },
 
       "record/:id": function (id) {
-        if (!app.views.recordPage){
-          app.views.recordPage = new app.views.RecordPage({model: app.models.record});
+        if (!app.views.recordPage) {
+          app.views.recordPage = new RecordPage({model: app.models.record});
         }
         var prevPageID = $.mobile.activePage ? $.mobile.activePage.attr('id') : '';
 
@@ -70,37 +88,37 @@
       },
 
       "location": function () {
-        if (!app.views.locationPage){
-          app.views.locationPage = new app.views.LocationPage({model: app.models.record});
+        if (!app.views.locationPage) {
+          app.views.locationPage = new LocationPage({model: app.models.record});
         }
         this.changePage(app.views.locationPage);
         app.views.locationPage.update();
       },
 
       "number": function () {
-        if (!app.views.numberPage){
-          app.views.numberPage = new app.views.NumberPage({model: app.models.record});
+        if (!app.views.numberPage) {
+          app.views.numberPage = new NumberPage({model: app.models.record});
         }
         this.changePage(app.views.numberPage);
       },
 
       "stage": function () {
         if (!app.views.stagePage) {
-          app.views.stagePage = new app.views.StagePage({model: app.models.record});
+          app.views.stagePage = new StagePage({model: app.models.record});
         }
         this.changePage(app.views.stagePage);
       },
 
       "comment": function () {
-        if (!app.views.commentPage){
-          app.views.commentPage = new app.views.CommentPage({model: app.models.record});
+        if (!app.views.commentPage) {
+          app.views.commentPage = new CommentPage({model: app.models.record});
         }
         this.changePage(app.views.commentPage);
       },
 
       "date": function () {
-        if (!app.views.datePage){
-          app.views.datePage = new app.views.DatePage({model: app.models.record});
+        if (!app.views.datePage) {
+          app.views.datePage = new DatePage({model: app.models.record});
         }
         this.changePage(app.views.datePage);
       },
@@ -117,7 +135,7 @@
         this.navigateToStandardPage('species-info');
       },
 
-     "credits": function () {
+      "credits": function () {
         this.navigateToStandardPage('credits');
       },
 
@@ -131,8 +149,8 @@
     },
 
     navigateToStandardPage: function (pageID) {
-      if (!app.views[pageID + 'Page']){
-        app.views[pageID + 'Page'] = new app.views.Page(pageID);
+      if (!app.views[pageID + 'Page']) {
+        app.views[pageID + 'Page'] = new Page(pageID);
       }
       this.changePage(app.views[pageID + 'Page']);
     },
@@ -166,4 +184,5 @@
     }
   });
 
-})();
+  return Router;
+});

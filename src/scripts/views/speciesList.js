@@ -1,10 +1,10 @@
-var app = app || {};
-app.views = app.views || {};
-
-(function () {
+define([
+  'backbone',
+  'templates'
+], function (Backbone) {
   'use strict';
 
-  app.views.SpeciesList = Backbone.View.extend({
+  var SpeciesList = Backbone.View.extend({
     tagName: 'ul',
 
     attributes: {
@@ -332,4 +332,6 @@ app.views = app.views || {};
       return this;
     }
   });
-})();
+
+  return SpeciesList;
+});

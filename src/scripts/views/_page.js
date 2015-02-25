@@ -1,10 +1,9 @@
-var app = app || {};
-app.views = app.views || {};
-
-(function () {
+define([
+  'backbone'
+], function (Backbone) {
   'use strict';
 
-  app.views.Page = Backbone.View.extend({
+  var Page = Backbone.View.extend({
     tagName: 'div',
     role: "page",
 
@@ -44,4 +43,6 @@ app.views = app.views || {};
       });
     }
   });
-})();
+
+  return Page;
+});

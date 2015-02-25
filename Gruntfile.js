@@ -28,9 +28,24 @@ module.exports = function (grunt) {
       main: {
         files: [
           {
+            src: 'src/scripts/main.js',
+            dest: 'dist/scripts/main.js', flatten: true
+          },
+          {
+            src: 'src/scripts/routers/*',
+            dest: 'dist/scripts/routers/',  expand: true, flatten: true
+          },
+          {
+            src: 'src/scripts/models/*',
+            dest: 'dist/scripts/models/',  expand: true, flatten: true
+          },
+          {
+            src: 'src/scripts/views/*',
+            dest: 'dist/scripts/views/',  expand: true, flatten: true
+          },
+          {
             src: 'src/scripts/*.js',
-            dest: 'dist/scripts/',
-            expand: true, flatten: true
+            dest: 'dist/scripts/', expand: true, flatten: true, filter: 'isFile'
           },
           // includes files within path
           {
@@ -106,24 +121,24 @@ module.exports = function (grunt) {
       //  // the files to concatenate
       //  src: [
       //    'src/scripts/conf.js',
-      //    'src/scripts/views/*.js',
-      //    'src/scripts/models/*.js',
-      //    'src/scripts/routers/*.js',
+      //   // 'src/scripts/views/*.js',
+      //    //'src/scripts/models/*.js',
+      //   // 'src/scripts/routers/*.js',
       //    'src/scripts/helpers.js',
       //    'src/scripts/app.js'
       //  ],
       //  // the location of the resulting JS file
       //  dest: DEST + APP_NAME
       //},
-      views: {
-        src: 'scr/scripts/views/*.js', dest: DEST + 'views.js'
-      },
-      models: {
-        src: 'scr/scripts/models/*.js', dest: DEST + 'models.js'
-      },
-      routers: {
-        src: 'scr/scripts/routers/*.js', dest: DEST + 'routers.js'
-      },
+      //views: {
+      //  src: 'scr/scripts/views/*.js', dest: DEST + 'views.js'
+      //},
+      //models: {
+      //  src: 'scr/scripts/models/*.js', dest: DEST + 'models.js'
+      //},
+      //routers: {
+      //  src: 'scr/scripts/routers/*.js', dest: DEST + 'routers.js'
+      //},
       data: {
         // the files to concatenate
         src: [
@@ -179,6 +194,6 @@ module.exports = function (grunt) {
 
   // the default task can be run just by typing "grunt" on the command line
   grunt.registerTask('init', ['bower']);
-  grunt.registerTask('build', ['copy', 'jst', 'concat', 'replace']);
-  grunt.registerTask('default', ['init', 'build', 'uglify']);
+  grunt.registerTask('build', ['copy', 'jst', 'concat']);
+  grunt.registerTask('default', ['init', 'build']);
 };

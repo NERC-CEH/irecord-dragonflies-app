@@ -1,7 +1,8 @@
-var app = app || {};
-app.models = app.models || {};
-
-(function () {
+define([
+  'backbone',
+  'backbone.localStorage',
+  'conf'
+], function (Backbone) {
   'use strict';
 
   var User = Backbone.Model.extend({
@@ -22,7 +23,6 @@ app.models = app.models || {};
       this.fetch();
     },
 
-    // Save all of the todo items under the `"todos-backbone"` namespace.
     localStorage: new Store(app.CONF.NAME),
 
     signOut: function () {
@@ -51,12 +51,12 @@ app.models = app.models || {};
     },
 
     getLocationSref: function (geoloc) {
-     var LOCATION_GRANULARITY= 2; //Precision of returned grid reference (6 digits = metres).
+      var LOCATION_GRANULARITY = 2; //Precision of returned grid reference (6 digits = metres).
 
-        geoloc = geoloc || this.get('location');
-       if (!geoloc){
-         return null;
-       }
+      geoloc = geoloc || this.get('location');
+      if (!geoloc) {
+        return null;
+      }
       //get translated geoloc
       var p = new LatLonE(geoloc.split(',')[0], geoloc.split(',')[1], LatLonE.datum.OSGB36);
       var grid = OsGridRef.latLonToOsGrid(p);
@@ -109,7 +109,5 @@ app.models = app.models || {};
     }
   });
 
-  //create global
-  app.models.user = new User();
-
-})();
+  return User;
+});

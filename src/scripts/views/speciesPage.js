@@ -1,10 +1,12 @@
-var app = app || {};
-app.views = app.views || {};
-
-(function () {
+define([
+  'views/_page',
+  'templates',
+  'd3',
+  'photoswipe'
+], function (Page) {
   'use strict';
 
-  app.views.SpeciesPage = app.views.Page.extend({
+  var SpeciesPage = Page.extend({
     id: 'species',
 
     template: app.templates.species,
@@ -301,5 +303,7 @@ app.views = app.views || {};
       return this;
     }
   });
-})();
+
+  return SpeciesPage;
+});
 

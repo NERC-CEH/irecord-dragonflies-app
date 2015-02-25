@@ -1,10 +1,7 @@
-var app = app || {};
-app.views = app.views || {};
-
-(function () {
+define(['views/_page', 'templates'], function (Page) {
   'use strict';
 
-  app.views.RegisterPage = app.views.Page.extend({
+  var RegisterPage = Page.extend({
     id: 'register',
 
     template: app.templates.register,
@@ -97,4 +94,6 @@ app.views = app.views || {};
       $.mobile.loading('hide');
     }
   });
-})();
+
+  return RegisterPage;
+});

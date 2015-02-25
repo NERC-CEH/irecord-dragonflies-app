@@ -1,3 +1,4 @@
+app = window.app || {};
 app.data = app.data || {};
 app.data.flight = {
   "11": {

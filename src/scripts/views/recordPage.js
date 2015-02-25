@@ -1,10 +1,10 @@
-var app = app || {};
-app.views = app.views || {};
-
-(function () {
+define([
+  'views/_page',
+  'templates',
+  'morel'], function(Page) {
   'use strict';
 
-  app.views.RecordPage = app.views.Page.extend({
+  var RecordPage = Page.extend({
     id: 'record',
 
     template: app.templates.record,
@@ -283,5 +283,6 @@ app.views = app.views || {};
     }
   });
 
-})();
+  return RecordPage;
+});
 

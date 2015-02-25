@@ -1,3 +1,4 @@
+app = window.app || {};
 app.data = app.data || {};
 app.data.probability = { HP40: { "14": '0.8299' },
   HP50: 

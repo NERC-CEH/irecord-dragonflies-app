@@ -1,10 +1,10 @@
-var app = app || {};
-app.views = app.views || {};
-
-(function () {
+define([
+  'views/_page',
+  'templates',
+  'vector3d', 'geo', 'latlon-ellipsoid', 'osgridref'], function (Page) {
   'use strict';
 
-  app.views.UserPage = app.views.Page.extend({
+  var UserPage = Page.extend({
     id: 'user',
 
     template: app.templates.user,
@@ -173,4 +173,6 @@ app.views = app.views || {};
     }
 
   });
-})();
+
+  return UserPage;
+});

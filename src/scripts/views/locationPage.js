@@ -1,10 +1,11 @@
-var app = app || {};
-app.views = app.views || {};
+define([
+  'views/_page',
+  'templates',
+  'vector3d', 'geo', 'latlon-ellipsoid', 'osgridref'], function (Page) {
 
-(function () {
   'use strict';
 
-  app.views.LocationPage = app.views.Page.extend({
+  var LocationPage = Page.extend({
     id: 'location',
 
     template: app.templates.location,
@@ -405,4 +406,6 @@ app.views = app.views || {};
     }
 
   });
-})();
+
+  return LocationPage;
+});

@@ -1,8 +1,6 @@
-var app = app || {};
-app.models = app.models || {};
-app.collections = app.collections || {};
-
-(function () {
+define([
+  'backbone'
+], function (Backbone) {
   'use strict';
 
   var Specie = Backbone.Model.extend({
@@ -21,7 +19,7 @@ app.collections = app.collections || {};
     }
   });
 
-  app.collections.Species = Backbone.Collection.extend({
+  var Species = Backbone.Collection.extend({
     model: Specie,
 
     initialize: function (species) {
@@ -50,4 +48,5 @@ app.collections = app.collections || {};
     }
   });
 
-})();
+  return Species;
+});

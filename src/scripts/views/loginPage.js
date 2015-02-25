@@ -1,10 +1,7 @@
-var app = app || {};
-app.views = app.views || {};
-
-(function () {
+define(['views/_page', 'templates'], function (Page) {
   'use strict';
 
-  app.views.LoginPage = app.views.Page.extend({
+  var LoginPage = Page.extend({
     id: 'login',
 
     template: app.templates.login,
@@ -118,4 +115,6 @@ app.views = app.views || {};
       return morel.auth.isUser();
     }
   });
-})();
+
+  return LoginPage;
+});

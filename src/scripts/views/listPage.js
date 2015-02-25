@@ -1,10 +1,11 @@
-var app = app || {};
-app.views = app.views || {};
-
-(function () {
+define([
+  'views/_page',
+  'views/speciesList',
+  'templates'
+], function (Page, SpeciesList) {
   'use strict';
 
-  app.views.ListPage = app.views.Page.extend({
+  var ListPage = Page.extend({
     id: 'list',
 
     template: app.templates.list,
@@ -18,7 +19,7 @@ app.views = app.views || {};
 
     initialize: function () {
       _log('views.ListPage: initialize', app.LOG_DEBUG);
-      this.listView = new app.views.SpeciesList({collection: app.collections.species});
+      this.listView = new SpeciesList({collection: app.collections.species});
 
       var sorts = this.listView.sorts;
       var filters = this.listView.filters;
@@ -259,4 +260,5 @@ app.views = app.views || {};
 
   });
 
-})();
+  return ListPage;
+});

@@ -1,7 +1,9 @@
-var app = app || {};
-app.models = app.models || {};
+define([
+  'backbone',
+  'backbone.localStorage',
+  'conf'
+], function (Backbone) {
 
-(function () {
   'use strict';
 
   var App = Backbone.Model.extend({
@@ -19,5 +21,5 @@ app.models = app.models || {};
 
   });
 
-  app.models.app = new App();
-})();
+  return App;
+});

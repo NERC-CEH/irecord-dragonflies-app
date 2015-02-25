@@ -1,7 +1,4 @@
-var app = app || {};
-app.models = app.models || {};
-
-(function () {
+define(['backbone'], function (Backbone) {
   'use strict';
 
   var Record = Backbone.Model.extend({
@@ -78,5 +75,5 @@ app.models = app.models || {};
     }
   });
 
-  app.models.record = new Record();
-})();
+  return Record;
+});
