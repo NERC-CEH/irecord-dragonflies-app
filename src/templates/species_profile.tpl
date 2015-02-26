@@ -33,7 +33,9 @@
         <li><strong>Distribution</strong>:
             <p><%- distribution %></p></li>
         <li><strong>Habitat</strong>:
-            <p><%- habitat %></p></li>
+            <p><%- habitat %></p>
+            <p><a href='#species-terms' data-role="button" data-icon="info" data-prefetch>Species Terms</a></p>
+        </li>
     </ul>
 </center>
 

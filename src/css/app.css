@@ -313,7 +313,7 @@ form, body {
 }
 
 
-li.taxon {
+div.taxon {
     display: none !important;
 }
 

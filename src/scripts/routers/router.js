@@ -135,6 +135,18 @@ define([
         this.navigateToStandardPage('species-info');
       },
 
+      "species-differences": function () {
+        this.navigateToStandardPage('species-differences');
+      },
+
+      "species-anatomy": function () {
+        this.navigateToStandardPage('species-anatomy');
+      },
+
+      "species-terms": function () {
+        this.navigateToStandardPage('species-terms');
+      },
+
       "credits": function () {
         this.navigateToStandardPage('credits');
       },
