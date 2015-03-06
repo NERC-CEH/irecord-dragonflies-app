@@ -1,5 +1,6 @@
 module.exports = function (grunt) {
   var DEST = 'dist/scripts/';
+  var CONF_NAME = 'conf.js';
   var APP_NAME = 'app.js';
   var LIBS_NAME = 'libs.js';
   var DATA_NAME = 'data.js';
@@ -150,15 +151,15 @@ module.exports = function (grunt) {
     },
     replace: {
       main: {
-        src: [DEST + APP_NAME],
+        src: [DEST + CONF_NAME],
         overwrite: true, // overwrite matched source files
         replacements: [{
-          from: /(app\.CONF.VERSION =) \'0\';/g, // string replacement
-          to: '$1 \'<%= pkg.version %>\';'
+          from: /(VERSION:).*version grunt replaced/g, // string replacement
+          to: '$1 \'<%= pkg.version %>\','
         },
           {
-            from: /(app\.CONF\.NAME =) \'app\';/g,  // string replacement
-            to: '$1 \'<%= pkg.name %>\';'
+            from: /(NAME:).*name grunt replaced/g,  // string replacement
+            to: '$1 \'<%= pkg.name %>\','
           }
         ]
       },
@@ -194,6 +195,6 @@ module.exports = function (grunt) {
 
   // the default task can be run just by typing "grunt" on the command line
   grunt.registerTask('init', ['bower']);
-  grunt.registerTask('build', ['copy', 'jst', 'concat']);
+  grunt.registerTask('build', ['copy', 'jst', 'concat', 'replace']);
   grunt.registerTask('default', ['init', 'build']);
 };
