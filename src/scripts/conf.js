@@ -6,6 +6,10 @@ define(['morel'], function () {
 
 //app wide settings
   app.CONF = {
+    STATES: {
+      DEV: 'development',
+      PROD: 'production'
+    },
     VERSION: '0', //version grunt replaced //Application (controllers and data) version
     NAME: 'app', //name grunt replaced
     HOME: "raf/dist/",
@@ -16,7 +20,7 @@ define(['morel'], function () {
     LOGIN_URL: "http://192.171.199.230/iRecord/user/mobile/register",
     LOGIN_TIMEOUT: 20000
   };
-
+  app.CONF.STATE = app.CONF.STATES.DEV; //sets the app state
 
 
 //morel configuration
