@@ -6,10 +6,6 @@ define(['morel'], function () {
 
 //app wide settings
   app.CONF = {
-    STATES: {
-      DEV: 'development',
-      PROD: 'production'
-    },
     VERSION: '0', //version grunt replaced //Application (controllers and data) version
     NAME: 'app', //name grunt replaced
     HOME: "raf/dist/",
@@ -18,10 +14,14 @@ define(['morel'], function () {
     PROB_DATA_SRC: "data/abundance.json",
     APPCACHE_SRC: "appcache.html",
     LOGIN_URL: "http://192.171.199.230/iRecord/user/mobile/register",
-    LOGIN_TIMEOUT: 20000
+    LOGIN_TIMEOUT: 20000,
+    //app feature settings
+    FEATURES: {
+      LOGIN: 'simulate',
+      SEND_RECORD: 'simulate',
+      REGISTER: true
+    }
   };
-  app.CONF.STATE = app.CONF.STATES.DEV; //sets the app state
-
 
 //morel configuration
   morel.CONF.NAME = app.CONF.NAME;
