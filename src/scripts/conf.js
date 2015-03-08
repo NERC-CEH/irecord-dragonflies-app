@@ -33,9 +33,9 @@ define(['morel'], function () {
     SURVEY_ID: 42
   };
   morel.geoloc.CONF.GPS_ACCURACY_LIMIT = 100; //meters
-  morel.record.inputs.KEYS = {
+  $.extend(morel.record.inputs.KEYS, {
     NUMBER: 'sample:number',
     STAGE: 'sample:stage',
     LOCATIONDETAILS: 'sample:locationdetails'
-  };
+  });
 });

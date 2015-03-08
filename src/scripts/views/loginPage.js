@@ -59,7 +59,7 @@ define(['views/_page', 'templates'], function (Page) {
            break;
          case false:
          default:
-           _log('views.LoginPage: unknown login feature state');
+           _log('views.LoginPage: unknown feature state');
        }
     },
 
@@ -88,12 +88,12 @@ define(['views/_page', 'templates'], function (Page) {
      * @param person
      */
     loginSimulate: function (form, person) {
-      var loginSelection =
+      var selection =
         "<h1>Simulate:</h1>" +
         "<button id='simulate-success-button'>Success</button>" +
         "<button id='simulate-failure-button'>Failure</button>" +
         "<button id='simulate-cancel-button'>Cancel</button>";
-      app.message(loginSelection, 0);
+      app.message(selection, 0);
 
       var that = this;
       $('#simulate-success-button').on('click', function () {
@@ -106,7 +106,7 @@ define(['views/_page', 'templates'], function (Page) {
       $('#simulate-cancel-button').on('click', function () {
         $.mobile.loading('hide');
       });
-      },
+    },
 
     /**
      * Successful login.
@@ -120,7 +120,7 @@ define(['views/_page', 'templates'], function (Page) {
       user.email = this.email;
       app.models.user.signIn(user);
 
-      Backbone.history.navigate('user', {trigger:true});
+      window.history.back();
     },
 
     /**
@@ -149,7 +149,9 @@ define(['views/_page', 'templates'], function (Page) {
      */
     onLoginError: function (xhr, ajaxOptions, thrownError) {
       _log("views.LoginPage: ERROR " + xhr.status + " " + thrownError + ".", morel.LOG_ERROR);
-      app.message('<center><h2>Sorry.<br/> Some problem occurred.</h2></center><br/>' +
+      app.message(
+        '<center><h2>Sorry.</h2></center>' +
+        '<p>Some problem occurred.</p><br/>' +
       (xhr.responseText || ''), 3000);
     },
 

@@ -105,7 +105,18 @@ define([
             Backbone.history.navigate('list', {trigger:true});
           }, 2000);
         };
-        app.models.record.send(onSendSuccess, onError);
+
+        switch (app.CONF.FEATURES.SEND_RECORD) {
+          case true:
+            app.models.record.send(onSendSuccess, onError);
+            break;
+          case 'simulate':
+            this.sendSimulate(onSendSuccess, onError);
+            break;
+          case false:
+          default:
+            _log('views.RecordPage: unknown feature state');
+        }
 
       } else {
         //offline
@@ -127,6 +138,33 @@ define([
           Backbone.history.navigate('list', {trigger:true});
         }, 2000);
       }
+    },
+
+    /**
+     * Simulates the login
+     * @param form
+     * @param person
+     */
+    sendSimulate: function (onSendSuccess, onError) {
+      var selection =
+        "<h1>Simulate:</h1>" +
+        "<button id='simulate-success-button'>Success</button>" +
+        "<button id='simulate-failure-button'>Failure</button>" +
+        "<button id='simulate-cancel-button'>Cancel</button>";
+      app.message(selection, 0);
+
+      var that = this;
+      $('#simulate-success-button').on('click', function () {
+        onSendSuccess();
+      });
+      $('#simulate-failure-button').on('click', function () {
+        app.models.record.save(function () {
+          onError({message: 'Some Error Message.'});
+        }, null);
+      });
+      $('#simulate-cancel-button').on('click', function () {
+        $.mobile.loading('hide');
+      });
     },
 
     save: function () {
