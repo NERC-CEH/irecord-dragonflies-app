@@ -1,7 +1,8 @@
 define([
   'views/_page',
   'templates',
-  'vector3d', 'geo', 'latlon-ellipsoid', 'osgridref'], function (Page) {
+  'latlon'
+], function (Page) {
   'use strict';
 
   var UserPage = Page.extend({

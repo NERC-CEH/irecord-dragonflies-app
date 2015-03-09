@@ -1,7 +1,8 @@
 define([
   'backbone',
   'backbone.localStorage',
-  'conf'
+  'conf',
+  'latlon'
 ], function (Backbone) {
   'use strict';
 
@@ -60,7 +61,7 @@ define([
         return null;
       }
       //get translated geoloc
-      var p = new LatLonE(geoloc.split(',')[0], geoloc.split(',')[1], LatLonE.datum.OSGB36);
+      var p = new LatLon(geoloc.split(',')[0], geoloc.split(',')[1], LatLon.datum.OSGB36);
       var grid = OsGridRef.latLonToOsGrid(p);
       var gref = grid.toString(LOCATION_GRANULARITY);
       _log('models.user: converted geoloc to sref -  ' + gref + ".");

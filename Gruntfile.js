@@ -1,8 +1,5 @@
 module.exports = function (grunt) {
   var DEST = 'dist/scripts/';
-  var CONF_NAME = 'conf.js';
-  var APP_NAME = 'app.js';
-  var LIBS_NAME = 'libs.js';
   var DATA_NAME = 'data.js';
 
   var banner = "/*!\n" +
@@ -76,22 +73,7 @@ module.exports = function (grunt) {
             src: ['src/appcache.mf'], dest: 'dist/appcache.mf'
           }
         ]
-      }//,
-      //libs: {
-      //  files: [
-      //    {src: ['src/scripts/libs/jquery/jquery.js'], dest: 'dist/scripts/lib/jquery.js'},
-      //    {src: ['src/scripts/libs/jquery-mobile/jquery.mobile-1.4.5.js'], dest: 'dist/scripts/lib/jquery.mobile-1.4.5.js'},
-      //    {src: ['src/scripts/libs/IndexedDBShim/IndexedDBShim.js'], dest: 'dist/scripts/lib/IndexedDBShim.js'},
-      //
-      //    {src: ['src/scripts/libs/photoswipe/lib/klass.min.js'], dest: 'dist/scripts/lib/klass.min.js'},
-      //    {src: ['src/scripts/libs/photoswipe/code.photoswipe.jquery-3.0.5.min.js'], dest: 'dist/scripts/lib/code.photoswipe.jquery-3.0.5.min.js'},
-      //    {src: ['src/scripts/libs/fastclick/fastclick.js'], dest: 'dist/scripts/lib/fastclick.js'},
-      //    {src: ['src/scripts/libs/morel/morel.js'], dest: 'dist/scripts/lib/morel.js'},
-      //    {src: ['src/scripts/libs/lodash/lodash.js'], dest: 'dist/scripts/lib/lodash.js'},
-      //    {src: ['src/scripts/libs/backbone/backbone.js'], dest: 'dist/scripts/lib/backbone.js'},
-      //    {src: ['src/scripts/libs/backbone.localstorage/backbone.localStorage.js'], dest: 'dist/scripts/lib/backbone.localStorage.js'}
-      //  ]
-      //}
+      }
     },
     jst: {
       compile: {
@@ -115,31 +97,6 @@ module.exports = function (grunt) {
         // define a string to put between each file in the concatenated output
         separator: '\n\n'
       },
-      //app: {
-      //  options: {
-      //    banner: banner
-      //  },
-      //  // the files to concatenate
-      //  src: [
-      //    'src/scripts/conf.js',
-      //   // 'src/scripts/views/*.js',
-      //    //'src/scripts/models/*.js',
-      //   // 'src/scripts/routers/*.js',
-      //    'src/scripts/helpers.js',
-      //    'src/scripts/app.js'
-      //  ],
-      //  // the location of the resulting JS file
-      //  dest: DEST + APP_NAME
-      //},
-      //views: {
-      //  src: 'scr/scripts/views/*.js', dest: DEST + 'views.js'
-      //},
-      //models: {
-      //  src: 'scr/scripts/models/*.js', dest: DEST + 'models.js'
-      //},
-      //routers: {
-      //  src: 'scr/scripts/routers/*.js', dest: DEST + 'routers.js'
-      //},
       data: {
         // the files to concatenate
         src: [
@@ -150,26 +107,18 @@ module.exports = function (grunt) {
       }
     },
     replace: {
-      main: {
-        src: [DEST + CONF_NAME],
-        overwrite: true, // overwrite matched source files
-        replacements: [{
-          from: /(VERSION:).*version grunt replaced/g, // string replacement
-          to: '$1 \'<%= pkg.version %>\','
-        },
-          {
-            from: /(NAME:).*name grunt replaced/g,  // string replacement
-            to: '$1 \'<%= pkg.name %>\','
-          }
-        ]
-      },
       libs: {
-        src: [DEST + LIBS_NAME],
-        overwrite: true, // Fix klass.js no ';' problem
-        replacements: [{
-          from: '\/\/ PhotoSwipe',
-          to: ';\/\/ photoswipe'
-        }
+        src: ['src/scripts/libs/latlon/js/latlon-ellipsoidal.js'],
+        overwrite: true, // Fix double define problem
+        replacements: [
+          {
+            from: 'if (typeof module != \'undefined\' && module.exports) module.exports.Vector3d = Vector3d;',
+            to: ''
+          },
+          {
+            from: 'if (typeof define == \'function\' && define.amd) define([], function() { return Vector3d; });',
+            to: ''
+          }
         ]
       }
     },
@@ -183,6 +132,20 @@ module.exports = function (grunt) {
           'dist/scripts/app.min.js': ['<%= concat.app.dest %>']
         }
       }
+    },
+    requirejs: {
+      compile: {
+        options: {
+          verbose: true,
+          baseUrl: "dist/scripts/",
+
+          mainConfigFile: 'src/scripts/main.js',
+          name: "main",
+          out: "dist/scripts/main-built.js",
+
+          optimize: 'none'
+        }
+      }
     }
   });
 
@@ -192,9 +155,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jst');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
 
   // the default task can be run just by typing "grunt" on the command line
-  grunt.registerTask('init', ['bower']);
-  grunt.registerTask('build', ['copy', 'jst', 'concat', 'replace']);
+  grunt.registerTask('init', ['bower', 'replace']);
+  grunt.registerTask('build', ['copy', 'jst', 'concat', 'requirejs']);
   grunt.registerTask('default', ['init', 'build']);
 };

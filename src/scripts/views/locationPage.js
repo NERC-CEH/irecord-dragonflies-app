@@ -1,7 +1,8 @@
 define([
   'views/_page',
   'templates',
-  'vector3d', 'geo', 'latlon-ellipsoid', 'osgridref'], function (Page) {
+  'latlon'
+], function (Page) {
 
   'use strict';
 
@@ -115,7 +116,7 @@ define([
       }
 
       if (location) {
-        var p = new LatLonE(location.lat, location.lon, LatLonE.datum.OSGB36);
+        var p = new LatLon(location.lat, location.lon, LatLon.datum.OSGB36);
         var grid = OsGridRef.latLonToOsGrid(p);
         gref = grid.toString();
         location.gref = gref;
@@ -347,7 +348,7 @@ define([
 
       function updateMapInfoMessage(id, location) {
         //convert coords to Grid Ref
-        var p = new LatLonE(location.lat, location.lon, LatLonE.datum.OSGB36);
+        var p = new LatLon(location.lat, location.lon, LatLon.datum.OSGB36);
         var grid = OsGridRef.latLonToOsGrid(p);
         var gref = grid.toString();
 
