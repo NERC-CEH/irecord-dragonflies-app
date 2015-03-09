@@ -1,7 +1,8 @@
 define([
   'views/_page',
   'templates',
-  'morel'
+  'morel',
+  'conf'
 ], function (Page) {
   'use strict';
 

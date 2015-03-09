@@ -1,7 +1,8 @@
 define([
   'views/_page',
   'templates',
-  'latlon'
+  'latlon',
+  'conf'
 ], function (Page) {
 
   'use strict';

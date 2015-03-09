@@ -124,7 +124,11 @@ module.exports = function (grunt) {
           name: "main",
           out: "dist/scripts/main-built.js",
 
-          optimize: 'none'
+          optimize: 'none',
+          paths: {
+            data: 'empty:'
+          }
+
         }
       }
     }

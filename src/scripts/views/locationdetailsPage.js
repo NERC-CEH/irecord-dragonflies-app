@@ -1,7 +1,9 @@
 define([
   'views/_page',
   'templates',
-  'morel'], function (Page) {
+  'morel',
+  'conf'
+], function (Page) {
   'use strict';
 
   var LocationdetailsPage = Page.extend({

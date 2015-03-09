@@ -10,7 +10,8 @@ define([
     'models/species',
     'models/record',
     'helpers',
-    'data'],
+    'data'
+  ],
   function ($, jqm, Backbone, FastClick, klass, Router, AppModel, UserModel,
             SpeciesCollection, RecordModel) {
     var App = {
