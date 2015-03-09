@@ -28,6 +28,8 @@ define([
     signOut: function () {
       this.set('email', '');
       this.set('secret', '');
+      this.set('name', '');
+
       this.save();
     },
 

@@ -48,7 +48,28 @@ define(['views/_page', 'templates'], function (Page) {
         'appname': morel.auth.CONF.APPNAME,
         'appsecret': morel.auth.CONF.APPSECRET
       };
+      this.email = person.email; //save email for successful login
 
+       switch (app.CONF.FEATURES.LOGIN) {
+         case true:
+           this.loginSend(form, person);
+           break;
+         case 'simulate':
+           this.loginSimulate(form, person);
+           break;
+         case false:
+         default:
+           _log('views.LoginPage: unknown feature state');
+       }
+    },
+
+    /**
+     * Sends the login AJAX request.
+     * @param form
+     * @param person
+     */
+    loginSend: function (form, person) {
+      $.mobile.loading('show');
       $.ajax({
         url: app.CONF.LOGIN_URL,
         type: 'POST',
@@ -57,47 +78,81 @@ define(['views/_page', 'templates'], function (Page) {
         dataType: 'text',
         timeout: app.CONF.LOGIN_TIMEOUT,
         success: this.onLoginSuccess,
-        error: this.onLoginError,
-        beforeSend: this.onLogin
+        error: this.onLoginError
       });
     },
 
-    onLogin: function () {
-      $.mobile.loading('show');
+    /**
+     * Simulates the login
+     * @param form
+     * @param person
+     */
+    loginSimulate: function (form, person) {
+      var selection =
+        "<h1>Simulate:</h1>" +
+        "<button id='simulate-success-button'>Success</button>" +
+        "<button id='simulate-failure-button'>Failure</button>" +
+        "<button id='simulate-cancel-button'>Cancel</button>";
+      app.message(selection, 0);
+
+      var that = this;
+      $('#simulate-success-button').on('click', function () {
+        var data = "userSecret\nuserName\nuserSurname";
+        that.onLoginSuccess(data);
+      });
+      $('#simulate-failure-button').on('click', function () {
+        that.onLoginError({});
+      });
+      $('#simulate-cancel-button').on('click', function () {
+        $.mobile.loading('hide');
+      });
     },
 
+    /**
+     * Successful login.
+     * @param data
+     */
     onLoginSuccess: function (data) {
       _log('views.LoginPage: success.', morel.LOG_DEBUG);
+      $.mobile.loading('hide');
 
+      var user = this.extractUserDetails(data);
+      user.email = this.email;
+      app.models.user.signIn(user);
+
+      window.history.back();
+    },
+
+    /**
+     * Since the server response is not JSON, it gets user details from the response.
+     * @param data
+     * @returns {*}
+     */
+    extractUserDetails: function (data) {
       var lines = (data && data.split(/\r\n|\r|\n/g));
       if (lines && lines.length >= 3 && lines[0].length > 0) {
-        var user = {
+        return {
           'secret': lines[0],
-          'name': lines[1] + " " + lines[2],
-          'email': this.callback_data.email
+          'name': lines[1] + " " + lines[2]
         };
-        $.mobile.loading('hide');
-        app.models.user.signIn(user);
-
-        Backbone.history.navigate('user', {trigger:true});
       } else {
         _log('views.LoginPage: problems with received secret.', morel.LOG_WARNING);
+        return null;
       }
     },
 
+    /**
+     * On Error.
+     * @param xhr
+     * @param ajaxOptions
+     * @param thrownError
+     */
     onLoginError: function (xhr, ajaxOptions, thrownError) {
       _log("views.LoginPage: ERROR " + xhr.status + " " + thrownError + ".", morel.LOG_ERROR);
-      _log(xhr.responseText);
-      $.mobile.loading('show', {
-        text: "Wrong email or password." +
-        " Please double-check and try again.",
-        theme: "b",
-        textVisible: true,
-        textonly: true
-      });
-      setTimeout(function () {
-        $.mobile.loading('hide');
-      }, 3000);
+      app.message(
+        '<center><h2>Sorry.</h2></center>' +
+        '<p>Some problem occurred.</p><br/>' +
+      (xhr.responseText || ''), 3000);
     },
 
     /**
