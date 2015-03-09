@@ -92,20 +92,6 @@ module.exports = function (grunt) {
         }
       }
     },
-    concat: {
-      options: {
-        // define a string to put between each file in the concatenated output
-        separator: '\n\n'
-      },
-      data: {
-        // the files to concatenate
-        src: [
-          'src/data/*.js'
-        ],
-        // the location of the resulting JS file
-        dest: DEST + DATA_NAME
-      }
-    },
     replace: {
       libs: {
         src: ['src/scripts/libs/latlon/js/latlon-ellipsoidal.js'],
@@ -124,12 +110,8 @@ module.exports = function (grunt) {
     },
     uglify: {
       dist: {
-        options: {
-          // the banner is inserted at the top of the output
-          banner: banner
-        },
         files: {
-          'dist/scripts/app.min.js': ['<%= concat.app.dest %>']
+          'dist/scripts/data.js': ['src/data/*.js']
         }
       }
     },
@@ -138,7 +120,6 @@ module.exports = function (grunt) {
         options: {
           verbose: true,
           baseUrl: "dist/scripts/",
-
           mainConfigFile: 'src/scripts/main.js',
           name: "main",
           out: "dist/scripts/main-built.js",
@@ -150,7 +131,6 @@ module.exports = function (grunt) {
   });
 
   grunt.loadNpmTasks('grunt-bower-task');
-  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-text-replace');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -159,6 +139,6 @@ module.exports = function (grunt) {
 
   // the default task can be run just by typing "grunt" on the command line
   grunt.registerTask('init', ['bower', 'replace']);
-  grunt.registerTask('build', ['copy', 'jst', 'concat', 'requirejs']);
+  grunt.registerTask('build', ['copy', 'jst', 'uglify', 'requirejs']);
   grunt.registerTask('default', ['init', 'build']);
 };
