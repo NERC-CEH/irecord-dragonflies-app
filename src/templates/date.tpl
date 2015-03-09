@@ -10,7 +10,9 @@
         </div>
     </div>
     <div data-role="content">
-        <div class="info-message"><p>Please enter the date of the recording.</p>
+        <div class="info-message">
+            <p>Please enter the date of the recording.
+            Otherwise the current date will be used.</p>
         </div>
         <input id="sample:date" name="sample:date" type="date" required>
     </div>
