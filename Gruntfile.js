@@ -1,6 +1,6 @@
 module.exports = function (grunt) {
   var DEST = 'dist/scripts/';
-  var DATA_NAME = 'data.js';
+  var CONF_NAME = 'conf.js';
 
   var banner = "/*!\n" +
     " * <%= pkg.title %>. \n" +
@@ -106,6 +106,19 @@ module.exports = function (grunt) {
             to: ''
           }
         ]
+      },
+      main: {
+        src: [DEST + CONF_NAME],
+        overwrite: true, // overwrite matched source files
+        replacements: [{
+          from: /(VERSION:).*version grunt replaced/g, // string replacement
+          to: '$1 \'<%= pkg.version %>\','
+        },
+          {
+            from: /(NAME:).*name grunt replaced/g,  // string replacement
+            to: '$1 \'<%= pkg.name %>\','
+          }
+        ]
       }
     },
     uglify: {
@@ -142,7 +155,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-requirejs');
 
   // the default task can be run just by typing "grunt" on the command line
-  grunt.registerTask('init', ['bower', 'replace']);
-  grunt.registerTask('build', ['copy', 'jst', 'uglify', 'requirejs']);
+  grunt.registerTask('init', ['bower', 'replace:libs']);
+  grunt.registerTask('build', ['copy', 'jst', 'uglify', 'replace:main', 'requirejs']);
   grunt.registerTask('default', ['init', 'build']);
 };

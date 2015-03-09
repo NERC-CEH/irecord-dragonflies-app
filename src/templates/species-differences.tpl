@@ -7,7 +7,7 @@
 
 <div data-role="content">
     <div class="info-message">
-        These are general trends – there are always exceptions to the rule!
+        <p>These are general trends – there are always exceptions to the rule!</p>
     </div>
     <table data-role="table" data-mode="reflow"  class="ui-responsive table-stroke" style="background-color: white">
         <thead>
