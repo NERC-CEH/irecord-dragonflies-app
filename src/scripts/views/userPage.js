@@ -126,10 +126,14 @@ define([
       var user = app.models.user.attributes;
       if (user.email){
         //logged in
+        $('#user_heading').html(user.name);
+
         $logoutButton.show();
         $loginWarning.hide();
       } else {
         //logged out
+        $('#user_heading').html('My Account');
+
         $logoutButton.hide();
         $loginWarning.show();
       }

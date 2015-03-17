@@ -8,10 +8,7 @@ define(['morel'], function () {
   app.CONF = {
     VERSION: '0', //version grunt replaced //Application (controllers and data) version
     NAME: 'app', //name grunt replaced
-    HOME: "raf/dist/",
     LOG: morel.LOG_DEBUG,
-    SPECIES_DATA_SRC: "data/species.json",
-    PROB_DATA_SRC: "data/abundance.json",
     APPCACHE_SRC: "appcache.html",
     LOGIN_URL: "http://192.171.199.230/irecord7/user/mobile/register",
     LOGIN_TIMEOUT: 20000,
