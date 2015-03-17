@@ -13,7 +13,8 @@ define([
 
     events: {
       'click #entry-form-save': 'save',
-      'click #entry-form-send': 'send'
+      'click #entry-form-send': 'send',
+      'change input[type="checkbox"]': 'saveCertain'
     },
 
     initialize: function () {
@@ -290,6 +291,13 @@ define([
       }
     },
 
+    saveCertain: function (e) {
+      _log('app.views.RecordPage: saving certain.', app.LOG_INFO);
+      var value = $(e.currentTarget).prop('checked');
+
+      this.model.set(morel.record.inputs.KEYS.CERTAIN, value);
+    },
+
     resetButtons: function () {
       this.updateNumberButton();
       this.updateStageButton();
@@ -303,18 +311,21 @@ define([
       value = value || '';
       $numberButton.html(value);
     },
+
     updateStageButton: function () {
       var $stageButton = jQuery('#stage-button .descript');
       var value = this.model.get(morel.record.inputs.KEYS.STAGE);
       value = value || '';
       $stageButton.html(value);
     },
+
     updateLocationdetailsButton: function () {
       var $locationdetailsButton = jQuery('#locationdetails-button .descript');
       var value = this.model.get(morel.record.inputs.KEYS.LOCATIONDETAILS);
       value = value || '';
       $locationdetailsButton.html(value);
     },
+
     updateCommentButton: function () {
       var $commentButton = jQuery('#comment-button .descript');
       var value = this.model.get(morel.record.inputs.KEYS.COMMENT);

@@ -7,7 +7,8 @@ define(['views/_page', 'templates'], function (Page) {
     template: app.templates.register,
 
     events: {
-      'click #register-button': 'register'
+      'click #register-button': 'register',
+      'change input[type="checkbox"]': 'toggleRegisterButton'
     },
 
     initialize: function () {
@@ -27,22 +28,15 @@ define(['views/_page', 'templates'], function (Page) {
       return this;
     },
 
-    //controller configuration should be set up in an app config file
-    CONF: {
-      URL: "",
-      TIMEOUT: 20000
-    },
-
-    show: function () {
+    toggleRegisterButton: function (e) {
       //enable 'Create account' button on Terms agreement
-      $('#terms-agreement').click(function () {
-        var button = $('#register-button');
-        if ($(this).prop('checked')) {
-          button.prop('disabled', false);
-        } else {
-          button.prop('disabled', true);
-        }
-      });
+      var value = $(e.currentTarget).prop('checked');
+      this.$registerButton = $('#register-button');
+      if (value) {
+        this.$registerButton.prop('disabled', false);
+      } else {
+        this.$registerButton.prop('disabled', true);
+      }
     },
 
     /**
@@ -61,37 +55,49 @@ define(['views/_page', 'templates'], function (Page) {
       var form = document.getElementById('register-form');
       var data = new FormData(form);
 
+      this.email = this.$el.find('input[name=email]').val(); //save it for future
+
       //app logins
       data.append('appname', morel.auth.CONF.APPNAME);
       data.append('appsecret', morel.auth.CONF.APPSECRET);
 
       $.ajax({
-        url: this.CONF.URL,
+        url: app.CONF.LOGIN_URL,
         type: 'POST',
         data: data,
         dataType: 'text',
         contentType: false,
         processData: false,
-        timeout: this.CONF.TIMEOUT,
-        success: this.onLoginSuccess,
-        error: this.onLoginError,
-        beforeSend: this.onLogin
+        timeout: app.CONF.LOGIN_TIMEOUT,
+        success: this.onSuccess,
+        error: this.onError,
+        beforeSend: this.onSend
       });
     },
 
-    onLogin: function () {
+    onSend: function () {
       $.mobile.loading('show');
     },
 
-    onLoginSuccess: function (data) {
+    onSuccess: function (data) {
       _log('register: success.');
       $.mobile.loading('hide');
+
+      var user = app.views.loginPage.extractUserDetails(data);
+      user.email = app.views.registerPage.email;
+      app.models.user.signIn(user);
+
+      app.message('Success! A confirmation email sent.', 0);
+      setTimeout(function(){
+        window.history.go(-2);
+      }, 1000);
     },
 
-    onLoginError: function (xhr, ajaxOptions, thrownError) {
+    onError: function (xhr, ajaxOptions, thrownError) {
       _log("register: ERROR " + xhr.status + " " + thrownError);
       _log(xhr.responseText);
       $.mobile.loading('hide');
+      app.message('Sorry <br/>' + xhr.responseText);
     }
   });
 

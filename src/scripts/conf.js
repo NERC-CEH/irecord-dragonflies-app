@@ -11,7 +11,7 @@ define(['morel'], function () {
     LOG: morel.LOG_DEBUG,
     APPCACHE_SRC: "appcache.html",
     LOGIN_URL: "http://192.171.199.230/irecord7/user/mobile/register",
-    LOGIN_TIMEOUT: 20000,
+    LOGIN_TIMEOUT: 80000,
     //app feature settings
     FEATURES: {
       LOGIN: true,
@@ -33,6 +33,7 @@ define(['morel'], function () {
   $.extend(morel.record.inputs.KEYS, {
     NUMBER: 'sample:number',
     STAGE: 'sample:stage',
-    LOCATIONDETAILS: 'sample:locationdetails'
+    LOCATIONDETAILS: 'sample:locationdetails',
+    CERTAIN: 'sample:checked'
   });
 });
