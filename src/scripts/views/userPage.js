@@ -42,11 +42,16 @@ define([
     },
 
     sendAllSavedRecords: function () {
+      $.mobile.loading('show');
+
       function onSuccess() {
         app.views.userPage.printList();
       }
 
-      morel.io.sendAllSavedRecords(onSuccess);
+      function onSuccessAll() {
+        $.mobile.loading('hide');
+      }
+      morel.io.sendAllSavedRecords(onSuccess, onSuccessAll);
     },
 
     sendSavedRecord: function (e) {

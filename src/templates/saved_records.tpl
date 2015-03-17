@@ -1,5 +1,5 @@
     <% if (records.length) { %>
-    <div class="info-message">Saved recordings.</div>
+    <div class="info-message"><p>Saved recordings.</p></div>
 
     <ul data-role="listview" id="saved-list" data-split-icon="gear"
         data-inset="true" data-split-theme="d">
@@ -24,5 +24,5 @@
         <% }); %>
     </ul>
     <% } else { %>
-    <div class="info-message">No saved recordings.</div>
+    <div class="info-message"><p>No saved recordings.</p></div>
     <% } %>

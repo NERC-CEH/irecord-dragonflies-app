@@ -116,8 +116,8 @@ define(['views/_page', 'templates'], function (Page) {
       _log('views.LoginPage: success.', morel.LOG_DEBUG);
       $.mobile.loading('hide');
 
-      var user = this.extractUserDetails(data);
-      user.email = this.email;
+      var user = app.views.loginPage.extractUserDetails(data);
+      user.email = app.views.loginPage.email;
       app.models.user.signIn(user);
 
       window.history.back();

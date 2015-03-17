@@ -388,9 +388,14 @@ label.filter, label.sort {
 }
 
 .list-normal-white-space > li > p,
+ol[data-role="listview"] > li > strong,
+ol[data-role="listview"] > li > p,
 ul[data-role="listview"] > li > strong,
 ul[data-role="listview"] > li > p {
     white-space: normal;
+}
+ol[data-role="listview"] > li > p {
+    margin-right: 20px;
 }
 
 .app-logo{
