@@ -15,6 +15,13 @@ body {
     text-align: center;
 }
 
+/* Active JQM Tabs stop displaying some styles. This is a fix to restore them. */
+.ui-tabs-active > a {
+    background-color: #3388CC !important;
+    color: #ffffff !important;
+    text-shadow: none !important;
+}
+
 img {
     max-width: 100%;
 }
