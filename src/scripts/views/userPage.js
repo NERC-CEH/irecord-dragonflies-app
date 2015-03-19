@@ -18,7 +18,7 @@ define([
     },
 
     initialize: function () {
-      _log('views.UserPage: initialize', app.LOG_DEBUG);
+      _log('views.UserPage: initialize', log.DEBUG);
 
       this.listenTo(app.models.user, 'change:email', this.update);
 
@@ -27,7 +27,7 @@ define([
     },
 
     render: function () {
-      _log('views.UserPage: render', app.LOG_DEBUG);
+      _log('views.UserPage: render', log.DEBUG);
 
       this.$el.html(this.template());
 
@@ -82,8 +82,8 @@ define([
           if (!xhr.responseText) {
             xhr.responseText = "Sorry. Some Error Occurred."
           }
-          _log("user: ERROR record ajax (" + xhr.status + " " + thrownError + ").", app.LOG_ERROR);
-          _log(xhr.responseText, app.LOG_ERROR);
+          _log("user: ERROR record ajax (" + xhr.status + " " + thrownError + ").", log.ERROR);
+          _log(xhr.responseText, log.ERROR);
 
           $.mobile.loading('show', {
             text: xhr.responseText,
@@ -177,7 +177,7 @@ define([
     },
 
     signOut: function () {
-      _log('user: logging out', app.LOG_INFO);
+      _log('user: logging out', log.INFO);
       app.models.user.signOut();
       this.update();
     }

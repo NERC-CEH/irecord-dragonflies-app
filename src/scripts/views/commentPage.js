@@ -16,14 +16,14 @@ define([
     },
 
     initialize: function () {
-      _log('views.CommentPage: initialize', app.LOG_DEBUG);
+      _log('views.CommentPage: initialize', log.DEBUG);
 
       this.render();
       this.appendBackButtonListeners();
     },
 
     render: function () {
-      _log('views.CommentPage: render', app.LOG_DEBUG);
+      _log('views.CommentPage: render', log.DEBUG);
 
       this.$el.html(this.template());
 

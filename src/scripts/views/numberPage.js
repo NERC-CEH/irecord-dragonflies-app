@@ -18,7 +18,7 @@ define([
     },
 
     initialize: function () {
-      _log('views.NumberPage: initialize', app.LOG_DEBUG);
+      _log('views.NumberPage: initialize', log.DEBUG);
 
       this.listenTo(this.model,
         'change:' + this.warehouse_id, this.update);

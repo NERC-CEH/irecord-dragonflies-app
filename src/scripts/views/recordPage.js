@@ -18,7 +18,7 @@ define([
     },
 
     initialize: function () {
-      _log('views.RecordPage: initialize', app.LOG_DEBUG);
+      _log('views.RecordPage: initialize', log.DEBUG);
 
       this.listenTo(this.model,
         'change:' + morel.record.inputs.KEYS.NUMBER, this.updateNumberButton);
@@ -37,7 +37,7 @@ define([
     },
 
     render: function () {
-      _log('views.RecordPage: render', app.LOG_DEBUG);
+      _log('views.RecordPage: render', log.DEBUG);
 
       this.$el.html(this.template());
       $('body').append($(this.el));
@@ -51,7 +51,7 @@ define([
           this.initRecording(speciesID);
           break;
         case '':
-          _log('views.RecordPage: coming from unknown page.', app.LOG_WARNING);
+          _log('views.RecordPage: coming from unknown page.', log.WARNING);
           this.initRecording(speciesID);
         default:
       }
@@ -76,7 +76,7 @@ define([
 
     runGeoloc: function () {
       function onGeolocSuccess(location) {
-        _log('views.RecordPage: saving location.', app.LOG_DEBUG);
+        _log('views.RecordPage: saving location.', log.DEBUG);
         morel.geoloc.set(location.lat, location.lon, location.acc);
 
         var sref = location.lat + ', ' + location.lon;
@@ -92,7 +92,7 @@ define([
     },
 
     send: function () {
-      _log('views.RecordPage: sending record.', app.LOG_INFO);
+      _log('views.RecordPage: sending record.', log.INFO);
 
       $.mobile.loading('show');
 
@@ -171,7 +171,7 @@ define([
     },
 
     save: function () {
-      _log('views.RecordPage: saving record.', app.LOG_INFO);
+      _log('views.RecordPage: saving record.', log.INFO);
       $.mobile.loading('show');
 
       if (!this.valid()) {
@@ -287,12 +287,12 @@ define([
           button.removeClass('none');
           break;
         default:
-          _log('views.RecordPage: ERROR no such GPS button state: ' + accuracy, app.LOG_WARNING);
+          _log('views.RecordPage: ERROR no such GPS button state: ' + accuracy, log.WARNING);
       }
     },
 
     saveCertain: function (e) {
-      _log('app.views.RecordPage: saving certain.', app.LOG_INFO);
+      _log('app.views.RecordPage: saving certain.', log.INFO);
       var value = $(e.currentTarget).prop('checked');
 
       this.model.set(morel.record.inputs.KEYS.CERTAIN, value);

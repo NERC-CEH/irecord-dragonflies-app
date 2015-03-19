@@ -17,7 +17,7 @@ define([
     },
 
     initialize: function () {
-      _log('views.LocationdetailsPage: initialize', app.LOG_DEBUG);
+      _log('views.LocationdetailsPage: initialize', log.DEBUG);
 
       this.listenTo(this.model,
         'change:' + this.warehouse_id, this.update);

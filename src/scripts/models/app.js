@@ -10,12 +10,12 @@ define([
 
     id: 'app',
 
-    localStorage: new Store(app.CONF.NAME),
+    localStorage: new Store(app.NAME),
 
     initialize: function () {
       this.fetch();
       if (!this.get('appVer')) {
-        this.save ('appVer', app.CONF.VERSION);
+        this.save ('appVer', app.VERSION);
       }
     }
 

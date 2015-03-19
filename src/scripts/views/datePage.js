@@ -18,7 +18,7 @@ define([
     },
 
     initialize: function () {
-      _log('views.DatePage: initialize', app.LOG_DEBUG);
+      _log('views.DatePage: initialize', log.DEBUG);
 
       this.render();
       this.appendBackButtonListeners();

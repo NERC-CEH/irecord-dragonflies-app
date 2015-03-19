@@ -19,7 +19,7 @@ define([
     },
 
     initialize: function () {
-      _log('views.LocationPage: initialize', app.LOG_DEBUG);
+      _log('views.LocationPage: initialize', log.DEBUG);
 
       this.render();
       this.appendBackButtonListeners();
@@ -38,7 +38,7 @@ define([
     },
 
     render: function () {
-      _log('views.LocationPage: render', app.LOG_DEBUG);
+      _log('views.LocationPage: render', log.DEBUG);
 
       this.$el.html(this.template());
       $('body').append($(this.el));

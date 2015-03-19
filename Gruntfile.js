@@ -111,12 +111,12 @@ module.exports = function (grunt) {
         src: [DEST + CONF_NAME],
         overwrite: true, // overwrite matched source files
         replacements: [{
-          from: /(VERSION:).*version grunt replaced/g, // string replacement
-          to: '$1 \'<%= pkg.version %>\','
+          from: /(app.VERSION =).*version grunt replaced/g, // string replacement
+          to: '$1 \'<%= pkg.version %>\';'
         },
           {
-            from: /(NAME:).*name grunt replaced/g,  // string replacement
-            to: '$1 \'<%= pkg.name %>\','
+            from: /(app.NAME =).*name grunt replaced/g,  // string replacement
+            to: '$1 \'<%= pkg.name %>\';'
           }
         ]
       }

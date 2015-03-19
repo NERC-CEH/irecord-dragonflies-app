@@ -19,14 +19,14 @@ define([
     },
 
     initialize: function () {
-      _log('views.SpeciesPage: initialize', app.LOG_DEBUG);
+      _log('views.SpeciesPage: initialize', log.DEBUG);
 
       this.render();
       this.appendBackButtonListeners();
     },
 
     render: function () {
-      _log('views.SpeciesPage: render', app.LOG_DEBUG);
+      _log('views.SpeciesPage: render', log.DEBUG);
 
       this.$el.html(this.template());
       $('body').append($(this.el));
@@ -77,7 +77,7 @@ define([
     addFlightData: function () {
       //gracefully fallback and not break anything else if not found.
       if (app.data.flight == null || app.data.flight == 'undefined') {
-        _log('species: app.data.flight not found', app.LOG_ERROR);
+        _log('species: app.data.flight not found', log.ERROR);
         return;
       }
       var container = $('#species-flight');
@@ -91,7 +91,7 @@ define([
       var flight_data = app.data.flight[speciesID];
 
       if (flight_data == null) {
-        _log('species: no filght data was found for: ' + speciesID, app.LOG_ERROR);
+        _log('species: no filght data was found for: ' + speciesID, log.ERROR);
         return;
       }
 

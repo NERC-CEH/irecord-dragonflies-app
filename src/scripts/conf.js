@@ -3,13 +3,13 @@
  */
 define(['morel'], function () {
   app = window.app || {};
+  //app wide settings
 
-//app wide settings
+  app.VERSION = '0'; //version grunt replaced
+  app.NAME = 'app'; //name grunt replaced
+
   app.CONF = {
-    VERSION: '0', //version grunt replaced //Application (controllers and data) version
-    NAME: 'app', //name grunt replaced
-    LOG: morel.LOG_DEBUG,
-    APPCACHE_SRC: "appcache.html",
+    APPCACHE_URL: "appcache.html",
     LOGIN_URL: "http://192.171.199.230/irecord7/user/mobile/register",
     LOGIN_TIMEOUT: 80000,
     //app feature settings
@@ -20,8 +20,16 @@ define(['morel'], function () {
     }
   };
 
+  //logging
+  log.CONF = {
+    STATE: log.DEBUG,
+    ERROR_URL: "http://192.171.199.230/irecord7/mobile/log",
+    APP_NAME: app.NAME,
+    APP_VERSION: app.VERSION
+  };
+
 //morel configuration
-  morel.CONF.NAME = app.CONF.NAME;
+  morel.CONF.NAME = app.NAME;
   morel.io.CONF.RECORD_URL = 'http://192.171.199.230/irecord7/mobile/submit';
   morel.auth.CONF = {
     APPNAME: "test",

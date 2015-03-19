@@ -1,35 +1,146 @@
-/*
- !!!!QUICK FIX - REMOVE AFTER DONE!!!!
+/**
+ * Takes care of application execution logging.
+ *
+ * Depends on morel.
+ *
+ * Uses 5 levels of logging:
+ *  0: none
+ *  1: errors
+ *  2: warnings
+ *  3: information
+ *  4: debug
+ *
+ * Levels values defined in core app module.
+ *
+ * @param message
+ * @param level
+ * @private
  */
-function _log(message, level) {
 
-  //do nothing if logging turned off
-  if (app.CONF.LOG == morel.LOG_NONE) {
-    return;
-  }
+window.log = {
+  NONE: 0,
+  ERROR: 1,
+  WARNING: 2,
+  INFO: 3,
+  DEBUG: 4,
 
-  if (app.CONF.LOG >= level || !level) {
-    switch (level) {
-      case morel.LOG_ERROR:
-        console.error(message.message, message.url, message.line);
-        break;
-      case morel.LOG_WARNING:
-        console.warn(message);
-        break;
-      case morel.LOG_INFO:
-        console.log(message);
-        break;
-      case morel.LOG_DEBUG:
-      default:
-        //IE does not support console.debug
-        if (!console.debug) {
+  CONF: {
+    STATUS: 4,
+    ERROR_URL: '',
+    APP_NAME: '',
+    APP_VERSION: ''
+  },
+
+  core: function (message, level) {
+    "use strict";
+    //do nothing if logging turned off
+    if (log.CONF.STATE === log.NONE) {
+      return;
+    }
+
+    if (log.CONF.STATE >= level || !level) {
+      switch (level) {
+        case log.ERROR:
+          log.error(log.CONF.ERROR_URL, message);
+          break;
+        case log.WARNING:
+          console.warn(message);
+          break;
+        case log.INFO:
           console.log(message);
           break;
-        }
-        console.debug(message);
+        case log.DEBUG:
+        /* falls through */
+        default:
+          //IE does not support console.debug
+          if (!console.debug) {
+            console.log(message);
+            break;
+          }
+          console.debug(message);
+      }
     }
+  },
+
+
+  /**
+   * Prints and posts an error to the mobile authentication log.
+   *
+   * @param error object holding a 'message', and optionally 'url' and 'line' fields.
+   * @private
+   */
+  error: function (errorLogURL, error) {
+    "use strict";
+    //print error
+    console.error(error.message, error.url, error.line);
+
+    //prepare the message
+    var message = '<b style="color: red">' + error.message + '</b>';
+    message += '</br><b> morel version = </b><i>"' + morel.VERSION + '"</i>';
+
+    message += '</br><b> app name = </b><i>"' + log.CONF.APP_NAME + '"</i>';
+    message += '</br><b> app version = </b><i>"' + log.CONF.APP_VERSION + '"</i></br>';
+
+    //browser info
+    message += '</br>' + navigator.appName;
+    message += '</br>' + navigator.appVersion;
+
+    var url = error.url + ' (' + error.line + ')';
+
+    if (navigator.onLine) {
+      //send to server
+
+      var data = {};
+      data.append = function (name, value) {
+        this[name] = value;
+      };
+      data.append('message', message);
+      data.append('url', url);
+      morel.auth.appendApp(data);
+
+      //removing unnecessary information
+      delete data.append;
+
+      jQuery.ajax({
+        url: errorLogURL,
+        type: 'post',
+        dataType: 'json',
+        success: function (data) {
+          console.log(data);
+        },
+        data: data
+      });
+    }
+  },
+
+  /**
+   * Hook into window.error function.
+   *
+   * @param message
+   * @param url
+   * @param line
+   * @returns {boolean}
+   * @private
+   */
+  onError: function (message, url, line) {
+    "use strict";
+    window.onerror = null;
+
+    var error = {
+      'message': message,
+      'url': url || '',
+      'line': line || -1
+    };
+
+    _log(error, log.ERROR);
+
+    window.onerror = this; // turn on error handling again
+    return true; // suppress normal error reporting
   }
-}
+
+};
+
+window._log = log.core;
 
 var app = app || {};
 
@@ -41,7 +152,7 @@ var app = app || {};
  */
 app.message = function (text, time) {
   if (!text) {
-    _log('NAVIGATION: no text provided to message.', morel.LOG_ERROR);
+    _log('NAVIGATION: no text provided to message.', log.ERROR);
     return;
   }
 
@@ -70,7 +181,7 @@ app.message = function (text, time) {
  * Asks the user to start an appcache download
  * process.
  */
-app.download =  function () {
+app.download = function () {
   var downloadedApp = app.models.user.get('downloadedApp');
   var dontAskDownloadApp = app.models.user.get('dontAskDownloadApp');
 
@@ -91,7 +202,7 @@ app.download =  function () {
     app.message(message, 0);
 
     $('#' + donwloadBtnId).on('click', function () {
-      _log('helpers: starting appcache downloading process.', app.LOG_DEBUG);
+      _log('helpers: starting appcache downloading process.', log.DEBUG);
       $.mobile.loading('hide');
 
       //for some unknown reason on timeout the popup does not disappear
@@ -110,7 +221,7 @@ app.download =  function () {
     });
 
     $('#' + donwloadCancelBtnId).on('click', function () {
-      _log('helpers: appcache dowload canceled.', app.LOG_DEBUG);
+      _log('helpers: appcache dowload canceled.', log.DEBUG);
       $.mobile.loading('hide');
 
       var dontAsk = $('#' + downloadCheckbox).prop('checked');
@@ -136,7 +247,7 @@ app.startManifestDownload = function (id, callback, onError) {
    at that point.
    */
   if (navigator.onLine) {
-    var src = app.CONF.APPCACHE_SRC;
+    var src = app.CONF.APPCACHE_URL;
     var frame = document.getElementById(id);
     if (frame) {
       //update
@@ -148,7 +259,7 @@ app.startManifestDownload = function (id, callback, onError) {
 
       //After frame loading set up its controllers/callbacks
       frame.onload = function () {
-        _log('Manifest frame loaded', app.LOG_INFO);
+        _log('Manifest frame loaded', log.INFO);
         if (callback != null) {
           frame.contentWindow.finished = callback;
         }
@@ -228,7 +339,7 @@ app.fixIOSbuttons = function () {
    * Fixes back buttons for specific page
    */
   /*jslint unparam: true*/
-  function fixPageBackButtons  (currentPageURL, nextPageId) {
+  function fixPageBackButtons(currentPageURL, nextPageId) {
     "use strict";
     console.log('FIXING: back buttons ( ' + nextPageId + ')');
 
@@ -243,6 +354,7 @@ app.fixIOSbuttons = function () {
       }
     });
   }
+
   /*jslint unparam: false*/
 };
 
@@ -252,10 +364,10 @@ app.fixIOSbuttons = function () {
  */
 app.checkForUpdates = function () {
   var appVer = app.models.app.get('appVer');
-  if (appVer !== app.CONF.VERSION) {
-    _log('helpers: app version differs. Updating.', morel.LOG_INFO);
+  if (appVer !== app.VERSION) {
+    _log('helpers: app version differs. Updating.', log.INFO);
 
     //set new version
-    app.models.app.save('appVer', app.CONF.VERSION);
+    app.models.app.save('appVer', app.VERSION);
   }
 };

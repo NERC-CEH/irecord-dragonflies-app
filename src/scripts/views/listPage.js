@@ -18,7 +18,7 @@ define([
     },
 
     initialize: function () {
-      _log('views.ListPage: initialize', app.LOG_DEBUG);
+      _log('views.ListPage: initialize', log.DEBUG);
       this.listView = new SpeciesList({collection: app.collections.species});
 
       var sorts = this.listView.sorts;
@@ -31,7 +31,7 @@ define([
     },
 
     render: function () {
-      _log('views.ListPage: render', app.LOG_DEBUG);
+      _log('views.ListPage: render', log.DEBUG);
 
       this.$el.html(this.template());
       this.$list = this.$el.find('#list-placeholder');

@@ -3,7 +3,7 @@ define(['backbone'], function (Backbone) {
 
   var Record = Backbone.Model.extend({
     reset: function (warehouseID) {
-      _log('models.Record: reset.', app.LOG_DEBUG);
+      _log('models.Record: reset.', log.DEBUG);
 
       this.clear();
       this.set(morel.record.inputs.KEYS.DATE, this.getCurrentDate());

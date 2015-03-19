@@ -8,7 +8,7 @@
     "backbone.localStorage": "jeromegn/Backbone.localStorage#1.1.16",
     "lodash": "3.5.0",
     "jquery-mobile": "jobrapido/jquery-mobile-bower#1.4.5",
-    "morel": "NERC-CEH/morel#~2.4",
+    "morel": "NERC-CEH/morel#~2.0",
     "latlon": "chrisveness/geodesy#d50580b5054b562f0d1c94441f74a9d0bf8ba710",
     "IndexedDBShim": "axemclion/IndexedDBShim#d3267b460d272f6aa03bbbab2d88aa007b5896f5",
     "photoswipe": "https://github.com/downloads/codecomputerlove/PhotoSwipe/code.photoswipe-3.0.5.zip",

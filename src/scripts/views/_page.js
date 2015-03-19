@@ -8,7 +8,7 @@ define([
     role: "page",
 
     initialize: function (id) {
-      _log('views.Page(' + id + '): initialize', app.LOG_DEBUG);
+      _log('views.Page(' + id + '): initialize', log.DEBUG);
 
       this.el.id = id;
       this.id = id;
@@ -22,7 +22,7 @@ define([
     },
 
     render: function () {
-      _log('views.Page(' + this.id + '): render', app.LOG_DEBUG);
+      _log('views.Page(' + this.id + '): render', log.DEBUG);
 
       $(this.el).html(this.template());
       return this;
@@ -35,7 +35,7 @@ define([
     },
 
     appendBackButtonListeners: function () {
-      _log('views.Page(' + this.id + '): appending Back button listeners', app.LOG_DEBUG);
+      _log('views.Page(' + this.id + '): appending Back button listeners', log.DEBUG);
 
       this.$el.find('a[data-rel="back"]').on('click', function (e) {
         window.history.back();

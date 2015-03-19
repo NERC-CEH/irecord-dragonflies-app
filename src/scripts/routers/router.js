@@ -21,7 +21,7 @@ define([
 
   var Router = Backbone.Router.extend({
     initialize: function () {
-      _log('app.Router: initialize.', app.LOG_DEBUG);
+      _log('app.Router: initialize.', log.DEBUG);
 
       $(document).on("show", _.bind(this.handleshow, this));
     },
@@ -171,7 +171,7 @@ define([
       // We turned off $.mobile.autoInitializePage, but now that we've
       // added our first page to the DOM, we can now call initializePage.
       if (!this.initializedFirstPage) {
-        _log('app.Router: loading first page.', app.LOG_DEBUG);
+        _log('app.Router: loading first page.', log.DEBUG);
 
         $.mobile.initializePage();
         this.initializedFirstPage = true;

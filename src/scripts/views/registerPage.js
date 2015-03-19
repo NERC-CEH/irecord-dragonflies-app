@@ -12,14 +12,14 @@ define(['views/_page', 'templates'], function (Page) {
     },
 
     initialize: function () {
-      _log('views.RegisterPage: initialize', app.LOG_DEBUG);
+      _log('views.RegisterPage: initialize', log.DEBUG);
 
       this.render();
       this.appendBackButtonListeners();
     },
 
     render: function () {
-      _log('views.RegisterPage: render', app.LOG_DEBUG);
+      _log('views.RegisterPage: render', log.DEBUG);
 
       this.$el.html(this.template());
 

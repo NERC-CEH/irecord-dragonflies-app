@@ -199,7 +199,7 @@ define([
      *
      */
     initialize: function () {
-      _log('views.SpeciesList: initialize', app.LOG_DEBUG);
+      _log('views.SpeciesList: initialize', log.DEBUG);
 
       this.listenTo(this.collection, 'change', this.update);
       this.listenTo(app.models.user, 'change:filters',  this.update);
@@ -211,7 +211,7 @@ define([
      * @returns {SpeciesListView}
      */
     render: function (onSuccess) {
-      _log('views.SpeciesList: render', app.LOG_DEBUG);
+      _log('views.SpeciesList: render', log.DEBUG);
 
       var that = this;
       this.prepareList(function (list){
@@ -229,7 +229,7 @@ define([
     },
 
     update: function () {
-      _log('list: updating', app.LOG_INFO);
+      _log('list: updating', log.INFO);
       this.render(function($el){
         $el.listview('refresh');
       });

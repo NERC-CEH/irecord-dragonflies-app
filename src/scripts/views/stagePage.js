@@ -18,7 +18,7 @@ define([
     },
 
     initialize: function () {
-      _log('views.StagePage: initialize', app.LOG_DEBUG);
+      _log('views.StagePage: initialize', log.DEBUG);
 
       this.render();
       this.appendBackButtonListeners();
