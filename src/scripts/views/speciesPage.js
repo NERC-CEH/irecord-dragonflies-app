@@ -15,6 +15,7 @@ define([
       'click #species-profile-fav-button': 'toggleSpeciesFavourite',
       'click #species-map': 'toggleMap',
       'click #species-map-button': 'toggleMap',
+      'click #gallery-button': 'showGallery',
       'click #profile_pic': 'showGallery'
     },
 
@@ -184,6 +185,8 @@ define([
       if (WIDTH < 400) {
         BAR_WIDTH = 3; //small bar width for small screens
       }
+      var rectFill = '#C2B855';
+      var rectFillOut = '#828829';
       graph.selectAll('rect')
         .data(barData)
         .enter()
@@ -202,14 +205,14 @@ define([
           var height = ((HEIGHT - MARGINS.bottom) - yScale(d.y));
           return height > 0 ? height : 0;
         })
-        .attr('fill', '#C6C99F')
+        .attr('fill', rectFill)
         .on('mouseover', function (d) {
           d3.select(this)
-            .attr('fill', '#E2E4CD');
+            .attr('fill', rectFillOut);
         })
         .on('mouseout', function (d) {
           d3.select(this)
-            .attr('fill', '#C6C99F');
+            .attr('fill', rectFill);
         });
 
       //attach graph bar count label

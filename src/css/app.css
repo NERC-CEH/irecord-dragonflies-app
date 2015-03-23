@@ -183,7 +183,8 @@ form, body {
 .ui-header-fixed, .ui-footer-fixed {
     min-height: 45px;
 
-    background-color: #D5CB5F !important;
+    background-color: #C2B855 !important;
+    border-color: transparent !important;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -301,7 +302,6 @@ form, body {
     font-weight: bold;
 }
 
-
 #location-top-button.none:after {
     background-color: rgb(195, 109, 109);
 }
@@ -319,6 +319,15 @@ form, body {
     display: block !important;
 }
 
+.ui-header .ui-title {
+    color: white;
+    text-shadow: none;
+}
+
+h1.taxon {
+    text-shadow: none;
+    font-style: italic;
+}
 
 div.taxon {
     display: none !important;

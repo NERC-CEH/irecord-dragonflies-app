@@ -10,15 +10,26 @@
         <% }); %>
     </div>
 
-    <% if (map) { %>
-        <button id="species-map-button">Show Distribution</button>
+    <div data-role="navbar" data-iconpos="left">
+        <ul>
+            <li>
+                <button id="species-map-button">Distribution</button>
+            </li>
+            <li>
+                <button id="gallery-button">Gallery</button>
+            </li>
+        </ul>
+    </div>
 
-        <svg viewBox="0 0 400 500" id="species-map" preserveAspectRatio="none" style="display:none" xmlns="http://www.w3.org/2000/svg"
-             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
-            <use id="species-map-data" xlink:href="<%- map %>#data"/>
-            <use id="species-map-boundary" xlink:href="images/national_boundary.svg#boundary"/>
-        </svg>
-    <% } %>
+    <ul id="species-map" data-role="listview" data-inset="true" style="max-width: 800px; display: none">
+        <li >
+            <svg viewBox="0 0 400 500"  preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
+                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+                <use id="species-map-data" xlink:href="<%- map %>#data"/>
+                <use id="species-map-boundary" xlink:href="images/national_boundary.svg#boundary"/>
+            </svg>
+        </li>
+    </ul>
 
     <ul data-role="listview" data-inset="true" style="max-width:800px;">
 
