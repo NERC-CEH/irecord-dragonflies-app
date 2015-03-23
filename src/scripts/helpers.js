@@ -180,9 +180,11 @@ app.download = function () {
           app.models.user.save('downloadedApp', true);
 
           //Send update to Google Analytics
-          require(['ga'], function (ga) {
-            ga('send', 'event', 'app', 'downloadSuccess');
-          });
+          if (app.CONF.GA.STATUS){
+            require(['ga'], function (ga) {
+              ga('send', 'event', 'app', 'downloadSuccess');
+            });
+          }
 
           //finished reload popup
           var finishedBtnId = 'download-finished-restart-button';
