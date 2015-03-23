@@ -16,6 +16,20 @@ define([
             SpeciesCollection, RecordModel) {
     var App = {
       init: function () {
+        //init Google Analytics
+        //http://veithen.github.io/2015/02/14/requirejs-google-analytics.html
+        if (app.CONF.GA.STATUS){
+          window.GoogleAnalyticsObject = "__ga__";
+          window.__ga__ = {
+            q: [["create", app.CONF.GA.ID, "auto"]],
+            l: Date.now()
+          };
+          require(['ga'], function(ga) {
+            ga('set', 'appName', app.NAME);
+            ga('set', 'appVersion', app.VERSION);
+          });
+        }
+
         //overwrite morel user append function to match backbone
         window.morel.auth.getUser = function () {
           return app.models.user.attributes;

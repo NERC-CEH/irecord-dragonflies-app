@@ -16,14 +16,16 @@
       'morel': 'libs/morel',
       'underscore': 'libs/lodash',
       'backbone': 'libs/backbone',
-      'backbone.localStorage': 'libs/backbone.localStorage'
+      'backbone.localStorage': 'libs/backbone.localStorage',
+      'ga': '//www.google-analytics.com/analytics'
     },
     shim: {
       'latlon': {deps: ['latlon-ellipsoidal', 'vector3d', 'dms']},
       'jquery.mobile': {deps: ['jquery.mobile-config']},
       'backbone': {deps: ['jquery', 'underscore'], "exports": "Backbone"},
       'morel': {deps: ['IndexedDBShim']},
-      'photoswipe': {deps: ['jquery', 'klass'], exports : 'Code.PhotoSwipe'}
+      'photoswipe': {deps: ['jquery', 'klass'], exports : 'Code.PhotoSwipe'},
+      'ga': {exports: "__ga__"}
     },
     waitSeconds: 20
   });

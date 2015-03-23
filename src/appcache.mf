@@ -196,7 +196,7 @@ images/Sympetrum_striolatum_m_1_David_Kitching.jpg
 images/Sympetrum_striolatum_m_3_David_Kitching.jpg
 images/Sympetrum_striolatum_new_final_.svg
 
-scripts/lib/require.js
+scripts/libs/require.js
 scripts/data.js
 scripts/main-built.js
 

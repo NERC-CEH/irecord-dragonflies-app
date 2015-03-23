@@ -24,7 +24,7 @@ define([
       this.fetch();
     },
 
-    localStorage: new Store(app.CONF.NAME),
+    localStorage: new Store(app.NAME),
 
     signOut: function () {
       this.set('email', '');

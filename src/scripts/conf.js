@@ -10,7 +10,13 @@ define(['morel'], function () {
   app.CONF = {
     //app feature settings
     OFFLINE: {
+      STATUS: true,
       APPCACHE_URL: "appcache.html"
+    },
+    GA: {
+      //Google Analytics settings
+      STATUS: true,
+      ID: 'UA-58378803-2'
     },
     LOGIN: {
       STATUS: true,
@@ -29,9 +35,7 @@ define(['morel'], function () {
   //logging
   log.CONF = {
     STATE: log.DEBUG,
-    ERROR_URL: "http://192.171.199.230/irecord7/mobile/log",
-    APP_NAME: app.NAME,
-    APP_VERSION: app.VERSION
+    GA_ERROR: true //log error using google analytics
   };
 
   //morel configuration

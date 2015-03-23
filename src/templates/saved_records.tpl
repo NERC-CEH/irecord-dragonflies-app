@@ -14,8 +14,7 @@
         <li data-corners="false" data-shadow="false" data-iconshadow="true"
             data-wrapperels="div" data-icon="arrow-r" data-iconpos="right">
             <a href="#user" id="send-button" data-id="<%- record.id %>">
-                <!--<img src="" />-->
-                <p><%- record.date %></p>
+                <p><strong><%- record.date %></strong></p>
                 <p><%- record.common_name %></p>
             </a>
             <a href="#user" id="delete-button" data-icon="delete" data-ajax="false"

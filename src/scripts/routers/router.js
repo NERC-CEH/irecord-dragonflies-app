@@ -24,6 +24,14 @@ define([
       _log('app.Router: initialize.', log.DEBUG);
 
       $(document).on("show", _.bind(this.handleshow, this));
+
+      //track every route change as a page view in google analytics
+      this.bind('route', this.trackPageview);
+
+      //download app for offline usage
+      if (app.CONF.OFFLINE.STATUS){
+        setTimeout(app.download, 500);
+      }
     },
 
     routes: {
@@ -175,9 +183,6 @@ define([
 
         $.mobile.initializePage();
         this.initializedFirstPage = true;
-
-        //ask user to appcache
-        //setTimeout(app.download, 1000);
       }
 
       $(":mobile-pagecontainer").pagecontainer("change", '#' + page.id,
@@ -193,6 +198,24 @@ define([
           page.show(event, ui);
         }
       });
+    },
+
+    trackPageview: function () {
+      //Google Analytics
+      if (app.CONF.GA.STATUS) {
+        require(['ga'], function(ga) {
+          var url = Backbone.history.getFragment();
+
+          // Add a slash if neccesary
+          if (!/^\//.test(url)) url = '/' + url;
+
+          // Record page view
+          ga('send', {
+            'hitType': 'pageview',
+            'page': url
+          });
+        });
+      }
     }
   });
 

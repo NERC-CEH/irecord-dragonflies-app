@@ -26,9 +26,7 @@ window.log = {
 
   CONF: {
     STATUS: 4,
-    ERROR_URL: '',
-    APP_NAME: '',
-    APP_VERSION: ''
+    GA_ERROR: false //google analytics error logging
   },
 
   core: function (message, level) {
@@ -41,7 +39,7 @@ window.log = {
     if (log.CONF.STATE >= level || !level) {
       switch (level) {
         case log.ERROR:
-          log.error(log.CONF.ERROR_URL, message);
+          log.error(message);
           break;
         case log.WARNING:
           console.warn(message);
@@ -69,46 +67,16 @@ window.log = {
    * @param error object holding a 'message', and optionally 'url' and 'line' fields.
    * @private
    */
-  error: function (errorLogURL, error) {
+  error: function (error) {
     "use strict";
     //print error
     console.error(error.message, error.url, error.line);
 
-    //prepare the message
-    var message = '<b style="color: red">' + error.message + '</b>';
-    message += '</br><b> morel version = </b><i>"' + morel.VERSION + '"</i>';
-
-    message += '</br><b> app name = </b><i>"' + log.CONF.APP_NAME + '"</i>';
-    message += '</br><b> app version = </b><i>"' + log.CONF.APP_VERSION + '"</i></br>';
-
-    //browser info
-    message += '</br>' + navigator.appName;
-    message += '</br>' + navigator.appVersion;
-
-    var url = error.url + ' (' + error.line + ')';
-
-    if (navigator.onLine) {
-      //send to server
-
-      var data = {};
-      data.append = function (name, value) {
-        this[name] = value;
-      };
-      data.append('message', message);
-      data.append('url', url);
-      morel.auth.appendApp(data);
-
-      //removing unnecessary information
-      delete data.append;
-
-      jQuery.ajax({
-        url: errorLogURL,
-        type: 'post',
-        dataType: 'json',
-        success: function (data) {
-          console.log(data);
-        },
-        data: data
+    if (app.CONF.GA.STATUS && log.CONF.GA_ERROR){
+      require(['ga'], function (ga) {
+        ga('send', 'exception', {
+          'exDescription': error.message + ' ' +  error.url + ' ' +  error.line
+        })
       });
     }
   },
@@ -141,6 +109,7 @@ window.log = {
 };
 
 window._log = log.core;
+window.onerror = log.onError;
 
 var app = app || {};
 
@@ -210,6 +179,11 @@ app.download = function () {
         function onSuccess() {
           app.models.user.save('downloadedApp', true);
 
+          //Send update to Google Analytics
+          require(['ga'], function (ga) {
+            ga('send', 'event', 'app', 'downloadSuccess');
+          });
+
           //finished reload popup
           var finishedBtnId = 'download-finished-restart-button';
           var finishedBtnCloseId = 'download-finished-close-button';
@@ -230,8 +204,8 @@ app.download = function () {
           });
         }
 
-        function onError() {
-          _log('helpers: ERROR appcache.');
+        function onError(error) {
+          _log(error, log.ERROR);
         }
 
         app.startManifestDownload('appcache', onSuccess, onError);
@@ -265,7 +239,7 @@ app.startManifestDownload = function (id, callback, onError) {
    at that point.
    */
   if (navigator.onLine) {
-    var src = app.CONF.APPCACHE_URL;
+    var src = app.CONF.OFFLINE.APPCACHE_URL;
     var frame = document.getElementById(id);
     if (frame) {
       //update
