@@ -50,7 +50,7 @@ define(['views/_page', 'templates'], function (Page) {
       };
       this.email = person.email; //save email for successful login
 
-       switch (app.CONF.FEATURES.LOGIN) {
+       switch (app.CONF.LOGIN.STATUS) {
          case true:
            this.loginSend(form, person);
            break;
@@ -71,12 +71,12 @@ define(['views/_page', 'templates'], function (Page) {
     loginSend: function (form, person) {
       $.mobile.loading('show');
       $.ajax({
-        url: app.CONF.LOGIN_URL,
+        url: app.CONF.LOGIN.URL,
         type: 'POST',
         data: person,
         callback_data: person,
         dataType: 'text',
-        timeout: app.CONF.LOGIN_TIMEOUT,
+        timeout: app.CONF.LOGIN.TIMEOUT,
         success: this.onLoginSuccess,
         error: this.onLoginError
       });

@@ -55,12 +55,18 @@ define([
     save: function () {
       var location = this.get();
 
-      morel.geoloc.set(location.lat, location.lon, location.acc);
+      if (location.latitude && location.longitude) {
+        morel.geoloc.set(location.latitude, location.longitude, location.accuracy);
 
-      var sref = location.lat + ', ' + location.lon;
-      app.models.record.set(morel.record.inputs.KEYS.SREF, sref);
-      app.models.record.set(morel.record.inputs.KEYS.SREF_ACCURACY, location.acc);
-      app.models.user.saveLocation(location);
+        var sref = location.latitude + ', ' + location.longitude;
+        app.models.record.set(morel.record.inputs.KEYS.SREF, sref);
+        app.models.record.set(morel.record.inputs.KEYS.SREF_ACCURACY, location.accuracy);
+        app.models.record.set(morel.record.inputs.KEYS.SREF_NAME, location.name);
+
+        app.models.user.saveLocation(location);
+      } else {
+        _log('views.LocationPage: invalid location to set', log.WARNING);
+      }
 
       window.history.back();
     },
@@ -69,23 +75,26 @@ define([
     latitude: null,
     longitude: null,
     accuracy: -1,
+    name: '',
 
-    set: function (lat, lon, acc) {
-      this.latitude = lat;
-      this.longitude = lon;
-      this.accuracy = acc;
+    set: function (latitude, longitude, accuracy, name) {
+      this.latitude = latitude;
+      this.longitude = longitude;
+      this.accuracy = accuracy;
+      this.name = name || ''
     },
 
     get: function () {
       return {
-        'lat': this.latitude,
-        'lon': this.longitude,
-        'acc': this.accuracy
+        'latitude': this.latitude,
+        'longitude': this.longitude,
+        'accuracy': this.accuracy,
+        'name': this.name
       };
     },
 
-    updateCoordinateDisplay: function (lat, lon, acc) {
-      var info = 'Your coordinates: ' + lat + ', ' + lon + ' (Accuracy: ' + acc + ')';
+    updateCoordinateDisplay: function (latitude, longitude, accuracy) {
+      var info = 'Your coordinates: ' + latitude + ', ' + longitude + ' (Accuracy: ' + accuracy + ')';
       $('#coordinates').text(info);
     },
 
@@ -98,7 +107,7 @@ define([
       switch (state) {
         case 'init':
           var currentLocation = app.views.locationPage.get();
-          if (currentLocation.acc === -1) {
+          if (currentLocation.accuracy === -1) {
             currentLocation = null;
           } else {
             location = currentLocation;
@@ -117,7 +126,7 @@ define([
       }
 
       if (location) {
-        var p = new LatLon(location.lat, location.lon, LatLon.datum.OSGB36);
+        var p = new LatLon(location.latitude, location.longitude, LatLon.datum.OSGB36);
         var grid = OsGridRef.latLonToOsGrid(p);
         gref = grid.toString();
         location.gref = gref;
@@ -143,9 +152,9 @@ define([
       function onUpdate(location) {
         //if improved update current location
         var currentLocation = app.views.locationPage.get();
-        if (currentLocation.acc === -1 || location.acc <= currentLocation.acc) {
+        if (currentLocation.accuracy === -1 || location.accuracy <= currentLocation.accuracy) {
           currentLocation = location;
-          app.views.locationPage.set(location.lat, location.lon, location.acc);
+          app.views.locationPage.set(location.latitude, location.longitude, location.accuracy);
         } else {
           location = currentLocation;
         }
@@ -157,7 +166,7 @@ define([
       function onSuccess(location) {
         $.mobile.loading('hide');
 
-        app.views.locationPage.set(location.lat, location.lon, location.acc);
+        app.views.locationPage.set(location.latitude, location.longitude, location.accuracy);
         app.views.locationPage.renderGPStab('finished', location);
       }
 
@@ -182,7 +191,7 @@ define([
 
       var location = null;
       var currentLocation = app.views.locationPage.get();
-      if (currentLocation.acc !== -1) {
+      if (currentLocation.accuracy !== -1) {
         location = currentLocation;
       }
 
@@ -381,10 +390,12 @@ define([
 
     gridRefConvert: function () {
       var val = $('#grid-ref').val();
+      var name = $('#location-name').val();
+
       var gridref = OsGridRef.parse(val);
       if (!isNaN(gridref.easting) && !isNaN(gridref.northing)) {
         var latLon = OsGridRef.osGridToLatLon(gridref);
-        this.set(latLon.lat, latLon.lon, 1);
+        this.set(latLon.lat, latLon.lon, 1, name);
 
         var gref = val.toUpperCase();
         var message = $('#gref-message');

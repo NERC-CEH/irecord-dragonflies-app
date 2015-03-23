@@ -109,7 +109,7 @@ define([
           }, 2000);
         };
 
-        switch (app.CONF.FEATURES.SEND_RECORD) {
+        switch (app.CONF.SEND_RECORD.STATUS) {
           case true:
             app.models.record.send(onSendSuccess, onError);
             break;
@@ -250,7 +250,7 @@ define([
       var invalids = app.models.record.validate();
       if (invalids) {
         var message =
-          "<br/> <p>The following is still missing:</p><ul>";
+          "<h3>Still missing:</h3><ul>";
 
         for (var i = 0; i < invalids.length; i++) {
           message += "<li>" + invalids[i] + "</li>";

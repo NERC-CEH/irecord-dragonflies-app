@@ -62,13 +62,13 @@ define(['views/_page', 'templates'], function (Page) {
       data.append('appsecret', morel.auth.CONF.APPSECRET);
 
       $.ajax({
-        url: app.CONF.LOGIN_URL,
+        url: app.CONF.LOGIN.URL,
         type: 'POST',
         data: data,
         dataType: 'text',
         contentType: false,
         processData: false,
-        timeout: app.CONF.LOGIN_TIMEOUT,
+        timeout: app.CONF.LOGIN.TIMEOUT,
         success: this.onSuccess,
         error: this.onError,
         beforeSend: this.onSend

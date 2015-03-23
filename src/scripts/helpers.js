@@ -209,7 +209,25 @@ app.download = function () {
       setTimeout(function () {
         function onSuccess() {
           app.models.user.save('downloadedApp', true);
-          window.location.reload();
+
+          //finished reload popup
+          var finishedBtnId = 'download-finished-restart-button';
+          var finishedBtnCloseId = 'download-finished-close-button';
+
+          var message =
+            '<h3>App can be used offline now.</h3>' +
+            '<p>Do you want to restart it?</p>' +
+            '<button id="' + finishedBtnId + '">Restart Now</button>' +
+            '<button id="' + finishedBtnCloseId+ '">Restart Later</button>';
+
+          app.message(message, 0);
+
+          $('#' + finishedBtnId).on('click', function () {
+            window.location.reload();
+          });
+          $('#' + finishedBtnCloseId).on('click', function () {
+            $.mobile.loading('hide');
+          });
         }
 
         function onError() {

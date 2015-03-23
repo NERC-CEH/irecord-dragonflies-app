@@ -33,6 +33,7 @@
                         <br/> e.g. <i>"TQ 28170 77103"</i></p>
                 </div>
                 <input type="text" id="grid-ref" placeholder="Grid Reference"/>
+                <input type="text" id="location-name" placeholder="Location Name (optional)"/>
                 <input type="button" id="grid-ref-set" value="Set"/>
             </div>
         </div>
