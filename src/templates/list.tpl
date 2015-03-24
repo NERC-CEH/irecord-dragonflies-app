@@ -7,8 +7,8 @@
                data-icon="user" data-iconpos="notext">User</a>
         </div>
 
-        <h1 id='list_heading' class="heading-short">iRD</h1>
-        <h1 id='list_heading' class="heading-long">iRecord Dragonfly</h1>
+        <h1 class="heading-short">iRD </h1>
+        <h1 class="heading-long">iRecord Dragonfly</h1>
 
         <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
             <a href="#list" id="fav-button" data-role="button"

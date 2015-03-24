@@ -28,6 +28,9 @@ define([
 
       this.render();
       this.appendBackButtonListeners();
+
+      this.listenTo(app.models.user, 'change:filters', this.updateListControlsButton);
+      this.updateListControlsButton();
     },
 
     render: function () {
@@ -58,6 +61,12 @@ define([
 
     toggleListControls: function () {
       this.listControlsView.toggleListControls();
+    },
+
+    updateListControlsButton: function () {
+      this.$listControlsButton = $('#list-controls-button');
+      var filters = app.models.user.get('filters');
+      this.$listControlsButton.toggleClass('running', filters.length > 0);
     },
 
     /**
