@@ -48,8 +48,8 @@ define([
     },
 
     saveLocation: function (location) {
-      this.set('location', location.lat + ', ' + location.lon);
-      this.set('location_acc', location.acc);
+      this.set('location', location.latitude + ', ' + location.longitude);
+      this.set('location_acc', location.accuracy);
       this.save();
     },
 

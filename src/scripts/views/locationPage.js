@@ -348,17 +348,17 @@ define([
 
       function updateMapCoords(mapLatLng) {
         var location = {
-          'lat': mapLatLng.lat(),
-          'lon': mapLatLng.lng()
+          'latitude': mapLatLng.lat(),
+          'longitude': mapLatLng.lng()
         };
-        app.views.locationPage.set(location.lat, location.lon, 1);
+        app.views.locationPage.set(location.latitude, location.longitude, 1);
 
         updateMapInfoMessage('#map-message', location);
       }
 
       function updateMapInfoMessage(id, location) {
         //convert coords to Grid Ref
-        var p = new LatLon(location.lat, location.lon, LatLon.datum.OSGB36);
+        var p = new LatLon(location.latitude, location.longitude, LatLon.datum.OSGB36);
         var grid = OsGridRef.latLonToOsGrid(p);
         var gref = grid.toString();
 
@@ -395,7 +395,7 @@ define([
       var gridref = OsGridRef.parse(val);
       if (!isNaN(gridref.easting) && !isNaN(gridref.northing)) {
         var latLon = OsGridRef.osGridToLatLon(gridref);
-        this.set(latLon.lat, latLon.lon, 1, name);
+        this.set(latLon.latitude, latLon.longitude, 1, name);
 
         var gref = val.toUpperCase();
         var message = $('#gref-message');
