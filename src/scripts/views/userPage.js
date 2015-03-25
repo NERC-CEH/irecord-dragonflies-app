@@ -78,15 +78,11 @@ define([
           });
         };
 
-        onError = function (xhr, ajaxOptions, thrownError) {
-          if (!xhr.responseText) {
-            xhr.responseText = "Sorry. Some Error Occurred."
-          }
-          _log("user: ERROR record ajax (" + xhr.status + " " + thrownError + ").", log.ERROR);
-          _log(xhr.responseText, log.ERROR);
+        onError = function (error) {
+          _log(error, log.ERROR);
 
           $.mobile.loading('show', {
-            text: xhr.responseText,
+            text: 'Sorry. Some problem occurred :(',
             theme: "b",
             textVisible: true,
             textonly: true

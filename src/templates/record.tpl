@@ -56,7 +56,7 @@
             </li>
         </ul>
 
-        <label>
+        <label for="certain-button">
             <input type="checkbox" data-iconpos="right" id="certain-button"
                    name="certain" value="1"> Certain
         </label>

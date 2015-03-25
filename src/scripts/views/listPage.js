@@ -65,7 +65,7 @@ define([
 
     updateListControlsButton: function () {
       this.$listControlsButton = $('#list-controls-button');
-      var filters = app.models.user.get('filters');
+      var filters = _.without(app.models.user.get('filters'), 'favourites');
       this.$listControlsButton.toggleClass('running', filters.length > 0);
     },
 

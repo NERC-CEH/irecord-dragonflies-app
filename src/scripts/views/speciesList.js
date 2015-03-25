@@ -36,13 +36,17 @@ define([
                 var speciesIds = Object.keys(location_data);
                 for (var i = 0; i < speciesIds.length; i++) {
                   for (var j = 0; j < list.length; j++) {
-                    if (list[j].id == speciesIds[i]) {
+                    if (list[j].id === speciesIds[i]) {
                       filtered_list.push(list[j]);
                       break;
                     }
                   }
                 }
               }
+              //add general ones
+            //  var general = _.findWhere(list, {attributes:{general: "TRUE"}});
+             // filtered_list.push(general);
+
               onSuccess(filtered_list);
           }
       }},
@@ -52,7 +56,7 @@ define([
           filter: function (list, onSuccess) {
             var filtered_list = [];
             for (var j = 0; j < list.length; j++) {
-              if (list[j].attributes.type === 'anisoptera') {
+              if (list[j].attributes.type === 'anisoptera' || list[j].attributes.general) {
                 filtered_list.push(list[j]);
               }
             }
@@ -64,7 +68,7 @@ define([
           filter: function (list, onSuccess) {
             var filtered_list = [];
             for (var j = 0; j < list.length; j++) {
-              if (list[j].attributes.type === 'zygoptera') {
+              if (list[j].attributes.type === 'zygoptera' || list[j].attributes.general) {
                 filtered_list.push(list[j]);
               }
             }
@@ -101,6 +105,9 @@ define([
         label: 'Taxonomic',
         sort: function (list, onSuccess) {
           list.sort(function (a, b) {
+            if (a.attributes.general || b.attributes.general){
+              return a.attributes.general ? 1 : -1;
+            }
             a = parseInt(a.attributes.id);
             b = parseInt(b.attributes.id);
             if (a === b) {
@@ -115,8 +122,12 @@ define([
         label: 'Common Name',
         sort: function (list, onSuccess) {
           list.sort(function (a, b) {
+            if (a.attributes.general || b.attributes.general){
+              return a.attributes.general ? 1 : -1;
+            }
             a = a.attributes.common_name.toLowerCase();
             b = b.attributes.common_name.toLowerCase();
+
             if (a === b) {
               return 0;
             }
@@ -129,8 +140,12 @@ define([
         label: 'Common Name Reverse',
         sort: function (list, onSuccess) {
           list.sort(function (a, b) {
+            if (a.attributes.general || b.attributes.general){
+              return a.attributes.general ? 1 : -1;
+            }
             a = a.attributes.common_name.toLowerCase();
             b = b.attributes.common_name.toLowerCase();
+
             if (a === b) {
               return 0;
             }
@@ -143,8 +158,12 @@ define([
         label: 'Scientific Name',
         sort: function (list, onSuccess) {
           list.sort(function (a, b) {
+            if (a.attributes.general || b.attributes.general){
+              return a.attributes.general ? 1 : -1;
+            }
             a = a.attributes.taxon.toLowerCase();
             b = b.attributes.taxon.toLowerCase();
+
             if (a === b) {
               return 0;
             }
@@ -157,8 +176,12 @@ define([
         label: 'Scientific Name Reverse',
         sort: function (list, onSuccess) {
           list.sort(function (a, b) {
+            if (a.attributes.general || b.attributes.general){
+              return a.attributes.general ? 1 : -1;
+            }
             a = a.attributes.taxon.toLowerCase();
             b = b.attributes.taxon.toLowerCase();
+
             if (a === b) {
               return 0;
             }
@@ -178,6 +201,9 @@ define([
           }
 
           list.sort(function (a, b) {
+              if (a.attributes.general || b.attributes.general){
+                return a.attributes.general ? 1 : -1;
+              }
               var a_prob = getProb(a);
               var b_prob = getProb(b);
               if (a_prob == b_prob) return 0;

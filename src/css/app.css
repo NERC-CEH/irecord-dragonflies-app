@@ -504,4 +504,11 @@ div.loading {
     margin-top: 10%;
 }
 
+.ui-loader .ui-icon-loading {
+    background-color: #DFDFDF;
+}
 
+.ui-loader-default {
+
+    opacity: .70;
+}

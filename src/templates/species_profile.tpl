@@ -10,6 +10,7 @@
         <% }); %>
     </div>
 
+    <% if (!general) { %>
     <div data-role="navbar" data-iconpos="left">
         <ul>
             <li>
@@ -20,6 +21,7 @@
             </li>
         </ul>
     </div>
+    <% } %>
 
     <ul id="species-map" data-role="listview" data-inset="true" style="max-width: 800px; display: none">
         <li >
@@ -32,26 +34,42 @@
     </ul>
 
     <ul data-role="listview" data-inset="true" style="max-width:800px;">
-
         <li>
             <div class="common-name"><%- common_name %></div>
             <div class="taxon"><%- taxon %></div>
         </li>
+        <% if (!general) { %>
         <li id="species-flight"></li>
+        <% } %>
         <li>
             <p><%- description %></p>
         </li>
-        <li><strong>Distribution</strong>:
-            <p><%- distribution %></p></li>
-        <li><strong>Habitat</strong>:
+        <% if (distribution) { %>
+        <li>
+            <strong>Distribution</strong>:
+            <p><%- distribution %></p>
+        </li>
+        <% } %>
+        <% if (habitat) { %>
+        <li>
+            <strong>Habitat</strong>:
             <p><%- habitat %></p>
         </li>
+        <% } %>
+        <% if (confusion_species) { %>
+        <li>
+            <strong>Confusion Species</strong>:
+            <p><%- confusion_species %></p>
+        </li>
+        <% } %>
     </ul>
+    <% if (!general) { %>
     <div data-role="navbar" data-iconpos="left">
         <ul>
             <li><a href='#species-terms' data-role="button" data-icon="info" data-prefetch>Species Terms</a></li>
         </ul>
     </div>
+    <% } %>
 </center>
 
 

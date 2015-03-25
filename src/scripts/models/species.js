@@ -5,11 +5,12 @@ define([
 
   var Specie = Backbone.Model.extend({
     defaults: {
+      general: false,
       id: "",
       warehouse_id: 0,
       taxon: "",
       common_name: "",
-      profile_pic: "images/sample.jpg",
+      profile_pic: "images/unknown.png",
       description: "",
       distribution: "",
       habitat: "",

@@ -41,11 +41,17 @@ define([
 
       this.$el.html(this.template());
       $('body').append($(this.el));
+
+      this.$heading = $('#record_heading');
+      this.$certainInputLabel =  $('label[for="certain-button"]');
+      this.$certainInput = $('#certain-button');
+      this.$photo = $('#photo');
+      this.$locationButton = $('#location-top-button');
       return this;
     },
 
     update: function (prevPageId, speciesID) {
-      _log('views.RecordPage: show.');
+      _log('views.RecordPage: update.');
       switch (prevPageId) {
         case 'list':
           this.initRecording(speciesID);
@@ -65,8 +71,17 @@ define([
       this.model.reset(specie.attributes.warehouse_id);
 
       //add header to the page
-      $('#record_heading').text(specie.attributes.common_name);
+      this.$heading.text(specie.attributes.common_name);
       this.resetButtons();
+
+      //turn off certainty option on general ones
+      if (specie.attributes.general){
+        this.$certainInputLabel.hide();
+        this.$certainInput.hide();
+      } else {
+        this.$certainInputLabel.show();
+        this.$certainInput.show();
+      }
 
       //start geolocation
       this.runGeoloc();
@@ -203,7 +218,7 @@ define([
       }
 
       $('#' + img_holder).remove();
-      $('#photo').append('<div id="' + img_holder + '"></div>');
+      this.$photo.append('<div id="' + img_holder + '"></div>');
 
       $('#sample-image-placeholder').on('click', function () {
         $('input[type="file"]').click();
@@ -265,7 +280,7 @@ define([
     },
 
     updateGPSButton: function () {
-      var button = $('#location-top-button');
+      var button = this.$locationButton;
       var accuracy = this.model.get(morel.record.inputs.KEYS.SREF_ACCURACY);
       switch (true) {
         case (accuracy == -1):
