@@ -395,7 +395,7 @@ define([
       var gridref = OsGridRef.parse(val);
       if (!isNaN(gridref.easting) && !isNaN(gridref.northing)) {
         var latLon = OsGridRef.osGridToLatLon(gridref);
-        this.set(latLon.latitude, latLon.longitude, 1, name);
+        this.set(latLon.lat, latLon.lon, 1, name);
 
         var gref = val.toUpperCase();
         var message = $('#gref-message');

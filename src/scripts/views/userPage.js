@@ -50,6 +50,7 @@ define([
 
       function onSuccessAll() {
         $.mobile.loading('hide');
+        app.views.listPage.updateUserPageButton();
       }
       morel.io.sendAllSavedRecords(onSuccess, onSuccessAll);
     },
@@ -62,6 +63,11 @@ define([
         $.mobile.loading('show');
 
         onSuccess = function () {
+          //for some reason need a timeout
+          setTimeout(function () {
+            app.views.listPage.updateUserPageButton();
+          }, 100);
+
           $.mobile.loading('show', {
             text: "Done!",
             theme: "b",
@@ -111,6 +117,8 @@ define([
     deleteSavedRecord: function (e) {
       var recordKey = $(e.currentTarget).data('id');
       morel.record.db.remove(recordKey, function () {
+        app.views.listPage.updateUserPageButton();
+
         app.views.userPage.printList();
       });
     },

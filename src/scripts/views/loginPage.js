@@ -38,29 +38,42 @@ define(['views/_page', 'templates'], function (Page) {
       //todo: add validation
 
       _log('views.LoginPage: start.', morel.LOG_DEBUG);
-      var form = jQuery('#login-form');
-      var person = {
-        //user logins
-        'email': form.find('input[name=email]').val(),
-        'password': form.find('input[name=password]').val(),
+      if (navigator.onLine) {
+        var form = jQuery('#login-form');
+        var person = {
+          //user logins
+          'email': form.find('input[name=email]').val(),
+          'password': form.find('input[name=password]').val(),
 
-        //app logins
-        'appname': morel.auth.CONF.APPNAME,
-        'appsecret': morel.auth.CONF.APPSECRET
-      };
-      this.email = person.email; //save email for successful login
+          //app logins
+          'appname': morel.auth.CONF.APPNAME,
+          'appsecret': morel.auth.CONF.APPSECRET
+        };
+        this.email = person.email; //save email for successful login
 
-       switch (app.CONF.LOGIN.STATUS) {
-         case true:
-           this.loginSend(form, person);
-           break;
-         case 'simulate':
-           this.loginSimulate(form, person);
-           break;
-         case false:
-         default:
-           _log('views.LoginPage: unknown feature state');
-       }
+        switch (app.CONF.LOGIN.STATUS) {
+          case true:
+            this.loginSend(form, person);
+            break;
+          case 'simulate':
+            this.loginSimulate(form, person);
+            break;
+          case false:
+          default:
+            _log('views.LoginPage: unknown feature state');
+        }
+      } else {
+        $.mobile.loading('show', {
+          text: "Looks like you are offline!",
+          theme: "b",
+          textVisible: true,
+          textonly: true
+        });
+
+        setTimeout(function () {
+          $.mobile.loading('hide');
+        }, 3000);
+      }
     },
 
     /**
@@ -149,10 +162,11 @@ define(['views/_page', 'templates'], function (Page) {
      */
     onLoginError: function (xhr, ajaxOptions, thrownError) {
       _log("views.LoginPage: ERROR " + xhr.status + " " + thrownError + ".", morel.LOG_ERROR);
+      var response = xhr.responseText == "Missing name parameter" ? 'Bad Username or Password' : xhr.responseText;
       app.message(
         '<center><h2>Sorry.</h2></center>' +
         '<p>Some problem occurred.</p><br/>' +
-      (xhr.responseText || ''), 3000);
+        (response || ''), 3000);
     },
 
     /**

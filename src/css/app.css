@@ -306,6 +306,7 @@ form, body {
     background-color: rgb(195, 109, 109);
 }
 #location-top-button.running:after,
+#user-page-button.running:after,
 #list-controls-button.running:after {
     background-color: rgb(205, 155, 0);
 }

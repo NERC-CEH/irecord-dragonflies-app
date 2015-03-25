@@ -139,6 +139,8 @@ define([
       } else {
         //offline
         var onSaveSuccess = function () {
+          app.views.listPage.updateUserPageButton();
+
           app.message("<center><h2>No Internet. Record saved.</h2></center>");
           setTimeout(function () {
             Backbone.history.navigate('list', {trigger:true});
@@ -148,6 +150,8 @@ define([
       }
 
       function onError(err) {
+        app.views.listPage.updateUserPageButton();
+
         var message = "<center><h3>Sorry!</h3></center>" +
           "<p>" + err.message + "</p>" +
           "<p> Record Saved </p>";
@@ -194,6 +198,8 @@ define([
       }
 
       function onSuccess() {
+        app.views.listPage.updateUserPageButton();
+
         app.message("<center><h2>Record saved.</h2></center>");
         setTimeout(function () {
           Backbone.history.navigate('list', {trigger:true});

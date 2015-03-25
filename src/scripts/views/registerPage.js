@@ -50,29 +50,42 @@ define(['views/_page', 'templates'], function (Page) {
      */
     register: function () {
       _log('register: start.');
+      if (navigator.onLine) {
 
-      //user logins
-      var form = document.getElementById('register-form');
-      var data = new FormData(form);
+        //user logins
+        var form = document.getElementById('register-form');
+        var data = new FormData(form);
 
-      this.email = this.$el.find('input[name=email]').val(); //save it for future
+        this.email = this.$el.find('input[name=email]').val(); //save it for future
 
-      //app logins
-      data.append('appname', morel.auth.CONF.APPNAME);
-      data.append('appsecret', morel.auth.CONF.APPSECRET);
+        //app logins
+        data.append('appname', morel.auth.CONF.APPNAME);
+        data.append('appsecret', morel.auth.CONF.APPSECRET);
 
-      $.ajax({
-        url: app.CONF.LOGIN.URL,
-        type: 'POST',
-        data: data,
-        dataType: 'text',
-        contentType: false,
-        processData: false,
-        timeout: app.CONF.LOGIN.TIMEOUT,
-        success: this.onSuccess,
-        error: this.onError,
-        beforeSend: this.onSend
-      });
+        $.ajax({
+          url: app.CONF.LOGIN.URL,
+          type: 'POST',
+          data: data,
+          dataType: 'text',
+          contentType: false,
+          processData: false,
+          timeout: app.CONF.LOGIN.TIMEOUT,
+          success: this.onSuccess,
+          error: this.onError,
+          beforeSend: this.onSend
+        });
+      } else {
+        $.mobile.loading('show', {
+          text: "Looks like you are offline!",
+          theme: "b",
+          textVisible: true,
+          textonly: true
+        });
+
+        setTimeout(function () {
+          $.mobile.loading('hide');
+        }, 3000);
+      }
     },
 
     onSend: function () {
@@ -88,7 +101,7 @@ define(['views/_page', 'templates'], function (Page) {
       app.models.user.signIn(user);
 
       app.message('Success! A confirmation email sent.', 0);
-      setTimeout(function(){
+      setTimeout(function () {
         window.history.go(-2);
       }, 1000);
     },
@@ -99,6 +112,7 @@ define(['views/_page', 'templates'], function (Page) {
       $.mobile.loading('hide');
       app.message('Sorry <br/>' + xhr.responseText);
     }
+
   });
 
   return RegisterPage;

@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#1
+#2
 
 CACHE:
 css/images/ajax-loader.gif
@@ -195,6 +195,8 @@ images/Sympetrum_striolatum_f_2_David_Kitching.jpg
 images/Sympetrum_striolatum_m_1_David_Kitching.jpg
 images/Sympetrum_striolatum_m_3_David_Kitching.jpg
 images/Sympetrum_striolatum_new_final_.svg
+images/anatomy.png
+images/anatomy2.png
 
 scripts/libs/require.js
 scripts/data.js

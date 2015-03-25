@@ -3,7 +3,7 @@
         <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
             <a href='#info' data-role="button" data-icon="info"
                data-iconpos="notext">Info</a>
-            <a href="#user" data-role="button"
+            <a href="#user" id="user-page-button" data-role="button"
                data-icon="user" data-iconpos="notext">User</a>
         </div>
 

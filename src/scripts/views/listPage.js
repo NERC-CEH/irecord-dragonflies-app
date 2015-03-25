@@ -29,8 +29,12 @@ define([
       this.render();
       this.appendBackButtonListeners();
 
+      this.$userPageButton = $('#user-page-button');
+      this.$listControlsButton = $('#list-controls-button');
+
       this.listenTo(app.models.user, 'change:filters', this.updateListControlsButton);
       this.updateListControlsButton();
+      this.updateUserPageButton();
     },
 
     render: function () {
@@ -64,9 +68,21 @@ define([
     },
 
     updateListControlsButton: function () {
-      this.$listControlsButton = $('#list-controls-button');
       var filters = _.without(app.models.user.get('filters'), 'favourites');
       this.$listControlsButton.toggleClass('running', filters.length > 0);
+    },
+
+    /**
+     * Todo: hook into some record counter event
+     */
+    updateUserPageButton: function () {
+      var $userPageButton = this.$userPageButton;
+      function onSuccess(savedRecords) {
+        var savedRecordIDs = Object.keys(savedRecords);
+        $userPageButton.toggleClass('running', savedRecordIDs.length > 0);
+
+      }
+      morel.record.db.getAll(onSuccess);
     },
 
     /**
