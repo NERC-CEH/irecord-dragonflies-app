@@ -70,7 +70,7 @@ module.exports = function (grunt) {
             expand: true, flatten: true, filter: 'isFile'
           },
           {
-            src: ['src/appcache.mf'], dest: 'dist/appcache.mf'
+            src: ['src/appcache.manifest'], dest: 'dist/appcache.manifest'
           }
         ]
       }
@@ -93,7 +93,7 @@ module.exports = function (grunt) {
       }
     },
     replace: {
-      libs: {
+      latlon: {
         src: ['src/scripts/libs/latlon/js/latlon-ellipsoidal.js'],
         overwrite: true, // Fix double define problem
         replacements: [
@@ -104,6 +104,20 @@ module.exports = function (grunt) {
           {
             from: 'if (typeof define == \'function\' && define.amd) define([], function() { return Vector3d; });',
             to: ''
+          }
+        ]
+      },
+      indexedDBShim: {
+        src: ['src/scripts/libs/IndexedDBShim/js/IndexedDBShim.js'],
+        overwrite: true,
+        replacements: [
+          {
+            from: 'shim(\'indexedDB\', idbModules.shimIndexedDB);',
+            to:  'shim(\'_indexedDB\', idbModules.shimIndexedDB);'
+          },
+          {
+            from: 'shim(\'IDBKeyRange\', idbModules.IDBKeyRange);',
+            to:  'shim(\'_IDBKeyRange\', idbModules.IDBKeyRange);'
           }
         ]
       },
@@ -155,7 +169,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-requirejs');
 
   // the default task can be run just by typing "grunt" on the command line
-  grunt.registerTask('init', ['bower', 'replace:libs']);
+  grunt.registerTask('init', ['bower', 'replace:indexedDBShim', 'replace:latlon']);
   grunt.registerTask('build', ['copy', 'jst', 'uglify', 'replace:main', 'requirejs']);
   grunt.registerTask('default', ['init', 'build']);
 };

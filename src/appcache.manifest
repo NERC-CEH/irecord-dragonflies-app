@@ -168,7 +168,7 @@ images/Pyrrhosoma_nymphula_f_2_David_Kitching.jpg
 images/Pyrrhosoma_nymphula_f_melanotum_Stan_and_Dee_Maddams.jpg
 images/Pyrrhosoma_nymphula_m_David_Kitching.jpg
 images/Pyrrhosoma_nymphula_new_final_.svg
-images/sample.jpg
+images/unknown.png
 images/Somatochlora_arctica_f_3_Dave_Ashton.jpg
 images/Somatochlora_arctica_m_3_Ewoud_van_der_Ploeg.jpg
 images/Somatochlora_arctica_m___Pat_Batty.jpg
@@ -203,6 +203,7 @@ scripts/data.js
 scripts/main-built.js
 
 index.html
+.
 
 NETWORK:
 *

@@ -506,7 +506,7 @@ div.loading {
 }
 
 .ui-loader .ui-icon-loading {
-    background-color: #DFDFDF;
+    background-color: white;
 }
 
 .ui-loader-default {
