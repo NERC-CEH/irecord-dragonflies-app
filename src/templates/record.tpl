@@ -58,7 +58,7 @@
 
         <label for="certain-button">
             <input type="checkbox" data-iconpos="right" id="certain-button"
-                   name="certain" value="1"> Certain
+                   name="certain" value="2"> Certain
         </label>
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">

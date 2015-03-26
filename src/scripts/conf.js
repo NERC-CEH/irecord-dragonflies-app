@@ -46,13 +46,34 @@ define(['morel'], function () {
     APPNAME: "test",
     APPSECRET: "mytest",
     WEBSITE_ID: 23,
-    SURVEY_ID: 18
+    SURVEY_ID: 256
   });
   $.extend(morel.record.inputs.KEYS, {
-    NUMBER: 'sample:number',
-    STAGE: 'sample:stage',
-    LOCATIONDETAILS: 'sample:locationdetails',
-    SREF_NAME: 'smpAttr:location',
-    CERTAIN: 'sample:checked'
+    NUMBER: 'occAttr:379',
+    NUMBER_VAL: {
+      '1': 665,
+      '2-5': 666,
+      '6-20': 667,
+      '21-100': 668,
+      '101-500': 669,
+      '500+': 670,
+      'present': 671 //default
+    },
+    STAGE: 'occAttr:378',
+    STAGE_VAL: {
+      adult: 4756,
+      copulating: 4757,
+      ovipositing: 4758,
+      larva: 4759,
+      exuvia: 4760,
+      emergent: 4761
+    },
+    SREF_NAME: 'smpAttr:566',
+    CERTAIN: 'occAttr:32',
+    CERTAIN_VAL: {
+      TRUE: 663,
+      FALSE: 664 //default
+    },
+    COMMENT: 'sample:comment'
   });
 });

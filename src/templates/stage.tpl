@@ -10,17 +10,17 @@
         <p>Please pick the life stage.</p>
     </div>
     <fieldset data-role="controlgroup" data-iconpos="right">
-        <input type="radio" name="stage" id="radio-choice-adult" value="Adult">
+        <input type="radio" name="stage" id="radio-choice-adult" value="adult">
         <label for="radio-choice-adult">Adult</label>
-        <input type="radio" name="stage" id="radio-choice-pair" value="Copulating pair">
+        <input type="radio" name="stage" id="radio-choice-pair" value="copulating">
         <label for="radio-choice-pair">Copulating pair</label>
-        <input type="radio" name="stage" id="radio-choice-ovipositing" value="Ovipositing">
+        <input type="radio" name="stage" id="radio-choice-ovipositing" value="ovipositing">
         <label for="radio-choice-ovipositing">Ovipositing</label>
-        <input type="radio" name="stage" id="radio-choice-larva" value="Larva">
+        <input type="radio" name="stage" id="radio-choice-larva" value="larva">
         <label for="radio-choice-larva">Larva</label>
-        <input type="radio" name="stage" id="radio-choice-exuvia" value="Exuvia">
+        <input type="radio" name="stage" id="radio-choice-exuvia" value="exuvia">
         <label for="radio-choice-exuvia">Exuvia</label>
-        <input type="radio" name="stage" id="radio-choice-emergent" value="Emergent">
+        <input type="radio" name="stage" id="radio-choice-emergent" value="emergent">
         <label for="radio-choice-emergent">Emergent</label>
     </fieldset>
 </div>

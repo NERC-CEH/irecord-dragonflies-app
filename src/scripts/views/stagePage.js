@@ -45,7 +45,8 @@ define([
     save: function (e) {
       var name = this.warehouse_id;
       var value = e.currentTarget.value;
-      if (value !== "") {
+      value = morel.record.inputs.KEYS.STAGE_VAL[value];
+      if (value) {
         this.model.set(name, value);
       }
       window.history.back();

@@ -15,7 +15,10 @@
                     <p>Karolis Kazlauskis (CEH, app development)</p>
                 </li>
                 <li>
-                    <p>British Dragonfly Society</p>
+                    <p>Claire Install (BDS, species information, app support)</p>
+                </li>
+                <li>
+                    <p>Dave Smallshire (BDS, app requirements gathering, app support)</p>
                 </li>
                 <li>
                     <p>Jim Bacon (CEH, app development support)</p>

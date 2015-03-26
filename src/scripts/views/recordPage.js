@@ -314,7 +314,9 @@ define([
 
     saveCertain: function (e) {
       _log('app.views.RecordPage: saving certain.', log.INFO);
-      var value = $(e.currentTarget).prop('checked');
+      var input = $(e.currentTarget).prop('checked');
+      var value = input ? morel.record.inputs.KEYS.CERTAIN_VAL.TRUE :
+        morel.record.inputs.KEYS.CERTAIN_VAL.FALSE;
 
       this.model.set(morel.record.inputs.KEYS.CERTAIN, value);
     },
@@ -331,15 +333,29 @@ define([
     updateNumberButton: function () {
       var $numberButton = jQuery('#number-button .descript');
       var value = this.model.get(morel.record.inputs.KEYS.NUMBER);
-      value = value || '';
-      $numberButton.html(value);
+      var text = '';
+      var keys = Object.keys(morel.record.inputs.KEYS.NUMBER_VAL);
+      for (var i = 0; i < keys.length; i++){
+        if (morel.record.inputs.KEYS.NUMBER_VAL[keys[i]] === value) {
+          text = keys[i];
+          break;
+        }
+      }
+      $numberButton.html(text);
     },
 
     updateStageButton: function () {
       var $stageButton = jQuery('#stage-button .descript');
       var value = this.model.get(morel.record.inputs.KEYS.STAGE);
-      value = value || '';
-      $stageButton.html(value);
+      var text = '';
+      var keys = Object.keys(morel.record.inputs.KEYS.STAGE_VAL);
+      for (var i = 0; i < keys.length; i++){
+        if (morel.record.inputs.KEYS.STAGE_VAL[keys[i]] === value) {
+          text = keys[i];
+          break;
+        }
+      }
+      $stageButton.html(text);
     },
 
     updateLocationdetailsButton: function () {
