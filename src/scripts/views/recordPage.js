@@ -324,6 +324,8 @@ define([
       this.updateStageButton();
       this.updateLocationdetailsButton();
       this.updateCommentButton();
+
+      this.$certainInput.prop('checked', false).checkboxradio('refresh');
     },
 
     updateNumberButton: function () {
