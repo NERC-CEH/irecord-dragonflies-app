@@ -118,7 +118,9 @@ define([
       if (navigator.onLine) {
         //online
         var onSendSuccess = function () {
-          app.message("<center><h2>Submitted successfully. </br>Thank You!</h2></center>");
+          app.message("<center><h2>Submitted successfully.</h2></center>" +
+          " </br><h3>Thank You!</h3>");
+
           setTimeout(function () {
             Backbone.history.navigate('list', {trigger:true});
           }, 2000);
@@ -141,7 +143,8 @@ define([
         var onSaveSuccess = function () {
           app.views.listPage.updateUserPageButton();
 
-          app.message("<center><h2>No Internet. Record saved.</h2></center>");
+          app.message("<center><h2>No Internet.</h2></center>" +
+          "<br/><h3> Record saved.</h3>");
           setTimeout(function () {
             Backbone.history.navigate('list', {trigger:true});
           }, 2000);
@@ -152,9 +155,9 @@ define([
       function onError(err) {
         app.views.listPage.updateUserPageButton();
 
-        var message = "<center><h3>Sorry!</h3></center>" +
+        var message = "<center><h2>Error</h2></center>" +
           "<p>" + err.message + "</p>" +
-          "<p> Record Saved </p>";
+          "<h3> Record Saved </h3>";
         app.message(message);
         setTimeout(function () {
           Backbone.history.navigate('list', {trigger:true});
@@ -207,7 +210,7 @@ define([
       }
 
       function onError(err) {
-        var message = "<center><h3>Sorry!</h3></center>" +
+        var message = "<center><h2>Error</h2></center>" +
           "<p>" + err.message + "</p>";
         app.message(message);
       }
@@ -271,7 +274,7 @@ define([
       var invalids = app.models.record.validate();
       if (invalids) {
         var message =
-          "<h3>Still missing:</h3><ul>";
+          "<h2>Still missing:</h2><ul>";
 
         for (var i = 0; i < invalids.length; i++) {
           message += "<li>" + invalids[i] + "</li>";

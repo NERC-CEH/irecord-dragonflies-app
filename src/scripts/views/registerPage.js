@@ -100,17 +100,18 @@ define(['views/_page', 'templates'], function (Page) {
       user.email = app.views.registerPage.email;
       app.models.user.signIn(user);
 
-      app.message('Success! A confirmation email sent.', 0);
+      app.message('<center><h2>Success</h2></center> <br/><h3>A confirmation email sent.</h3>');
       setTimeout(function () {
         window.history.go(-2);
-      }, 1000);
+      }, 3000);
     },
 
     onError: function (xhr, ajaxOptions, thrownError) {
       _log("register: ERROR " + xhr.status + " " + thrownError);
       _log(xhr.responseText);
       $.mobile.loading('hide');
-      app.message('Sorry <br/>' + xhr.responseText);
+      app.message('<center><h2>Error</h2></center>' +
+      '<br/>' + xhr.responseText);
     }
 
   });

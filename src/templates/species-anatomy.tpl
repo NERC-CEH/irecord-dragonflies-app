@@ -6,6 +6,12 @@
 </div>
 
 <div data-role="content">
-    <img src="images/anatomy.png">
-    <img src="images/anatomy2.png">
+    <ul data-role="listview">
+        <li>
+            <p><img src="images/anatomy.png"></p>
+        </li>
+        <li>
+            <p><img src="images/anatomy2.png"></p>
+        </li>
+    </ul>
 </div>

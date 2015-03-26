@@ -63,16 +63,8 @@ define(['views/_page', 'templates'], function (Page) {
             _log('views.LoginPage: unknown feature state');
         }
       } else {
-        $.mobile.loading('show', {
-          text: "Looks like you are offline!",
-          theme: "b",
-          textVisible: true,
-          textonly: true
-        });
-
-        setTimeout(function () {
-          $.mobile.loading('hide');
-        }, 3000);
+        app.message("<center><h2>Sorry</h2></center>" +
+        "<br/><h3>Looks like you are offline!</h3>");
       }
     },
 
@@ -164,8 +156,8 @@ define(['views/_page', 'templates'], function (Page) {
       _log("views.LoginPage: ERROR " + xhr.status + " " + thrownError + ".", morel.LOG_ERROR);
       var response = xhr.responseText == "Missing name parameter" ? 'Bad Username or Password' : xhr.responseText;
       app.message(
-        '<center><h2>Sorry.</h2></center>' +
-        '<p>Some problem occurred.</p><br/>' +
+        '<center><h2>Error</h2></center><br/>' +
+        '<h3>Some problem occurred.</h3>' +
         (response || ''), 3000);
     },
 

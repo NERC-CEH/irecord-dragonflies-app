@@ -68,16 +68,7 @@ define([
             app.views.listPage.updateUserPageButton();
           }, 100);
 
-          $.mobile.loading('show', {
-            text: "Done!",
-            theme: "b",
-            textVisible: true,
-            textonly: true
-          });
-
-          setTimeout(function () {
-            $.mobile.loading('hide');
-          }, 3000);
+          app.message("<h2>Done</h2>");
 
           morel.record.db.remove(recordKey, function () {
             app.views.userPage.printList();
@@ -87,30 +78,17 @@ define([
         onError = function (error) {
           _log(error, log.ERROR);
 
-          $.mobile.loading('show', {
-            text: 'Sorry. Some problem occurred :(',
-            theme: "b",
-            textVisible: true,
-            textonly: true
-          });
+          var message =
+            "<center><h2>Error</h2></center> <br/>" +
+            error.message || '<h3>Some problem occurred :(</h3>';
 
-          setTimeout(function () {
-            $.mobile.loading('hide');
-          }, 10000);
+          app.message(message);
         };
 
         morel.io.sendSavedRecord(recordKey, onSuccess, onError);
       } else {
-        $.mobile.loading('show', {
-          text: "Looks like you are offline!",
-          theme: "b",
-          textVisible: true,
-          textonly: true
-        });
-
-        setTimeout(function () {
-          $.mobile.loading('hide');
-        }, 3000);
+        app.message("<center><h2>Sorry</h2></center>" +
+        "<br/><h3>Looks like you are offline!</h3>");
       }
     },
 

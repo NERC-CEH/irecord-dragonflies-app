@@ -264,7 +264,7 @@ app.startManifestDownload = function (id, callback, onError) {
       }
     }
   } else {
-    app.message("Looks like you are offline!");
+    app.message("<center><h2>Sorry</h2></center><br/><h3>Looks like you are offline!</h3>");
   }
 };
 
