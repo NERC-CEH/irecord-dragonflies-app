@@ -52,7 +52,16 @@ define(['backbone'], function (Backbone) {
 
       if (!this.has(morel.record.inputs.KEYS.DATE)) {
         invalids.push('Date');
+      } else {
+        //check if valid date
+        var input = this.get(morel.record.inputs.KEYS.DATE);
+        var inputDate = new Date(input);
+        var currentDate =  new Date();
+        if (inputDate > currentDate) {
+          invalids.push('Non future Date');
+        }
       }
+
       if (!this.has(morel.record.inputs.KEYS.SREF)) {
         invalids.push('Location');
       }

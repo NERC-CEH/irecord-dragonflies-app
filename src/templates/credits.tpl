@@ -8,26 +8,67 @@
 <div data-role="content">
     <ul data-role="listview" data-inset="true" style="max-width:800px;">
         <li>
-            <p>We are very greatful for all the people that helped to create this app:</p>
+            <strong>We are very greatful for all the people that helped to
+                create this app:</strong>
             <ul class="list-normal-white-space">
                 <li>
-                    <p>Karolis Kazlauskis</p>
+                    <p>Karolis Kazlauskis (CEH, app development)</p>
                 </li>
                 <li>
                     <p>British Dragonfly Society</p>
                 </li>
                 <li>
-                    <p>Jim Bacon</p>
+                    <p>Jim Bacon (CEH, app development support)</p>
                 </li>
                 <li>
-                    <p>Dr Tom August</p>
+                    <p>Dr Tom August (CEH, species probability data)</p>
                 </li>
                 <li>
-                    <p>Bjorn Beckmann </p>
+                    <p>Bjorn Beckmann (CEH, species maps)</p>
                 </li>
                 <li>
-                    <p>Tom Humphrey </p>
+                    <p>Tom Humphrey (BSBI, app development support)</p>
                 </li>
+            </ul>
+        </li>
+        <li>
+            <strong>Photographs:</strong>
+            <ul>
+                <li><p>Alan Davies</p></li>
+                <li><p>António A Gonçalves</p></li>
+                <li><p>Damian Pinguey</p></li>
+                <li><p>Dave Ashton</p></li>
+                <li><p>Dave Mitchell</p></li>
+                <li><p>Dave Smallshire</p></li>
+                <li><p>David Kitching</p></li>
+                <li><p>David Marquina Reyes</p></li>
+                <li><p>Frédéric Barszezak</p></li>
+                <li><p>Gilles San Martin</p></li>
+                <li><p>Graham Bayliss</p></li>
+                <li><p>Hugh J Griffiths</p></li>
+                <li><p>Jean-François Bousquet</p></li>
+                <li><p>John Luck</p></li>
+                <li><p>Jose Viana</p></li>
+                <li><p>Jules Oliver</p></li>
+                <li><p>Konrad Schultz</p></li>
+                <li><p>L. B. Tettenborn</p></li>
+                <li><p>Mark Tyrrell</p></li>
+                <li><p>Martin D Parr</p></li>
+                <li><p>Montse Poch</p></li>
+                <li><p>Neil Malton</p></li>
+                <li><p>Nik Janssen</p></li>
+                <li><p>Pam Taylor</p></li>
+                <li><p>Pat Batty</p></li>
+                <li><p>Paul Ashton</p></li>
+                <li><p>Peter Hunt</p></li>
+                <li><p>Piet Spaans</p></li>
+                <li><p>Quartl</p></li>
+                <li><p>Robert Geerts</p></li>
+                <li><p>Stan and Dee Maddams</p></li>
+                <li><p>Steve Covey</p></li>
+                <li><p>Tim Melling</p></li>
+                <li><p>Val Perrin</p></li>
+                <li><p>Wim Zoeteman</p></li>
             </ul>
         </li>
     </ul>
