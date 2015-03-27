@@ -22,6 +22,10 @@ body {
     text-shadow: none !important;
 }
 
+.ui-listview>li p {
+    font-size: 90%;
+}
+
 img {
     max-width: 100%;
 }
