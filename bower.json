@@ -6,7 +6,7 @@
     "backbone": "1.1.2",
     "jquery": "1.10.2",
     "backbone.localStorage": "jeromegn/Backbone.localStorage#1.1.16",
-    "lodash": "3.5.0",
+    "lodash": "3.6.0",
     "jquery-mobile": "jobrapido/jquery-mobile-bower#1.4.5",
     "morel": "NERC-CEH/morel#~2.0",
     "latlon": "chrisveness/geodesy#d50580b5054b562f0d1c94441f74a9d0bf8ba710",

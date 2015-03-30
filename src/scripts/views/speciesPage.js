@@ -59,6 +59,14 @@ define([
       //add Flight profile
       this.addFlightData();
 
+      //add Map
+      var $mapsHolder = $('#maps-holder');
+      $.get("images/national_boundary.svg", function(data) {
+        $mapsHolder.html(new XMLSerializer().serializeToString(data.documentElement));
+      });
+      $.get(this.model.attributes.map, function(data) {
+        $mapsHolder.append(new XMLSerializer().serializeToString(data.documentElement));
+      });
     },
 
     /**
