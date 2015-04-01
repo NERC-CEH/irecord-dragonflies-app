@@ -14,7 +14,10 @@ define([
     events: {
       'click #entry-form-save': 'save',
       'click #entry-form-send': 'send',
-      'change input[type="checkbox"]': 'saveCertain'
+      'change input[type="checkbox"]': 'saveCertain',
+      'click #photo': function(event) {
+          $('input[type="file"]').trigger('click');
+      }
     },
 
     initialize: function () {
@@ -25,10 +28,7 @@ define([
       this.listenTo(this.model,
         'change:' + morel.record.inputs.KEYS.STAGE, this.updateStageButton);
       this.listenTo(this.model,
-        'change:' + morel.record.inputs.KEYS.LOCATIONDETAILS, this.updateLocationdetailsButton);
-      this.listenTo(this.model,
         'change:' + morel.record.inputs.KEYS.COMMENT, this.updateCommentButton);
-
       this.listenTo(this.model,
         'change:' + morel.record.inputs.KEYS.SREF_ACCURACY, this.updateGPSButton);
 
@@ -43,7 +43,7 @@ define([
       $('body').append($(this.el));
 
       this.$heading = $('#record_heading');
-      this.$certainInputLabel =  $('label[for="certain-button"]');
+      this.$certainInputLabel =  $('#certain-button-label');
       this.$certainInput = $('#certain-button');
       this.$photo = $('#photo');
       this.$locationButton = $('#location-top-button');
@@ -229,10 +229,6 @@ define([
       $('#' + img_holder).remove();
       this.$photo.append('<div id="' + img_holder + '"></div>');
 
-      $('#sample-image-placeholder').on('click', function () {
-        $('input[type="file"]').click();
-      });
-
       upload.change(function (e) {
         e.preventDefault();
         var file = this.files[0];
@@ -316,12 +312,13 @@ define([
     },
 
     saveCertain: function (e) {
-      _log('app.views.RecordPage: saving certain.', log.INFO);
-      var input = $(e.currentTarget).prop('checked');
-      var value = input ? morel.record.inputs.KEYS.CERTAIN_VAL.TRUE :
-        morel.record.inputs.KEYS.CERTAIN_VAL.FALSE;
+        _log('app.views.RecordPage: saving certain.', log.INFO);
 
-      this.model.set(morel.record.inputs.KEYS.CERTAIN, value);
+        var input = $(e.currentTarget).prop('checked');
+        var value = input ? morel.record.inputs.KEYS.CERTAIN_VAL.TRUE :
+          morel.record.inputs.KEYS.CERTAIN_VAL.FALSE;
+
+        this.model.set(morel.record.inputs.KEYS.CERTAIN, value);
     },
 
     resetButtons: function () {

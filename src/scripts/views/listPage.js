@@ -272,14 +272,14 @@ define([
       });
 
       var that = this;
-      this.$el.find('.filter').on('change', function () {
-        app.models.user.toggleListFilter(this.id);
+      this.$el.find('.filter').on('change', function (e) {
+          app.models.user.toggleListFilter(this.id);
 
-        var filters = that.getCurrentFilters(that.filters);
-        if (filters.length === 1 && filters[0].id === 'favourites') {
-          filters = [];
-        }
-        that.$el.find('#list-controls-button').toggleClass('on', filters.length > 0);
+          var filters = that.getCurrentFilters(that.filters);
+          if (filters.length === 1 && filters[0].id === 'favourites') {
+            filters = [];
+          }
+          that.$el.find('#list-controls-button').toggleClass('on', filters.length > 0);
       });
     }
 

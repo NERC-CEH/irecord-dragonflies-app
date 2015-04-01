@@ -10,10 +10,9 @@ define([
   'views/locationPage',
   'views/numberPage',
   'views/stagePage',
-  'views/locationdetailsPage',
   'views/commentPage'
 ], function(Page, ListPage, SpeciesPage, UserPage, LoginPage, RegisterPage,
-            RecordPage, DatePage, LocationPage, NumberPage, StagePage, LocationdetailsPage,
+            RecordPage, DatePage, LocationPage, NumberPage, StagePage,
             CommentPage) {
   'use strict';
 

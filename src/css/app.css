@@ -219,11 +219,18 @@ form, body {
     display: inline-block;
     position: relative;
     width: 30%;
+    height: 20vh;
 }
 
 #photo-picker {
-    margin-top: 75%;
-    visibility: hidden;
+    opacity: 0;
+    font-size: 70px;
+    height: 20vh;
+    position: absolute;
+    top: 40px;
+    left: 5%;
+    overflow: hidden;
+    width: 25%;
 }
 
 #sample-image-placeholder {

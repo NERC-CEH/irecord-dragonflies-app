@@ -23,13 +23,12 @@
                value="4326"/>
         <input type="hidden" id="sref_accuracy" name="smpAttr:273" value="-1"/>
 
-        <div id="photo">
-            <div id="photo-picker">
-                <input type="file" id="sample:image" name="sample:image"
-                       accept="png|jpg|gif|jpeg"/>
-                <input type="hidden" id="sample_medium:path" name="sample_medium:path"
-                       value=""/>
-            </div>
+        <div id="photo"></div>
+        <div id="photo-picker">
+            <input type="file" id="sample:image" name="sample:image"
+                   accept="png|jpg|gif|jpeg"/>
+            <input type="hidden" id="sample_medium:path" name="sample_medium:path"
+                   value=""/>
         </div>
         <ul data-role="listview" data-inset="true">
             <li>
@@ -55,10 +54,9 @@
                 </a>
             </li>
         </ul>
-
-        <label for="certain-button">
-            <input type="checkbox" data-iconpos="right" id="certain-button"
-                   name="certain" value="2"> Certain
+        <label id="certain-button-label">
+            <input name="certain" id="certain-button" type="checkbox"
+                   data-iconpos="right"> Certain
         </label>
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
