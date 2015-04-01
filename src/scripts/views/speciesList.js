@@ -24,9 +24,29 @@ define([
           filter: function (list, onSuccess) {
             var sref = app.models.user.getLocationSref();
             if (sref == null) {
-              app.models.user.toggleListFilter('probability');
 
-              Backbone.history.navigate('location', {trigger:true});
+              var initBtn = "init-button";
+              var initCancelBtnId = "init-cancel-button";
+
+              var message =
+                '<h3>Please set your location first.</h3></br>' +
+
+                '<button id="' + initBtn + '" class="ui-btn">Set Location</button>' +
+                '<button id="' + initCancelBtnId + '" class="ui-btn">Cancel</button>';
+
+              app.message(message, 0);
+
+              $('#' + initBtn).on('click', function () {
+                $('#probability.filter').prop('checked', false).checkboxradio('refresh');
+                app.models.user.toggleListFilter('probability');
+                Backbone.history.navigate('location', {trigger:true});
+              });
+
+              $('#' + initCancelBtnId).on('click', function () {
+                $.mobile.loading('hide');
+                app.models.user.toggleListFilter('probability');
+                $('#probability.filter').prop('checked', false).checkboxradio('refresh');
+              });
               return;
             }
 

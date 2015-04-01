@@ -2,7 +2,7 @@
     <fieldset data-role="controlgroup">
         <% _.each(obj, function( input ){ %>
         <label class="filter">
-            <input name="terms-agreement" class="filter" id="<%- input.id %>"
+            <input class="filter" id="<%- input.id %>"
                    type="checkbox" data-iconpos="right" <%- input.checked %>><%- input.label %>
         </label>
         <% }); %>
