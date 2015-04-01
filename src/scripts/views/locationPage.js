@@ -125,15 +125,7 @@ define([
           _log('views.LocationPage: unknown render gps tab.');
       }
 
-      if (location) {
-        var p = new LatLon(location.latitude, location.longitude, LatLon.datum.OSGB36);
-        var grid = OsGridRef.latLonToOsGrid(p);
-        gref = grid.toString();
-        location.gref = gref;
-        data.location = location;
-      }
-
-      placeholder.html(template(data));
+      placeholder.html(template({location: location}));
       placeholder.trigger('create');
 
       //attach event listeners
@@ -143,6 +135,33 @@ define([
 
     },
 
+    geoloc: {
+      latitude: null,
+      longitude: null,
+      accuracy: -1
+    },
+
+    //if improved update current location
+    setGeoloc: function (location){
+      if (location){
+        var geoloc = this.getGeoloc();
+        if (geoloc.accuracy === -1 || (geoloc.accuracy >= location.accuracy)) {
+          this.geoloc = location;
+          this.set(location.latitude, location.longitude, location.accuracy);
+          app.views.locationPage.updateLocationMessage();
+        } else if (geoloc.accuracy !== -1) {
+          //geoloc->map->geoloc case where we should set old geoloc
+          location = this.getGeoloc();
+          this.set(location.latitude, location.longitude, location.accuracy);
+          app.views.locationPage.updateLocationMessage();
+        }
+      }
+    },
+
+    getGeoloc: function() {
+      return this.geoloc;
+    },
+
     /**
      * Starts a geolocation service and modifies the DOM with new UI.
      */
@@ -150,14 +169,12 @@ define([
       $.mobile.loading('show');
 
       function onUpdate(location) {
-        //if improved update current location
-        var currentLocation = app.views.locationPage.get();
-        if (currentLocation.accuracy === -1 || location.accuracy <= currentLocation.accuracy) {
-          currentLocation = location;
-          app.views.locationPage.set(location.latitude, location.longitude, location.accuracy);
-        } else {
-          location = currentLocation;
-        }
+        app.views.locationPage.setGeoloc({
+          latitude: location.lat,
+          longitude: location.lon,
+          accuracy: location.acc
+        });
+        location = app.views.locationPage.getGeoloc();
 
         //modify the UI
         app.views.locationPage.renderGPStab('running', location);
@@ -166,7 +183,13 @@ define([
       function onSuccess(location) {
         $.mobile.loading('hide');
 
-        app.views.locationPage.set(location.latitude, location.longitude, location.accuracy);
+        app.views.locationPage.setGeoloc({
+          latitude: location.lat,
+          longitude: location.lon,
+          accuracy: location.acc
+        });
+        location = app.views.locationPage.getGeoloc();
+
         app.views.locationPage.renderGPStab('finished', location);
       }
 
@@ -186,17 +209,11 @@ define([
         app.views.locationPage.renderGPStab('init');
       }
 
+      //modify the UI
+      app.views.locationPage.renderGPStab('running');
+
       //start geoloc
       morel.geoloc.run(onUpdate, onSuccess, onError);
-
-      var location = null;
-      var currentLocation = app.views.locationPage.get();
-      if (currentLocation.accuracy !== -1) {
-        location = currentLocation;
-      }
-
-      //modify the UI
-      app.views.locationPage.renderGPStab('running', location);
     },
 
     /**
