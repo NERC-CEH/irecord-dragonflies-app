@@ -352,20 +352,8 @@ define([
           'longitude': mapLatLng.lng()
         };
         app.views.locationPage.set(location.latitude, location.longitude, 1);
-
-        updateMapInfoMessage('#map-message', location);
-      }
-
-      function updateMapInfoMessage(id, location) {
-        //convert coords to Grid Ref
-        var p = new LatLon(location.latitude, location.longitude, LatLon.datum.OSGB36);
-        var grid = OsGridRef.latLonToOsGrid(p);
-        var gref = grid.toString();
-
-        var message = $(id);
-        message.removeClass();
-        message.addClass('success-message');
-        message.empty().append('<p>Grid Ref:<br/>' + gref + '</p>');
+        app.views.locationPage.updateLocationMessage();
+        $('#map-message').hide();
       }
     },
 
@@ -393,16 +381,31 @@ define([
       var name = $('#location-name').val();
 
       var gridref = OsGridRef.parse(val);
+      gridref = normalizeGridRef(gridref);
+
       if (!isNaN(gridref.easting) && !isNaN(gridref.northing)) {
-        var latLon = OsGridRef.osGridToLatLon(gridref);
+        var latLon = OsGridRef.osGridToLatLon(gridref, LatLon.datum.OSGB36);
         this.set(latLon.lat, latLon.lon, 1, name);
 
-        var gref = val.toUpperCase();
-        var message = $('#gref-message');
-        message.removeClass();
-        message.addClass('success-message');
-        message.empty().append('<p>Grid Ref:<br/>' + gref + '</p>');
-        this.save();
+        $('#gref-message').hide();
+        this.updateLocationMessage();
+      }
+
+      function normalizeGridRef(gridref) {
+        // normalise to 1m grid, rounding up to centre of grid square:
+        var e = gridref.easting;
+        var n = gridref.northing;
+
+        switch (gridref.easting.toString().length) {
+          case 1: e += '50000'; n += '50000'; break;
+          case 2: e += '5000'; n += '5000'; break;
+          case 3: e += '500'; n += '500'; break;
+          case 4: e += '50'; n += '50'; break;
+          case 5: e += '5'; n += '5'; break;
+          case 6: break; // 10-digit refs are already 1m
+          default: return new OsGridRef(NaN, NaN);
+        }
+        return new OsGridRef(e, n);
       }
     },
 
@@ -416,6 +419,20 @@ define([
       script.type = 'text/javascript';
       script.src = src;
       document.body.appendChild(script);
+    },
+
+    updateLocationMessage: function () {
+      //convert coords to Grid Ref
+      var location = this.get();
+      var p = new LatLon(location.latitude, location.longitude, LatLon.datum.OSGB36);
+      var grid = OsGridRef.latLonToOsGrid(p);
+      var gref = grid.toString();
+
+      var message = $('#location-message');
+      message.show();
+      message.removeClass();
+      message.addClass('success-message');
+      message.empty().append('<p>Grid Ref:<br/>' + gref + '</p>');
     }
 
   });

@@ -10,6 +10,7 @@
         </div>
     </div>
     <div data-role="content">
+        <div class="info-message" id="location-message" style="display:none"></div>
         <div data-role="tabs" id="location-opts">
             <div data-role="navbar">
                 <ul>
