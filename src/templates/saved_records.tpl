@@ -1,4 +1,4 @@
-    <% if (records.length) { %>
+<% if (records.length) { %>
     <div class="info-message"><p>Saved recordings.</p></div>
 
     <ul data-role="listview" id="saved-list" data-split-icon="gear"
@@ -22,6 +22,6 @@
         </li>
         <% }); %>
     </ul>
-    <% } else { %>
+<% } else { %>
     <div class="info-message"><p>No saved recordings.</p></div>
-    <% } %>
+<% } %>

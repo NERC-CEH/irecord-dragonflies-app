@@ -1,13 +1,13 @@
-    <div class="info-message">
-        <p>We are trying to get your location. This might take a
-            few minutes...</p>
-        <% if (obj.location) { %>
-            <% if (obj.location.accuracy > morel.geoloc.CONF.GPS_ACCURACY_LIMIT) { %>
-              <p>Accuracy: <%- obj.location.accuracy %> meters (< <%- morel.geoloc.CONF.GPS_ACCURACY_LIMIT %>)</p>
-            <% } else { %>
-             <p>Accuracy: <%- obj.location.accuracy %> meters </p>
-            <% } %>
+<div class="info-message">
+    <p>We are trying to get your location. This might take a
+        few minutes...</p>
+    <% if (obj.location) { %>
+        <% if (obj.location.accuracy > morel.geoloc.CONF.GPS_ACCURACY_LIMIT) { %>
+          <p>Accuracy: <%- obj.location.accuracy %> meters (< <%- morel.geoloc.CONF.GPS_ACCURACY_LIMIT %>)</p>
+        <% } else { %>
+         <p>Accuracy: <%- obj.location.accuracy %> meters </p>
         <% } %>
-    </div>
+    <% } %>
+</div>
 
-    <input type="button" id="gps-stop-button" value="Stop">
+<input type="button" id="gps-stop-button" value="Stop">

@@ -363,5 +363,11 @@ app.checkForUpdates = function () {
 
     //set new version
     app.models.app.save('appVer', app.VERSION);
+
+    if (app.CONF.GA.STATUS) {
+      require(['ga'], function(ga) {
+        ga('send', 'event', 'app', 'updateSuccess');
+      });
+    }
   }
 };

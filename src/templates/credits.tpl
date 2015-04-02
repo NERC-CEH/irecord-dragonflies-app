@@ -8,17 +8,20 @@
 <div data-role="content">
     <ul data-role="listview" data-inset="true" style="max-width:800px;">
         <li>
-            <strong>We are very greatful for all the people that helped to
+            <strong>We are very grateful for all the people that helped to
                 create this app:</strong>
             <ul class="list-normal-white-space">
+                <li>
+                    <p>Dr David Roy (CEH, project initiation)</p>
+                </li>
                 <li>
                     <p>Karolis Kazlauskis (CEH, app development)</p>
                 </li>
                 <li>
-                    <p>Claire Install (BDS, species information, app support)</p>
+                    <p>Claire Install (BDS, app species information and corrections)</p>
                 </li>
                 <li>
-                    <p>Dave Smallshire (BDS, app requirements gathering, app support)</p>
+                    <p>Dave Smallshire (BDS, app corrections)</p>
                 </li>
                 <li>
                     <p>Jim Bacon (CEH, app development support)</p>
