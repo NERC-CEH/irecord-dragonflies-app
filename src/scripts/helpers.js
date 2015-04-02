@@ -312,45 +312,45 @@ app.browserDetect = function (browser) {
   return (navigator.userAgent.indexOf(browser) > -1);
 };
 
-app.fixIOSbuttons = function () {
-  //Fixing back buttons for Mac 7.* History bug.
-  $(document).on('pagecreate', function (event, ui) {
-    if (app.browserDetect('Safari')) {
-      if (jQuery.mobile.activePage) {
-        var nextPageid = event.target.id;
-        var currentPageURL = null;
-
-        var external = jQuery.mobile.activePage.attr('data-external-page');
-        if (!external) {
-          currentPageURL = '#' + jQuery.mobile.activePage.attr('id');
-        }
-        fixPageBackButtons(currentPageURL, nextPageid);
-      }
-    }
-  });
-
-  /**
-   * Fixes back buttons for specific page
-   */
-  /*jslint unparam: true*/
-  function fixPageBackButtons(currentPageURL, nextPageId) {
-    "use strict";
-    console.log('FIXING: back buttons ( ' + nextPageId + ')');
-
-    var $buttons = jQuery("div[id='" + nextPageId + "'] a[data-rel='back']");
-    $buttons.each(function (index, button) {
-      jQuery(button).removeAttr('data-rel');
-
-      //skip external pages
-      if (currentPageURL) {
-        //assign new url to the button
-        jQuery(button).attr('href', currentPageURL);
-      }
-    });
-  }
-
-  /*jslint unparam: false*/
-};
+//app.fixIOSbuttons = function () {
+//  //Fixing back buttons for Mac 7.* History bug.
+//  $(document).on('pagecreate', function (event, ui) {
+//    if (app.browserDetect('Safari')) {
+//      if (jQuery.mobile.activePage) {
+//        var nextPageid = event.target.id;
+//        var currentPageURL = null;
+//
+//        var external = jQuery.mobile.activePage.attr('data-external-page');
+//        if (!external) {
+//          currentPageURL = '#' + jQuery.mobile.activePage.attr('id');
+//        }
+//        fixPageBackButtons(currentPageURL, nextPageid);
+//      }
+//    }
+//  });
+//
+//  /**
+//   * Fixes back buttons for specific page
+//   */
+//  /*jslint unparam: true*/
+//  function fixPageBackButtons(currentPageURL, nextPageId) {
+//    "use strict";
+//    console.log('FIXING: back buttons ( ' + nextPageId + ')');
+//
+//    var $buttons = jQuery("div[id='" + nextPageId + "'] a[data-rel='back']");
+//    $buttons.each(function (index, button) {
+//      jQuery(button).removeAttr('data-rel');
+//
+//      //skip external pages
+//      if (currentPageURL) {
+//        //assign new url to the button
+//        jQuery(button).attr('href', currentPageURL);
+//      }
+//    });
+//  }
+//
+//  /*jslint unparam: false*/
+//};
 
 /**
  * Updates the app's data if the source code version mismatches the

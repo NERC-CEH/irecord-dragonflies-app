@@ -68,7 +68,7 @@ define([
             app.views.listPage.updateUserPageButton();
           }, 100);
 
-          app.message("<h2>Done</h2>");
+          app.message("<center><h2>Done</h2></center>");
 
           morel.record.db.remove(recordKey, function () {
             app.views.userPage.printList();
@@ -80,7 +80,7 @@ define([
 
           var message =
             "<center><h2>Error</h2></center> <br/>" +
-            error.message || '<h3>Some problem occurred :(</h3>';
+            error.message || '<h3>Some problem occurred </h3>';
 
           app.message(message);
         };

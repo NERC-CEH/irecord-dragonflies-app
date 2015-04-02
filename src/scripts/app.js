@@ -48,7 +48,7 @@ define([
         app.router = new Router();
         Backbone.history.start();
 
-        app.fixIOSbuttons();
+        //app.fixIOSbuttons();
         FastClick.attach(document.body);
 
         $('.loading').css('display', 'none');
