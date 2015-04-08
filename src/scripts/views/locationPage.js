@@ -34,6 +34,8 @@ define([
           'callback=app.views.locationPage.initializeMap' +
           dummyText
         );
+      } else {
+        this.initializeMap();
       }
     },
 
