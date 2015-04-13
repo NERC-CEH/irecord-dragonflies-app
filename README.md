@@ -1,5 +1,10 @@
-This is a Dragonfly mobile web application. HTML5 based offline mobile
-app dedicated to UK dragonfly recording.
+![iRecord Dragonfly](http://src/images/app_logo.png?raw=true "iRecord Dragonfly")
+![Made By](http://src/images/sponsor_logo.png?raw=true "Made By")
+
+This is a British Dragonfly identification and recording mobile web application. 
+HTML5 based offline mobile app linked to [iRecord](http://www.brc.ac.uk/irecord/) website.
+
+Live: [British Dragonfly Society](http://www.british-dragonflies.org.uk/mobile)
 
 ## Configuration
 
@@ -10,16 +15,16 @@ App configuration hosted in `scr/conf.js`.
 ## Building
 
 - Install [NodeJS](http://nodejs.org/)
-- Clone a copy of the main rare-arable-flowers git repo by running:
+- Get a copy of the main irecord-dragonfly-app git repo by running:
 
 ```bash
-git clone git://github.com/NERC-CEH/mobile_dragonfly.git
+git clone git://github.com/NERC-CEH/irecord-dragonfly-app.git
 ```
 
-- Enter the `morel` directory and install the npm build dependancies:
+- Enter the `irecord-dragonfly-app` directory and install the npm build dependancies:
 
 ```bash
-cd mobile_dragonfly && npm install
+cd irecord-dragonfly-app && npm install
 ```
 
 - Build the library: 
@@ -28,7 +33,7 @@ cd mobile_dragonfly && npm install
 grunt
 ```
 
-This will create a `dist` folder with the app code.
+This will create a `dist` folder with the app code and its dependencies.
 
 
 ## Bugs and feature requests
