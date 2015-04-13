@@ -5,11 +5,13 @@ HTML5 based offline mobile app linked to [iRecord](http://www.brc.ac.uk/irecord/
 
 Live: [British Dragonfly Society](http://www.british-dragonflies.org.uk/mobile)
 
+
 ## Configuration
 
 App configuration hosted in `scr/conf.js`.
 
 **Note:** it should be done *before* building the code.
+
 
 ## Building
 
@@ -34,6 +36,7 @@ grunt
 
 This will create a `dist` folder with the app code and its dependencies.
 
+
 ## Running
 
 [Express](http://expressjs.com/) framework is provided for a quick launch of a web server.
@@ -41,6 +44,7 @@ This will create a `dist` folder with the app code and its dependencies.
 ```bash
 node app.js
 ```
+
 
 ## Bugs and feature requests
 
@@ -52,7 +56,6 @@ Have a bug or a feature request? search for existing and closed issues. [Please 
 **Karolis Kazlauskis**
 
 - <https://github.com/kazlauskis>
-
 
 
 ## Copyright and license

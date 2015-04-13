@@ -2,17 +2,10 @@ module.exports = function (grunt) {
   var DEST = 'dist/scripts/';
   var CONF_NAME = 'conf.js';
 
-  var banner = "/*!\n" +
-    " * <%= pkg.title %>. \n" +
-    " * Version: <%= pkg.version %>\n" +
-    " *\n" + " * <%= pkg.homepage %>\n" +
-    " *\n" +
-    " * Author <%= grunt.template.today('yyyy') %> <%= pkg.author.name %>\n" +
-    " * Released under the <%= _.pluck(pkg.licenses, 'type').join(', ') %> license.\n" +
-    " */\n\n";
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
+
     bower: {
       install: {
         options: {
@@ -22,12 +15,40 @@ module.exports = function (grunt) {
         }
       }
     },
+
+
     copy: {
       main: {
         files: [
+          //HTML
+          {
+            src:  "src/*.html", dest: 'dist/',
+            expand: true, flatten: true
+          },
+          {
+            src: ['src/appcache.manifest'], dest: 'dist/appcache.manifest'
+          },
+          //CSS
+          {
+            src:  "src/css/*", dest: 'dist/css/',
+            expand: true, flatten: true
+          },
+          //JS
+          {
+            src:  "src/images/**", dest: 'dist/images/',
+            expand: true, flatten: true, filter: 'isFile'
+          },
+          {
+            src:  "src/images/ajax-loader.gif", dest: 'dist/css/images/',
+            expand: true, flatten: true
+          },
           {
             src: 'src/scripts/main.js',
             dest: 'dist/scripts/main.js', flatten: true
+          },
+          {
+            src: 'src/scripts/*.js',
+            dest: 'dist/scripts/', expand: true, flatten: true, filter: 'isFile'
           },
           {
             src: 'src/scripts/routers/*',
@@ -42,44 +63,23 @@ module.exports = function (grunt) {
             dest: 'dist/scripts/views/',  expand: true, flatten: true
           },
           {
-            src: 'src/scripts/*.js',
-            dest: 'dist/scripts/', expand: true, flatten: true, filter: 'isFile'
-          },
-          // includes files within path
-          {
-            src:  "src/*.html", dest: 'dist/',
-            expand: true, flatten: true
-          },
-          {
-            src:  "src/css/*", dest: 'dist/css/',
-            expand: true, flatten: true},
-          {
-            src:  "src/scripts/libs/**/css/*", dest: 'dist/css/',
-            expand: true, flatten: true
-          },
-          {
-            src:  "src/images/ajax-loader.gif", dest: 'dist/css/images/',
-            expand: true, flatten: true
-          },
-          {
             src:  "src/scripts/libs/**/js/*", dest: 'dist/scripts/libs/',
             expand: true, flatten: true
           },
           {
-            src:  "src/images/**", dest: 'dist/images/',
-            expand: true, flatten: true, filter: 'isFile'
-          },
-          {
-            src: ['src/appcache.manifest'], dest: 'dist/appcache.manifest'
+            src:  "src/scripts/libs/**/css/*", dest: 'dist/css/',
+            expand: true, flatten: true
           }
         ]
       }
     },
+
+
     jst: {
       compile: {
         options: {
           namespace: 'app.templates',
-         // prettify: true,
+          prettify: true,
           templateSettings: {
             interpolate : /\{\{(.+?)\}\}/g
           },
@@ -92,10 +92,13 @@ module.exports = function (grunt) {
         }
       }
     },
+
+
     replace: {
+      // Fix double define problem
       latlon: {
         src: ['src/scripts/libs/latlon/js/latlon-ellipsoidal.js'],
-        overwrite: true, // Fix double define problem
+        overwrite: true,
         replacements: [
           {
             from: 'if (typeof module != \'undefined\' && module.exports) module.exports.Vector3d = Vector3d;',
@@ -107,6 +110,7 @@ module.exports = function (grunt) {
           }
         ]
       },
+      //Fix iOS 8 readonly broken IndexedDB
       indexedDBShim: {
         src: ['src/scripts/libs/IndexedDBShim/js/IndexedDBShim.js'],
         overwrite: true,
@@ -121,6 +125,7 @@ module.exports = function (grunt) {
           }
         ]
       },
+      //App NAME and VERSION
       main: {
         src: [DEST + CONF_NAME],
         overwrite: true, // overwrite matched source files
@@ -135,6 +140,8 @@ module.exports = function (grunt) {
         ]
       }
     },
+
+
     uglify: {
       dist: {
         files: {
@@ -142,6 +149,8 @@ module.exports = function (grunt) {
         }
       }
     },
+
+
     requirejs: {
       compile: {
         options: {
