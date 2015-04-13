@@ -1,5 +1,4 @@
-![iRecord Dragonfly](https://github.com/NERC-CEH/irecord-dragonfly-app/src/images/app_logo.png)
-![Made By](https://github.com/NERC-CEH/irecord-dragonfly-app/src/images/sponsor_logo.png)
+![iRecord Dragonfly](https://github.com/NERC-CEH/irecord-dragonfly-app/blob/master/src/images/app_logo.png)
 
 This is a British Dragonfly identification and recording mobile web application. 
 HTML5 based offline mobile app linked to [iRecord](http://www.brc.ac.uk/irecord/) website.
