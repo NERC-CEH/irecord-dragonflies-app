@@ -1,5 +1,5 @@
-![iRecord Dragonfly](http://src/images/app_logo.png?raw=true "iRecord Dragonfly")
-![Made By](http://src/images/sponsor_logo.png?raw=true "Made By")
+![iRecord Dragonfly](https://github.com/NERC-CEH/irecord-dragonfly-app/src/images/app_logo.png)
+![Made By](https://github.com/NERC-CEH/irecord-dragonfly-app/src/images/sponsor_logo.png)
 
 This is a British Dragonfly identification and recording mobile web application. 
 HTML5 based offline mobile app linked to [iRecord](http://www.brc.ac.uk/irecord/) website.
@@ -15,13 +15,13 @@ App configuration hosted in `scr/conf.js`.
 ## Building
 
 - Install [NodeJS](http://nodejs.org/)
-- Get a copy of the main irecord-dragonfly-app git repo by running:
+- Get a copy of the code by running:
 
 ```bash
 git clone git://github.com/NERC-CEH/irecord-dragonfly-app.git
 ```
 
-- Enter the `irecord-dragonfly-app` directory and install the npm build dependancies:
+- Enter the `irecord-dragonfly-app` directory and install the npm build dependencies:
 
 ```bash
 cd irecord-dragonfly-app && npm install
