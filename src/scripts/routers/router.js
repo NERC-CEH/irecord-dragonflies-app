@@ -1,3 +1,6 @@
+/**
+ * Main app router.
+ */
 define([
   'views/_page',
   'views/listPage',

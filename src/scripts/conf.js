@@ -1,9 +1,9 @@
-/*!
- * CONFIGURATION.
+/**
+ * Main app configuration file.
  */
 define(['morel', 'helpers/log'], function () {
   app = window.app || {};
-  //app wide settings
+
   app.VERSION = '0'; //version grunt replaced
   app.NAME = 'app'; //name grunt replaced
 
