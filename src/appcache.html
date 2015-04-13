@@ -2,6 +2,22 @@
 <html manifest="appcache.manifest">
 <head>
   <title>offline.html</title>
+
+  <!-- CSS -->
+  <style>
+    body{
+      margin-left: 0;
+    }
+    .progress-radial-track {
+      fill: #EFF2CD;
+    }
+
+    .progress-radial-bar {
+      fill: #C2B855;
+    }
+  </style>
+
+  <!-- JS -->
   <script src="scripts/libs/jquery.js"></script>
   <script type="text/javascript">
     var lastUpdate = 0;
@@ -42,11 +58,11 @@
                       finished();
                       break;
                     case 'checking':
-                      jQuery('path').css('fill', '#339933');
                       message = "Checking";
                       break;
                     case 'noupdate':
                       message = "No update";
+                      finished();
                       break;
                     case 'downloading':
                     case 'progress':
@@ -105,18 +121,8 @@
       bar.setAttribute( 'd', animBar );
     }
   </script>
-  <style>
-    .progress-radial-track {
-      fill: #A2C139;
-    }
-
-    .progress-radial-bar {
-      fill: #339933;
-    }
-  </style>
 </head>
-<body width="20" height="200">
-<center>
+<body>
   <svg class="progress-radial" width="200" height="200" viewBox="0 0 200 200" shape-rendering="geometricPrecision">
     <defs>
       <mask id="circle_mask" x="0" y="0" width="200" height="200" maskUnits="userSpaceOnUse">
@@ -135,6 +141,5 @@
       <text text-anchor="middle" id="mytext" x="100" y="110" fill="white">  </text>
     </g>
   </svg>
-</center>
 </body>
 </html>
