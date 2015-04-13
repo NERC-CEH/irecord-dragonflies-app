@@ -3,7 +3,7 @@
 	"title": "iRecord Dragonfly",
 	"description": "iRecord Dragonfly mobile web application.",
 	"version": "1.0.0-beta.2",
-	"homepage": "",
+	"homepage": "http://www.british-dragonflies.org.uk/mobile",
 	"author": {
 		"name": "Karolis Kazlauskis",
 		"email": "karkaz@ceh.ac.uk",
@@ -11,10 +11,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/NERC-CEH/mobile_dragonfly"
+		"url": "https://github.com/NERC-CEH/irecord-dragonfly-app"
 	},
 	"bugs": {
-		"url": "https://github.com/NERC-CEH/mobile_dragonfly/issues"
+		"url": "https://github.com/NERC-CEH/irecord-dragonfly-app/issues"
 	},
 	"licenses": [
 		{

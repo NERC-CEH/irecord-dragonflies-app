@@ -34,6 +34,13 @@ grunt
 
 This will create a `dist` folder with the app code and its dependencies.
 
+## Running
+
+[Express](http://expressjs.com/) framework is provided for a quick launch of a web server.
+
+```bash
+node app.js
+```
 
 ## Bugs and feature requests
 
