@@ -1,5 +1,11 @@
 #!/usr/bin/python
 
+# Transforms a CSV file into a JSON file
+# eg.
+# A, B, C[], C[], C[], D[]
+#
+# {A, B, [C, C, C], [D]}
+
 import sys
 import csv
 import json

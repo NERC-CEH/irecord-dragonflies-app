@@ -1,3 +1,11 @@
+/**
+ * Species probability data.
+ *
+ * Parent object keys - UK grid references (10km).
+ * Child object keys - species IDs.
+ * Values - species probability in that location.
+ */
+
 app = window.app || {};
 app.data = app.data || {};
 app.data.probability = { HP40: { "14": '0.8299' },

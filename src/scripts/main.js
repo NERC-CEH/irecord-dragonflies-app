@@ -1,3 +1,6 @@
+/**
+ * App initiation.
+ */
 (function () {
   require.config({
     baseUrl: "scripts/",
@@ -31,7 +34,8 @@
   });
 
   //Load the mighty app :)
-  require(['jquery', 'jquery.mobile-config', 'app'], function ($, jqm, App) {
+  require(['jquery.mobile-config', 'app'], function (jqm, App) {
+    //jquery mobile - backbone configuration should be set up by this point.
     App.init();
   });
 

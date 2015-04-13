@@ -1,3 +1,6 @@
+/**
+ * App Object.
+ */
 define([
     'jquery',
     'jquery.mobile',
@@ -9,11 +12,13 @@ define([
     'models/user',
     'models/species',
     'models/record',
-    'helpers',
+    'helpers/update',
+    'helpers/message',
+    'helpers/log',
     'data'
   ],
   function ($, jqm, Backbone, FastClick, klass, Router, AppModel, UserModel,
-            SpeciesCollection, RecordModel) {
+            SpeciesCollection, RecordModel, update) {
     var App = {
       init: function () {
         //init Google Analytics
@@ -43,7 +48,8 @@ define([
         app.collections = {};
         app.collections.species = new SpeciesCollection(app.data.species);
 
-        app.checkForUpdates();
+        //update app
+        update();
 
         app.router = new Router();
         Backbone.history.start();
@@ -51,6 +57,7 @@ define([
         //app.fixIOSbuttons();
         FastClick.attach(document.body);
 
+        //turn off the loading splash screen
         $('.loading').css('display', 'none');
       }
     };

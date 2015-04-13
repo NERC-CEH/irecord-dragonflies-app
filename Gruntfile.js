@@ -51,6 +51,10 @@ module.exports = function (grunt) {
             dest: 'dist/scripts/', expand: true, flatten: true, filter: 'isFile'
           },
           {
+            src: 'src/scripts/helpers/*',
+            dest: 'dist/scripts/helpers/',  expand: true, flatten: true
+          },
+          {
             src: 'src/scripts/routers/*',
             dest: 'dist/scripts/routers/',  expand: true, flatten: true
           },

@@ -1,3 +1,11 @@
+/**
+ * Species flight data.
+ *
+ * Parent object keys - species IDs.
+ * Child object keys - week numbers.
+ * Values - abundance.
+ */
+
 app = window.app || {};
 app.data = app.data || {};
 app.data.flight = {

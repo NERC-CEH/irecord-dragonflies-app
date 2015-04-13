@@ -1,7 +1,7 @@
 /*!
  * CONFIGURATION.
  */
-define(['morel'], function () {
+define(['morel', 'helpers/log'], function () {
   app = window.app || {};
   //app wide settings
   app.VERSION = '0'; //version grunt replaced

@@ -1,3 +1,8 @@
+/**
+ * Jquery Mobile configuration to work alongside backbone framework.
+ *
+ * Important: this needs to be loaded before the JQM.
+ */
 define(['jquery'], function ($) {
   $(document).on("mobileinit", function() {
     //JQM configuration

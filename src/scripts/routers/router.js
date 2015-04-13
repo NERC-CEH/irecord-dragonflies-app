@@ -10,10 +10,11 @@ define([
   'views/locationPage',
   'views/numberPage',
   'views/stagePage',
-  'views/commentPage'
+  'views/commentPage',
+  'helpers/download'
 ], function(Page, ListPage, SpeciesPage, UserPage, LoginPage, RegisterPage,
             RecordPage, DatePage, LocationPage, NumberPage, StagePage,
-            CommentPage) {
+            CommentPage, download) {
   'use strict';
 
   app.views = {};
@@ -29,7 +30,7 @@ define([
 
       //download app for offline usage
       if (app.CONF.OFFLINE.STATUS){
-        setTimeout(app.download, 500);
+        setTimeout(download, 500);
       }
     },
 

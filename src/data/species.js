@@ -1,6 +1,9 @@
+/**
+ * Species data. An array of species describing objects.
+ */
+
 app = window.app || {};
 app.data = app.data || [];
-
 app.data.species = [
   {
     "profile_pic": "images/Chalcolestes_viridis_Jorg_Hempel.jpg", 
