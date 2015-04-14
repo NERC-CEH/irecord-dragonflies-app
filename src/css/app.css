@@ -314,7 +314,7 @@ form, body {
 }
 
 #location-top-button.none:after {
-    background-color: rgb(195, 109, 109);
+    background-color: rgb(192, 68, 32);
 }
 #location-top-button.running:after,
 #user-page-button.running:after,

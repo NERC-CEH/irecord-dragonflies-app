@@ -276,7 +276,7 @@ define([
     },
 
     update: function () {
-      _log('list: updating', log.INFO);
+      _log('list: updating', log.DEBUG);
       this.render(function($el){
         $el.listview('refresh');
       });

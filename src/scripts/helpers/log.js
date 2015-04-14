@@ -60,12 +60,17 @@ define([], function () {
     /**
      * Prints and posts an error to the mobile authentication log.
      *
-     * @param error object holding a 'message', and optionally 'url' and 'line' fields.
+     * @param error Object holding a 'message', and optionally 'url' and 'line' fields.
+     *              String holding a 'message
      * @private
      */
     error: function (error) {
       "use strict";
-      //print error
+      if (typeof error === 'string' || error instanceof String) {
+        error = {
+          message: error
+        }
+      }
       console.error(error.message, error.url, error.line);
 
       if (app.CONF.GA.STATUS && log.CONF.GA_ERROR){

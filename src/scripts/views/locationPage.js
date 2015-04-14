@@ -154,7 +154,7 @@ define([
           template = app.templates.location_gps_finished;
           break;
         default:
-          _log('views.LocationPage: unknown render gps tab.');
+          _log('views.LocationPage: unknown render gps tab.', log.WARNING);
       }
 
       placeholder.html(template({location: location}));
@@ -277,7 +277,7 @@ define([
      * Mapping
      */
     initializeMap: function () {
-      _log("location: initialising map.");
+      _log("location: initialising map.", log.DEBUG);
       //todo: add checking
 
       $('#location-opts').tabs( "option", "disabled", [] ); //enable map tab

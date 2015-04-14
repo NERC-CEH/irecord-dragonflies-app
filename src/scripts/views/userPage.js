@@ -186,7 +186,7 @@ define([
      * Signs the user out.
      */
     signOut: function () {
-      _log('user: logging out', log.INFO);
+      _log('user: logging out', log.DEBUG);
       app.models.user.signOut();
       this.update();
     }

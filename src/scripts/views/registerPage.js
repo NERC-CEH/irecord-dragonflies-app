@@ -118,8 +118,12 @@ define([
     },
 
     onError: function (xhr, ajaxOptions, thrownError) {
-      _log("register: ERROR " + xhr.status + " " + thrownError);
-      _log(xhr.responseText);
+      _log("register: ERROR " +
+            xhr.status + " " +
+            thrownError + " " +
+            xhr.responseText,
+        log.ERROR);
+
       $.mobile.loading('hide');
       app.message('<center><h2>Error</h2></center>' +
       '<br/>' + xhr.responseText);

@@ -13,12 +13,13 @@ define([
     'models/species',
     'models/record',
     'helpers/update',
+    'helpers/brcart',
     'helpers/message',
     'helpers/log',
     'data'
   ],
   function ($, jqm, Backbone, FastClick, klass, Router, AppModel, UserModel,
-            SpeciesCollection, RecordModel, update) {
+            SpeciesCollection, RecordModel, update, brcArt) {
     var App = {
       init: function () {
         //init Google Analytics
@@ -34,6 +35,8 @@ define([
             ga('set', 'appVersion', app.VERSION);
           });
         }
+
+        _log(brcArt, log.INFO);
 
         //overwrite morel user append function to match backbone
         window.morel.auth.getUser = function () {

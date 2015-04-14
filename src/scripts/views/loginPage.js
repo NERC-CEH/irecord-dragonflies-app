@@ -43,7 +43,7 @@ define([
     login: function () {
       //todo: add validation
 
-      _log('views.LoginPage: start.', morel.LOG_DEBUG);
+      _log('views.LoginPage: start.', log.DEBUG);
       if (navigator.onLine) {
         var form = jQuery('#login-form');
         var person = {
@@ -66,7 +66,7 @@ define([
             break;
           case false:
           default:
-            _log('views.LoginPage: unknown feature state');
+            _log('views.LoginPage: unknown feature state', log.WARNING);
         }
       } else {
         app.message("<center><h2>Sorry</h2></center>" +
@@ -124,7 +124,7 @@ define([
      * @param data
      */
     onLoginSuccess: function (data) {
-      _log('views.LoginPage: success.', morel.LOG_DEBUG);
+      _log('views.LoginPage: success.', log.DEBUG);
       $.mobile.loading('hide');
 
       var user = app.views.loginPage.extractUserDetails(data);
@@ -147,7 +147,7 @@ define([
           'name': lines[1] + " " + lines[2]
         };
       } else {
-        _log('views.LoginPage: problems with received secret.', morel.LOG_WARNING);
+        _log('views.LoginPage: problems with received secret.', log.WARNING);
         return null;
       }
     },
@@ -159,7 +159,7 @@ define([
      * @param thrownError
      */
     onLoginError: function (xhr, ajaxOptions, thrownError) {
-      _log("views.LoginPage: ERROR " + xhr.status + " " + thrownError + ".", morel.LOG_ERROR);
+      _log("views.LoginPage: ERROR " + xhr.status + " " + thrownError + ".", log.ERROR);
       var response = xhr.responseText == "Missing name parameter" ? 'Bad Username or Password' : xhr.responseText;
       app.message(
         '<center><h2>Error</h2></center><br/>' +

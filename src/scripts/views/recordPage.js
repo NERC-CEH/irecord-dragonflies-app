@@ -54,7 +54,7 @@ define([
     },
 
     update: function (prevPageId, speciesID) {
-      _log('views.RecordPage: update.');
+      _log('views.RecordPage: update.', log.DEBUG);
       switch (prevPageId) {
         case 'list':
           this.initRecording(speciesID);
@@ -116,7 +116,7 @@ define([
      * Submits the record.
      */
     send: function () {
-      _log('views.RecordPage: sending record.', log.INFO);
+      _log('views.RecordPage: sending record.', log.DEBUG);
 
       $.mobile.loading('show');
 
@@ -144,7 +144,7 @@ define([
             break;
           case false:
           default:
-            _log('views.RecordPage: unknown feature state');
+            _log('views.RecordPage: unknown feature state', log.WARNING);
         }
 
       } else {
@@ -205,7 +205,7 @@ define([
      * Saves the record.
      */
     save: function () {
-      _log('views.RecordPage: saving record.', log.INFO);
+      _log('views.RecordPage: saving record.', log.DEBUG);
       $.mobile.loading('show');
 
       if (!this.valid()) {
@@ -309,7 +309,7 @@ define([
       var button = this.$locationButton;
       var accuracy = this.model.get(morel.record.inputs.KEYS.SREF_ACCURACY);
       switch (true) {
-        case (accuracy == -1):
+        case (accuracy == -1 || !accuracy):
           //none
           button.addClass('none');
           button.removeClass('done');
@@ -338,7 +338,7 @@ define([
      * @param e
      */
     saveCertain: function (e) {
-        _log('app.views.RecordPage: saving certain.', log.INFO);
+        _log('app.views.RecordPage: saving certain.', log.DEBUG);
 
         var input = $(e.currentTarget).prop('checked');
         var value = input ? morel.record.inputs.KEYS.CERTAIN_VAL.TRUE :
