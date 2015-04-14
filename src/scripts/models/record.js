@@ -1,4 +1,9 @@
-define(['backbone'], function (Backbone) {
+/******************************************************************************
+ * Record model.
+ *****************************************************************************/
+define([
+  'backbone'
+], function (Backbone) {
   'use strict';
 
   var Record = Backbone.Model.extend({
@@ -14,7 +19,7 @@ define(['backbone'], function (Backbone) {
       warehouseID ? this.set(morel.record.inputs.KEYS.TAXON, warehouseID) : null;
     },
 
-    /*
+    /**
      * Sends the record.
      */
     send: function (callback, onError) {
@@ -32,7 +37,7 @@ define(['backbone'], function (Backbone) {
       morel.record.db.save(this.attributes, onSaveSuccess, onError);
     },
 
-    /*
+    /**
      * Saves the record.
      */
     save: function (callback, onError) {

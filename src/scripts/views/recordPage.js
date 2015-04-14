@@ -1,3 +1,6 @@
+/******************************************************************************
+ * Record page view.
+ *****************************************************************************/
 define([
   'views/_page',
   'templates',
@@ -89,6 +92,9 @@ define([
       this.setImage('input[type="file"]');
     },
 
+    /**
+     * Runs geolocation service in the background and updates the record on success.
+     */
     runGeoloc: function () {
       function onGeolocSuccess(location) {
         _log('views.RecordPage: saving location.', log.DEBUG);
@@ -106,6 +112,9 @@ define([
       this.model.set(morel.record.inputs.KEYS.SREF_ACCURACY, 0); //running
     },
 
+    /**
+     * Submits the record.
+     */
     send: function () {
       _log('views.RecordPage: sending record.', log.INFO);
 
@@ -192,6 +201,9 @@ define([
       });
     },
 
+    /**
+     * Saves the record.
+     */
     save: function () {
       _log('views.RecordPage: saving record.', log.INFO);
       $.mobile.loading('show');
@@ -218,6 +230,12 @@ define([
       app.models.record.save(onSuccess, onError);
     },
 
+    /**
+     * Sets the user selected species image as a background of the image picker.
+     *
+     * @param input
+     * @returns {boolean}
+     */
     setImage: function (input) {
       var img_holder = 'sample-image-placeholder';
       var upload = $(input);
@@ -284,6 +302,9 @@ define([
       return morel.TRUE;
     },
 
+    /**
+     * Udates the GPS button with the traffic light indication showing GPS status.
+     */
     updateGPSButton: function () {
       var button = this.$locationButton;
       var accuracy = this.model.get(morel.record.inputs.KEYS.SREF_ACCURACY);
@@ -311,6 +332,11 @@ define([
       }
     },
 
+    /**
+     * Saves the certain to the record.
+     *
+     * @param e
+     */
     saveCertain: function (e) {
         _log('app.views.RecordPage: saving certain.', log.INFO);
 
@@ -321,6 +347,9 @@ define([
         this.model.set(morel.record.inputs.KEYS.CERTAIN, value);
     },
 
+    /**
+     * Resets the record page buttons to initial state.
+     */
     resetButtons: function () {
       this.updateNumberButton();
       this.updateStageButton();
@@ -330,6 +359,9 @@ define([
       this.$certainInput.prop('checked', false).checkboxradio('refresh');
     },
 
+    /**
+     * Updates the button info text.
+     */
     updateNumberButton: function () {
       var $numberButton = jQuery('#number-button .descript');
       var value = this.model.get(morel.record.inputs.KEYS.NUMBER);
@@ -344,6 +376,9 @@ define([
       $numberButton.html(text);
     },
 
+    /**
+     * Updates the button info text.
+     */
     updateStageButton: function () {
       var $stageButton = jQuery('#stage-button .descript');
       var value = this.model.get(morel.record.inputs.KEYS.STAGE);
@@ -358,6 +393,9 @@ define([
       $stageButton.html(text);
     },
 
+    /**
+     * Updates the button info text.
+     */
     updateLocationdetailsButton: function () {
       var $locationdetailsButton = jQuery('#locationdetails-button .descript');
       var value = this.model.get(morel.record.inputs.KEYS.LOCATIONDETAILS);
@@ -365,6 +403,9 @@ define([
       $locationdetailsButton.html(value);
     },
 
+    /**
+     * Updates the button info text.
+     */
     updateCommentButton: function () {
       var $commentButton = jQuery('#comment-button .descript');
       var value = this.model.get(morel.record.inputs.KEYS.COMMENT);

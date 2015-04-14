@@ -1,4 +1,10 @@
-define(['views/_page', 'templates'], function (Page) {
+/******************************************************************************
+ * Login page view.
+ *****************************************************************************/
+define([
+  'views/_page',
+  'templates'
+], function (Page) {
   'use strict';
 
   var LoginPage = Page.extend({

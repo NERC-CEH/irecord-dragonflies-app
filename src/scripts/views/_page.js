@@ -1,3 +1,6 @@
+/******************************************************************************
+ * A default JQM page view.
+ *****************************************************************************/
 define([
   'backbone'
 ], function (Backbone) {
@@ -7,6 +10,12 @@ define([
     tagName: 'div',
     role: "page",
 
+    /**
+     * Initializes the page view by rendering the template and appending it to
+     * the body.
+     *
+     * @param id
+     */
     initialize: function (id) {
       _log('views.Page(' + id + '): initialize', log.DEBUG);
 
@@ -21,6 +30,11 @@ define([
       this.appendBackButtonListeners();
     },
 
+    /**
+     * Renders the page view.
+     *
+     * @returns {Page}
+     */
     render: function () {
       _log('views.Page(' + this.id + '): render', log.DEBUG);
 
@@ -28,12 +42,21 @@ define([
       return this;
     },
 
+    /**
+     * Append element attributes.
+     *
+     * @returns {{data-role: (string|Page.role)}}
+     */
     attributes: function () {
       return {
         "data-role": this.role
       };
     },
 
+    /**
+     * For JQM buttons to work correctly using backbone we need to append a listener
+     * to bring the history back.
+     */
     appendBackButtonListeners: function () {
       _log('views.Page(' + this.id + '): appending Back button listeners', log.DEBUG);
 

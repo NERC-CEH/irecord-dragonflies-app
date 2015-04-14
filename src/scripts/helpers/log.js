@@ -1,4 +1,4 @@
-/**
+/******************************************************************************
  * Takes care of application execution logging.
  *
  * Depends on morel.
@@ -11,11 +11,7 @@
  *  4: debug
  *
  * Levels values defined in core app module.
- *
- * @param message
- * @param level
- * @private
- */
+ *****************************************************************************/
 define([], function () {
   window.log = {
     NONE: 0,

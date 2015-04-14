@@ -1,3 +1,6 @@
+/******************************************************************************
+ * Location page view.
+ *****************************************************************************/
 define([
   'views/_page',
   'templates',
@@ -54,6 +57,9 @@ define([
 
     },
 
+    /**
+     * Saves the location to the record and returns to the previous page.
+     */
     save: function () {
       var location = this.get();
 
@@ -79,6 +85,14 @@ define([
     accuracy: -1,
     name: '',
 
+    /**
+     * Sets the location.
+     *
+     * @param latitude
+     * @param longitude
+     * @param accuracy
+     * @param name
+     */
     set: function (latitude, longitude, accuracy, name) {
       this.latitude = latitude;
       this.longitude = longitude;
@@ -86,6 +100,11 @@ define([
       this.name = name || ''
     },
 
+    /**
+     * Gets saved location.
+     *
+     * @returns {{latitude: *, longitude: *, accuracy: *, name: *}}
+     */
     get: function () {
       return {
         'latitude': this.latitude,
@@ -95,16 +114,27 @@ define([
       };
     },
 
+    /**
+     * Updates the text on the page with current location information as Grid Reference.
+     *
+     * @param latitude
+     * @param longitude
+     * @param accuracy
+     */
     updateCoordinateDisplay: function (latitude, longitude, accuracy) {
       var info = 'Your coordinates: ' + latitude + ', ' + longitude + ' (Accuracy: ' + accuracy + ')';
       $('#coordinates').text(info);
     },
 
+    /**
+     * Renders the GPS tab with the gps state.
+     *
+     * @param state
+     * @param location
+     */
     renderGPStab: function (state, location) {
       var template = null;
       var placeholder = $('#location-gps-placeholder');
-      var gref = "";
-      var data = {};
 
       switch (state) {
         case 'init':
@@ -137,13 +167,20 @@ define([
 
     },
 
+    /**
+     * Variable for storing location details while running geolocation.
+     */
     geoloc: {
       latitude: null,
       longitude: null,
       accuracy: -1
     },
 
-    //if improved update current location
+    /**
+     * Sets location if geolocation has an improved update of current location.
+     *
+     * @param location
+     */
     setGeoloc: function (location){
       if (location){
         var geoloc = this.getGeoloc();
@@ -160,6 +197,11 @@ define([
       }
     },
 
+    /**
+     * Returns the geolocation variable.
+     *
+     * @returns {*}
+     */
     getGeoloc: function() {
       return this.geoloc;
     },
@@ -377,7 +419,8 @@ define([
     },
 
     /**
-     * Fix one tile rendering in jQuery tabs
+     * Fix one tile rendering in jQuery tabs.
+     *
      * @param tabs
      * @param mapTab
      */
@@ -395,6 +438,9 @@ define([
       }
     },
 
+    /**
+     * Converts the grid reference to Lat and Long.
+     */
     gridRefConvert: function () {
       var val = $('#grid-ref').val();
       var name = $('#location-name').val();
@@ -440,6 +486,9 @@ define([
       document.body.appendChild(script);
     },
 
+    /**
+     * Updates the main location page message.
+     */
     updateLocationMessage: function () {
       //convert coords to Grid Ref
       var location = this.get();

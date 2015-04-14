@@ -1,3 +1,6 @@
+/******************************************************************************
+ * Stage page view.
+ *****************************************************************************/
 define([
   'views/_page',
   'templates',
@@ -42,6 +45,11 @@ define([
       }
     },
 
+    /**
+     * Saves the stage to the record.
+     *
+     * @param e
+     */
     save: function (e) {
       var name = this.warehouse_id;
       var value = e.currentTarget.value;

@@ -1,3 +1,6 @@
+/******************************************************************************
+ * Date page view.
+ *****************************************************************************/
 define([
   'views/_page',
   'templates',
@@ -31,6 +34,9 @@ define([
       return this;
     },
 
+    /**
+     * Saves the date to the record.
+     */
     save: function () {
       var name = this.warehouse_id;
       var ele = document.getElementById(name);

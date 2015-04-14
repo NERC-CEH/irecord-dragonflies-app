@@ -1,6 +1,6 @@
-/**
- * App initiation.
- */
+/******************************************************************************
+ * RequireJS configuration and app object construction.
+ *****************************************************************************/
 (function () {
   require.config({
     baseUrl: "scripts/",

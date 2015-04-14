@@ -1,3 +1,6 @@
+/******************************************************************************
+ * List page view.
+ *****************************************************************************/
 define([
   'views/_page',
   'views/speciesList',
@@ -57,22 +60,34 @@ define([
       return this;
     },
 
+    /**
+     * Turns on/off favourite filtering.
+     */
     toggleListFavourites: function () {
       var userConfig = app.models.user;
       var on  = userConfig.toggleListFilter('favourites');
       $("#fav-button").toggleClass("on", on);
     },
 
+    /**
+     * Shows/hides the list controls.
+     */
     toggleListControls: function () {
       this.listControlsView.toggleListControls();
     },
 
+    /**
+     * Updates the list controls button with the current state of the filtering.
+     * If one or more (non favourite) filters is turned on then the button is
+     * coloured accordingly.
+     */
     updateListControlsButton: function () {
       var filters = _.without(app.models.user.get('filters'), 'favourites');
       this.$listControlsButton.toggleClass('running', filters.length > 0);
     },
 
     /**
+     * Updates the user page navigation button with the state of saved records.
      * Todo: hook into some record counter event
      */
     updateUserPageButton: function () {
@@ -128,7 +143,7 @@ define([
 
 
     /**
-     *
+     * Renders and appends the list sort controls.
      */
     renderListSortControls: function () {
       var keys = Object.keys(this.sorts);
@@ -147,7 +162,7 @@ define([
     },
 
     /**
-     *
+     * Renders and appends the list filter controls.
      */
     renderListFilterControls: function () {
       var filtersToRender = [];

@@ -1,7 +1,7 @@
-/**
- * Updates the app's data if the source code version mismatches the
- * stored data's version.
- */
+/******************************************************************************
+ * Updates the app's data if the source code version mismatches the stored
+ * data's version.
+ *****************************************************************************/
 define([], function () {
   var CheckForUpdates = function () {
     var appVer = app.models.app.get('appVer');

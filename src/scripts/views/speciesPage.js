@@ -1,3 +1,6 @@
+/******************************************************************************
+ * Species page view.
+ *****************************************************************************/
 define([
   'views/_page',
   'templates',
@@ -245,10 +248,16 @@ define([
       });
     },
 
+    /**
+     * Shows/hides the distribution map.
+     */
     toggleMap: function () {
       $('#species-map').toggle('slow');
     },
 
+    /**
+     * Launches the species gallery viewing.
+     */
     showGallery: function () {
       if ($('.gallery')) {
         this.gallery.show(0);
@@ -257,6 +266,9 @@ define([
       }
     },
 
+    /**
+     * Initializes the species gallery.
+     */
     initGallery: function () {
       var images = $('#species_gallery a');
 
@@ -274,6 +286,11 @@ define([
   var SpeciesProfile = Backbone.View.extend({
     template: app.templates.species_profile,
 
+    /**
+     * Renders the species profile.
+     *
+     * @returns {SpeciesProfile}
+     */
     render: function () {
       this.$el.html(this.template(this.model.attributes));
       return this;

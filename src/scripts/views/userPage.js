@@ -1,3 +1,6 @@
+/******************************************************************************
+ * User page view.
+ *****************************************************************************/
 define([
   'views/_page',
   'templates',
@@ -41,6 +44,9 @@ define([
       this.printList();
     },
 
+    /**
+     * Recursively sends all the saved user records.
+     */
     sendAllSavedRecords: function () {
       $.mobile.loading('show');
 
@@ -55,6 +61,12 @@ define([
       morel.io.sendAllSavedRecords(onSuccess, onSuccessAll);
     },
 
+    /**
+     * Sends the saves user record.
+     *
+     * @param e Event of an element that contains the ID of the saved record as
+     * data attribute.
+     */
     sendSavedRecord: function (e) {
       var recordKey = $(e.currentTarget).data('id');
 
@@ -92,6 +104,12 @@ define([
       }
     },
 
+    /**
+     * Deletes the saves user record.
+     *
+     * @param e Event of an element that contains the ID of the saved record as
+     * data attribute.
+     */
     deleteSavedRecord: function (e) {
       var recordKey = $(e.currentTarget).data('id');
       morel.record.db.remove(recordKey, function () {
@@ -101,6 +119,9 @@ define([
       });
     },
 
+    /**
+     * Renders the user login information.
+     */
     printUserControls: function () {
       var $logoutButton = $('#logout-button');
       var $loginWarning = $('#login-warning');
@@ -121,6 +142,9 @@ define([
       }
     },
 
+    /**
+     * Renders the list of the saved records.
+     */
     printList: function () {
       function onSuccess(savedRecords) {
         var records = [];
@@ -158,6 +182,9 @@ define([
       morel.record.db.getAll(onSuccess);
     },
 
+    /**
+     * Signs the user out.
+     */
     signOut: function () {
       _log('user: logging out', log.INFO);
       app.models.user.signOut();

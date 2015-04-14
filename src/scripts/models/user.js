@@ -1,3 +1,6 @@
+/******************************************************************************
+ * User model. Persistent.
+ *****************************************************************************/
 define([
   'backbone',
   'backbone.localStorage',
@@ -20,12 +23,18 @@ define([
       favourites: []
     },
 
+    /**
+     * Initializes the user.
+     */
     initialize: function () {
       this.fetch();
     },
 
     localStorage: new Store(app.NAME),
 
+    /**
+     * Resets the user login information.
+     */
     signOut: function () {
       this.set('email', '');
       this.set('secret', '');
@@ -36,8 +45,8 @@ define([
 
     /**
      * Sets the app login state of the user account.
-     *
      * Saves the user account details into storage for permanent availability.
+     *
      * @param user User object or empty object
      */
     signIn: function (user) {
@@ -47,12 +56,23 @@ define([
       this.save()
     },
 
+    /**
+     * Saves user location.
+     *
+     * @param location
+     */
     saveLocation: function (location) {
       this.set('location', location.latitude + ', ' + location.longitude);
       this.set('location_acc', location.accuracy);
       this.save();
     },
 
+    /**
+     * Returns user location as Grid Reference.
+     *
+     * @param geoloc
+     * @returns {*}
+     */
     getLocationSref: function (geoloc) {
       var LOCATION_GRANULARITY = 2; //Precision of returned grid reference (6 digits = metres).
 
@@ -70,7 +90,11 @@ define([
       return gref.replace(/ /g, '');
     },
 
-
+    /**
+     * Adds/removes favourite species ID from user information.
+     *
+     * @param speciesID
+     */
     toggleFavouriteSpecies: function (speciesID) {
       var favourites = _.clone(this.get('favourites'));  //CLONING problem as discussed:
       //https://stackoverflow.com/questions/9909799/backbone-js-change-not-firing-on-model-change
@@ -84,11 +108,22 @@ define([
       this.save('favourites', favourites);
     },
 
+    /**
+     * Checks if the speciesID belongs to user favourites.
+     *
+     * @param speciesID
+     * @returns {boolean}
+     */
     isFavourite: function (speciesID) {
       var favourites = this.get('favourites');
       return _.indexOf(favourites, speciesID) >= 0;
     },
 
+    /**
+     * Adds/removes species list filter from user information.
+     * @param filterID
+     * @returns {boolean}
+     */
     toggleListFilter: function (filterID) {
       var filters = _.clone(this.get('filters'));  //CLONING problem as discussed:
       //https://stackoverflow.com/questions/9909799/backbone-js-change-not-firing-on-model-change
@@ -106,6 +141,13 @@ define([
       return !exists; //return the state of the filter added/removed
     },
 
+    /**
+     * Checks if the filterID belongs to user selected ones.
+     *
+     * @param filterID
+     * @param filters
+     * @returns {boolean}
+     */
     hasListFilter: function (filterID, filters) {
       filters = filters || this.get('filters');
       return _.indexOf(filters, filterID) >= 0;

@@ -1,3 +1,6 @@
+/******************************************************************************
+ * Species collection.
+ *****************************************************************************/
 define([
   'backbone'
 ], function (Backbone) {
@@ -23,6 +26,11 @@ define([
   var Species = Backbone.Collection.extend({
     model: Specie,
 
+    /**
+     * Initializes the collection.
+     *
+     * @param species Array
+     */
     initialize: function (species) {
       this.listenTo(app.models.user, 'change', this.updateFavourites);
 
@@ -37,6 +45,9 @@ define([
       });
     },
 
+    /**
+     * Updates the object information about user favourite species.
+     */
     updateFavourites: function () {
       var favourites = app.models.user.get('favourites');
       _.each(this.models, function(model){

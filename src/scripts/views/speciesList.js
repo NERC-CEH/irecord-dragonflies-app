@@ -1,3 +1,6 @@
+/******************************************************************************
+ * Species list view used in ListPage view.
+ *****************************************************************************/
 define([
   'backbone',
   'templates'
@@ -112,8 +115,6 @@ define([
           }
         }}
     },
-
-    DEFAULT_SORT: 'taxonomic',
 
     /**
      * A collection of sorting options used to manage lists.
@@ -242,7 +243,7 @@ define([
     },
 
     /**
-     *
+     * Initializes the species list view.
      */
     initialize: function () {
       _log('views.SpeciesList: initialize', log.DEBUG);
@@ -282,7 +283,7 @@ define([
     },
 
     /**
-     *
+     * Prepares the species list - filters, sorts.
      */
     prepareList: function (callback) {
       var filters = _.clone(app.models.user.get('filters'));
@@ -292,6 +293,7 @@ define([
     },
 
     /**
+     * Prepares the species list. Core functionality.
      *
      * @param list
      * @param sort
@@ -349,6 +351,9 @@ define([
       return group;
     },
 
+    /**
+     * Filters the species list to favourites only.
+     */
     filterFavourites : function () {
       var filter = app.views.listPage.getFilterById('favourites');
       app.views.listPage.setFilter(filter);
@@ -373,6 +378,11 @@ define([
 
     template: app.templates.species_list_item,
 
+    /**
+     * Renders the individual list item representing the species.
+     *
+     * @returns {SpeciesListItemView}
+     */
     render: function () {
       this.$el.html(this.template(this.model.attributes));
       return this;

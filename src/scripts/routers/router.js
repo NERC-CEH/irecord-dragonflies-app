@@ -1,6 +1,6 @@
-/**
+/******************************************************************************
  * Main app router.
- */
+ *****************************************************************************/
 define([
   'views/_page',
   'views/listPage',
@@ -23,10 +23,13 @@ define([
   app.views = {};
 
   var Router = Backbone.Router.extend({
+    /**
+     * Initialize the router.
+     */
     initialize: function () {
       _log('app.Router: initialize.', log.DEBUG);
 
-      $(document).on("show", _.bind(this.handleshow, this));
+     // $(document).on("show", _.bind(this.handleshow, this));
 
       //track every route change as a page view in google analytics
       this.bind('route', this.trackPageview);
@@ -37,6 +40,9 @@ define([
       }
     },
 
+    /**
+     * Routes to listen to.
+     */
     routes: {
       "": function () {
         if (!app.views.listPage) {
@@ -171,6 +177,12 @@ define([
       }
     },
 
+    /**
+     * If the JQM page needs no controller and uses a rather static template
+     * we can use this function to create the view and open it as a page.
+     *
+     * @param pageID the ID of a page that matches the template name
+     */
     navigateToStandardPage: function (pageID) {
       if (!app.views[pageID + 'Page']) {
         app.views[pageID + 'Page'] = new Page(pageID);
@@ -178,6 +190,12 @@ define([
       this.changePage(app.views[pageID + 'Page']);
     },
 
+    /**
+     * Since the JQM page navigation is disabled with backbone this navigates to
+     * a new page view.
+     *
+     * @param page backbone page view
+     */
     changePage: function (page) {
       // We turned off $.mobile.autoInitializePage, but now that we've
       // added our first page to the DOM, we can now call initializePage.
@@ -188,10 +206,16 @@ define([
         this.initializedFirstPage = true;
       }
 
+      //update the URL hash
       $(":mobile-pagecontainer").pagecontainer("change", '#' + page.id,
         {changeHash: false});
     },
 
+    /**
+     *
+     * @param event
+     * @param ui
+     */
     handleshow: function (event, ui) {
       // Figure out what page we are showing and call 'app.views.Page.show' on it
       // TODO: JQM 1.4.3 has ui.toPage, which would be preferred to getActivePage
@@ -203,6 +227,9 @@ define([
       });
     },
 
+    /**
+     * Google analytics to track the page navigation.
+     */
     trackPageview: function () {
       //Google Analytics
       if (app.CONF.GA.STATUS) {

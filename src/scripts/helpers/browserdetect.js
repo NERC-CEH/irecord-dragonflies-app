@@ -1,9 +1,9 @@
-/**
+/******************************************************************************
  * Generic function to detect the browser
  *
  * Chrome has to have and ID of both Chrome and Safari therefore
  * Safari has to have an ID of only Safari and not Chrome
- */
+ *****************************************************************************/
 define([], function () {
   BrowserDetect = function (browser) {
     "use strict";

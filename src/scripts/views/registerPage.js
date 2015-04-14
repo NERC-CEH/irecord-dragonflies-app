@@ -1,4 +1,10 @@
-define(['views/_page', 'templates'], function (Page) {
+/******************************************************************************
+ * Register page view.
+ *****************************************************************************/
+define([
+  'views/_page',
+  'templates'
+], function (Page) {
   'use strict';
 
   var RegisterPage = Page.extend({
@@ -28,6 +34,11 @@ define(['views/_page', 'templates'], function (Page) {
       return this;
     },
 
+    /**
+     * Shows/hides the registration submit button.
+     *
+     * @param e
+     */
     toggleRegisterButton: function (e) {
       //enable 'Create account' button on Terms agreement
       var value = $(e.currentTarget).prop('checked');

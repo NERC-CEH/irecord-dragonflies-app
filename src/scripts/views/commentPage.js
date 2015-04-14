@@ -1,3 +1,6 @@
+/******************************************************************************
+ * Comment page view.
+ *****************************************************************************/
 define([
   'views/_page',
   'templates',
@@ -31,6 +34,9 @@ define([
       return this;
     },
 
+    /**
+     * Saves the comment to record.
+     */
     save: function () {
       var name = morel.record.inputs.KEYS.COMMENT;
       var ele = document.getElementById(name);

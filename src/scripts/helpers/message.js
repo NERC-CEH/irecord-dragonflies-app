@@ -1,10 +1,13 @@
-/**
+/******************************************************************************
  * Displays a self disappearing lightweight message.
- *
- * @param text
- * @param time 0 if no hiding, null gives default 3000ms delay
- */
+ *****************************************************************************/
 define(['jquery', 'jquery.mobile'], function ($, jqm) {
+  /**
+   *
+   * @param text
+   * @param time 0 if no hiding, null gives default 3000ms delay
+   * @constructor
+   */
   var Message = function (text, time) {
     if (!text) {
       _log('NAVIGATION: no text provided to message.', log.ERROR);

@@ -1,6 +1,6 @@
-/**
+/******************************************************************************
  * Main app configuration file.
- */
+ *****************************************************************************/
 define(['morel', 'helpers/log'], function () {
   app = window.app || {};
 
@@ -29,6 +29,9 @@ define(['morel', 'helpers/log'], function () {
     },
     REGISTER: {
       STATUS: true
+    },
+    LIST: {
+      DEFAULT_SORT: 'taxonomic'
     }
   };
 
