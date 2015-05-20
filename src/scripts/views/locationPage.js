@@ -356,6 +356,7 @@ define([
           }
         ]
       };
+
       this.map = new google.maps.Map(mapCanvas, mapOptions);
       var marker = new google.maps.Marker({
         position: new google.maps.LatLng(-25.363, 131.044),

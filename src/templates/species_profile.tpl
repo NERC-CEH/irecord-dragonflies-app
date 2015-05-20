@@ -67,7 +67,8 @@
     <% if (!general) { %>
     <div data-role="navbar" data-iconpos="left">
         <ul>
-            <li><a href='#species-terms' data-role="button" data-icon="info" data-prefetch>Species Terms</a></li>
+            <li><a href='#species-terms' data-role="button" data-mini="true"
+                   data-icon="info" data-prefetch>Species Terms</a></li>
         </ul>
     </div>
     <% } %>

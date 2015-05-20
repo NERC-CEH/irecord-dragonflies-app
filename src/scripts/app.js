@@ -58,6 +58,7 @@ define([
         Backbone.history.start();
 
         //app.fixIOSbuttons();
+
         FastClick.attach(document.body);
 
         //turn off the loading splash screen

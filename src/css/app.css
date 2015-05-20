@@ -21,7 +21,7 @@ body {
     color: #ffffff !important;
     text-shadow: none !important;
 }
-
+.ui-collapsible-content p,
 .ui-listview>li p {
     font-size: 90%;
 }

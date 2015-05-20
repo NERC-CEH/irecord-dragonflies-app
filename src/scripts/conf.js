@@ -60,16 +60,16 @@ define(['morel', 'helpers/log'], function () {
       '21-100': 668,
       '101-500': 669,
       '500+': 670,
-      'present': 671 //default
+      'Present': 671 //default
     },
     STAGE: 'occAttr:378',
     STAGE_VAL: {
-      adult: 4756,
-      copulating: 4757,
-      ovipositing: 4758,
-      larva: 4759,
-      exuvia: 4760,
-      emergent: 4761
+      Adult: 4756,
+      Copulating: 4757,
+      Ovipositing: 4758,
+      Larva: 4759,
+      Exuvia: 4760,
+      Emergent: 4761
     },
     SREF_NAME: 'smpAttr:566',
     CERTAIN: 'occAttr:32',

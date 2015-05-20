@@ -22,7 +22,7 @@
         <label for="radio-choice-5">101-500</label>
         <input type="radio" name="number" id="radio-choice-6" value="500+">
         <label for="radio-choice-6">500+</label>
-        <input type="radio" name="number" id="radio-choice-0" value="present" checked>
+        <input type="radio" name="number" id="radio-choice-0" value="Present" checked>
         <label for="radio-choice-0">Present</label>
     </fieldset>
 </div>
