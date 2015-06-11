@@ -21,6 +21,26 @@ define([
      * label - label to represent the filter in the UI
      */
     filters: {
+      favouritesGroup: {
+        type: 'checkbox',
+        label: 'Favourites',
+        filters: {
+          favourites: {
+            label: 'My favourites only',
+            run: function (list, filteredList, onSuccess) {
+              var keys = app.models.user.get('favourites');
+              for (var i = 0; i < keys.length; i++) {
+                for (var j = 0; j < list.length; j++) {
+                  if (list[j].attributes.id === keys[i]) {
+                    filteredList.push(list[j]);
+                  }
+                }
+              }
+              onSuccess(filteredList);
+            }
+          }
+        }
+      },
       typeGroup: {
         type: 'checkbox',
         label: 'Type',
@@ -43,23 +63,6 @@ define([
               for (var j = 0; j < list.length; j++) {
                 if (list[j].attributes.type === 'zygoptera' || list[j].attributes.general) {
                   filteredList.push(list[j]);
-                }
-              }
-              onSuccess(filteredList);
-            }
-          }
-        }
-      },
-      favouritesGroup: {
-        filters: {
-          favourites: {
-            run: function (list, filteredList, onSuccess) {
-              var keys = app.models.user.get('favourites');
-              for (var i = 0; i < keys.length; i++) {
-                for (var j = 0; j < list.length; j++) {
-                  if (list[j].attributes.id === keys[i]) {
-                    filteredList.push(list[j]);
-                  }
                 }
               }
               onSuccess(filteredList);
@@ -392,17 +395,6 @@ define([
       });
 
       return group;
-    },
-
-    /**
-     * Filters the species list to favourites only.
-     */
-    filterFavourites : function () {
-      var filter = app.views.listPage.getFilterById('favourites');
-      app.views.listPage.setFilter(filter);
-      $("#fav-button").toggleClass("on");
-
-      app.views.listPage.renderList();
     }
   });
 

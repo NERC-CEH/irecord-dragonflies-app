@@ -17,8 +17,7 @@ define([
     events: {
       'click #list-controls-save-button': 'toggleListControls',
       'click #list-controls-button': 'toggleListControls',
-      'change input[type=radio]': 'toggleListControls',
-      'click #fav-button': 'toggleListFavourites'
+      'change input[type=radio]': 'toggleListControls'
     },
 
     initialize: function () {
@@ -52,10 +51,6 @@ define([
       var $listControls = $('#list-controls-placeholder');
       $listControls.html(this.listControlsView.el);
 
-      //turn on/off filter button
-      var on = app.models.user.groupHasListFilter('favourites', 'favouritesGroup');
-      $("#fav-button").toggleClass("on", on);
-
       return this;
     },
 
@@ -68,14 +63,6 @@ define([
       this.listenTo(app.models.user, 'change:filters', this.listControlsView.updateListControlsButton);
 
       this.appendBackButtonListeners();
-    },
-
-    /**
-     * Turns on/off favourite filtering.
-     */
-    toggleListFavourites: function () {
-      var on  = app.models.user.toggleListFilter('favourites', 'favouritesGroup');
-      $("#fav-button").toggleClass("on", on);
     },
 
     /**
@@ -250,14 +237,14 @@ define([
 
     /**
      * Updates the list controls button with the current state of the filtering.
-     * If one or more (non favourite) filters is turned on then the button is
+     * If one or more filters is turned on then the button is
      * coloured accordingly.
      */
     updateListControlsButton: function () {
       var filters = app.models.user.get('filters');
       var activate = false;
       _.each(filters, function (filterGroup, filterGroupID){
-        if (filterGroupID !== 'favouritesGroup' && filterGroup.length > 0) {
+        if (filterGroup.length > 0) {
           activate = true;
         }
       });

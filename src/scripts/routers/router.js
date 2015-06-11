@@ -15,10 +15,15 @@ define([
   'views/numberPage',
   'views/stagePage',
   'views/commentPage',
+  'views/multiRecordInfoPage',
+  'views/multiRecordPage',
+  'views/multiRecordListPage',
+  'views/multiRecordSpeciesPage',
   'helpers/browser'
 ], function(ext, Page, ListPage, SpeciesPage, UserPage, LoginPage, RegisterPage,
             RecordPage, DatePage, LocationPage, NumberPage, StagePage,
-            CommentPage, browser) {
+            CommentPage, MultiRecordInfoPage, MultiRecordPage, MultiRecordListPage,
+            MultiRecordSpeciesPage, browser) {
   'use strict';
 
   app.views = {};
@@ -146,6 +151,34 @@ define([
           app.views.datePage = new DatePage({model: app.models.record});
         }
         this.changePage(app.views.datePage);
+      },
+
+      "multi-record-info": function () {
+        if (!app.views.multiRecordInfoPage) {
+          app.views.multiRecordInfoPage = new MultiRecordInfoPage();
+        }
+        this.changePage(app.views.multiRecordInfoPage);
+      },
+
+      "multi-record": function () {
+        if (!app.views.multiRecordPage) {
+          app.views.multiRecordPage = new MultiRecordPage();
+        }
+        this.changePage(app.views.multiRecordPage);
+      },
+
+      "multi-record-list": function () {
+        if (!app.views.multiRecordListPage) {
+          app.views.multiRecordListPage = new MultiRecordListPage();
+        }
+        this.changePage(app.views.multiRecordListPage);
+      },
+
+      "multi-record-species": function () {
+        if (!app.views.multiRecordSpeciesPage) {
+          app.views.multiRecordSpeciesPage = new MultiRecordSpeciesPage();
+        }
+        this.changePage(app.views.multiRecordSpeciesPage);
       },
 
       "info": function () {
