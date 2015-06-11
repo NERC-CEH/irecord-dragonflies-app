@@ -21,99 +21,108 @@ define([
      * label - label to represent the filter in the UI
      */
     filters: {
-      probability: {
-        probability:{
-          label: 'Probability',
-          filter: function (list, onSuccess) {
-            var sref = app.models.user.getLocationSref();
-            if (sref == null) {
+      typeGroup: {
+        type: 'checkbox',
+        label: 'Type',
 
-              var initBtn = "init-button";
-              var initCancelBtnId = "init-cancel-button";
-
-              var message =
-                '<h3>Please set your location first.</h3></br>' +
-
-                '<button id="' + initBtn + '" class="ui-btn">Set Location</button>' +
-                '<button id="' + initCancelBtnId + '" class="ui-btn">Cancel</button>';
-
-              app.message(message, 0);
-
-              $('#' + initBtn).on('click', function () {
-                $('#probability.filter').prop('checked', false).checkboxradio('refresh');
-                app.models.user.toggleListFilter('probability');
-                Backbone.history.navigate('location', {trigger:true});
-              });
-
-              $('#' + initCancelBtnId).on('click', function () {
-                $.mobile.loading('hide');
-                app.models.user.toggleListFilter('probability');
-                $('#probability.filter').prop('checked', false).checkboxradio('refresh');
-              });
-              return;
+        filters: {
+          grass: {
+            label: 'Dragonflies',
+            run: function (list, filteredList, onSuccess) {
+              for (var j = 0; j < list.length; j++) {
+                if (list[j].attributes.type === 'anisoptera' || list[j].attributes.general) {
+                  filteredList.push(list[j]);
+                }
+              }
+              onSuccess(filteredList);
             }
+          },
+          flower: {
+            label: 'Damselflies',
+            run: function (list, filteredList, onSuccess) {
+              for (var j = 0; j < list.length; j++) {
+                if (list[j].attributes.type === 'zygoptera' || list[j].attributes.general) {
+                  filteredList.push(list[j]);
+                }
+              }
+              onSuccess(filteredList);
+            }
+          }
+        }
+      },
+      favouritesGroup: {
+        filters: {
+          favourites: {
+            run: function (list, filteredList, onSuccess) {
+              var keys = app.models.user.get('favourites');
+              for (var i = 0; i < keys.length; i++) {
+                for (var j = 0; j < list.length; j++) {
+                  if (list[j].attributes.id === keys[i]) {
+                    filteredList.push(list[j]);
+                  }
+                }
+              }
+              onSuccess(filteredList);
+            }
+          }
+        }
+      },
+      probabilityGroup: {
+        type: 'checkbox',
+        label: 'Location',
+        filters: {
+          probability: {
+            label: 'Species in your location',
+            run: function (list, filteredList, onSuccess) {
+              var sref = app.models.user.getLocationSref();
+              if (sref == null) {
 
-            var filtered_list = [];
+                var initBtn = "init-button";
+                var initCancelBtnId = "init-cancel-button";
+
+                var message =
+                  '<h3>Please set your location first.</h3></br>' +
+
+                  '<button id="' + initBtn + '" class="ui-btn">Set Location</button>' +
+                  '<button id="' + initCancelBtnId + '" class="ui-btn">Cancel</button>';
+
+                app.message(message, 0);
+
+                $('#' + initBtn).on('click', function () {
+                  $('#probability.filter').prop('checked', false).checkboxradio('refresh');
+                  app.models.user.toggleListFilter('probability');
+                  Backbone.history.navigate('location', {trigger:true});
+                });
+
+                $('#' + initCancelBtnId).on('click', function () {
+                  $.mobile.loading('hide');
+                  app.models.user.toggleListFilter('probability');
+                  $('#probability.filter').prop('checked', false).checkboxradio('refresh');
+                });
+                return;
+              }
+
               var location_data = app.data.probability[sref];
               if (location_data != null) {
                 var speciesIds = Object.keys(location_data);
                 for (var i = 0; i < speciesIds.length; i++) {
                   for (var j = 0; j < list.length; j++) {
                     if (list[j].id === speciesIds[i]) {
-                      filtered_list.push(list[j]);
+                      filteredList.push(list[j]);
                       break;
                     }
                   }
                 }
               }
               //add general ones
-            //  var general = _.findWhere(list, {attributes:{general: "TRUE"}});
-             // filtered_list.push(general);
+              //  var general = _.findWhere(list, {attributes:{general: "TRUE"}});
+              // filtered_list.push(general);
 
-              onSuccess(filtered_list);
-          }
-      }},
-      suborder: {
-        anisoptera: {
-          label: 'Dragonflies',
-          filter: function (list, onSuccess) {
-            var filtered_list = [];
-            for (var j = 0; j < list.length; j++) {
-              if (list[j].attributes.type === 'anisoptera' || list[j].attributes.general) {
-                filtered_list.push(list[j]);
-              }
+              onSuccess(filteredList);
             }
-            onSuccess(filtered_list);
-          }
-        },
-        zygoptera: {
-          label: 'Damseflies',
-          filter: function (list, onSuccess) {
-            var filtered_list = [];
-            for (var j = 0; j < list.length; j++) {
-              if (list[j].attributes.type === 'zygoptera' || list[j].attributes.general) {
-                filtered_list.push(list[j]);
-              }
-            }
-            onSuccess(filtered_list);
           }
         }
-      },
-      favourites: {
-        favourites: {
-          filter: function (list, onSuccess) {
-            var filtered_list = [];
-            var keys = app.models.user.get('favourites');
-            for (var i = 0; i < keys.length; i++) {
-              for (var j = 0; j < list.length; j++) {
-                if (list[j].attributes.id === keys[i]) {
-                  filtered_list.push(list[j]);
-                }
-              }
-            }
-            onSuccess(filtered_list);
-          }
-        }}
+      }
     },
 
     /**
@@ -257,21 +266,23 @@ define([
      * Renders the species list.
      * @returns {SpeciesListView}
      */
-    render: function (onSuccess) {
+    render: function (callback) {
       _log('views.SpeciesList: render', log.DEBUG);
 
       var that = this;
-      this.prepareList(function (list){
+      var onSuccess = function (list){
         var container = document.createDocumentFragment(); //optimising the performance
         _.each(list, function (specie) {
           var listSpeciesView = new SpeciesListItemView({model: specie});
           container.appendChild(listSpeciesView.render().el);
         });
         that.$el.html(container); //appends to DOM only once
-        if (onSuccess){
-          onSuccess(that.$el);
+        if (callback){
+          callback(that.$el);
         }
-      });
+      };
+
+      this.prepareList(onSuccess);
       return this;
     },
 
@@ -286,10 +297,10 @@ define([
      * Prepares the species list - filters, sorts.
      */
     prepareList: function (callback) {
-      var filters = _.clone(app.models.user.get('filters'));
+      var filtersToApply = _.cloneDeep(app.models.user.get('filters'));
       var sort = app.models.user.get('sort');
       var list = this.collection.models.slice(); //shallow copy of array
-      this.prepareListCore(list, sort, filters, callback);
+      this.prepareListCore(list, sort, filtersToApply, callback);
     },
 
     /**
@@ -299,24 +310,30 @@ define([
      * @param sort
      * @param filters
      */
-    prepareListCore: function (list, sort, filters, callback) {
+    prepareListCore: function (list, sort, filtersToApply, callback) {
       //todo: might need to move UI functionality to higher grounds
       $.mobile.loading("show");
 
       var that = this;
       //filter list
-      var onFilterSuccess = null;
-      if (filters.length > 0) {
-        var filter = filters.pop();
+      var filterGroups = Object.keys(filtersToApply);
+      if (filterGroups.length > 0) {
+        var filterGroupID = filterGroups[0];
+        var filterGroup = filtersToApply[filterGroupID];
+        if (filterGroup.length > 0) {
+          var onFilterGroupSuccess = function (species) {
+            delete filtersToApply[filterGroup];
+            that.prepareListCore(species, sort, filtersToApply, callback);
+            return;
+          };
 
-        onFilterSuccess = function (species) {
-          that.prepareListCore(species, sort, filters, callback);
-        };
-
-        var group = this.getFilterCurrentGroup(filter);
-
-        this.filters[group][filter].filter(list, onFilterSuccess);
-        return;
+          this.filterGroupCore(list, [], filterGroup, filterGroupID, onFilterGroupSuccess);
+          return;
+        } else {
+          delete filtersToApply[filterGroupID];
+          that.prepareListCore(list, sort, filtersToApply, callback);
+          return;
+        }
       }
 
       function onSortSuccess() {
@@ -331,17 +348,43 @@ define([
     },
 
     /**
+     * Iterates through the grouped filters applying them to the list.
+     *
+     * @param list
+     * @param filteredList
+     * @param filterGroup filters to apply
+     * @param filterGroupID
+     * @param callback
+     */
+    filterGroupCore: function (list, filteredList, filterGroup, filterGroupID, callback) {
+      if (filterGroup.length > 0) {
+        var filterID = filterGroup.pop();
+        var filter = this.filters[filterGroupID].filters[filterID];
+        var that = this;
+
+        var onSuccess = function (filteredList) {
+          var uniqueFilteredList = _.uniq(filteredList);
+          that.filterGroupCore(list, uniqueFilteredList, filterGroup, filterGroupID, callback);
+        };
+        filter.run(list, filteredList, onSuccess);
+
+      } else {
+        callback(filteredList);
+      }
+    },
+
+    /**
      * Returns the roup of the filterID.
      *
      * @param filter
      * @returns {Array}
      */
     getFilterCurrentGroup: function (filterID) {
-      var group = null;
       //iterate all filter groups
+      var group = null;
       _.each(this.filters, function (groupFilters, groupID) {
         //and filters
-        _.each(groupFilters, function (_filter, _filterID) {
+        _.each(groupFilters.filters, function (_filter, _filterID) {
           if(_filterID === filterID) {
             group = groupID;
           }

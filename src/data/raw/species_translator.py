@@ -23,6 +23,7 @@ reader = csv.reader(csv_file)
 json_file = open(sys.argv[2], 'wt')
 
 data = []
+row_data = {}
 
 rownum = 0
 for row in reader:

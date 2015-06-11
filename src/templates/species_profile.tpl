@@ -29,7 +29,13 @@
             <svg viewBox="0 0 400 500"  preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
                  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
                 <use id="species-map-data" xlink:href="#data"/>
-                <use id="species-map-boundary" xlink:href="#boundary"/>
+                <use id="species-map-boundary" xlink:href="#coastline"/>
+                <g id="legend">
+                    <text dy="15" x="30" y="0" style="font-size: normal">Main area</text>
+                    <rect width="20" height="20" fill="rgb(22.745098%,53.333333%,16.078431%)" y="0" x="0"></rect>
+                    <text dy="15" x="30" y="30" style="font-size: normal">Individual records</text>
+                    <rect width="20" height="20" fill="rgb(80.392157%,58.431373%,4.705882%)" y="30" x="0"></rect>
+                </g>
             </svg>
         </li>
     </ul>
@@ -62,7 +68,11 @@
             <strong>Confusion Species</strong>:
             <p><%- confusion_species %></p>
         </li>
-        <% } %>
+        <li>
+            <a href="#record/<%- id %>" data-role="button" data-icon="plus">
+                <center>Record Species</center></a>
+        </li>
+      <% } %>
     </ul>
     <% if (!general) { %>
     <div data-role="navbar" data-iconpos="left">

@@ -12,7 +12,7 @@ define('jquery', function ($) {
       var downloadCheckbox = "download-checkbox";
 
       var message =
-        '<h3>Start downloading the app for offline use?</h3></br>' +
+        '<center><h3>Download the app for offline use?</h3></center>' +
 
         '<label><input id="' + downloadCheckbox + '" type="checkbox" name="checkbox-0 ">Don\'t ask again' +
         '</label> </br>' +
@@ -43,7 +43,7 @@ define('jquery', function ($) {
             var finishedBtnCloseId = 'download-finished-close-button';
 
             var message =
-              '<h3>App can be used offline now.</h3>' +
+              '<center><h3>App can be used offline now</h3></center>' +
               '<p>Do you want to restart it?</p>' +
               '<button id="' + finishedBtnId + '">Restart Now</button>' +
               '<button id="' + finishedBtnCloseId+ '">Restart Later</button>';

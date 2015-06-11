@@ -3,9 +3,10 @@
  *****************************************************************************/
 define([
   'views/_page',
+  'views/contactDetailsDialog',
   'templates',
   'latlon'
-], function (Page) {
+], function (Page, contactDetailsDialog) {
   'use strict';
 
   var UserPage = Page.extend({
@@ -23,17 +24,14 @@ define([
     initialize: function () {
       _log('views.UserPage: initialize', log.DEBUG);
 
-      this.listenTo(app.models.user, 'change:email', this.update);
-
       this.render();
-      this.appendBackButtonListeners();
+      this.appendEventListeners();
     },
 
     render: function () {
       _log('views.UserPage: render', log.DEBUG);
 
       this.$el.html(this.template());
-
       $('body').append($(this.el));
 
       return this;
@@ -42,6 +40,12 @@ define([
     update: function () {
       this.printUserControls();
       this.printList();
+    },
+
+    appendEventListeners: function () {
+      this.listenTo(app.models.user, 'change:email', this.update);
+
+      this.appendBackButtonListeners();
     },
 
     /**
@@ -58,7 +62,15 @@ define([
         $.mobile.loading('hide');
         app.views.listPage.updateUserPageButton();
       }
-      morel.io.sendAllSavedRecords(onSuccess, onSuccessAll);
+
+      if (app.models.user.hasSignIn()) {
+        morel.io.sendAllSavedRecords(onSuccess, onSuccessAll);
+      } else {
+        contactDetailsDialog(function () {
+          $.mobile.loading('show');
+          morel.io.sendAllSavedRecords(onSuccess, onSuccessAll);
+        });
+      }
     },
 
     /**
@@ -72,6 +84,7 @@ define([
 
       var onSuccess = null, onError = null;
       if (navigator.onLine) {
+        //online
         $.mobile.loading('show');
 
         onSuccess = function () {
@@ -97,8 +110,16 @@ define([
           app.message(message);
         };
 
-        morel.io.sendSavedRecord(recordKey, onSuccess, onError);
+        if (app.models.user.hasSignIn()) {
+          morel.io.sendSavedRecord(recordKey, onSuccess, onError);
+        } else {
+          contactDetailsDialog(function () {
+            $.mobile.loading('show');
+            morel.io.sendSavedRecord(recordKey, onSuccess, onError);
+          });
+        }
       } else {
+        //offline
         app.message("<center><h2>Sorry</h2></center>" +
         "<br/><h3>Looks like you are offline!</h3>");
       }
@@ -126,10 +147,11 @@ define([
       var $logoutButton = $('#logout-button');
       var $loginWarning = $('#login-warning');
 
-      var user = app.models.user.attributes;
-      if (user.email){
+      if (app.models.user.hasSignIn()){
         //logged in
-        $('#user_heading').html(user.name);
+        var name = app.models.user.get('name');
+        var surname = app.models.user.get('surname');
+        $('#user_heading').html(name + ' ' + surname);
 
         $logoutButton.show();
         $loginWarning.hide();
@@ -190,7 +212,6 @@ define([
       app.models.user.signOut();
       this.update();
     }
-
   });
 
   return UserPage;

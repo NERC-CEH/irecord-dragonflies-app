@@ -15,6 +15,16 @@
     .progress-radial-bar {
       fill: #C2B855;
     }
+
+    .error {
+      word-wrap: break-word;
+      color: white;
+    }
+
+    .error h2{
+      margin-bottom: 10px;
+      color: red;
+    }
   </style>
 
   <!-- JS -->
@@ -48,10 +58,18 @@
                   var message = '';
                   switch (e.type) {
                     case 'error':
-                      message = "Error";
-                      jQuery('path').css('fill', 'red');
+                      var reason = e.originalEvent.message;
+                      if (e.originalEvent.message.search('exceed quota') >= 0) {
+                        reason = 'Not enough space! </br>' +
+                        'Try clearing your browser history.'
+                      }
+                      message = "<div class='error'>" +
+                      "<center><h2>Error :(</h2></center>" +
+                      reason + "</div>";
+
+                      $('body').html(message);
                       error(e.originalEvent);
-                      break;
+                      return;
                     case 'cached':
                     case 'updateready':
                       message = "Finished";

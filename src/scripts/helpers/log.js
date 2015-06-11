@@ -75,9 +75,12 @@ define([], function () {
 
       if (app.CONF.GA.STATUS && log.CONF.GA_ERROR){
         require(['ga'], function (ga) {
-          ga('send', 'exception', {
-            'exDescription': error.message + ' ' +  error.url + ' ' +  error.line
-          })
+          //check if the error did not occur before the analytics is loaded
+          if (ga) {
+            ga('send', 'exception', {
+              'exDescription': error.message + ' ' +  error.url + ' ' +  error.line
+            });
+          }
         });
       }
     },

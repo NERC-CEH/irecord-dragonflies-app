@@ -20,6 +20,10 @@ define([
       _log('views.LoginPage: initialize', log.DEBUG);
 
       this.render();
+      this.appendEventListeners();
+    },
+
+    appendEventListeners: function () {
       this.appendBackButtonListeners();
     },
 
@@ -144,7 +148,8 @@ define([
       if (lines && lines.length >= 3 && lines[0].length > 0) {
         return {
           'secret': lines[0],
-          'name': lines[1] + " " + lines[2]
+          'name': lines[1],
+          'surname': lines[2]
         };
       } else {
         _log('views.LoginPage: problems with received secret.', log.WARNING);

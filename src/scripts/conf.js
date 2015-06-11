@@ -32,8 +32,78 @@ define(['morel', 'helpers/log'], function () {
     },
     LIST: {
       DEFAULT_SORT: 'taxonomic'
+    },
+    MAP: {
+      zoom: 5,
+      zoomControl: true,
+      zoomControlOptions: {
+        style: 1
+      },
+      panControl: false,
+      linksControl: false,
+      streetViewControl: false,
+      overviewMapControl: false,
+      scaleControl: false,
+      rotateControl: false,
+      mapTypeControl: true,
+      mapTypeControlOptions: {
+        style: 1
+      },
+      styles: [
+        {
+          "featureType": "landscape",
+          "stylers": [
+            {"hue": "#FFA800"},
+            {"saturation": 0},
+            {"lightness": 0},
+            {"gamma": 1}
+          ]
+        },
+        {
+          "featureType": "road.highway",
+          "stylers": [
+            {"hue": "#53FF00"},
+            {"saturation": -73},
+            {"lightness": 40},
+            {"gamma": 1}
+          ]
+        },
+        {
+          "featureType": "road.arterial",
+          "stylers": [
+            {"hue": "#FBFF00"},
+            {"saturation": 0},
+            {"lightness": 0},
+            {"gamma": 1}
+          ]
+        },
+        {
+          "featureType": "road.local",
+          "stylers": [
+            {"hue": "#00FFFD"},
+            {"saturation": 0},
+            {"lightness": 30},
+            {"gamma": 1}
+          ]
+        },
+        {
+          "featureType": "water",
+          "stylers": [
+            {"saturation": 43},
+            {"lightness": -11},
+            {"hue": "#0088ff"}
+          ]
+        },
+        {
+          "featureType": "poi",
+          "elementType": "labels",
+          "stylers": [
+            { "visibility": "off" }
+          ]
+        }
+      ]
     }
-  };
+};
 
   //logging
   log.CONF = {
@@ -71,7 +141,7 @@ define(['morel', 'helpers/log'], function () {
       Exuvia: 4760,
       Emergent: 4761
     },
-    SREF_NAME: 'smpAttr:566',
+    SREF_NAME: 'sample:location_name',
     CERTAIN: 'occAttr:32',
     CERTAIN_VAL: {
       TRUE: 663,

@@ -26,7 +26,7 @@ define([
       _log('views.SpeciesPage: initialize', log.DEBUG);
 
       this.render();
-      this.appendBackButtonListeners();
+      this.appendEventListeners();
     },
 
     render: function () {
@@ -64,12 +64,16 @@ define([
 
       //add Map
       var $mapsHolder = $('#maps-holder');
-      $.get("images/national_boundary.svg", function(data) {
+      $.get("images/country_coastline.svg", function(data) {
         $mapsHolder.html(new XMLSerializer().serializeToString(data.documentElement));
       });
       $.get(this.model.attributes.map, function(data) {
         $mapsHolder.append(new XMLSerializer().serializeToString(data.documentElement));
       });
+    },
+
+    appendEventListeners: function () {
+      this.appendBackButtonListeners();
     },
 
     /**

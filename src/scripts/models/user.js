@@ -14,12 +14,13 @@ define([
 
     defaults: {
       name: '',
+      surname: '',
       email: '',
       secret: '',
       location: null,
       location_acc: -1,
       sort: 'common_name',
-      filters: [],
+      filters: {},
       favourites: []
     },
 
@@ -39,7 +40,7 @@ define([
       this.set('email', '');
       this.set('secret', '');
       this.set('name', '');
-
+      this.set('surname', '');
       this.save();
     },
 
@@ -50,10 +51,26 @@ define([
      * @param user User object or empty object
      */
     signIn: function (user) {
-      this.set('email', user.email);
-      this.set('secret', user.secret);
-      this.set('name', user.name);
+      this.set('secret', user.secret || '');
+      this.setContactDetails(user);
       this.save()
+    },
+
+    /**
+     * Sets user contact information.
+     */
+    setContactDetails: function (user) {
+      this.set('email', user.email || '');
+      this.set('name', user.name || '');
+      this.set('surname', user.surname || '');
+      this.save();
+    },
+
+    /**
+     * Returns user contact information.
+     */
+    hasSignIn: function () {
+      return this.get('secret');
     },
 
     /**
@@ -81,7 +98,7 @@ define([
         return null;
       }
       //get translated geoloc
-      var p = new LatLon(geoloc.split(',')[0], geoloc.split(',')[1], LatLon.datum.OSGB36);
+      var p = new LatLon(geoloc.split(',')[0], geoloc.split(',')[1], LatLon.datum.WGS84);
       var grid = OsGridRef.latLonToOsGrid(p);
       var gref = grid.toString(LOCATION_GRANULARITY);
       _log('models.User: converted geoloc to sref -  ' + gref + ".", log.DEBUG);
@@ -121,22 +138,31 @@ define([
 
     /**
      * Adds/removes species list filter from user information.
+     *
      * @param filterID
+     * @param groupID group the filter belongs to
      * @returns {boolean}
      */
-    toggleListFilter: function (filterID) {
-      var filters = _.clone(this.get('filters'));  //CLONING problem as discussed:
+    toggleListFilter: function (filterID, groupID) {
+      // var userFilters = _.clone(this.get('filters'));  //CLONING problem as discussed:
       //https://stackoverflow.com/questions/9909799/backbone-js-change-not-firing-on-model-change
+      var userFilters = this.get('filters');
 
-      var exists = this.hasListFilter(filterID, filters);
-      if (exists) {
-        filters = _.without(filters, filterID);
+      var exists = false;
+      if (userFilters[groupID]) {
+        exists = userFilters[groupID].indexOf(filterID) >= 0;
+        if (exists) {
+          userFilters[groupID] = _.without(userFilters[groupID], filterID);
+        } else {
+          userFilters[groupID].push(filterID);
+        }
       } else {
-        filters.push(filterID);
+        userFilters[groupID] = [filterID];
       }
 
-      this.set('filters', filters);
+      this.set('filters', userFilters);
       this.save();
+      this.trigger('change:filters');
 
       return !exists; //return the state of the filter added/removed
     },
@@ -148,9 +174,17 @@ define([
      * @param filters
      * @returns {boolean}
      */
-    hasListFilter: function (filterID, filters) {
+    groupHasListFilter: function (filterID, groupID, filters) {
       filters = filters || this.get('filters');
-      return _.indexOf(filters, filterID) >= 0;
+      return _.indexOf(filters[groupID], filterID) >= 0;
+    },
+
+    /**
+     * @returns {boolean} Scientific or different type of sorting is selected
+     */
+    isSortScientific: function () {
+      var sort = this.get('sort');
+      return sort === 'scientific' || sort === 'scientific_r';
     }
   });
 

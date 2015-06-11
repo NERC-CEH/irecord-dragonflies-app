@@ -195,6 +195,11 @@ form, body {
     overflow: hidden;
 }
 
+.ui-title {
+    color: white;
+    text-shadow: none !important;
+}
+
 /* Move loader dialog up */
 .ui-loader{
     top: 30% !important;
@@ -210,6 +215,13 @@ form, body {
 /* Record button */
 .record-button{
     text-align: left;
+}
+
+.core-inputs ul {
+    display: inline-block;
+    width: 66%;
+    margin-left: 2% !important;
+    vertical-align: top;
 }
 
 /* 	Photo picker. */
@@ -308,7 +320,7 @@ form, body {
     float: left
 }
 
-.species-list-common-name{
+.species-list-main-name{
     font-size: large !important;
     font-weight: bold;
 }
@@ -316,9 +328,9 @@ form, body {
 #location-top-button.none:after {
     background-color: rgb(192, 68, 32);
 }
-#location-top-button.running:after,
+#list-controls-button.running:after,
 #user-page-button.running:after,
-#list-controls-button.running:after {
+#location-top-button.running:after {
     background-color: rgb(205, 155, 0);
 }
 #location-top-button.done:after {
@@ -340,6 +352,11 @@ form, body {
 h1.taxon {
     text-shadow: none;
     font-style: italic;
+    margin: 0 10% 0 5% !important;
+}
+
+#record_heading {
+ margin: 0 0 0 20%;
 }
 
 div.taxon {
@@ -357,9 +374,27 @@ div.taxon {
         display: block !important;
     }
 
-    .species-list-common-name{
+    .common-name {
+        white-space: initial !important;
+        font-size: 1.2em;
+    }
+
+    .taxon {
+        margin-top: 10px;
+        white-space: initial !important;
+    }
+
+    .species-list-main-name{
+        white-space: initial !important;
         font-size: smaller !important;
         font-weight: bold;
+        margin-top: 0 !important;
+    }
+
+    .species-list-secondary-name {
+        white-space: initial !important;
+        font-size: 0.75em !important;
+        margin-bottom: 0 !important;
     }
 
     .favourite{
@@ -402,10 +437,32 @@ a.ui-btn > img {
     width: 3.5em;
 }
 
+
+#list-filters .ui-collapsible-content {
+    width: 80%;
+}
+
 label.filter, label.sort {
     width: 70%
 }
 
+#list-filters a{
+    width: 80%;
+}
+
+#list-filters fieldset,
+#list-filters .ui-collapsible-content{
+    padding: 0;
+    margin: 0;
+}
+
+
+#list-filters label {
+    width: 91%;
+    background-color: white;
+}
+
+#list-controls-clear-button,
 #list-controls-save-button{
     width: 30%;
 }
@@ -500,11 +557,13 @@ ol[data-role="listview"] > li > p {
     margin: 0 !important;
 }
 .heading {
+    font-size: 0.9em!important;
     width: 50%;
 }
 .descript {
+    font-size: .75em !important;
     font-weight: bold !important;
-    width: 30%;
+    width: 50%;
     padding-right: 40px;
 }
 
@@ -516,11 +575,34 @@ div.loading {
     margin-top: 10%;
 }
 
+.loading img {
+    margin-top: 5%;
+}
+
 .ui-loader .ui-icon-loading {
     background-color: white;
 }
 
+
+
+#heat-map{
+    height: 55vh;
+}
 .ui-loader-default {
 
     opacity: .70;
+}
+
+.trip-block {
+    text-shadow: none;
+    color: white;
+}
+
+#safari-add-homescreen {
+    margin: auto;
+}
+
+/* User details dialog */
+.input-error {
+    border-color: red !important;
 }

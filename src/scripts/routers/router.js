@@ -2,6 +2,7 @@
  * Main app router.
  *****************************************************************************/
 define([
+  'routers/routerExtention',
   'views/_page',
   'views/listPage',
   'views/speciesPage',
@@ -14,10 +15,10 @@ define([
   'views/numberPage',
   'views/stagePage',
   'views/commentPage',
-  'helpers/download'
-], function(Page, ListPage, SpeciesPage, UserPage, LoginPage, RegisterPage,
+  'helpers/browser'
+], function(ext, Page, ListPage, SpeciesPage, UserPage, LoginPage, RegisterPage,
             RecordPage, DatePage, LocationPage, NumberPage, StagePage,
-            CommentPage, download) {
+            CommentPage, browser) {
   'use strict';
 
   app.views = {};
@@ -29,15 +30,8 @@ define([
     initialize: function () {
       _log('app.Router: initialize.', log.DEBUG);
 
-     // $(document).on("show", _.bind(this.handleshow, this));
-
       //track every route change as a page view in google analytics
       this.bind('route', this.trackPageview);
-
-      //download app for offline usage
-      if (app.CONF.OFFLINE.STATUS){
-        setTimeout(download, 500);
-      }
     },
 
     /**
@@ -51,11 +45,25 @@ define([
         this.changePage(app.views.listPage);
       },
 
-      "list": function () {
-        if (!app.views.listPage) {
-          app.views.listPage = new ListPage();
+      "list": {
+        route: function () {
+          if (!app.views.listPage) {
+            app.views.listPage = new ListPage();
+          }
+          this.changePage(app.views.listPage);
+
+          app.views.listPage.update();
+       },
+        after: function(){
+          //leaving out safari home mode because it creates a nasty glitch on 8.3
+          if (app.views.listPage.scroll &&
+            !(browser.detect('Safari') && browser.isHomeMode())) {
+              window.scrollTo(0, app.views.listPage.scroll);
+          }
+        },
+        leave: function(){
+          app.views.listPage.scroll = $(window).scrollTop();
         }
-        this.changePage(app.views.listPage);
       },
 
       "species/:id": function (id) {
@@ -209,22 +217,6 @@ define([
       //update the URL hash
       $(":mobile-pagecontainer").pagecontainer("change", '#' + page.id,
         {changeHash: false});
-    },
-
-    /**
-     *
-     * @param event
-     * @param ui
-     */
-    handleshow: function (event, ui) {
-      // Figure out what page we are showing and call 'app.views.Page.show' on it
-      // TODO: JQM 1.4.3 has ui.toPage, which would be preferred to getActivePage
-      var activePage = $(":mobile-pagecontainer").pagecontainer("getActivePage");
-      _.each(this.pages, function (page) {
-        if (activePage.get(0) === page.el) {
-          page.show(event, ui);
-        }
-      });
     },
 
     /**

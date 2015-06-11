@@ -3,6 +3,7 @@
  *****************************************************************************/
 define([
   'views/_page',
+  'views/contactDetailsDialog',
   'templates',
   'morel',
   'conf'
@@ -26,17 +27,9 @@ define([
     initialize: function () {
       _log('views.RecordPage: initialize', log.DEBUG);
 
-      this.listenTo(this.model,
-        'change:' + morel.record.inputs.KEYS.NUMBER, this.updateNumberButton);
-      this.listenTo(this.model,
-        'change:' + morel.record.inputs.KEYS.STAGE, this.updateStageButton);
-      this.listenTo(this.model,
-        'change:' + morel.record.inputs.KEYS.COMMENT, this.updateCommentButton);
-      this.listenTo(this.model,
-        'change:' + morel.record.inputs.KEYS.SREF_ACCURACY, this.updateGPSButton);
-
       this.render();
-      this.appendBackButtonListeners();
+      this.appendEventListeners();
+      this.trip();
     },
 
     render: function () {
@@ -50,6 +43,7 @@ define([
       this.$certainInput = $('#certain-button');
       this.$photo = $('#photo');
       this.$locationButton = $('#location-top-button');
+      this.$dateButton = $('#date-top-button');
       return this;
     },
 
@@ -57,6 +51,7 @@ define([
       _log('views.RecordPage: update.', log.DEBUG);
       switch (prevPageId) {
         case 'list':
+        case 'species':
           this.initRecording(speciesID);
           break;
         case '':
@@ -64,6 +59,23 @@ define([
           this.initRecording(speciesID);
         default:
       }
+    },
+
+    appendEventListeners: function () {
+      this.listenTo(this.model,
+        'change:' + morel.record.inputs.KEYS.NUMBER, this.updateNumberButton);
+      this.listenTo(this.model,
+        'change:' + morel.record.inputs.KEYS.STAGE, this.updateStageButton);
+      this.listenTo(this.model,
+        'change:' + morel.record.inputs.KEYS.COMMENT, this.updateCommentButton);
+      this.listenTo(this.model,
+        'change:' + morel.record.inputs.KEYS.SREF_ACCURACY, this.updateGPSButton);
+      this.listenTo(this.model,
+        'change:' + morel.record.inputs.KEYS.SREF, this.updateGPSButton);
+      this.listenTo(this.model,
+        'change:' + morel.record.inputs.KEYS.DATE, this.updateDateButton);
+
+      this.appendBackButtonListeners();
     },
 
     /**
@@ -137,7 +149,14 @@ define([
 
         switch (app.CONF.SEND_RECORD.STATUS) {
           case true:
-            app.models.record.send(onSendSuccess, onError);
+            if (app.models.user.hasSignIn()) {
+              app.models.record.send(onSendSuccess, onError);
+            } else {
+              contactDetailsDialog(function() {
+                $.mobile.loading('show');
+                app.models.record.send(onSendSuccess, onError);
+              });
+            }
             break;
           case 'simulate':
             this.sendSimulate(onSendSuccess, onError);
@@ -306,45 +325,55 @@ define([
      * Udates the GPS button with the traffic light indication showing GPS status.
      */
     updateGPSButton: function () {
+      var $button = jQuery('#location-top-button .descript');
+      var text = '';
+
       var button = this.$locationButton;
       var accuracy = this.model.get(morel.record.inputs.KEYS.SREF_ACCURACY);
       switch (true) {
-        case (accuracy == -1 || !accuracy):
+        case (accuracy == -1 || accuracy === 'undefined'):
           //none
           button.addClass('none');
           button.removeClass('done');
           button.removeClass('running');
+
+          text = 'Required';
           break;
         case (accuracy > 0):
           //done
           button.addClass('done');
           button.removeClass('running');
           button.removeClass('none');
+
+          var value = this.model.get(morel.record.inputs.KEYS.SREF);
+          var location = {
+            latitude: value.split(',')[0],
+            longitude: value.split(',')[1]
+          };
+          var p = new LatLon(location.latitude, location.longitude, LatLon.datum.WGS84);
+          var grid = OsGridRef.latLonToOsGrid(p);
+          text =  grid.toString();
           break;
         case (accuracy == 0):
           //running
           button.addClass('running');
           button.removeClass('done');
           button.removeClass('none');
+
+          text = 'Locating..';
           break;
         default:
           _log('views.RecordPage: ERROR no such GPS button state: ' + accuracy, log.WARNING);
       }
+
+      $button.html(text);
     },
 
-    /**
-     * Saves the certain to the record.
-     *
-     * @param e
-     */
-    saveCertain: function (e) {
-        _log('app.views.RecordPage: saving certain.', log.DEBUG);
-
-        var input = $(e.currentTarget).prop('checked');
-        var value = input ? morel.record.inputs.KEYS.CERTAIN_VAL.TRUE :
-          morel.record.inputs.KEYS.CERTAIN_VAL.FALSE;
-
-        this.model.set(morel.record.inputs.KEYS.CERTAIN, value);
+    updateDateButton: function () {
+      var $dateButton = jQuery('#date-top-button .descript');
+      var value = this.model.get(morel.record.inputs.KEYS.DATE);
+      var text = value || '';
+      $dateButton.html(text);
     },
 
     /**
@@ -353,10 +382,9 @@ define([
     resetButtons: function () {
       this.updateNumberButton();
       this.updateStageButton();
-      this.updateLocationdetailsButton();
       this.updateCommentButton();
 
-      this.$certainInput.prop('checked', false).checkboxradio('refresh');
+      this.$certainInput.prop('checked', true).checkboxradio('refresh');
     },
 
     /**
@@ -396,21 +424,59 @@ define([
     /**
      * Updates the button info text.
      */
-    updateLocationdetailsButton: function () {
-      var $locationdetailsButton = jQuery('#locationdetails-button .descript');
-      var value = this.model.get(morel.record.inputs.KEYS.LOCATIONDETAILS);
-      value = value || '';
-      $locationdetailsButton.html(value);
-    },
-
-    /**
-     * Updates the button info text.
-     */
     updateCommentButton: function () {
       var $commentButton = jQuery('#comment-button .descript');
       var value = this.model.get(morel.record.inputs.KEYS.COMMENT);
-      value = value ? value.substring(0, 20) : ''; //cut it down a bit
+      var ellipsis = value && value.length > 20 ? '...' : '';
+      value = value ? value.substring(0, 20) + ellipsis : ''; //cut it down a bit
       $commentButton.html(value);
+    },
+
+    /**
+     * Shows the user around the page.
+     */
+    trip: function () {
+      var finishedTrips = app.models.user.get('trips') || [];
+      if (finishedTrips.indexOf('record') < 0) {
+        finishedTrips.push('record');
+        app.models.user.set('trips', finishedTrips);
+        app.models.user.save();
+
+        setTimeout(function(){
+          trip.start();
+        }, 500);
+      }
+
+      var options = {
+        delay : 1500
+      };
+
+      var trip = new Trip([
+        {
+          sel : $('#photo-picker'),
+          position : "s",
+          content : 'Snap a picture',
+          animation: 'fadeIn'
+        },
+        {
+          sel : $('#number-button'),
+          position : "s",
+          content : 'Fill in the details',
+          animation: 'fadeIn'
+        },
+        {
+          sel : $('#entry-form-send'),
+          position : "n",
+          content : 'Send a record',
+          animation: 'fadeIn'
+        },
+        {
+          sel : $('#entry-form-save'),
+          position : "n",
+          content : 'Or save it',
+          animation: 'fadeIn'
+        }
+      ], options);
     }
   });
 
