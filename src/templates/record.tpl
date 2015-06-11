@@ -57,7 +57,7 @@
     </ul>
     <label id="certain-button-label">
         <input name="certain" id="certain-button" type="checkbox"
-               data-iconpos="right"> Certain
+               data-iconpos="right" checked> Certain
     </label>
 </div>
 <div data-role="footer" data-position="fixed" data-tap-toggle="false">
