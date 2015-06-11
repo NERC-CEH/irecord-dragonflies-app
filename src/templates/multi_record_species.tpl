@@ -10,5 +10,11 @@
     </div>
 </div>
 <div data-role="content">
-    species record to edit
+    AD
+    CO
+    OV
+    LA
+    EX
+    EM
+    COMMENT
 </div>

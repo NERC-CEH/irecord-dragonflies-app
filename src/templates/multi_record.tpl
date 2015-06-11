@@ -6,7 +6,7 @@
     <h3 id='multi_record_heading'>Recorded Species</h3>
     <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
         <a href='' id="multi-save" data-rel='back' data-role="button" data-icon="mail"
-           data-iconpos="notext">Save</a>
+           data-iconpos="right">Save</a>
     </div>
 </div>
 <div data-role="content">

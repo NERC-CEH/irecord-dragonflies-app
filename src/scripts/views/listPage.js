@@ -4,9 +4,10 @@
 define([
   'views/_page',
   'views/speciesList',
+  'views/speciesListControls',
   'tripjs',
   'templates'
-], function (Page, SpeciesList) {
+], function (Page, SpeciesListView, SpeciesListControlsView) {
   'use strict';
 
   var ListPage = Page.extend({
@@ -20,15 +21,16 @@ define([
       'change input[type=radio]': 'toggleListControls'
     },
 
-    initialize: function () {
+    initialize: function (record) {
       _log('views.ListPage: initialize', log.DEBUG);
-      this.listView = new SpeciesList({collection: app.collections.species});
-
-      var sorts = this.listView.sorts;
-      var filters = this.listView.filters;
+      if (record) {
+        this.listView = new SpeciesListView({collection: app.collections.species});
+      } else {
+        this.listView = new SpeciesListView({collection: app.collections.species});
+      }
 
       this.$listControlsButton = this.$el.find('#list-controls-button');
-      this.listControlsView = new ListControlsView(sorts, filters, this.$listControlsButton);
+      this.listControlsView = new SpeciesListControlsView(this.$listControlsButton);
 
       this.render();
       this.appendEventListeners();
@@ -54,7 +56,7 @@ define([
       return this;
     },
 
-    update: function () {
+    update: function (record) {
       this.listControlsView.updateListControlsButton();
       this.updateUserPageButton();
     },
@@ -131,125 +133,6 @@ define([
           animation: 'fadeIn'
         }
       ], options);
-    }
-  });
-
-  var ListControlsView = Backbone.View.extend({
-    tagName: 'div',
-    id: 'list-controls-tabs',
-
-    template: app.templates.list_controls,
-    template_sort: app.templates.list_controls_sort,
-    template_filter: app.templates.list_controls_filter,
-
-    initialize: function (sorts, filters, $listControlsButton) {
-      this.sorts = sorts;
-      this.filters = filters;
-      this.$listControlsButton = $listControlsButton;
-      this.render();
-    },
-
-    render: function () {
-      this.$el.html(this.template());
-
-      this.renderListSortControls();
-      this.renderListFilterControls();
-      this.setListControlsListeners();
-    },
-
-    attributes: function () {
-      return {
-        "data-role": 'tabs'
-      };
-    },
-
-    /**
-     * Shows/closes list controlls.
-     */
-    toggleListControls: function (e) {
-      var $controls = $('#list-controls-placeholder');
-      if ($controls.is(":hidden")) {
-        $controls.slideDown("slow");
-      } else {
-        $controls.slideUp("slow");
-      }
-    },
-
-
-    /**
-     * Renders and appends the list sort controls.
-     */
-    renderListSortControls: function () {
-      var keys = Object.keys(this.sorts);
-      for (var i = 0, length = keys.length; i < length; i++) {
-        var sort = app.models.user.get('sort');
-
-        if (keys[i] === sort) {
-          this.sorts[keys[i]].checked = "checked";
-        }
-      }
-
-      var placeholder = this.$el.find('#list-controls-sort-placeholder');
-
-      placeholder.html(this.template_sort(this.sorts));
-      placeholder.trigger('create');
-    },
-
-    /**
-     * Renders and appends the list filter controls.
-     */
-    renderListFilterControls: function () {
-      var currentFilters = app.models.user.get('filters');
-
-      _.each(this.filters, function (filterGroup, filterGroupID) {
-        _.each(filterGroup.filters, function (filter, filterID) {
-          if (currentFilters[filterGroupID] && currentFilters[filterGroupID].indexOf(filterID) >= 0) {
-            filter.checked = "checked";
-          } else {
-            filter.checked = "";
-          }
-        });
-      });
-
-      var placeholder = this.$el.find('#list-controls-filter-placeholder');
-
-      placeholder.html(this.template_filter(this.filters));
-      placeholder.trigger('create');
-    },
-
-    /**
-     * Has to be done once on list creation.
-     */
-    setListControlsListeners: function () {
-      //initial list control button setup
-      this.updateListControlsButton();
-
-      this.$el.find('.sort').on('change', function () {
-        app.models.user.save('sort', this.id);
-      });
-
-      var that = this;
-      this.$el.find('.filter').on('change', function (e) {
-          app.models.user.toggleListFilter(this.id, $(this).data('group'));
-          that.updateListControlsButton();
-      });
-    },
-
-    /**
-     * Updates the list controls button with the current state of the filtering.
-     * If one or more filters is turned on then the button is
-     * coloured accordingly.
-     */
-    updateListControlsButton: function () {
-      var filters = app.models.user.get('filters');
-      var activate = false;
-      _.each(filters, function (filterGroup, filterGroupID){
-        if (filterGroup.length > 0) {
-          activate = true;
-        }
-      });
-
-      $(this.$listControlsButton.selector).toggleClass('running', activate);
     }
   });
 

@@ -50,19 +50,19 @@ define([
         this.changePage(app.views.listPage);
       },
 
-      "list": {
-        route: function () {
+      "list/:record": {
+        route: function (record) {
           if (!app.views.listPage) {
-            app.views.listPage = new ListPage();
+            app.views.listPage = new ListPage(record);
           }
           this.changePage(app.views.listPage);
 
-          app.views.listPage.update();
+          app.views.listPage.update(record);
        },
         after: function(){
           //leaving out safari home mode because it creates a nasty glitch on 8.3
           if (app.views.listPage.scroll &&
-            !(browser.detect('Safari') && browser.isHomeMode())) {
+            !(browser.isIOS() && browser.isHomeMode())) {
               window.scrollTo(0, app.views.listPage.scroll);
           }
         },
@@ -167,18 +167,12 @@ define([
         this.changePage(app.views.multiRecordPage);
       },
 
-      "multi-record-list": function () {
-        if (!app.views.multiRecordListPage) {
-          app.views.multiRecordListPage = new MultiRecordListPage();
-        }
-        this.changePage(app.views.multiRecordListPage);
-      },
-
-      "multi-record-species": function () {
+      "multi-record-species:id": function (id) {
         if (!app.views.multiRecordSpeciesPage) {
           app.views.multiRecordSpeciesPage = new MultiRecordSpeciesPage();
         }
         this.changePage(app.views.multiRecordSpeciesPage);
+        app.views.multiRecordSpeciesPage.update(id);
       },
 
       "info": function () {

@@ -3,8 +3,10 @@
  *****************************************************************************/
 define([
   'backbone',
+  'models/speciesListSorts',
+  'models/speciesListFilters',
   'templates'
-], function (Backbone) {
+], function (Backbone, sorts, filters) {
   'use strict';
 
   var SpeciesList = Backbone.View.extend({
@@ -12,246 +14,6 @@ define([
 
     attributes: {
       'data-role': 'listview'
-    },
-
-    /**
-     * A collection of filters used to manage lists.
-     * id - filter identifier
-     * group - some filters override/work-together. eg. colours, suborder
-     * label - label to represent the filter in the UI
-     */
-    filters: {
-      favouritesGroup: {
-        type: 'checkbox',
-        label: 'Favourites',
-        filters: {
-          favourites: {
-            label: 'My favourites only',
-            run: function (list, filteredList, onSuccess) {
-              var keys = app.models.user.get('favourites');
-              for (var i = 0; i < keys.length; i++) {
-                for (var j = 0; j < list.length; j++) {
-                  if (list[j].attributes.id === keys[i]) {
-                    filteredList.push(list[j]);
-                  }
-                }
-              }
-              onSuccess(filteredList);
-            }
-          }
-        }
-      },
-      typeGroup: {
-        type: 'checkbox',
-        label: 'Type',
-
-        filters: {
-          grass: {
-            label: 'Dragonflies',
-            run: function (list, filteredList, onSuccess) {
-              for (var j = 0; j < list.length; j++) {
-                if (list[j].attributes.type === 'anisoptera' || list[j].attributes.general) {
-                  filteredList.push(list[j]);
-                }
-              }
-              onSuccess(filteredList);
-            }
-          },
-          flower: {
-            label: 'Damselflies',
-            run: function (list, filteredList, onSuccess) {
-              for (var j = 0; j < list.length; j++) {
-                if (list[j].attributes.type === 'zygoptera' || list[j].attributes.general) {
-                  filteredList.push(list[j]);
-                }
-              }
-              onSuccess(filteredList);
-            }
-          }
-        }
-      },
-      probabilityGroup: {
-        type: 'checkbox',
-        label: 'Location',
-        filters: {
-          probability: {
-            label: 'Species in your location',
-            run: function (list, filteredList, onSuccess) {
-              var sref = app.models.user.getLocationSref();
-              if (sref == null) {
-
-                var initBtn = "init-button";
-                var initCancelBtnId = "init-cancel-button";
-
-                var message =
-                  '<h3>Please set your location first.</h3></br>' +
-
-                  '<button id="' + initBtn + '" class="ui-btn">Set Location</button>' +
-                  '<button id="' + initCancelBtnId + '" class="ui-btn">Cancel</button>';
-
-                app.message(message, 0);
-
-                $('#' + initBtn).on('click', function () {
-                  $('#probability.filter').prop('checked', false).checkboxradio('refresh');
-                  app.models.user.toggleListFilter('probability');
-                  Backbone.history.navigate('location', {trigger:true});
-                });
-
-                $('#' + initCancelBtnId).on('click', function () {
-                  $.mobile.loading('hide');
-                  app.models.user.toggleListFilter('probability');
-                  $('#probability.filter').prop('checked', false).checkboxradio('refresh');
-                });
-                return;
-              }
-
-              var location_data = app.data.probability[sref];
-              if (location_data != null) {
-                var speciesIds = Object.keys(location_data);
-                for (var i = 0; i < speciesIds.length; i++) {
-                  for (var j = 0; j < list.length; j++) {
-                    if (list[j].id === speciesIds[i]) {
-                      filteredList.push(list[j]);
-                      break;
-                    }
-                  }
-                }
-              }
-              //add general ones
-              //  var general = _.findWhere(list, {attributes:{general: "TRUE"}});
-              // filtered_list.push(general);
-
-              onSuccess(filteredList);
-            }
-          }
-        }
-      }
-    },
-
-    /**
-     * A collection of sorting options used to manage lists.
-     * id - sort type identifier
-     * label - label to represent the filter in the UI
-     */
-    sorts: {
-      taxonomic: {
-        label: 'Taxonomic',
-        sort: function (list, onSuccess) {
-          list.sort(function (a, b) {
-            if (a.attributes.general || b.attributes.general){
-              return a.attributes.general ? 1 : -1;
-            }
-            a = parseInt(a.attributes.id);
-            b = parseInt(b.attributes.id);
-            if (a === b) {
-              return 0;
-            }
-            return a > b ? 1 : -1;
-          });
-          onSuccess(list);
-        }
-      },
-      common_name: {
-        label: 'Common Name',
-        sort: function (list, onSuccess) {
-          list.sort(function (a, b) {
-            if (a.attributes.general || b.attributes.general){
-              return a.attributes.general ? 1 : -1;
-            }
-            a = a.attributes.common_name.toLowerCase();
-            b = b.attributes.common_name.toLowerCase();
-
-            if (a === b) {
-              return 0;
-            }
-            return a > b ? 1 : -1;
-          });
-          onSuccess(list);
-        }
-      },
-      common_name_r: {
-        label: 'Common Name Reverse',
-        sort: function (list, onSuccess) {
-          list.sort(function (a, b) {
-            if (a.attributes.general || b.attributes.general){
-              return a.attributes.general ? 1 : -1;
-            }
-            a = a.attributes.common_name.toLowerCase();
-            b = b.attributes.common_name.toLowerCase();
-
-            if (a === b) {
-              return 0;
-            }
-            return a < b ? 1 : -1;
-          });
-          onSuccess(list);
-        }
-      },
-      scientific: {
-        label: 'Scientific Name',
-        sort: function (list, onSuccess) {
-          list.sort(function (a, b) {
-            if (a.attributes.general || b.attributes.general){
-              return a.attributes.general ? 1 : -1;
-            }
-            a = a.attributes.taxon.toLowerCase();
-            b = b.attributes.taxon.toLowerCase();
-
-            if (a === b) {
-              return 0;
-            }
-            return a > b ? 1 : -1;
-          });
-          onSuccess(list);
-        }
-      },
-      scientific_r: {
-        label: 'Scientific Name Reverse',
-        sort: function (list, onSuccess) {
-          list.sort(function (a, b) {
-            if (a.attributes.general || b.attributes.general){
-              return a.attributes.general ? 1 : -1;
-            }
-            a = a.attributes.taxon.toLowerCase();
-            b = b.attributes.taxon.toLowerCase();
-
-            if (a === b) {
-              return 0;
-            }
-            return a < b ? 1 : -1;
-          });
-          onSuccess(list);
-        }
-      },
-      probability_sort: {
-        label: 'Probability',
-        sort: function (list, onSuccess){
-          var sref = app.models.user.getLocationSref();
-          if (sref == null) {
-            app.models.user.save('sort', 'common_name'); //todo: should be done with error handler
-            Backbone.history.navigate('location', {trigger:true});
-            return;
-          }
-
-          list.sort(function (a, b) {
-              if (a.attributes.general || b.attributes.general){
-                return a.attributes.general ? 1 : -1;
-              }
-              var a_prob = getProb(a);
-              var b_prob = getProb(b);
-              if (a_prob == b_prob) return 0;
-              return a_prob < b_prob ? 1 : -1;
-
-              function getProb(species) {
-                var id = species.attributes.id;
-                var data = app.data.probability;
-                return (data[sref] && data[sref][id]) || 0;
-              }
-            }
-         );
-          onSuccess(list);
-        }
-      }
     },
 
     /**
@@ -347,7 +109,7 @@ define([
         }
       }
 
-      this.sorts[sort].sort(list, onSortSuccess);
+      sorts[sort].sort(list, onSortSuccess);
     },
 
     /**
@@ -362,7 +124,7 @@ define([
     filterGroupCore: function (list, filteredList, filterGroup, filterGroupID, callback) {
       if (filterGroup.length > 0) {
         var filterID = filterGroup.pop();
-        var filter = this.filters[filterGroupID].filters[filterID];
+        var filter = filters[filterGroupID].filters[filterID];
         var that = this;
 
         var onSuccess = function (filteredList) {
@@ -385,7 +147,7 @@ define([
     getFilterCurrentGroup: function (filterID) {
       //iterate all filter groups
       var group = null;
-      _.each(this.filters, function (groupFilters, groupID) {
+      _.each(filters, function (groupFilters, groupID) {
         //and filters
         _.each(groupFilters.filters, function (_filter, _filterID) {
           if(_filterID === filterID) {
