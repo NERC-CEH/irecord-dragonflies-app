@@ -21,13 +21,13 @@ define([
       'change input[type=radio]': 'toggleListControls'
     },
 
-    initialize: function (options) {
+    initialize: function () {
       _log('views.ListPage: initialize', log.DEBUG);
 
       this.$listControlsButton = this.$el.find('#list-controls-button');
       this.listControlsView = new SpeciesListControlsView(this.$listControlsButton);
 
-      this.render(options && options.record);
+      this.render();
       this.appendEventListeners();
 
       this.$userPageButton = $('#user-page-button');
@@ -35,11 +35,11 @@ define([
       this.trip();
     },
 
-    render: function (record) {
+    render: function () {
       _log('views.ListPage: render', log.DEBUG);
 
       this.$el.html(this.template());
-      this.addList(record);
+      this.addList();
 
       $('body').append($(this.el));
 
@@ -50,24 +50,16 @@ define([
       return this;
     },
 
-    addList: function (record) {
-      this.listView = new SpeciesListView({
-        collection: app.collections.species,
-        record: record
-      });
+    addList: function () {
+      this.listView = new SpeciesListView({collection: app.collections.species});
       this.$list = this.$el.find('#list-placeholder');
       this.$list.html(this.listView.render().el);
       return this.listView;
     },
 
-    update: function (record) {
+    update: function () {
       this.listControlsView.updateListControlsButton();
       this.updateUserPageButton();
-
-      //update list
-      if (this.listView.record !== record){
-        this.addList(record).update(true);
-      }
     },
 
     appendEventListeners: function () {

@@ -54,22 +54,37 @@ define([
         route: function (record) {
           record = record === 'record';
 
-          if (!app.views.listPage) {
-            app.views.listPage = new ListPage({record: record});
-          }
-          this.changePage(app.views.listPage);
+          if (record) {
+            if (!app.views.multiRecordListPage) {
+              app.views.multiRecordListPage = new MultiRecordListPage({record: record});
+            }
+            this.changePage(app.views.multiRecordListPage);
 
-          app.views.listPage.update(record);
+            app.views.multiRecordListPage.update(record);
+          } else {
+            if (!app.views.listPage) {
+              app.views.listPage = new ListPage({record: record});
+            }
+            this.changePage(app.views.listPage);
+
+            app.views.listPage.update(record);
+          }
        },
-        after: function(){
+        after: function (record) {
           //leaving out safari home mode because it creates a nasty glitch on 8.3
-          if (app.views.listPage.scroll &&
-            !(browser.isIOS() && browser.isHomeMode())) {
-              window.scrollTo(0, app.views.listPage.scroll);
+          if (!(browser.isIOS() && browser.isHomeMode())) {
+            var scroll = !record ? app.views.listPage.scroll : app.views.multiRecordListPage.scroll;
+            if (scroll) {
+              window.scrollTo(0, scroll);
+            }
           }
         },
-        leave: function(){
-          app.views.listPage.scroll = $(window).scrollTop();
+        leave: function (record) {
+          if (record) {
+            app.views.multiRecordListPage.scroll = $(window).scrollTop();
+          } else {
+            app.views.listPage.scroll = $(window).scrollTop();
+          }
         }
       },
 
@@ -169,7 +184,7 @@ define([
         this.changePage(app.views.multiRecordPage);
       },
 
-      "multi-record-species:id": function (id) {
+      "multi-record-species/:id": function (id) {
         if (!app.views.multiRecordSpeciesPage) {
           app.views.multiRecordSpeciesPage = new MultiRecordSpeciesPage();
         }

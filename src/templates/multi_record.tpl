@@ -10,7 +10,7 @@
     </div>
 </div>
 <div data-role="content">
-    <a href="#multi-record-list" data-role="button" data-icon="plus">Add new</a>
+    <a href="#list/record" data-role="button" data-icon="plus">Add new</a>
     selected species list
 </div>
 
