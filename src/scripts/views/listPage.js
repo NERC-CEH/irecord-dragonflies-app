@@ -21,18 +21,13 @@ define([
       'change input[type=radio]': 'toggleListControls'
     },
 
-    initialize: function (record) {
+    initialize: function (options) {
       _log('views.ListPage: initialize', log.DEBUG);
-      if (record) {
-        this.listView = new SpeciesListView({collection: app.collections.species});
-      } else {
-        this.listView = new SpeciesListView({collection: app.collections.species});
-      }
 
       this.$listControlsButton = this.$el.find('#list-controls-button');
       this.listControlsView = new SpeciesListControlsView(this.$listControlsButton);
 
-      this.render();
+      this.render(options && options.record);
       this.appendEventListeners();
 
       this.$userPageButton = $('#user-page-button');
@@ -40,12 +35,11 @@ define([
       this.trip();
     },
 
-    render: function () {
+    render: function (record) {
       _log('views.ListPage: render', log.DEBUG);
 
       this.$el.html(this.template());
-      this.$list = this.$el.find('#list-placeholder');
-      this.$list.html(this.listView.render().el);
+      this.addList(record);
 
       $('body').append($(this.el));
 
@@ -56,9 +50,24 @@ define([
       return this;
     },
 
+    addList: function (record) {
+      this.listView = new SpeciesListView({
+        collection: app.collections.species,
+        record: record
+      });
+      this.$list = this.$el.find('#list-placeholder');
+      this.$list.html(this.listView.render().el);
+      return this.listView;
+    },
+
     update: function (record) {
       this.listControlsView.updateListControlsButton();
       this.updateUserPageButton();
+
+      //update list
+      if (this.listView.record !== record){
+        this.addList(record).update(true);
+      }
     },
 
     appendEventListeners: function () {

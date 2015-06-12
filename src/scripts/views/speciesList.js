@@ -5,11 +5,13 @@ define([
   'backbone',
   'models/speciesListSorts',
   'models/speciesListFilters',
+  'views/speciesListItem',
+  'views/speciesListRecordItem',
   'templates'
-], function (Backbone, sorts, filters) {
+], function (Backbone, sorts, filters, SpeciesListItemView, SpeciesListItemRecordView) {
   'use strict';
 
-  var SpeciesList = Backbone.View.extend({
+  var View = Backbone.View.extend({
     tagName: 'ul',
 
     attributes: {
@@ -19,8 +21,9 @@ define([
     /**
      * Initializes the species list view.
      */
-    initialize: function () {
+    initialize: function (options) {
       _log('views.SpeciesList: initialize', log.DEBUG);
+      this.record = options.record;
 
       this.listenTo(this.collection, 'change', this.update);
       this.listenTo(app.models.user, 'change:filters',  this.update);
@@ -32,29 +35,52 @@ define([
      * @returns {SpeciesListView}
      */
     render: function (callback) {
-      _log('views.SpeciesList: render', log.DEBUG);
+      _log('views.SpeciesList: render ', log.DEBUG);
 
       var that = this;
-      var onSuccess = function (list){
+      this.prepareList(function (list){
         var container = document.createDocumentFragment(); //optimising the performance
+
         _.each(list, function (specie) {
-          var listSpeciesView = new SpeciesListItemView({model: specie});
+          var listSpeciesView;
+          if (that.record) {
+            listSpeciesView = new SpeciesListItemRecordView({model: specie});
+          } else {
+            listSpeciesView = new SpeciesListItemView({model: specie});
+          }
           container.appendChild(listSpeciesView.render().el);
         });
+
         that.$el.html(container); //appends to DOM only once
+
+        //attach listeners
+        if (that.record) {
+          that.$el.find('.multi-record-species-img').on('click', function (e) {
+            //stop propagation of jqm link
+            e.stopPropagation();
+            e.preventDefault();
+
+            Backbone.history.navigate('species/' + $(this).data('id'), {trigger: true});
+          });
+        }
+
         if (callback){
           callback(that.$el);
         }
-      };
+      });
 
-      this.prepareList(onSuccess);
       return this;
     },
 
-    update: function () {
+    update: function (init) {
       _log('list: updating', log.DEBUG);
+
       this.render(function($el){
-        $el.listview('refresh');
+        if (init) {
+          $el.listview();
+        } else {
+          $el.listview('refresh');
+        }
       });
     },
 
@@ -160,31 +186,5 @@ define([
     }
   });
 
-  var SpeciesListItemView = Backbone.View.extend({
-    tagName: "li",
-
-    attributes: {
-      "data-corners": false,
-      "data-shadow": false,
-      "data-iconshadow": true,
-      "data-wrapperels": "div",
-      "data-icon": "arrow-r",
-      "data-iconpos": "right",
-      "data-theme": "c"
-    },
-
-    template: app.templates.species_list_item,
-
-    /**
-     * Renders the individual list item representing the species.
-     *
-     * @returns {SpeciesListItemView}
-     */
-    render: function () {
-      this.$el.html(this.template(this.model.attributes));
-      return this;
-    }
-  });
-
-  return SpeciesList;
+  return View;
 });

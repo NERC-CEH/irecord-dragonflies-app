@@ -50,10 +50,12 @@ define([
         this.changePage(app.views.listPage);
       },
 
-      "list/:record": {
+      "list(/:record)": {
         route: function (record) {
+          record = record === 'record';
+
           if (!app.views.listPage) {
-            app.views.listPage = new ListPage(record);
+            app.views.listPage = new ListPage({record: record});
           }
           this.changePage(app.views.listPage);
 

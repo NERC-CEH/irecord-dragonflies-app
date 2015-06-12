@@ -107,7 +107,7 @@ define(['morel', 'helpers/log'], function () {
 
   //logging
   log.CONF = {
-    STATE: log.INFO,
+    STATE: log.DEBUG,
     GA_ERROR: true //log error using google analytics
   };
 
