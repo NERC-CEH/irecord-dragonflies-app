@@ -9,7 +9,7 @@
 
     <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
         <a href="#" id="list-controls-button" data-role="button"
-           data-icon="bars" data-iconpos="notext">List Controls</a>
+           data-icon="filter" data-iconpos="notext">List Controls</a>
     </div>
     <div id="list-controls-placeholder"></div>
 </div>

@@ -3,8 +3,8 @@
  *****************************************************************************/
 define([
   'views/_page',
-  'views/speciesList',
-  'views/speciesListControls',
+  'views/list',
+  'views/listControls',
   'templates'
 ], function (Page, SpeciesListView, SpeciesListControlsView) {
   'use strict';

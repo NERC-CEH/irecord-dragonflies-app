@@ -34,6 +34,9 @@ define([
       return this;
     },
 
+    update: function () {
+
+    },
 
     appendEventListeners: function () {
       this.appendBackButtonListeners();
