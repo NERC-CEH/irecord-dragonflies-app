@@ -2,8 +2,9 @@
  * Record model.
  *****************************************************************************/
 define([
-  'backbone'
-], function (Backbone) {
+  'backbone',
+  'helpers/currentDate'
+], function (Backbone, currentDate) {
   'use strict';
 
   var Record = Backbone.Model.extend({
@@ -11,7 +12,7 @@ define([
       _log('models.Record: reset.', log.DEBUG);
 
       this.clear();
-      this.set(morel.record.inputs.KEYS.DATE, this.getCurrentDate());
+      this.set(morel.record.inputs.KEYS.DATE, currentDate);
       this.set(morel.record.inputs.KEYS.SREF_ACCURACY, '-1');
       this.set(morel.record.inputs.KEYS.SREF_SYSTEM, '4326');
       this.set(morel.record.inputs.KEYS.CERTAIN, morel.record.inputs.KEYS.CERTAIN_VAL.TRUE);
@@ -76,18 +77,6 @@ define([
         invalids.push('Taxon');
       }
       return invalids.length > 0 ? invalids : null;
-    },
-
-    /**
-     * Saves the current date and populates the date input.
-     */
-    getCurrentDate: function () {
-      var now = new Date();
-      var day = ("0" + now.getDate()).slice(-2);
-      var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
-      var date = now.getFullYear() + "-" + (month) + "-" + (day);
-      return date
     }
   });
 
