@@ -7,7 +7,7 @@ define([
   'views/listControls',
   'tripjs',
   'templates'
-], function (Page, SpeciesListView, SpeciesListControlsView) {
+], function (Page, ListView, ListControlsView) {
   'use strict';
 
   var ListPage = Page.extend({
@@ -25,7 +25,7 @@ define([
       _log('views.ListPage: initialize', log.DEBUG);
 
       this.$listControlsButton = this.$el.find('#list-controls-button');
-      this.listControlsView = new SpeciesListControlsView(this.$listControlsButton);
+      this.listControlsView = new ListControlsView(this.$listControlsButton);
 
       this.render();
       this.appendEventListeners();
@@ -51,7 +51,7 @@ define([
     },
 
     addList: function () {
-      this.listView = new SpeciesListView({collection: app.collections.species});
+      this.listView = new ListView({collection: app.collections.species});
       this.$list = this.$el.find('#list-placeholder');
       this.$list.html(this.listView.render().el);
       return this.listView;

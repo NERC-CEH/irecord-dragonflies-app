@@ -1,12 +1,12 @@
 /******************************************************************************
- * Species list view used in ListPage view.
+ * List view of the species used in ListPage view.
  *****************************************************************************/
 define([
   'backbone',
   'models/speciesListSorts',
   'models/speciesListFilters',
-  'views/speciesListItem',
-  'views/speciesListRecordItem',
+  'views/listItem',
+  'views/multiRecordListItem',
   'templates'
 ], function (Backbone, sorts, filters, SpeciesListItemView, SpeciesListItemRecordView) {
   'use strict';
@@ -61,6 +61,16 @@ define([
             e.preventDefault();
 
             Backbone.history.navigate('species/' + $(this).data('id'), {trigger: true});
+          });
+
+          that.$el.find('.multi-record-list-item').on('click', function (e) {
+            //stop propagation of jqm link
+            e.stopPropagation();
+            e.preventDefault();
+
+            var id = $(this).data('id');
+            app.models.multiRecord.setRecordSpeciesID(id);
+            Backbone.history.navigate('multi-record', {trigger: true});
           });
         }
 

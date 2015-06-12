@@ -20,6 +20,7 @@ define([
 
     initialize: function () {
       _log('views.MultiRecordSpeciesInfo: initialize', log.DEBUG);
+      this.model = app.models.multiRecord;
 
       this.render();
       this.appendEventListeners();
@@ -34,6 +35,26 @@ define([
       return this;
     },
 
+    update: function (prevPageId, speciesID) {
+      _log('views.MultiRecordSpeciesInfo: update.', log.DEBUG);
+      switch (prevPageId) {
+        case 'list':
+        case 'species':
+          this.initRecording(speciesID);
+          break;
+        case '':
+          _log('views.RecordPage: coming from unknown page.', log.WARNING);
+          this.initRecording(speciesID);
+        default:
+      }
+    },
+
+    /**
+     * Initialises the recording form: sets empty image, clears geolocation etc.
+     */
+    initRecording: function () {
+      this.model.initialize();
+    },
 
     appendEventListeners: function () {
       this.appendBackButtonListeners();

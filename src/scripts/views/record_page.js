@@ -26,6 +26,7 @@ define([
 
     initialize: function () {
       _log('views.RecordPage: initialize', log.DEBUG);
+      this.model = app.models.record;
 
       this.render();
       this.appendEventListeners();
@@ -83,7 +84,7 @@ define([
      */
     initRecording: function (speciesID) {
       var specie = app.collections.species.find({id:speciesID});
-      this.model.reset(specie.attributes.warehouse_id);
+      this.model.initialize(specie.attributes.warehouse_id);
 
       //add header to the page
       this.$heading.text(specie.attributes.common_name);

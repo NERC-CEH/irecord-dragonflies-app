@@ -6,7 +6,7 @@ define([
   'views/list',
   'views/listControls',
   'templates'
-], function (Page, SpeciesListView, SpeciesListControlsView) {
+], function (Page, ListView, ListControlsView) {
   'use strict';
 
   var Page = Page.extend({
@@ -24,7 +24,7 @@ define([
       _log('views.MultiRecordListPage: initialize', log.DEBUG);
 
       this.$listControlsButton = this.$el.find('#list-controls-button');
-      this.listControlsView = new SpeciesListControlsView(this.$listControlsButton);
+      this.listControlsView = new ListControlsView(this.$listControlsButton);
 
       this.render();
       this.appendEventListeners();
@@ -48,7 +48,7 @@ define([
     },
 
     addList: function () {
-      this.listView = new SpeciesListView({
+      this.listView = new ListView({
         collection: app.collections.species,
         record: true
       });

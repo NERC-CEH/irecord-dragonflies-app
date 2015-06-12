@@ -20,7 +20,7 @@ define([
       "data-theme": "c"
     },
 
-    template: app.templates.list_item,
+    template: app.templates.multi_record_list_item,
 
     /**
      * Renders the individual list item representing the species.

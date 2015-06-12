@@ -1,5 +1,5 @@
 /******************************************************************************
- * Species list control view used in ListPage view.
+ * Multi Record Saved list.
  *****************************************************************************/
 define([
   'backbone',
@@ -20,7 +20,7 @@ define([
       "data-theme": "c"
     },
 
-    template: app.templates.species_list_record_item,
+    template: app.templates.multi_record_saved_list_item,
 
     /**
      * Renders the individual list item representing the species.
@@ -28,7 +28,11 @@ define([
      * @returns {SpeciesListItemView}
      */
     render: function () {
-      this.$el.html(this.template(this.model.attributes));
+      var warehouse_id = this.model.attributes[morel.record.inputs.KEYS.TAXON];
+      var specie = app.collections.species.find(function (model) {
+        return model.get('warehouse_id') === warehouse_id;
+      });
+      this.$el.html(this.template(specie.attributes));
       return this;
     }
   });

@@ -3,10 +3,11 @@
  *****************************************************************************/
 define([
   'views/_page',
+  'views/multiRecordSavedList',
   'templates',
   'morel',
   'conf'
-], function(Page) {
+], function(Page, MultiRecordSavedListView) {
   'use strict';
 
   var MultiRecordPage = Page.extend({
@@ -29,14 +30,27 @@ define([
       _log('views.MultiRecordPage: render', log.DEBUG);
 
       this.$el.html(this.template());
+      this.addList();
+
       $('body').append($(this.el));
 
       return this;
     },
 
-
     appendEventListeners: function () {
+      this.listenTo(app.models.multiRecord, 'change', this.update);
+
       this.appendBackButtonListeners();
+    },
+
+    addList: function () {
+      var multiRecords = app.models.multiRecord.get('records');
+
+      this.listView = new MultiRecordSavedListView({collection: multiRecords});
+      this.$list = this.$el.find('#recorded-species-list');
+      this.$list.html(this.listView.render().el);
+
+      return this.listView;
     }
   });
 
