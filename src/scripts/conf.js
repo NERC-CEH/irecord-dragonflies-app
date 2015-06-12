@@ -147,6 +147,11 @@ define(['morel', 'helpers/log'], function () {
       TRUE: 663,
       FALSE: 664 //default
     },
-    COMMENT: 'sample:comment'
+    COMMENT: 'sample:comment',
+    FULL_LIST: 'smpAttr:full_list',
+    FULL_LIST_VAL: {
+      TRUE: 'true',
+      FALSE: 'false'
+    }
   });
 });

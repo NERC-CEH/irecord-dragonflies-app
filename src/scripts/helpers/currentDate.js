@@ -1,3 +1,6 @@
+/******************************************************************************
+ * Returns a formatted current date for Indicia warehouse.
+ *****************************************************************************/
 define([], function () {
   var now = new Date();
   var day = ("0" + now.getDate()).slice(-2);

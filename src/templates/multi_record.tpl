@@ -11,6 +11,7 @@
 </div>
 <div data-role="content">
     <a href="#list/record" data-role="button" data-icon="plus">Add new</a>
-    selected species list
+    <br/>
+    <div id="recorded-species-list"></div>
 </div>
 

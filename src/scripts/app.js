@@ -12,6 +12,7 @@ define([
     'models/user',
     'models/species',
     'models/record',
+    'models/multiRecord',
     'helpers/update',
     'helpers/brcart',
     'helpers/message',
@@ -19,7 +20,7 @@ define([
     'data'
   ],
   function ($, jqm, Backbone, FastClick, klass, Router, AppModel, UserModel,
-            SpeciesCollection, RecordModel, update, brcArt) {
+            SpeciesCollection, RecordModel, MultiRecordModel, update, brcArt) {
     var App = {
       init: function () {
         //init Google Analytics
@@ -48,6 +49,7 @@ define([
         app.models.user = new UserModel();
         app.models.app = new AppModel();
         app.models.record = new RecordModel();
+        app.models.multiRecord = new MultiRecordModel();
         app.collections = {};
         app.collections.species = new SpeciesCollection(app.data.species);
 

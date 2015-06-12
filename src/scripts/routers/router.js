@@ -4,21 +4,21 @@
 define([
   'routers/routerExtention',
   'views/_page',
-  'views/listPage',
-  'views/speciesPage',
-  'views/userPage',
-  'views/loginPage',
-  'views/registerPage',
-  'views/recordPage',
-  'views/datePage',
-  'views/locationPage',
-  'views/numberPage',
-  'views/stagePage',
-  'views/commentPage',
-  'views/multiRecordInfoPage',
-  'views/multiRecordPage',
-  'views/multiRecordListPage',
-  'views/multiRecordSpeciesPage',
+  'views/list_page',
+  'views/species_page',
+  'views/user_page',
+  'views/login_page',
+  'views/register_page',
+  'views/record_page',
+  'views/date_page',
+  'views/location_page',
+  'views/number_page',
+  'views/stage_page',
+  'views/comment_page',
+  'views/multiRecordInfo_page',
+  'views/multiRecord_page',
+  'views/multiRecordList_page',
+  'views/multiRecordSpecies_page',
   'helpers/browser'
 ], function(ext, Page, ListPage, SpeciesPage, UserPage, LoginPage, RegisterPage,
             RecordPage, DatePage, LocationPage, NumberPage, StagePage,
@@ -126,7 +126,7 @@ define([
 
       "record/:id": function (id) {
         if (!app.views.recordPage) {
-          app.views.recordPage = new RecordPage({model: app.models.record});
+          app.views.recordPage = new RecordPage();
         }
         var prevPageID = $.mobile.activePage ? $.mobile.activePage.attr('id') : '';
 

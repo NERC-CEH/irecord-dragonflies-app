@@ -1,5 +1,5 @@
 /******************************************************************************
- * Record model.
+ * Multi record model.
  *****************************************************************************/
 define([
   'backbone',
@@ -7,49 +7,79 @@ define([
 ], function (Backbone, currentDate) {
   'use strict';
 
+  var RecordModel = Backbone.Model.extend({
+
+  });
+
+  var RecordCollection = Backbone.Collection.extend({
+    model: RecordModel
+  });
+
   var Model = Backbone.Model.extend({
-    initialize: function (warehouseID) {
-      _log('models.Record: initialize.', log.DEBUG);
+    initialize: function () {
+      _log('models.MultiRecord: init.', log.DEBUG);
 
       this.clear();
+
+      this.initRecordsCollection();
+
       this.set(morel.record.inputs.KEYS.DATE, currentDate);
       this.set(morel.record.inputs.KEYS.SREF_ACCURACY, '-1');
       this.set(morel.record.inputs.KEYS.SREF_SYSTEM, '4326');
-      this.set(morel.record.inputs.KEYS.CERTAIN, morel.record.inputs.KEYS.CERTAIN_VAL.TRUE);
-      this.set(morel.record.inputs.KEYS.NUMBER, morel.record.inputs.KEYS.NUMBER_VAL.Present);
-      warehouseID ? this.set(morel.record.inputs.KEYS.TAXON, warehouseID) : null;
+      this.set(morel.record.inputs.KEYS.FULL_LIST, morel.record.inputs.KEYS.FULL_LIST.FALSE);
+      this.removeAllRecords();
+    },
+
+    initRecordsCollection: function () {
+      this.set('records', new RecordCollection());
+    },
+
+    isRecord: function (id) {
+      return this.getRecord(id);
+    },
+
+    getRecord: function (id) {
+      return this.get('records').get(id);
+    },
+
+    setRecord: function (record) {
+      this.get('records').add(record);
+      //todo: should do it automatically
+      this.get('records').trigger('change');
+    },
+
+    setRecordSpeciesID: function (id) {
+      var specie = app.collections.species.find({id: id + ''}); //needs to be a string
+      var record = {};
+      record[morel.record.inputs.KEYS.TAXON] = specie.attributes.warehouse_id;
+
+      this.setRecord(record);
+    },
+
+    removeRecord: function (id) {
+      this.get('records').remove(id);
+    },
+
+    getAllRecords: function () {
+      return this.get('records').reset();
+    },
+
+    removeAllRecords: function () {
+      this.get('records')
     },
 
     /**
      * Sends the record.
      */
     send: function (callback, onError) {
-      var onSaveSuccess = function (savedRecordId) {
-        function onSendSuccess() {
-          morel.record.db.remove(savedRecordId);
-          if (callback) {
-            callback();
-          }
-        }
-        //#2 Post the record
-        morel.io.sendSavedRecord(savedRecordId, onSendSuccess, onError);
-      };
-      //#1 Save the record first
-      morel.record.db.save(this.attributes, onSaveSuccess, onError);
+
     },
 
     /**
      * Saves the record.
      */
     save: function (callback, onError) {
-      var onSaveSuccess = function (savedRecordId) {
-        morel.record.clear();
 
-        if (callback) {
-          callback();
-        }
-      };
-      morel.record.db.save(this.attributes, onSaveSuccess, onError);
     },
 
     /**
