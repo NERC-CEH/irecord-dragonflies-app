@@ -32,7 +32,10 @@ define([
       var specie = app.collections.species.find(function (model) {
         return model.get('warehouse_id') === warehouse_id;
       });
-      this.$el.html(this.template(specie.attributes));
+
+      var template_data = $.extend({}, specie.attributes); //clone the object
+      template_data.stages = this.model.get('stages');
+      this.$el.html(this.template(template_data));
       return this;
     }
   });

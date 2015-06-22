@@ -8,7 +8,12 @@ define([
   'use strict';
 
   var RecordModel = Backbone.Model.extend({
-
+    defaults: {
+      stages: {
+        'AD': 1
+      },
+      comment: ''
+    }
   });
 
   var RecordCollection = Backbone.Collection.extend({
@@ -50,22 +55,25 @@ define([
 
     setRecordSpeciesID: function (id) {
       var specie = app.collections.species.find({id: id + ''}); //needs to be a string
-      var record = {};
-      record[morel.record.inputs.KEYS.TAXON] = specie.attributes.warehouse_id;
+      var record = new RecordModel({id: id});
+      record.set(morel.record.inputs.KEYS.TAXON, specie.attributes.warehouse_id);
 
       this.setRecord(record);
     },
 
     removeRecord: function (id) {
-      this.get('records').remove(id);
+      var records = this.get('records');
+      var savedSpecies = records.where({id: id});
+      records.remove(savedSpecies);
+      records.trigger('change');
     },
 
     getAllRecords: function () {
-      return this.get('records').reset();
+      return this.get('records');
     },
 
     removeAllRecords: function () {
-      this.get('records')
+      this.get('records').reset();
     },
 
     /**

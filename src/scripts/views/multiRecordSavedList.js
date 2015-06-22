@@ -1,5 +1,5 @@
 /******************************************************************************
- * List view of the species used in ListPage view.
+ * List view of the Multi Record Species List used in ListPage view.
  *****************************************************************************/
 define([
   'backbone',
@@ -19,7 +19,7 @@ define([
      * Initializes the species list view.
      */
     initialize: function () {
-      _log('views.SpeciesList: initialize', log.DEBUG);
+      _log('views.MultiRecordSpeciesList: initialize', log.DEBUG);
 
       this.listenTo(this.collection, 'change', this.update);
     },
@@ -29,7 +29,7 @@ define([
      * @returns {SpeciesListView}
      */
     render: function () {
-      _log('views.SpeciesList: render ', log.DEBUG);
+      _log('views.MultiRecordSpeciesList: render ', log.DEBUG);
 
       var container = document.createDocumentFragment(); //optimising the performance
 
@@ -42,13 +42,18 @@ define([
       this.$el.listview().listview('refresh');
 
       //attach listeners
+      $('.multi-record-saved-species-remove').on('click', function () {
+        _log('views.MultiRecordSpeciesList: removing saved species.', log.DEBUG);
 
+        var id = $(this).data('id');
+        app.models.multiRecord.removeRecord(id);
+      });
 
       return this;
     },
 
     update: function () {
-      _log('list: updating', log.DEBUG);
+      _log('MultiRecordSpeciesList: updating', log.DEBUG);
 
       this.render();
     }

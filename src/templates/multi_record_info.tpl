@@ -3,7 +3,7 @@
         <a href='#' data-rel='back' data-role="button" data-icon="arrow-l"
            data-iconpos="notext">Back</a>
     </div>
-    <h3 id='multi_record_info_heading'>Advanced Recording</h3>
+    <h3 id='multi_record_info_heading'>Multi-Recording</h3>
     <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
         <a href='#multi-record' data-role="button" data-icon="arrow-r"
            data-iconpos="right">Next</a>

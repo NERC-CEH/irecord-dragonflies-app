@@ -64,6 +64,15 @@ define([
     appendEventListeners: function () {
       this.listenTo(app.models.user, 'change:filters', this.listControlsView.updateListControlsButton);
 
+      $('.multi-record-species-img').on('click', function () {
+        //stop propagation of jqm link
+        e.stopPropagation();
+        e.preventDefault();
+
+        var id = $(this).data('id');
+        Backbone.history.navigate('species/' + id, {trigger: true});
+      });
+
       this.appendBackButtonListeners();
     },
 
