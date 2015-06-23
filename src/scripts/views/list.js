@@ -69,6 +69,8 @@ define([
             e.preventDefault();
 
             var id = $(this).data('id');
+            id = parseInt(id);
+
             app.models.multiRecord.setRecordSpeciesID(id);
             Backbone.history.navigate('multi-record', {trigger: true});
           });

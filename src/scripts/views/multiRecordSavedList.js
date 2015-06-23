@@ -46,6 +46,8 @@ define([
         _log('views.MultiRecordSpeciesList: removing saved species.', log.DEBUG);
 
         var id = $(this).data('id');
+        id = parseInt(id);
+
         app.models.multiRecord.removeRecord(id);
       });
 

@@ -185,6 +185,8 @@ define([
       },
 
       "multi-record-species/:id": function (id) {
+        id = parseInt(id);
+
         if (!app.views.multiRecordSpeciesPage) {
           app.views.multiRecordSpeciesPage = new MultiRecordSpeciesPage();
         }

@@ -37,8 +37,8 @@ define([
 
     update: function (id) {
       _log('views.MultiRecordSpeciesPage: updating', log.DEBUG);
-      this.model = app.models.multiRecord.setRecordSpeciesID(id);
 
+      this.model = app.models.multiRecord.setRecordSpeciesID(id);
       this.updateInputs();
     },
 
