@@ -51,12 +51,9 @@ define([
 
           app.models.multiRecord.removeRecord(id);
         });
+        $('#empty-list-message').hide();
       } else {
-        //todo: move this to template and out of 'ul'
-        this.$el.html('<div class="info-message"> ' +
-        '<p>No species has been selected to the list. Please add some' +
-        'using the plus button above.</p> ' +
-        '</div>');
+        $('#empty-list-message').show();
      }
 
       return this;

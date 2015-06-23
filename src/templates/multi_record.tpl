@@ -9,6 +9,10 @@
     </div>
 </div>
 <div data-role="content">
+    <div id="empty-list-message" class="info-message">
+        <p>No species has been selected to the list. Please add some
+            using the plus button below.</p>
+    </div>
     <a href="#list/record" id="multi-record-add-button" data-iconpos="notext"
        data-role="button" data-icon="plus">Add species</a>
     <br/>
