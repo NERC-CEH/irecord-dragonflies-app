@@ -3,7 +3,7 @@
  *****************************************************************************/
 define([
   'views/_page',
-  'views/list',
+  'views/multiRecordList',
   'views/listControls',
   'templates'
 ], function (Page, ListView, ListControlsView) {
@@ -24,7 +24,15 @@ define([
       _log('views.MultiRecordListPage: initialize', log.DEBUG);
 
       this.$listControlsButton = this.$el.find('#list-controls-button');
-      this.listControlsView = new ListControlsView(this.$listControlsButton);
+
+      //todo: enable list controls
+      //this.listControlsView = new ListControlsView(this.$listControlsButton);
+      this.listControlsView = new (Backbone.View.extend({
+        toggleListControls: function () {
+          app.message('<center><b>Disabled</b></center>', 500);
+        },
+        updateListControlsButton: function (){}
+      }))();
 
       this.render();
       this.appendEventListeners();
@@ -41,7 +49,7 @@ define([
       $('body').append($(this.el));
 
       //add list controls
-      var $listControls = $('#list-controls-placeholder');
+      var $listControls = this.$el.find('#list-controls-placeholder');
       $listControls.html(this.listControlsView.el);
 
       return this;

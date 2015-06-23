@@ -2,6 +2,11 @@ body {
     margin: 0;
 }
 
+button.header {
+    padding: 0.5em 1em !important;
+    width: 1.9em !important;
+}
+
 /* Buttons in fixed footer control group are shifted down. This lifts them up.*/
 .ui-controlgroup{
     margin: 0;
@@ -309,8 +314,11 @@ form, body {
 }
 
 #list-controls-placeholder {
-    margin: 10px 10px 10px 10px;
+    margin:0 10px 0 10px;
     top: 80px;
+}
+
+#list-controls-tabs {
     display: none;
 }
 

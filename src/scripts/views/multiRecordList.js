@@ -1,13 +1,13 @@
 /******************************************************************************
- * Species list view used in ListPage view.
+ * List view of the species used in ListPage view.
  *****************************************************************************/
 define([
   'backbone',
   'models/speciesListSorts',
   'models/speciesListFilters',
-  'views/listItem',
+  'views/multiRecordListItem',
   'templates'
-], function (Backbone, sorts, filters, SpeciesListItemView) {
+], function (Backbone, sorts, filters, SpeciesListItemRecordView) {
   'use strict';
 
   var View = Backbone.View.extend({
@@ -33,20 +33,41 @@ define([
      * @returns {SpeciesListView}
      */
     render: function (callback) {
-      _log('views.SpeciesList: render', log.DEBUG);
+      _log('views.SpeciesList: render ', log.DEBUG);
 
       var that = this;
       this.prepareList(function (list){
         var container = document.createDocumentFragment(); //optimising the performance
 
         _.each(list, function (specie) {
-          var listSpeciesView = new SpeciesListItemView({model: specie});
+          var listSpeciesView = new SpeciesListItemRecordView({model: specie});
+
           container.appendChild(listSpeciesView.render().el);
         });
 
         that.$el.html(container); //appends to DOM only once
 
         //attach listeners
+        that.$el.find('.multi-record-species-img').on('click', function (e) {
+          //stop propagation of jqm link
+          e.stopPropagation();
+          e.preventDefault();
+
+          Backbone.history.navigate('species/' + $(this).data('id'), {trigger: true});
+        });
+
+        that.$el.find('.multi-record-list-item').on('click', function (e) {
+          //stop propagation of jqm link
+          e.stopPropagation();
+          e.preventDefault();
+
+          var id = $(this).data('id');
+          id = parseInt(id);
+
+          app.models.multiRecord.setRecordSpeciesID(id);
+          Backbone.history.history.back();
+        });
+
 
         if (callback){
           callback(that.$el);
@@ -58,6 +79,7 @@ define([
 
     update: function () {
       _log('list: updating', log.DEBUG);
+
       this.render(function($el){
         $el.listview('refresh');
       });

@@ -44,7 +44,7 @@ define([
       $('body').append($(this.el));
 
       //add list controls
-      var $listControls = $('#list-controls-placeholder');
+      var $listControls = this.$el.find('#list-controls-placeholder');
       $listControls.html(this.listControlsView.el);
 
       return this;

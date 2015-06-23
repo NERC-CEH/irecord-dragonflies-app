@@ -40,11 +40,10 @@ define([
      * Shows/closes list controlls.
      */
     toggleListControls: function (e) {
-      var $controls = $('#list-controls-placeholder');
-      if ($controls.is(":hidden")) {
-        $controls.slideDown("slow");
+      if (this.$el.is(":hidden")) {
+        this.$el.slideDown("slow");
       } else {
-        $controls.slideUp("slow");
+        this.$el.slideUp("slow");
       }
     },
 

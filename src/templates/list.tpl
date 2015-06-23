@@ -11,8 +11,8 @@
     <h1 class="heading-long">iRecord Dragonfly</h1>
 
     <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
-        <a href="#" id="list-controls-button" data-role="button"
-           data-icon="filter" data-iconpos="notext">List Controls</a>
+        <button id="list-controls-button" class="header" data-icon="filter"
+                data-iconpos="notext">List Controls</button>
         <a href="#multi-record-info" id="fav-button" data-role="button"
            data-icon="multi-record" data-iconpos="notext">Multi Recording</a>
     </div>
