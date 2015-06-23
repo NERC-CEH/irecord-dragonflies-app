@@ -19,6 +19,9 @@ define([
       habitat: "",
       map: "",
       gallery: [],
+      colour: {},
+      gallery_sex: [],
+      profile_pic_sex: "",
       favourite: false
     }
   });

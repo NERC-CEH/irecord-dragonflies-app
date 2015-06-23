@@ -113,6 +113,146 @@ define([], function () {
           }
         }
       }
+    },
+    colorGroup: {
+      type: 'checkbox',
+      label: 'Colour',
+
+      filters: {
+        yellow: {
+          label: 'Yellow',
+          run: function (list, filteredList, onSuccess) {
+            for (var j = 0; j < list.length; j++) {
+              if (list[j].attributes.colour.yellow) {
+                filteredList.push(list[j]);
+              }
+            }
+            onSuccess(filteredList);
+          }
+        },
+        purple: {
+          label: 'Purple',
+          run: function (list, filteredList, onSuccess) {
+            for (var j = 0; j < list.length; j++) {
+              if (list[j].attributes.colour.purple) {
+                filteredList.push(list[j]);
+              }
+            }
+            onSuccess(filteredList);
+          }
+        },
+        cream: {
+          label: 'White',
+          run: function (list, filteredList, onSuccess) {
+            for (var j = 0; j < list.length; j++) {
+              if (list[j].attributes.colour.cream) {
+                filteredList.push(list[j]);
+              }
+            }
+            onSuccess(filteredList);
+          }
+        },
+        green: {
+          label: 'Green',
+          run: function (list, filteredList, onSuccess) {
+            for (var j = 0; j < list.length; j++) {
+              if (list[j].attributes.colour.green) {
+                filteredList.push(list[j]);
+              }
+            }
+            onSuccess(filteredList);
+          }
+        },
+        blue: {
+          label: 'Blue',
+          run: function (list, filteredList, onSuccess) {
+            for (var j = 0; j < list.length; j++) {
+              if (list[j].attributes.colour.blue) {
+                filteredList.push(list[j]);
+              }
+            }
+            onSuccess(filteredList);
+          }
+        },
+        orange: {
+          label: 'Orange',
+          run: function (list, filteredList, onSuccess) {
+            for (var j = 0; j < list.length; j++) {
+              if (list[j].attributes.colour.orange) {
+                filteredList.push(list[j]);
+              }
+            }
+            onSuccess(filteredList);
+          }
+        },
+        red: {
+          label: 'Red',
+          run: function (list, filteredList, onSuccess) {
+            for (var j = 0; j < list.length; j++) {
+              if (list[j].attributes.colour.red) {
+                filteredList.push(list[j]);
+              }
+            }
+            onSuccess(filteredList);
+          }
+        },
+        grey: {
+          label: 'Grey',
+          run: function (list, filteredList, onSuccess) {
+            for (var j = 0; j < list.length; j++) {
+              if (list[j].attributes.colour.grey) {
+                filteredList.push(list[j]);
+              }
+            }
+            onSuccess(filteredList);
+          }
+        },
+        metallic: {
+          label: 'Metallic',
+          run: function (list, filteredList, onSuccess) {
+            for (var j = 0; j < list.length; j++) {
+              if (list[j].attributes.colour.metallic) {
+                filteredList.push(list[j]);
+              }
+            }
+            onSuccess(filteredList);
+          }
+        },
+        brown: {
+          label: 'Brown',
+          run: function (list, filteredList, onSuccess) {
+            for (var j = 0; j < list.length; j++) {
+              if (list[j].attributes.colour.brown) {
+                filteredList.push(list[j]);
+              }
+            }
+            onSuccess(filteredList);
+          }
+        },
+        black: {
+          label: 'Black',
+          run: function (list, filteredList, onSuccess) {
+            for (var j = 0; j < list.length; j++) {
+              if (list[j].attributes.colour.black) {
+                filteredList.push(list[j]);
+              }
+            }
+            onSuccess(filteredList);
+          }
+        },
+        pink: {
+          label: 'Pink',
+          run: function (list, filteredList, onSuccess) {
+            for (var j = 0; j < list.length; j++) {
+              if (list[j].attributes.colour.pink) {
+                filteredList.push(list[j]);
+              }
+            }
+            onSuccess(filteredList);
+          }
+        }
+
+      }
     }
   };
 

@@ -3,10 +3,10 @@
 
     <div class="gallery" id="species_gallery" style="display:none">
         <a href="<%- profile_pic %>">
-            <img src="<%- profile_pic %>" alt="&copy; <%- profile_pic_author %>">
+            <img src="<%- profile_pic %>" alt="<%- profile_pic_sex %> &nbsp&nbsp &copy; <%- profile_pic_author %>">
         </a>
         <% _.each( _.zip(gallery, gallery_authors), function ( pic ) { %>
-        <a href="<%- pic[0] %>"><img src="<%- pic[0] %>" alt="&copy; <%- pic[1] %>"/></a>
+        <a href="<%- pic[0] %>"><img src="<%- pic[0] %>" alt="<%- gallery_sex[1] %> &nbsp&nbsp &copy; <%- pic[1] %>"/></a>
         <% }); %>
     </div>
 
