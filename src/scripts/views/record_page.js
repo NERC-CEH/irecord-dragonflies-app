@@ -7,7 +7,7 @@ define([
   'templates',
   'morel',
   'conf'
-], function(Page) {
+], function(Page, contactDetailsDialog) {
   'use strict';
 
   var RecordPage = Page.extend({
