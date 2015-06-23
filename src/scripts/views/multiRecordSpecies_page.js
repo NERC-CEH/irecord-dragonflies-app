@@ -37,8 +37,8 @@ define([
 
     update: function (id) {
       _log('views.MultiRecordSpeciesPage: updating', log.DEBUG);
-
-      this.model = app.models.multiRecord.setRecordSpeciesID(id);
+      this.existingRecord = app.models.multiRecord.isRecord(id); //state to see if the record already exists
+      this.model = this.existingRecord || app.models.multiRecord.setRecordSpeciesID(id);
       this.updateInputs();
     },
 
@@ -67,8 +67,13 @@ define([
         stages[name] = parseInt(val);
       });
       this.model.set('stages', stages);
-      //todo: needs to go back the history - twice if comming from list
-      Backbone.history.navigate('multi-record', {trigger: true});
+
+      //needs to go back the history - twice if comming from list
+      if (this.existingRecord) {
+        Backbone.history.history.go(-1);
+      } else {
+        Backbone.history.history.go(-2);
+      }
     }
 
   });

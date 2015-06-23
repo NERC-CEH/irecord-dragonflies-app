@@ -72,7 +72,7 @@ define([
             id = parseInt(id);
 
             app.models.multiRecord.setRecordSpeciesID(id);
-            Backbone.history.navigate('multi-record', {trigger: true});
+            Backbone.history.history.back();
           });
         }
 
