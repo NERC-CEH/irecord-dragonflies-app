@@ -16,7 +16,7 @@ define([
     template: app.templates.multi_record,
 
     events: {
-
+      'click #multi-send': 'send'
     },
 
     initialize: function () {
@@ -55,6 +55,10 @@ define([
       this.$list.html(this.listView.render().el);
 
       return this.listView;
+    },
+
+    send: function () {
+      app.message('<center><b>Disabled</b></center>', 500);
     }
   });
 

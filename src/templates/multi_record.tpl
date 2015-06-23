@@ -5,7 +5,7 @@
     </div>
     <h3 id='multi_record_heading'>Species</h3>
     <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
-        <button id="multi-save" data-icon="mail" data-iconpos="right" data-theme="b">Send</button>
+        <button id="multi-send" data-icon="mail" data-iconpos="right" data-theme="b">Send</button>
     </div>
 </div>
 <div data-role="content">
