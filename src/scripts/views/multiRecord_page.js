@@ -37,6 +37,10 @@ define([
       return this;
     },
 
+    update: function () {
+
+    },
+
     appendEventListeners: function () {
       this.listenTo(app.models.multiRecord, 'change', this.update);
 

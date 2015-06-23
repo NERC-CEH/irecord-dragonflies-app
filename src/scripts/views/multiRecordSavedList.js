@@ -33,23 +33,31 @@ define([
 
       var container = document.createDocumentFragment(); //optimising the performance
 
-      _.each(this.collection.models, function (specie) {
-        var item = new MultiRecordSavedListItemView({model: specie});
-        container.insertBefore(item.render().el, container.firstChild);
-      });
+      if (this.collection.length) {
+        _.each(this.collection.models, function (specie) {
+          var item = new MultiRecordSavedListItemView({model: specie});
+          container.insertBefore(item.render().el, container.firstChild);
+        });
 
-      this.$el.html(container); //appends to DOM only once
-      this.$el.listview().listview('refresh');
+        this.$el.html(container); //appends to DOM only once
+        this.$el.listview().listview('refresh');
 
-      //attach listeners
-      $('.multi-record-saved-species-remove').on('click', function () {
-        _log('views.MultiRecordSpeciesList: removing saved species.', log.DEBUG);
+        //attach listeners
+        $('.multi-record-saved-species-remove').on('click', function () {
+          _log('views.MultiRecordSpeciesList: removing saved species.', log.DEBUG);
 
-        var id = $(this).data('id');
-        id = parseInt(id);
+          var id = $(this).data('id');
+          id = parseInt(id);
 
-        app.models.multiRecord.removeRecord(id);
-      });
+          app.models.multiRecord.removeRecord(id);
+        });
+      } else {
+        //todo: move this to template and out of 'ul'
+        this.$el.html('<div class="info-message"> ' +
+        '<p>No species has been selected to the list. Please add some' +
+        'using the plus button above.</p> ' +
+        '</div>');
+     }
 
       return this;
     },
