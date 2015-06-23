@@ -16,6 +16,8 @@ define([
     }
   });
 
+  window.a = RecordModel;
+
   var RecordCollection = Backbone.Collection.extend({
     model: RecordModel
   });
@@ -59,6 +61,8 @@ define([
       record.set(morel.record.inputs.KEYS.TAXON, specie.attributes.warehouse_id);
 
       this.setRecord(record);
+      //todo: does not work if returns just 'record'
+      return this.getRecord(id);
     },
 
     removeRecord: function (id) {

@@ -5,7 +5,8 @@ define([
   'views/_page',
   'templates',
   'morel',
-  'conf'
+  'conf',
+  'helpers/jqm-spinbox'
 ], function(Page) {
   'use strict';
 
@@ -15,7 +16,7 @@ define([
     template: app.templates.multi_record_species,
 
     events: {
-
+    'click #multi-record-species-save': 'save'
     },
 
     initialize: function () {
@@ -34,13 +35,42 @@ define([
       return this;
     },
 
-    update: function () {
+    update: function (id) {
+      _log('views.MultiRecordSpeciesPage: updating', log.DEBUG);
+      this.model = app.models.multiRecord.setRecordSpeciesID(id);
 
+      this.updateInputs();
+    },
+
+    updateInputs: function () {
+      var stages = this.model.get('stages');
+      var $inputs = $('input.stages');
+      $inputs.each(function () {
+        var name = $(this).attr('name');
+        $(this).val(stages[name] || 0);
+      });
     },
 
     appendEventListeners: function () {
       this.appendBackButtonListeners();
+    },
+
+    save: function () {
+      _log('views.MultiRecordSpeciesPage: saving', log.DEBUG);
+      var stages = {};
+
+      var $inputs = $('input.stages');
+      $inputs.each(function () {
+        var val = $(this).val();
+        var name = $(this).attr('name');
+
+        stages[name] = parseInt(val);
+      });
+      this.model.set('stages', stages);
+      //todo: needs to go back the history - twice if comming from list
+      Backbone.history.navigate('multi-record', {trigger: true});
     }
+
   });
 
   return MultiRecordSpeciesPage;

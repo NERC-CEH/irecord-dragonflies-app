@@ -37,7 +37,7 @@
   });
 
   //Load the mighty app :)
-  require(['jquery.mobile-config', 'app'], function (jqm, App) {
+  require(['jquery.mobile-config', 'app'], function (jqmConf, App) {
     //jquery mobile - backbone configuration should be set up by this point.
     App.init();
   });

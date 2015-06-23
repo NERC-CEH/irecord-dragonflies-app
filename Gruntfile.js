@@ -11,7 +11,7 @@ module.exports = function (grunt) {
         options: {
           targetDir: 'src/scripts/libs',
           layout: 'byComponent',
-          cleanBowerDir: true
+          cleanBowerDir: false
         }
       }
     },

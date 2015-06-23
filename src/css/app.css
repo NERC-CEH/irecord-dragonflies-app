@@ -148,6 +148,20 @@ textarea{
     height:70vh !important;
 }
 
+.number-spin > label {
+    width: 50%;
+    float: left;
+}
+
+.number-spin > div {
+    float: left;
+}
+
+#species-comment-button {
+    width: 80%;
+    float: left;
+}
+
 /* Custom Number Input */
 td.numberInput{
     width:95%;

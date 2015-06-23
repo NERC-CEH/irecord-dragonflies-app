@@ -9,7 +9,9 @@
         <p class="species-list-secondary-name"><i><%- taxon %></i></p>
         <p class="species-list-results">
             <% for (stage in stages) { %>
-                <b><%- stage %>: </b> <%- stages[stage] %>
+                <% if (stages[stage]) { %>
+                    <b><%- stage %>: </b> <%- stages[stage] %>
+                <% } %>
             <% } %>
         </p>
     <% } %>
