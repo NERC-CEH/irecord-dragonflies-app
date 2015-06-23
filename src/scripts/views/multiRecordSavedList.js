@@ -35,7 +35,7 @@ define([
 
       _.each(this.collection.models, function (specie) {
         var item = new MultiRecordSavedListItemView({model: specie});
-        container.appendChild(item.render().el);
+        container.insertBefore(item.render().el, container.firstChild);
       });
 
       this.$el.html(container); //appends to DOM only once
