@@ -14,5 +14,5 @@
         <p>Please enter the date of the recording.
         Otherwise the current date will be used.</p>
     </div>
-    <input id="sample:date" name="sample:date" type="date" required>
+    <input id="record-date" type="date" required>
 </div>

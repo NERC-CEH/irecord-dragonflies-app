@@ -24,6 +24,9 @@ define([
       _log('views.CommentPage: initialize', log.DEBUG);
 
       this.render();
+
+      this.$input = $('#record-comment');
+
       this.appendEventListeners();
     },
 
@@ -32,7 +35,6 @@ define([
 
       this.$el.html(this.template());
       $('body').append($(this.el));
-
       return this;
     },
 
@@ -42,7 +44,7 @@ define([
     update: function () {
       var value = this.model.get(this.warehouse_id);
       if (!value) {
-        this.clearInput();
+        this.$input.val('');
       }
     },
 
@@ -56,40 +58,12 @@ define([
      * Saves the comment to record.
      */
     save: function () {
-      var value = this.readInput();
+      var value = this.$input.val();
       if (value !== "") {
         this.model.set(this.warehouse_id, value);
       }
       window.history.back();
-    },
-
-    /**
-     * Reads the user input.
-     */
-    readInput: function () {
-      var input = this.getInput();
-
-      return  $(input).val();
-    },
-
-    /**
-     * Clears user input.
-     */
-    clearInput: function () {
-      var input = this.getInput();
-      $(input).val('');
-    },
-
-    /**
-     * Gets the input element.
-     * @returns {HTMLElement}
-     */
-    getInput: function () {
-      var input = document.getElementById(this.warehouse_id);
-
-      return input;
     }
-
   });
 
   return CommentPage;

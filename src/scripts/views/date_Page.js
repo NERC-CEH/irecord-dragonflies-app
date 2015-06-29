@@ -24,6 +24,9 @@ define([
       _log('views.DatePage: initialize', log.DEBUG);
 
       this.render();
+
+      this.$input = $('#record-date');
+
       this.appendEventListeners();
     },
 
@@ -42,11 +45,9 @@ define([
      * Saves the date to the record.
      */
     save: function () {
-      var name = this.warehouse_id;
-      var ele = document.getElementById(name);
-      var value = $(ele).val();
+      var value = this.$input.val();
       if (value !== "") {
-        this.model.set(name, value);
+        this.model.set(this.warehouse_id, value);
       }
       window.history.back();
     }
