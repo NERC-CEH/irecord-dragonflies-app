@@ -32,11 +32,6 @@ module.exports = function (grunt) {
             src:  "src/*.json", dest: 'dist/',
             expand: true, flatten: true
           },
-          //CSS
-          {
-            src:  "src/css/*", dest: 'dist/css/',
-            expand: true, flatten: true
-          },
           //JS
           {
             src:  "src/images/**", dest: 'dist/images/',

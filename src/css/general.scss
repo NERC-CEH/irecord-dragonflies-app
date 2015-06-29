@@ -39,38 +39,6 @@ button.header {
   background-image: url('data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMzUwIDMyMSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3BhY2U9InByZXNlcnZlIiBzdHlsZT0iZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjEuNDE0MjE7Ij48ZyBpZD0iTGF5ZXIyIj48ZyBpZD0iTGF5ZXIxIj48cGF0aCBkPSJNNTcuMjM3LDYyLjM2MTdjMTI0LjA5NSwtMTIuMTA4OSAxOTAuOTE4LC0yLjcwNDk4IDIyNy45MDcsLTEuNTM5OTRjMzcuOTMwOCwxLjE5NDczIC03Mi45NDkzLDEwMC44MTQgLTc0LjY2NCwxMDMuMDEzbDIuMzA5MiwxMTIuNDE1bC03MS43MTc0LC0yMi4yOTZsMC4xMjYyODQsLTg4LjQ4NjJjLTMzLjY2MjcsLTMzLjkyMjggLTEwMy43OTIsLTkxLjIwMSAtODMuOTYwOSwtMTAzLjEwN1oiIHN0eWxlPSJmaWxsOiNmZmY7Ii8+PC9nPjwvZz48L3N2Zz4=');
 }
 
-.ui-icon-multi-record:after {
-  background-image: url("data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgODAwIDgwMCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3BhY2U9InByZXNlcnZlIiBzdHlsZT0iZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjEuNDE0MjE7Ij48ZyBpZD0iTGF5ZXIxIj48Zz48cGF0aCBkPSJNNTEwLjk5NywyMzcuODk0bC00MzguODQ4LDBsMCwxMTkuODQ3bDM0NS4zMzIsLTIuNDgyNzFsLTEuMDQsLTgyLjc2MzVsOTQuNTU2MywwLjQ5MTk0NWwwLC0zNS4wOTI4WiIgc3R5bGU9ImZpbGw6I2ZmZjsiLz48cGF0aCBkPSJNMjMxLjQ5OCw3OC40MzQ4bDAuMzAyODI1LDQzOC44NDhsMjguMjgxOSwtMC4wMjgxNTUzbDAuMDA1NDg5OTcsLTkxLjI5NDFsOTEuMzc5NSwtMC45NzgyNjJsLTAuMTIyNzIxLC0zNDYuNjNsLTExOS44NDcsMC4wODI2OTk4WiIgc3R5bGU9ImZpbGw6I2ZmZjsiLz48L2c+PGc+PHJlY3QgeD0iMjg2LjUwNyIgeT0iNDUyLjIwNSIgd2lkdGg9IjQzOC44NDgiIGhlaWdodD0iMTE5Ljg0NyIgc3R5bGU9ImZpbGw6I2ZmZjsiLz48cGF0aCBkPSJNNDQ1Ljg1NiwyOTIuNzQ2bDAuMzAyODI1LDQzOC44NDhsMTE5Ljg0NywtMC4wODI2OTk4bC0wLjMwMjgyNSwtNDM4Ljg0OGwtMTE5Ljg0NywwLjA4MjY5OThaIiBzdHlsZT0iZmlsbDojZmZmOyIvPjwvZz48L2c+PC9zdmc+");
-}
-
-#multi-record-add-button {
-  width: 50px;
-  height: 50px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.species-list-results {
-  margin-top: 10px !important;
-}
-
-.multi-record-recorded-list-item {
-  min-height: 75px;
-}
-
-.multi-record-recorded-list-item > .camera-picker{
-  width: 80px;
-  height: 80px;
-  margin-top: 5px;
-  margin-left: 5px;
-}
-
-.multi-record-recorded-list-item > p {
-  margin-left: 90px !important;
-  margin-bottom: 0 !important;
-  margin-top: 5px!important;
-}
-
 img {
   max-width: 100%;
 }
@@ -166,70 +134,6 @@ label, form label {
 }
 
 
-/*##################*/
-/* DRAGONFLY APP CSS */
-/*##################*/
-
-textarea{
-  height:70vh !important;
-}
-
-.number-spin > label {
-  width: 50%;
-  float: left;
-}
-
-.number-spin > div {
-  float: left;
-}
-
-#species-comment-button {
-  width: 80%;
-  float: left;
-}
-
-/* Custom Number Input */
-td.numberInput{
-  width:95%;
-  padding:0 16px 0 16px;
-  vertical-align:middle;
-}
-
-table.numberInput{
-  background-color: #fff /*{a-body-background-color}*/;
-  border-color: rgba(202, 202, 202, 0.28) /*{a-body-border}*/;
-  color: #3D3D36 /*{a-body-color}*/;
-  text-shadow: 0 /*{a-body-shadow-x}*/ 1px /*{a-body-shadow-y}*/ 0 /*{a-body-shadow-radius}*/ #f3f3f3 /*{a-body-shadow-color}*/;
-
-  margin: .5em 0;
-  border-width: 1px;
-  border-style: solid;
-  box-shadow: inset 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.2);
-
-  background-clip: padding-box;
-  border-radius: .3125em /*{global-radii-blocks}*/;
-  display: block;
-
-  font-size: 1em;
-  line-height: 1.3;
-  font-family: sans-serif /*{global-font-family}*/;
-
-}
-
-input.numberInput{
-  border-color: #ddd /*{a-body-border}*/;
-  display: block;
-  width: 50px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  border-width: 1px;
-  border-style: solid;
-  background-clip: padding-box;
-  border-radius: .3125em;
-  text-align: start;
-}
-
 /* Body */
 .ui-mobile body{
   height:auto;
@@ -264,99 +168,9 @@ form, body {
   top: 30% !important;
 }
 
-
-/* Date, SRef and Taxon Inputs */
-#date-button, #sref-button,
-#occurrence, #taxa_taxon_list_id-button, label[for=occurrence\:taxa_taxon_list_id]{
-  display:none;
-}
-
-/* Record button */
-.record-button{
-  text-align: left;
-}
-
-.core-inputs ul {
-  display: inline-block;
-  width: 66%;
-  margin-left: 2% !important;
-  vertical-align: top;
-}
-
-/* 	Photo picker. */
-/*	Dynamic height css from:
-	http://stackoverflow.com/questions/5445491/height-equal-to-dynamic-width-css-fluid-layout */
-#photo {
-  display: inline-block;
-  position: relative;
-  width: 30%;
-  height: 20vh;
-}
-
-#photo-picker {
-  opacity: 0;
-  font-size: 70px;
-  height: 20vh;
-  position: absolute;
-  top: 40px;
-  left: 5%;
-  overflow: hidden;
-  width: 25%;
-}
-
-.camera-picker {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-
-  border-style: dashed;
-  border-color: #A0A286;
-
-  background-color: #E5E1B2;
-  background-size: 44px auto;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpath%20style%3D%22fill%3A%23FFFFFF%3B%22%20d%3D%22M12%2C2.5H9.908c-0.206-0.581-0.756-1-1.408-1h-3c-0.652%2C0-1.202%2C0.419-1.408%2C1H2c-1.104%2C0-2%2C0.896-2%2C2%20v6c0%2C1.104%2C0.896%2C2%2C2%2C2h10c1.104%2C0%2C2-0.896%2C2-2v-6C14%2C3.396%2C13.104%2C2.5%2C12%2C2.5z%20M7%2C10.5c-1.657%2C0-3-1.344-3-3c0-1.657%2C1.343-3%2C3-3%20s3%2C1.343%2C3%2C3C10%2C9.156%2C8.657%2C10.5%2C7%2C10.5z%20M7%2C5.5c-1.104%2C0-2%2C0.896-2%2C2c0%2C1.104%2C0.896%2C2%2C2%2C2c1.104%2C0%2C2-0.896%2C2-2%20C9%2C6.396%2C8.104%2C5.5%2C7%2C5.5z%22%2F%3E%3C%2Fsvg%3E");
-}
-
-#sample-image-placeholder img {
-  position:absolute;
-  min-height:100%;
-  min-width:100%;
-  display:block;
-}
-
 .ui-widget-content {
   border: 0px;
   background: transparent;
-}
-
-#list-controls-placeholder {
-  margin:0 10px 0 10px;
-  top: 80px;
-}
-
-#list-controls-tabs {
-  display: none;
-}
-
-.list-controls legend {
-  text-align: center;
-  font-weight: bold;
-}
-
-.list-controls fieldset{
-  margin-left: auto !important;
-  margin-right: auto !important;
-  margin-bottom: 20px !important;
-  margin-top: 10px !important;
-}
-
-.list-controls fieldset > div{
-  width: 100%;
 }
 
 #species-profile-fav-button.on:after,
@@ -368,24 +182,6 @@ form, body {
   background-color: #3388cc;
 }
 
-.favourite{
-  background-color: rgba(0,0,0,.3) /*{global-icon-disc}*/;
-  background-position: right 10px center;
-  background-repeat: no-repeat;
-  background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+Cjxzdmcgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogPCEtLSBDcmVhdGVkIHdpdGggU1ZHLWVkaXQgLSBodHRwOi8vc3ZnLWVkaXQuZ29vZ2xlY29kZS5jb20vIC0tPgoKIDxnPgogIDx0aXRsZT5MYXllciAxPC90aXRsZT4KICA8cG9seWdvbiBzdHJva2Utd2lkdGg9IjAiIHN0cm9rZT0iI2ZmZmZmZiIgcG9pbnRzPSIxMS41NTQ3OTM4MzQ2ODYyOCw4LjQyMDMwNTI1MjA3NTE5NSAxNC4yOTY1ODA3OTE0NzMzODksMTYuMzA4MDU5NjkyMzgyODEyIDIyLjY0NTU0MTY2NzkzODIzMiwxNi40NzgyMTYxNzEyNjQ2NSAxNS45OTEwOTQxMTIzOTYyNCwyMS41MjMyNjAxMTY1NzcxNSAxOC40MDkyNTE2ODk5MTA4OSwyOS41MTYxNjg1OTQzNjAzNSAxMS41NTQ3OTM4MzQ2ODYyOCwyNC43NDY0MTc5OTkyNjc1NzggNC43MDAzMzc4ODY4MTAzMDMsMjkuNTE2MTY4NTk0MzYwMzUgNy4xMTg0OTczNzE2NzM1ODQsMjEuNTIzMjYwMTE2NTc3MTUgMC40NjQwNDg4NjI0NTcyNzU0LDE2LjQ3ODIxNjE3MTI2NDY1IDguODEzMDEwNjkyNTk2NDM2LDE2LjMwODA1OTY5MjM4MjgxMiAxMS41NTQ3OTM4MzQ2ODYyOCw4LjQyMDMwNTI1MjA3NTE5NSAxNC4yOTY1ODA3OTE0NzMzODksMTYuMzA4MDU5NjkyMzgyODEyICIgc3Ryb2tlV2lkdGg9Im51bGwiIHN0cm9rZWNvbG9yPSIjZmZmZmZmIiBmaWxsPSIjYmZiZjAwIiBvcmllbnQ9InBvaW50IiByMj0iODUuNzkwODQ0IiByPSIyMTQuNDc3MTA5IiBwb2ludD0iNSIgc2hhcGU9InN0YXIiIGlkPSJzdmdfMTEiIGN5PSI0MjguNDQ0NDI1IiBjeD0iMzU1LjU1NTUzNyIvPgogPC9nPgo8L3N2Zz4=");
-}
-
-.common-name{
-  width: 75%;
-  font-size: x-large;
-  margin-top: 1.5%;
-  float: left
-}
-
-.species-list-main-name{
-  font-size: large !important;
-  font-weight: bold;
-}
 
 #location-top-button.none:after {
   background-color: rgb(192, 68, 32);
@@ -426,47 +222,6 @@ div.taxon {
 }
 
 @media only screen and (max-width: 400px) {
-
-  h1.taxon {
-    display: none !important;
-  }
-  div.taxon {
-    font-style: italic;
-    float: left;
-    display: block !important;
-  }
-
-  .common-name {
-    white-space: initial !important;
-    font-size: 1.2em;
-  }
-
-  .taxon {
-    margin-top: 10px;
-    white-space: initial !important;
-  }
-
-  .species-list-main-name{
-    white-space: initial !important;
-    font-size: smaller !important;
-    font-weight: bold;
-    margin-top: 0 !important;
-  }
-
-  .species-list-secondary-name,
-  .species-list-results {
-    white-space: initial !important;
-    font-size: 0.75em !important;
-    margin-bottom: 0 !important;
-  }
-
-  .favourite{
-    background-color: rgba(0,0,0,.3) /*{global-icon-disc}*/;
-    background-position: right 10px bottom;
-    background-repeat: no-repeat;
-    background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+Cjxzdmcgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogPCEtLSBDcmVhdGVkIHdpdGggU1ZHLWVkaXQgLSBodHRwOi8vc3ZnLWVkaXQuZ29vZ2xlY29kZS5jb20vIC0tPgoKIDxnPgogIDx0aXRsZT5MYXllciAxPC90aXRsZT4KICA8cG9seWdvbiBzdHJva2Utd2lkdGg9IjAiIHN0cm9rZT0iI2ZmZmZmZiIgcG9pbnRzPSIxMS41NTQ3OTM4MzQ2ODYyOCw4LjQyMDMwNTI1MjA3NTE5NSAxNC4yOTY1ODA3OTE0NzMzODksMTYuMzA4MDU5NjkyMzgyODEyIDIyLjY0NTU0MTY2NzkzODIzMiwxNi40NzgyMTYxNzEyNjQ2NSAxNS45OTEwOTQxMTIzOTYyNCwyMS41MjMyNjAxMTY1NzcxNSAxOC40MDkyNTE2ODk5MTA4OSwyOS41MTYxNjg1OTQzNjAzNSAxMS41NTQ3OTM4MzQ2ODYyOCwyNC43NDY0MTc5OTkyNjc1NzggNC43MDAzMzc4ODY4MTAzMDMsMjkuNTE2MTY4NTk0MzYwMzUgNy4xMTg0OTczNzE2NzM1ODQsMjEuNTIzMjYwMTE2NTc3MTUgMC40NjQwNDg4NjI0NTcyNzU0LDE2LjQ3ODIxNjE3MTI2NDY1IDguODEzMDEwNjkyNTk2NDM2LDE2LjMwODA1OTY5MjM4MjgxMiAxMS41NTQ3OTM4MzQ2ODYyOCw4LjQyMDMwNTI1MjA3NTE5NSAxNC4yOTY1ODA3OTE0NzMzODksMTYuMzA4MDU5NjkyMzgyODEyICIgc3Ryb2tlV2lkdGg9Im51bGwiIHN0cm9rZWNvbG9yPSIjZmZmZmZmIiBmaWxsPSIjYmZiZjAwIiBvcmllbnQ9InBvaW50IiByMj0iODUuNzkwODQ0IiByPSIyMTQuNDc3MTA5IiBwb2ludD0iNSIgc2hhcGU9InN0YXIiIGlkPSJzdmdfMTEiIGN5PSI0MjguNDQ0NDI1IiBjeD0iMzU1LjU1NTUzNyIvPgogPC9nPgo8L3N2Zz4=");
-  }
-
   .heading-short {
     display: block !important;
   }
@@ -504,41 +259,6 @@ a.ui-btn > img {
 .ui-btn-icon-bottom:after,
 .ui-btn-icon-notext:after {
   background-color: #828829;
-}
-
-/* Species list record button */
-.ui-listview > li.ui-li-has-alt > .ui-btn + .ui-btn {
-  width: 3.5em;
-}
-
-
-#list-filters .ui-collapsible-content {
-  width: 80%;
-}
-
-label.filter, label.sort {
-  width: 70%
-}
-
-#list-filters a{
-  width: 80%;
-}
-
-#list-filters fieldset,
-#list-filters .ui-collapsible-content{
-  padding: 0;
-  margin: 0;
-}
-
-
-#list-filters label {
-  width: 91%;
-  background-color: white;
-}
-
-#list-controls-clear-button,
-#list-controls-save-button{
-  width: 30%;
 }
 
 /* This is needed for expanding header not to make a gap in the list
@@ -590,81 +310,8 @@ ol[data-role="listview"] > li > p {
   }
 }
 
-/* Flight Graph */
-#species-flight {
-  height: 12vh;
-}
-.axis path, .axis line
-{
-  fill: none;
-  stroke: #777;
-  shape-rendering: crispEdges;
-}
-
-.axis text
-{
-  font-family: 'Arial';
-  font-size: 13px;
-}
-.tick
-{
-  stroke-dasharray: 1, 2;
-}
-.bar
-{
-  fill: FireBrick;
-}
-
-/* Species Map */
-#species-map{
-  width: 95%;
-}
-
 #list {
   min-height: 94vh;
-}
-
-/* Record Input buttons */
-.heading, .descript {
-  display: inline-block !important;
-  vertical-align: middle;
-  margin: 0 !important;
-}
-.heading {
-  font-size: 0.9em!important;
-  width: 50%;
-}
-.descript {
-  font-size: .75em !important;
-  font-weight: bold !important;
-  width: 50%;
-  padding-right: 40px;
-}
-
-div.loading {
-  max-width: 500px;
-  text-align: center;
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 10%;
-}
-
-.loading img {
-  margin-top: 5%;
-}
-
-.ui-loader .ui-icon-loading {
-  background-color: white;
-}
-
-
-
-#heat-map{
-  height: 55vh;
-}
-.ui-loader-default {
-
-  opacity: .70;
 }
 
 .trip-block {

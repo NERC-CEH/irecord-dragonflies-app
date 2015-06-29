@@ -1,0 +1,20 @@
+/* App Loader */
+div.loading {
+  max-width: 500px;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10%;
+}
+
+.loading img {
+  margin-top: 5%;
+}
+
+.ui-loader .ui-icon-loading {
+  background-color: white;
+}
+
+.ui-loader-default {
+  opacity: .70;
+}
