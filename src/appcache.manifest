@@ -2,14 +2,14 @@ CACHE MANIFEST
 #2
 
 CACHE:
-css/images/ajax-loader.gif
-css/app.css
-css/icons.png
-css/icons@2x.png
-css/jquery.mobile-1.4.5.css
-css/photoswipe.css
-css/error.gif
-css/loader.gif
+styles/images/ajax-loader.gif
+styles/app.css
+styles/icons.png
+styles/icons@2x.png
+styles/jquery.mobile-1.4.5.css
+styles/photoswipe.css
+styles/error.gif
+styles/loader.gif
 
 
 images/192.png

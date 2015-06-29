@@ -38,7 +38,7 @@ module.exports = function (grunt) {
             expand: true, flatten: true, filter: 'isFile'
           },
           {
-            src:  "src/images/ajax-loader.gif", dest: 'dist/css/images/',
+            src:  "src/images/ajax-loader.gif", dest: 'dist/styles/images/',
             expand: true, flatten: true
           },
           {
@@ -74,7 +74,7 @@ module.exports = function (grunt) {
             expand: true, flatten: true
           },
           {
-            src:  "src/scripts/libs/**/css/*", dest: 'dist/css/',
+            src:  "src/scripts/libs/**/css/*", dest: 'dist/styles/',
             expand: true, flatten: true
           }
         ]
@@ -268,7 +268,7 @@ module.exports = function (grunt) {
     sass: {
       dist: {
         files: {
-          'dist/css/main.css': 'src/css/main.scss'
+          'dist/styles/main.css': 'src/styles/main.scss'
         },
         options: {
           sourcemap: 'none',
@@ -281,12 +281,12 @@ module.exports = function (grunt) {
       target: {
         files: [{
           src: [
-            'dist/css/jquery.mobile-1.4.5.min.css',
-            'dist/css/photoswipe.css',
-            'dist/css/trip.min.css',
-            'dist/css/main.css'
+            'dist/styles/jquery.mobile-1.4.5.min.css',
+            'dist/styles/photoswipe.css',
+            'dist/styles/trip.min.css',
+            'dist/styles/main.css'
           ],
-          dest: 'dist/css/main.min.css'
+          dest: 'dist/styles/main.min.css'
         }]
       }
     },
