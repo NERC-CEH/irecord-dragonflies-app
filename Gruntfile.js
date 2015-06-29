@@ -270,6 +270,18 @@ module.exports = function (grunt) {
       }
     },
 
+    sass: {
+      dist: {
+        files: {
+          'dist/css/main.css': 'src/css/main.scss'
+        },
+        options: {
+          sourcemap: 'none',
+          style: 'expanded'
+        }
+      }
+    },
+
     cssmin: {
       target: {
         files: [{
@@ -277,7 +289,7 @@ module.exports = function (grunt) {
             'dist/css/jquery.mobile-1.4.5.min.css',
             'dist/css/photoswipe.css',
             'dist/css/trip.min.css',
-            'dist/css/app.css'
+            'dist/css/main.css'
           ],
           dest: 'dist/css/main.min.css'
         }]
@@ -306,6 +318,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-text-replace');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jst');
@@ -313,6 +326,6 @@ module.exports = function (grunt) {
 
   // the default task can be run just by typing "grunt" on the command line
   grunt.registerTask('init', ['bower', 'replace:indexedDBShim', 'replace:latlon', 'uglify']);
-  grunt.registerTask('build', ['copy', 'cssmin', 'jst', 'replace:main', 'requirejs']);
+  grunt.registerTask('build', ['copy', 'sass', 'cssmin', 'jst', 'replace:main', 'requirejs']);
   grunt.registerTask('default', ['init', 'build']);
 };
