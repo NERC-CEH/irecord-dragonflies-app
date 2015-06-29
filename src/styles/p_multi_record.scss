@@ -1,3 +1,7 @@
+/******************************************************************************
+ * Multi Recording pages styles.
+ *****************************************************************************/
+
 .ui-icon-multi-record:after {
   background-image: url("data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgODAwIDgwMCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3BhY2U9InByZXNlcnZlIiBzdHlsZT0iZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjEuNDE0MjE7Ij48ZyBpZD0iTGF5ZXIxIj48Zz48cGF0aCBkPSJNNTEwLjk5NywyMzcuODk0bC00MzguODQ4LDBsMCwxMTkuODQ3bDM0NS4zMzIsLTIuNDgyNzFsLTEuMDQsLTgyLjc2MzVsOTQuNTU2MywwLjQ5MTk0NWwwLC0zNS4wOTI4WiIgc3R5bGU9ImZpbGw6I2ZmZjsiLz48cGF0aCBkPSJNMjMxLjQ5OCw3OC40MzQ4bDAuMzAyODI1LDQzOC44NDhsMjguMjgxOSwtMC4wMjgxNTUzbDAuMDA1NDg5OTcsLTkxLjI5NDFsOTEuMzc5NSwtMC45NzgyNjJsLTAuMTIyNzIxLC0zNDYuNjNsLTExOS44NDcsMC4wODI2OTk4WiIgc3R5bGU9ImZpbGw6I2ZmZjsiLz48L2c+PGc+PHJlY3QgeD0iMjg2LjUwNyIgeT0iNDUyLjIwNSIgd2lkdGg9IjQzOC44NDgiIGhlaWdodD0iMTE5Ljg0NyIgc3R5bGU9ImZpbGw6I2ZmZjsiLz48cGF0aCBkPSJNNDQ1Ljg1NiwyOTIuNzQ2bDAuMzAyODI1LDQzOC44NDhsMTE5Ljg0NywtMC4wODI2OTk4bC0wLjMwMjgyNSwtNDM4Ljg0OGwtMTE5Ljg0NywwLjA4MjY5OThaIiBzdHlsZT0iZmlsbDojZmZmOyIvPjwvZz48L2c+PC9zdmc+");
 }
@@ -38,4 +42,14 @@
 
 .number-spin > div {
   float: left;
+}
+
+.species-info-icon {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+  background: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpath%20fill%3D%22%23FFF%22%20d%3D%22M7%2C0C3.134%2C0%2C0%2C3.134%2C0%2C7s3.134%2C7%2C7%2C7s7-3.134%2C7-7S10.866%2C0%2C7%2C0z%20M7%2C2c0.552%2C0%2C1%2C0.447%2C1%2C1S7.552%2C4%2C7%2C4S6%2C3.553%2C6%2C3%20S6.448%2C2%2C7%2C2z%20M9%2C11H5v-1h1V6H5V5h3v5h1V11z%22%2F%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3C%2Fsvg%3E") no-repeat;
+  background-size: cover;
 }

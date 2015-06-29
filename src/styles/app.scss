@@ -1,0 +1,144 @@
+/******************************************************************************
+ * App wide styles. Only place where tag only selectors allowed.
+ *****************************************************************************/
+
+@import "conf.scss";
+@import "messages.scss";
+@import "logos.scss";
+@import "helpers.scss";
+
+body {
+  margin: 0;
+}
+
+.ui-mobile body{
+  height:auto;
+}
+
+form, body {
+  background: $background-color !important;
+}
+
+.ui-page {
+  background: $page-color;
+}
+
+button.header {
+  padding: 0.5em 1em !important;
+  width: 1.9em !important;
+}
+
+/* Buttons in fixed footer control group are shifted down. This lifts them up.*/
+.ui-controlgroup{
+  margin: 0;
+}
+
+.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-btn-icon-notext {
+  width: 1.9em;
+}
+
+.splash-box {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: #555 solid 2px;
+  border-radius: 10px;
+  padding: 1em;
+  text-align: center;
+}
+
+/* Active JQM Tabs stop displaying some styles. This is a fix to restore them. */
+.ui-tabs-active > a {
+  background-color: #3388CC !important;
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+.ui-collapsible-content p,
+.ui-listview>li p {
+  font-size: 90%;
+}
+
+img {
+  max-width: 100%;
+}
+
+label, form label {
+  width: auto;
+}
+
+/* Increase label width compared to standard jQM. */
+@media (min-width: 28em) {
+  .ui-field-contain > label,
+  .ui-field-contain .ui-controlgroup-label,
+  .ui-field-contain > .ui-rangeslider > label {
+    width: 30%;
+  }
+}
+
+/* Wide screens CSS */
+@media only screen and (min-width: 650px) {
+  /* Scrollbar stops repositioning the page */
+  html {
+    overflow-y: scroll;
+  }
+
+  .ui-page[class] {
+    width: 650px;
+    margin: 0 auto;
+    position: relative;
+
+    box-shadow: 0 0 10px rgba(0,0,0,.4);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,.4);
+  }
+
+  .ui-header-fixed, .ui-footer-fixed {
+    width: 650px;
+    margin-left: -325px;
+    left: 50%;
+  }
+}
+
+.ui-header-fixed, .ui-footer-fixed {
+  min-height: 45px;
+
+  background-color: $header-color !important;
+  border-color: transparent !important;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Move loader dialog up */
+.ui-loader{
+  top: 30% !important;
+}
+
+.ui-widget-content {
+  border: 0;
+  background: transparent;
+}
+
+.ui-header .ui-title {
+  color: $header-text-color;
+  text-shadow: none;
+}
+
+.ui-btn{
+  background-color: #F8F8F2;
+  color: #3D3D36;
+  border-color: rgba(202, 202, 202, 0.28);
+}
+
+a.ui-btn > img {
+  margin-left: 3px;
+  margin-top: 5px;
+  min-height: 70%;
+}
+
+.ui-btn-icon-left:after,
+.ui-btn-icon-right:after,
+.ui-btn-icon-top:after,
+.ui-btn-icon-bottom:after,
+.ui-btn-icon-notext:after {
+  background-color: $button-color;
+}
+

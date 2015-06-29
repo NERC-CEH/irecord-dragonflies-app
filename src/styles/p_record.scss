@@ -1,6 +1,9 @@
+/******************************************************************************
+ * Record page styles.
+ *****************************************************************************/
 
-textarea{
-  height:70vh !important;
+#record_heading {
+  margin: 0 0 0 20%;
 }
 
 #species-comment-button {
@@ -86,8 +89,6 @@ input.numberInput{
   vertical-align: top;
 }
 
-
-
 /* 	Photo picker. */
 /*	Dynamic height css from:
 	http://stackoverflow.com/questions/5445491/height-equal-to-dynamic-width-css-fluid-layout */
@@ -132,4 +133,8 @@ input.numberInput{
   min-height:100%;
   min-width:100%;
   display:block;
+}
+
+textarea#record-comment {
+  height:70vh !important;
 }

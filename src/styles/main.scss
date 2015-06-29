@@ -1,6 +1,10 @@
-@import "general.scss";
-@import "list_page.scss";
-@import "species_profile_page.scss";
-@import "record_page.scss";
-@import "multi_record_page.scss";
-@import "helpers.scss";
+/******************************************************************************
+ * Main styling placeholder. Only imports!
+ *****************************************************************************/
+
+@import "app.scss";
+@import "p_list.scss";
+@import "p_species_profile.scss";
+@import "p_record.scss";
+@import "p_multi_record.scss";
+@import "p_location.scss";

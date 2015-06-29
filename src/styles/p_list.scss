@@ -1,39 +1,55 @@
+/******************************************************************************
+ * List page styles.
+ *****************************************************************************/
+
+@import "list_controls.scss";
+
+#list {
+  min-height: 94vh;
+}
+
+/* This is needed for expanding header not to make a gap in the list
+ if the list is left and returned. */
+.ui-page-header-fixed {
+  padding-top: 2.5em !important;
+}
+
+.heading-short {
+  display: none !important;
+}
+.heading-long {
+  display: block !important;
+}
+
+@media only screen and (max-width: 400px) {
+  .heading-short {
+    display: block !important;
+  }
+  .heading-long {
+    display: none !important;
+  }
+}
+
+.list-normal-white-space > li > p,
+ol[data-role="listview"] > li > strong,
+ol[data-role="listview"] > li > p,
+ul[data-role="listview"] > li > strong,
+ul[data-role="listview"] > li > p {
+  white-space: normal;
+}
+ol[data-role="listview"] > li > p {
+  margin-right: 20px;
+}
 
 /* Species list record button */
 .ui-listview > li.ui-li-has-alt > .ui-btn + .ui-btn {
   width: 3.5em;
 }
 
-
-#list-filters .ui-collapsible-content {
-  width: 80%;
+#species-profile-fav-button.on:after,
+#fav-button.on:after {
+  background-color: rgb(191, 191, 0);
 }
-
-label.filter, label.sort {
-  width: 70%
-}
-
-#list-filters a{
-  width: 80%;
-}
-
-#list-filters fieldset,
-#list-filters .ui-collapsible-content{
-  padding: 0;
-  margin: 0;
-}
-
-
-#list-filters label {
-  width: 91%;
-  background-color: white;
-}
-
-#list-controls-clear-button,
-#list-controls-save-button{
-  width: 30%;
-}
-
 
 .favourite{
   background-color: rgba(0,0,0,.3) /*{global-icon-disc}*/;
@@ -52,32 +68,6 @@ label.filter, label.sort {
 .species-list-main-name{
   font-size: large !important;
   font-weight: bold;
-}
-
-
-#list-controls-placeholder {
-  margin:0 10px 0 10px;
-  top: 80px;
-}
-
-#list-controls-tabs {
-  display: none;
-}
-
-.list-controls legend {
-  text-align: center;
-  font-weight: bold;
-}
-
-.list-controls fieldset{
-  margin-left: auto !important;
-  margin-right: auto !important;
-  margin-bottom: 20px !important;
-  margin-top: 10px !important;
-}
-
-.list-controls fieldset > div{
-  width: 100%;
 }
 
 @media only screen and (max-width: 400px) {

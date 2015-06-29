@@ -1,0 +1,20 @@
+/******************************************************************************
+ * Location page styles.
+ *****************************************************************************/
+
+#location-top-button.none:after {
+  background-color: rgb(192, 68, 32);
+}
+#list-controls-button.running:after,
+#user-page-button.running:after,
+#location-top-button.running:after {
+  background-color: rgb(205, 155, 0);
+}
+#location-top-button.done:after {
+  background-color: rgb(46, 139, 87);
+}
+
+/* For Google maps */
+#map-canvas img{
+  max-width: inherit;
+}

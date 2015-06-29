@@ -1,3 +1,7 @@
+/******************************************************************************
+ * Helper styles. Stuff that did not fit anywhere else.
+ *****************************************************************************/
+
 /* App Loader */
 div.loading {
   max-width: 500px;
@@ -17,4 +21,22 @@ div.loading {
 
 .ui-loader-default {
   opacity: .70;
+}
+
+.trip-block {
+  text-shadow: none;
+  color: white;
+}
+
+#safari-add-homescreen {
+  margin: auto;
+}
+
+/* User details dialog */
+.input-error {
+  border-color: red !important;
+}
+
+.centre {
+  text-align: center;
 }
