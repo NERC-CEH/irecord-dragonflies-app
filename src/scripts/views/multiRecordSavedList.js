@@ -63,6 +63,15 @@ define([
       _log('MultiRecordSpeciesList: updating', log.DEBUG);
 
       this.render();
+
+      //attach event listeners
+      this.$el.find('.camera-picker').on('click', function (e) {
+        //disable jqm link
+        e.stopPropagation();
+        e.preventDefault();
+
+        app.message('<center><b>Photo picker disabled</b></center>', 500);
+      });
     }
   });
 

@@ -11,8 +11,6 @@
         <div id="photo-picker">
             <input type="file" id="sample:image" name="sample:image"
                    accept="png|jpg|gif|jpeg"/>
-            <input type="hidden" id="sample_medium:path" name="sample_medium:path"
-                   value=""/>
         </div>
         <ul data-role="listview" data-inset="true">
             <li>

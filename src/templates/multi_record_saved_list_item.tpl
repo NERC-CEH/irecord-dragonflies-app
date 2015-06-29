@@ -1,5 +1,8 @@
 <a href="#multi-record-species/<%- id %>" data-id="<%- id %>" class="multi-record-recorded-list-item">
-    <img class="multi-record-recorded-species-img" src="images/unknown.png" />
+
+    <div class="camera-picker"></div>
+    <!--img class="multi-record-recorded-species-img" src="images/unknown.png" /-->
+
     <% if (app.models.user.isSortScientific()) { %>
         <p class="species-list-main-name"><b><i><%- taxon %></i></b></p>
         <p class="species-list-secondary-name"><%- common_name %></p>

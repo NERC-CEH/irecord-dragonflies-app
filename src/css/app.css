@@ -50,6 +50,27 @@ button.header {
     margin-left: auto;
 }
 
+.species-list-results {
+    margin-top: 10px !important;
+}
+
+.multi-record-recorded-list-item {
+    min-height: 75px;
+}
+
+.multi-record-recorded-list-item > .camera-picker{
+    width: 80px;
+    height: 80px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.multi-record-recorded-list-item > p {
+    margin-left: 90px !important;
+    margin-bottom: 0 !important;
+    margin-top: 5px!important;
+}
+
 img {
     max-width: 100%;
 }
@@ -283,7 +304,7 @@ form, body {
     width: 25%;
 }
 
-#sample-image-placeholder {
+.camera-picker {
     overflow: hidden;
     position: absolute;
     top: 0;

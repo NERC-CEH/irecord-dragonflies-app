@@ -265,7 +265,7 @@ define([
       }
 
       $('#' + img_holder).remove();
-      this.$photo.append('<div id="' + img_holder + '"></div>');
+      this.$photo.append('<div id="' + img_holder + '" class="camera-picker"></div>');
 
       upload.change(function (e) {
         e.preventDefault();
