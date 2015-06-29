@@ -5,8 +5,8 @@
         <a href="<%- profile_pic %>">
             <img src="<%- profile_pic %>" alt="<%- profile_pic_sex %> &nbsp&nbsp &copy; <%- profile_pic_author %>">
         </a>
-        <% _.each( _.zip(gallery, gallery_authors), function ( pic ) { %>
-        <a href="<%- pic[0] %>"><img src="<%- pic[0] %>" alt="<%- gallery_sex[1] %> &nbsp&nbsp &copy; <%- pic[1] %>"/></a>
+        <% _.each( _.zip(gallery, gallery_authors, gallery_sex), function ( pic ) { %>
+        <a href="<%- pic[0] %>"><img src="<%- pic[0] %>" alt="<%- pic[2] %> &nbsp&nbsp &copy; <%- pic[1] %>"/></a>
         <% }); %>
     </div>
 
