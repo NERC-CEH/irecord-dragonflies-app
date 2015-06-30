@@ -14,7 +14,7 @@ define([
 
     warehouse_id: morel.record.inputs.KEYS.DATE,
 
-    template: app.templates.date,
+    template: app.templates.p_date,
 
     events: {
       'click #date-save': 'save'

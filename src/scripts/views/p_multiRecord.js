@@ -13,7 +13,7 @@ define([
   var MultiRecordPage = Page.extend({
     id: 'multi-record',
 
-    template: app.templates.multi_record,
+    template: app.templates.p_multi_record,
 
     events: {
       'click #multi-send': 'send'

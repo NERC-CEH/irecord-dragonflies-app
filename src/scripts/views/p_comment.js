@@ -1,5 +1,5 @@
 /******************************************************************************
- * Stage page view.
+ * Comment page view.
  *****************************************************************************/
 define([
   'views/_page',
@@ -9,30 +9,32 @@ define([
 ], function (Page) {
   'use strict';
 
-  var StagePage = Page.extend({
-    id: 'stage',
+  var CommentPage = Page.extend({
+    id: 'comment',
 
-    warehouse_id: morel.record.inputs.KEYS.STAGE,
+    warehouse_id: morel.record.inputs.KEYS.COMMENT,
 
-    template: app.templates.stage,
+    template: app.templates.p_comment,
 
     events: {
-      'change input[type=radio]': 'save'
+      'click #comment-save': 'save'
     },
 
     initialize: function () {
-      _log('views.StagePage: initialize', log.DEBUG);
+      _log('views.CommentPage: initialize', log.DEBUG);
 
       this.render();
+
+      this.$input = $('#record-comment');
+
       this.appendEventListeners();
     },
 
     render: function () {
-      _log('views.StagePage: render', log.DEBUG);
+      _log('views.CommentPage: render', log.DEBUG);
 
       this.$el.html(this.template());
       $('body').append($(this.el));
-
       return this;
     },
 
@@ -42,8 +44,7 @@ define([
     update: function () {
       var value = this.model.get(this.warehouse_id);
       if (!value) {
-        //unset all radio buttons
-        this.$el.find("input:radio").attr("checked", false).checkboxradio("refresh");
+        this.$input.val('');
       }
     },
 
@@ -54,20 +55,16 @@ define([
     },
 
     /**
-     * Saves the stage to the record.
-     *
-     * @param e
+     * Saves the comment to record.
      */
-    save: function (e) {
-      var name = this.warehouse_id;
-      var value = e.currentTarget.value;
-      value = morel.record.inputs.KEYS.STAGE_VAL[value];
-      if (value) {
-        this.model.set(name, value);
+    save: function () {
+      var value = this.$input.val();
+      if (value !== "") {
+        this.model.set(this.warehouse_id, value);
       }
       window.history.back();
     }
   });
 
-  return StagePage;
+  return CommentPage;
 });

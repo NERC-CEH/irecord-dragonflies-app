@@ -1,5 +1,5 @@
 /******************************************************************************
- * Number page view.
+ * Stage page view.
  *****************************************************************************/
 define([
   'views/_page',
@@ -9,26 +9,26 @@ define([
 ], function (Page) {
   'use strict';
 
-  var NumberPage = Page.extend({
-    id: 'number',
+  var StagePage = Page.extend({
+    id: 'stage',
 
-    warehouse_id: morel.record.inputs.KEYS.NUMBER,
+    warehouse_id: morel.record.inputs.KEYS.STAGE,
 
-    template: app.templates.number,
+    template: app.templates.p_stage,
 
     events: {
       'change input[type=radio]': 'save'
     },
 
     initialize: function () {
-      _log('views.NumberPage: initialize', log.DEBUG);
+      _log('views.StagePage: initialize', log.DEBUG);
 
       this.render();
       this.appendEventListeners();
     },
 
     render: function () {
-      _log('views.NumberPage: render', log.DEBUG);
+      _log('views.StagePage: render', log.DEBUG);
 
       this.$el.html(this.template());
       $('body').append($(this.el));
@@ -36,6 +36,9 @@ define([
       return this;
     },
 
+    /**
+     * Reset the page.
+     */
     update: function () {
       var value = this.model.get(this.warehouse_id);
       if (!value) {
@@ -51,22 +54,20 @@ define([
     },
 
     /**
-     * Saves the number to the record.
+     * Saves the stage to the record.
      *
      * @param e
-     * @returns {boolean}
      */
     save: function (e) {
       var name = this.warehouse_id;
       var value = e.currentTarget.value;
-      value = morel.record.inputs.KEYS.NUMBER_VAL[value];
-      if (value !== "") {
+      value = morel.record.inputs.KEYS.STAGE_VAL[value];
+      if (value) {
         this.model.set(name, value);
       }
       window.history.back();
-      return false;
     }
   });
 
-  return NumberPage;
+  return StagePage;
 });

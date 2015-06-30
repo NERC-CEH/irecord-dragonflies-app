@@ -12,7 +12,7 @@ define([
   var MultiRecordSpeciesInfo = Page.extend({
     id: 'multi-record-info',
 
-    template: app.templates.multi_record_info,
+    template: app.templates.p_multi_record_info,
 
     events: {
 

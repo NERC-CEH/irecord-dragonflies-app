@@ -13,7 +13,7 @@ define([
   var RecordPage = Page.extend({
     id: 'record',
 
-    template: app.templates.record,
+    template: app.templates.p_record,
 
     events: {
       'click #entry-form-save': 'save',

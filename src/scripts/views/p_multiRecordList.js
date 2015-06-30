@@ -12,7 +12,7 @@ define([
   var Page = Page.extend({
     id: 'multi-record-list',
 
-    template: app.templates.multi_record_list,
+    template: app.templates.p_multi_record_list,
 
     events: {
       'click #list-controls-save-button': 'toggleListControls',

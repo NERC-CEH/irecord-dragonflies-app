@@ -13,7 +13,7 @@ define([
   var ListPage = Page.extend({
     id: 'list',
 
-    template: app.templates.list,
+    template: app.templates.p_list,
 
     events: {
       'click #list-controls-save-button': 'toggleListControls',

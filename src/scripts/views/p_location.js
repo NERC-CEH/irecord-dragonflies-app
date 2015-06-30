@@ -13,7 +13,7 @@ define([
   var LocationPage = Page.extend({
     id: 'location',
 
-    template: app.templates.location,
+    template: app.templates.p_location,
 
     events: {
       'click #grid-ref-set': 'gridRefConvert',

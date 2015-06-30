@@ -12,7 +12,7 @@ define([
   var SpeciesPage = Page.extend({
     id: 'species',
 
-    template: app.templates.species,
+    template: app.templates.p_species,
 
     events: {
       'click #species-profile-fav-button': 'toggleSpeciesFavourite',

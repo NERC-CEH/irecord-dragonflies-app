@@ -12,7 +12,7 @@ define([
   var UserPage = Page.extend({
     id: 'user',
 
-    template: app.templates.user,
+    template: app.templates.p_user,
 
     events: {
       'click #sendall-button': 'sendAllSavedRecords',

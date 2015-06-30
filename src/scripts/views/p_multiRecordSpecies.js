@@ -13,7 +13,7 @@ define([
   var MultiRecordSpeciesPage = Page.extend({
     id: 'multi-record-species',
 
-    template: app.templates.multi_record_species,
+    template: app.templates.p_multi_record_species,
 
     events: {
     'click #multi-record-species-save': 'save'

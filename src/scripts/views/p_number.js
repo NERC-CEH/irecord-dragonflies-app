@@ -1,5 +1,5 @@
 /******************************************************************************
- * Comment page view.
+ * Number page view.
  *****************************************************************************/
 define([
   'views/_page',
@@ -9,42 +9,38 @@ define([
 ], function (Page) {
   'use strict';
 
-  var CommentPage = Page.extend({
-    id: 'comment',
+  var NumberPage = Page.extend({
+    id: 'number',
 
-    warehouse_id: morel.record.inputs.KEYS.COMMENT,
+    warehouse_id: morel.record.inputs.KEYS.NUMBER,
 
-    template: app.templates.comment,
+    template: app.templates.p_number,
 
     events: {
-      'click #comment-save': 'save'
+      'change input[type=radio]': 'save'
     },
 
     initialize: function () {
-      _log('views.CommentPage: initialize', log.DEBUG);
+      _log('views.NumberPage: initialize', log.DEBUG);
 
       this.render();
-
-      this.$input = $('#record-comment');
-
       this.appendEventListeners();
     },
 
     render: function () {
-      _log('views.CommentPage: render', log.DEBUG);
+      _log('views.NumberPage: render', log.DEBUG);
 
       this.$el.html(this.template());
       $('body').append($(this.el));
+
       return this;
     },
 
-    /**
-     * Reset the page.
-     */
     update: function () {
       var value = this.model.get(this.warehouse_id);
       if (!value) {
-        this.$input.val('');
+        //unset all radio buttons
+        this.$el.find("input:radio").attr("checked", false).checkboxradio("refresh");
       }
     },
 
@@ -55,16 +51,22 @@ define([
     },
 
     /**
-     * Saves the comment to record.
+     * Saves the number to the record.
+     *
+     * @param e
+     * @returns {boolean}
      */
-    save: function () {
-      var value = this.$input.val();
+    save: function (e) {
+      var name = this.warehouse_id;
+      var value = e.currentTarget.value;
+      value = morel.record.inputs.KEYS.NUMBER_VAL[value];
       if (value !== "") {
-        this.model.set(this.warehouse_id, value);
+        this.model.set(name, value);
       }
       window.history.back();
+      return false;
     }
   });
 
-  return CommentPage;
+  return NumberPage;
 });

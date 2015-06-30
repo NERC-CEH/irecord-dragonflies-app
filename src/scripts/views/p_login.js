@@ -10,7 +10,7 @@ define([
   var LoginPage = Page.extend({
     id: 'login',
 
-    template: app.templates.login,
+    template: app.templates.p_login,
 
     events: {
       'click #login-button': 'login'

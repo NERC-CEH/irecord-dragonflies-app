@@ -10,7 +10,7 @@ define([
   var RegisterPage = Page.extend({
     id: 'register',
 
-    template: app.templates.register,
+    template: app.templates.p_register,
 
     events: {
       'click #register-button': 'register',
