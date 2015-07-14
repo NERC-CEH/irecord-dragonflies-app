@@ -12,8 +12,6 @@ define([
   var CommentPage = Page.extend({
     id: 'comment',
 
-    warehouse_id: morel.record.inputs.KEYS.COMMENT,
-
     template: app.templates.p_comment,
 
     events: {
@@ -42,14 +40,14 @@ define([
      * Reset the page.
      */
     update: function () {
-      var value = this.model.get(this.warehouse_id);
+      var value = this.model.get(this.id);
       if (!value) {
         this.$input.val('');
       }
     },
 
     appendEventListeners: function () {
-      this.listenTo(this.model, 'change:' + this.warehouse_id, this.update);
+      this.listenTo(this.model, 'change:' + this.id, this.update);
 
       this.appendBackButtonListeners();
     },
@@ -60,7 +58,7 @@ define([
     save: function () {
       var value = this.$input.val();
       if (value !== "") {
-        this.model.set(this.warehouse_id, value);
+        this.model.set(this.id, value);
       }
       window.history.back();
     }

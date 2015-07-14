@@ -34,8 +34,8 @@ define([
          */
         var dummyText = '&' + (new Date()).getTime();
         this.loadScript('http://maps.googleapis.com/maps/api/js?sensor=false&' +
-          'callback=app.views.locationPage.initializeMap' +
-          dummyText
+            'callback=app.views.locationPage.initializeMap' +
+            dummyText
         );
       } else {
         this.initializeMap();
@@ -71,9 +71,9 @@ define([
         morel.geoloc.set(location.latitude, location.longitude, location.accuracy);
 
         var sref = location.latitude + ', ' + location.longitude;
-        app.models.record.set(morel.record.inputs.KEYS.SREF, sref);
-        app.models.record.set(morel.record.inputs.KEYS.SREF_ACCURACY, location.accuracy);
-        app.models.record.set(morel.record.inputs.KEYS.SREF_NAME, location.name);
+        app.models.sample.set('location', sref);
+        app.models.sample.set('location_accuracy', location.accuracy);
+        app.models.sample.set('location_name', location.name);
 
         app.models.user.saveLocation(location);
       } else {
@@ -335,7 +335,7 @@ define([
 
         navigator.geolocation.getCurrentPosition(function (position) {
           var latLng = new google.maps.LatLng(position.coords.latitude,
-            position.coords.longitude);
+              position.coords.longitude);
           app.views.locationPage.map.setCenter(latLng);
           app.views.locationPage.map.setZoom(15);
         }, null, options);
@@ -364,7 +364,7 @@ define([
         google.maps.event.trigger(app.views.locationPage.map, 'resize');
         if (app.views.locationPage.latitude !== null && app.views.locationPage.longitude !== null) {
           var latLong = new google.maps.LatLng(app.views.locationPage.latitude,
-            app.views.locationPage.longitude);
+              app.views.locationPage.longitude);
 
           app.views.locationPage.map.setCenter(latLong);
           app.views.locationPage.map.setZoom(15);
