@@ -21,6 +21,8 @@ define([
     initialize: function () {
       _log('views.CommentPage: initialize', log.DEBUG);
 
+      this.model = app.models.sample;
+
       this.render();
 
       this.$input = $('#record-comment');

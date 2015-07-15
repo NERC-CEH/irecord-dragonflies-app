@@ -49,7 +49,7 @@ define([
                 app.models = {};
                 app.models.user = new UserModel();
                 app.models.app = new AppModel();
-                app.models.record = null; //to be set up on record opening
+                app.models.sample = null; //to be set up on record opening
                 app.collections = {};
                 app.collections.species = new SpeciesCollection(app.data.species);
 

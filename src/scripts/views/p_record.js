@@ -44,12 +44,12 @@ define([
             this.$el.html(this.template());
             $('body').append($(this.el));
 
-            this.$heading = $('#record_heading');
-            this.$certainInputLabel = $('#certain-button-label');
-            this.$certainInput = $('#certain-button');
-            this.$photo = $('#photo');
-            this.$locationButton = $('#location-top-button');
-            this.$dateButton = $('#date-top-button');
+            this.$heading = this.$el.find('#record_heading');
+            this.$certainInputLabel = this.$el.find('#certain-button-label');
+            this.$certainInput = this.$el.find('#certain-button');
+            this.$photo = this.$el.find('#photo');
+            this.$locationButton = this.$el.find('#location-top-button');
+            this.$dateButton = this.$el.find('#date-top-button');
             return this;
         },
 
@@ -68,12 +68,12 @@ define([
         },
 
         appendEventListeners: function () {
-            this.occurrence.on('change:number', this.updateNumberButton);
-            this.occurrence.on('change:stage', this.updateStageButton);
-            this.model.on('change:comment', this.updateCommentButton);
-            this.model.on('change:location_accuracy', this.updateGPSButton);
-            this.model.on('change:location', this.updateGPSButton);
-            this.model.on('change:date', this.updateDateButton);
+            this.occurrence.on('change:number', this.updateNumberButton, this);
+            this.occurrence.on('change:stage', this.updateStageButton, this);
+            this.model.on('change:comment', this.updateCommentButton, this);
+            this.model.on('change:location_accuracy', this.updateGPSButton, this);
+            this.model.on('change:location', this.updateGPSButton, this);
+            this.model.on('change:date', this.updateDateButton, this);
 
             this.appendBackButtonListeners();
         },

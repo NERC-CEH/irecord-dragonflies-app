@@ -21,6 +21,8 @@ define([
         initialize: function () {
             _log('views.StagePage: initialize', log.DEBUG);
 
+            this.model = app.models.sample.occurrences.getFirst();
+
             this.render();
             this.appendEventListeners();
         },
@@ -58,7 +60,7 @@ define([
          */
         save: function (e) {
             var value = e.currentTarget.value;
-            value = morel.record.inputs.KEYS.STAGE_VAL[value];
+            value = morel.Occurrence.KEYS.STAGE.values[value];
             if (value) {
                 this.model.set(this.id, value);
             }
