@@ -3,4 +3,5 @@
 .sass-cache
 dist
 node_modules
+bower_components
 src/scripts/libs

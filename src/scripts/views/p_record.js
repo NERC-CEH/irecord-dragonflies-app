@@ -68,18 +68,12 @@ define([
         },
 
         appendEventListeners: function () {
-            this.listenTo(this.model,
-                'change:' + morel.Occurrence.KEYS.NUMBER.name, this.updateNumberButton);
-            this.listenTo(this.model,
-                'change:' + morel.Occurrence.KEYS.STAGE.name, this.updateStageButton);
-            this.listenTo(this.model,
-                'change:' + morel.Sample.KEYS.COMMENT.name, this.updateCommentButton);
-            this.listenTo(this.model,
-                'change:' + morel.Sample.KEYS.LOCATION_ACCURACY.name, this.updateGPSButton);
-            this.listenTo(this.model,
-                'change:' + morel.Sample.KEYS.LOCATION.name, this.updateGPSButton);
-            this.listenTo(this.model,
-                'change:' + morel.Sample.KEYS.DATE.name, this.updateDateButton);
+            this.occurrence.on('change:number', this.updateNumberButton);
+            this.occurrence.on('change:stage', this.updateStageButton);
+            this.model.on('change:comment', this.updateCommentButton);
+            this.model.on('change:location_accuracy', this.updateGPSButton);
+            this.model.on('change:location', this.updateGPSButton);
+            this.model.on('change:date', this.updateDateButton);
 
             this.appendBackButtonListeners();
         },
@@ -119,17 +113,17 @@ define([
                 morel.geoloc.set(location.lat, location.lon, location.acc);
 
                 var sref = location.lat + ', ' + location.lon;
-                app.views.recordPage.model.set(morel.Sample.KEYS.LOCATION, sref);
-                app.views.recordPage.model.set(morel.Sample.KEYS.LOCATION_ACCURACY, location.acc);
+                app.models.sample.set('location', sref);
+                app.models.sample.set('location_accuracy', location.acc);
             }
 
             function onError(err) {
                 //modify the UI
-                app.views.recordPage.model.set(morel.Sample.KEYS.LOCATION_ACCURACY, -1); //stopped
+                app.models.sample.set('location_accuracy', -1); //stopped
             }
 
             morel.geoloc.run(null, onGeolocSuccess, onError);
-            this.model.set(morel.Sample.KEYS.LOCATION_ACCURACY.name, 0); //running
+            this.model.set('location_accuracy', 0); //running
         },
 
         /**
@@ -364,7 +358,7 @@ define([
             var text = '';
 
             var button = this.$locationButton;
-            var accuracy = this.model.get(morel.Sample.KEYS.LOCATION_ACCURACY);
+            var accuracy = this.model.get('location_accuracy');
             switch (true) {
                 case (accuracy == -1 || accuracy === 'undefined'):
                     //none
@@ -380,7 +374,7 @@ define([
                     button.removeClass('running');
                     button.removeClass('none');
 
-                    var value = this.model.get(morel.Sample.KEYS.LOCATION);
+                    var value = this.model.get('location');
                     var location = {
                         latitude: value.split(',')[0],
                         longitude: value.split(',')[1]
@@ -406,7 +400,7 @@ define([
 
         updateDateButton: function () {
             var $dateButton = jQuery('#date-top-button .descript');
-            var value = this.model.get(morel.Sample.KEYS.DATE.name);
+            var value = this.model.get('date');
             var text = value || '';
             $dateButton.html(text);
         },
@@ -427,7 +421,7 @@ define([
          */
         updateNumberButton: function () {
             var $numberButton = jQuery('#number-button .descript');
-            var value = this.model.get(morel.Occurrence.KEYS.NUMBER.name);
+            var value = this.occurrence.get('number');
             var text = '';
             var keys = Object.keys(morel.Occurrence.KEYS.NUMBER.values);
             for (var i = 0; i < keys.length; i++) {
@@ -444,7 +438,7 @@ define([
          */
         updateStageButton: function () {
             var $stageButton = jQuery('#stage-button .descript');
-            var value = this.model.get(morel.Occurrence.KEYS.STAGE.name);
+            var value = this.occurrence.get('stage');
             var text = '';
             var keys = Object.keys(morel.Occurrence.KEYS.STAGE.values);
             for (var i = 0; i < keys.length; i++) {
@@ -461,7 +455,7 @@ define([
          */
         updateCommentButton: function () {
             var $commentButton = jQuery('#comment-button .descript');
-            var value = this.model.get(morel.Sample.KEYS.COMMENT.name);
+            var value = this.model.get('comment');
             var ellipsis = value && value.length > 20 ? '...' : '';
             value = value ? value.substring(0, 20) + ellipsis : ''; //cut it down a bit
             $commentButton.html(value);
