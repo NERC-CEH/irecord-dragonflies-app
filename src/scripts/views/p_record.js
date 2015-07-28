@@ -17,7 +17,6 @@ define([
 
         events: {
             'click #entry-form-save': 'save',
-            'click #entry-form-send': 'send',
             'change input[type="checkbox"]': 'saveCertain',
             'click #photo': function (event) {
                 $('input[type="file"]').trigger('click');
@@ -44,7 +43,7 @@ define([
             this.$el.html(this.template());
             $('body').append($(this.el));
 
-            this.$heading = this.$el.find('#record_heading');
+            this.$heading = this.$el.find('#record_species');
             this.$certainInputLabel = this.$el.find('#certain-button-label');
             this.$certainInput = this.$el.find('#certain-button');
             this.$photo = this.$el.find('#photo');
@@ -124,102 +123,6 @@ define([
 
             morel.geoloc.run(null, onGeolocSuccess, onError);
             this.model.set('location_accuracy', 0); //running
-        },
-
-        /**
-         * Submits the record.
-         */
-        send: function () {
-            _log('views.RecordPage: sending record.', log.DEBUG);
-
-            $.mobile.loading('show');
-
-            if (!this.valid()) {
-                return;
-            }
-
-            if (navigator.onLine) {
-                //online
-                var onSendSuccess = function () {
-                    app.message("<center><h2>Submitted successfully.</h2></center>" +
-                        " </br><h3>Thank You!</h3>");
-
-                    setTimeout(function () {
-                        Backbone.history.navigate('list', {trigger: true});
-                    }, 2000);
-                };
-
-                switch (app.CONF.SEND_RECORD.STATUS) {
-                    case true:
-                        if (app.models.user.hasSignIn()) {
-                            app.models.record.send(onSendSuccess, onError);
-                        } else {
-                            contactDetailsDialog(function () {
-                                $.mobile.loading('show');
-                                app.models.record.send(onSendSuccess, onError);
-                            });
-                        }
-                        break;
-                    case 'simulate':
-                        this.sendSimulate(onSendSuccess, onError);
-                        break;
-                    case false:
-                    default:
-                        _log('views.RecordPage: unknown feature state', log.WARNING);
-                }
-
-            } else {
-                //offline
-                var onSaveSuccess = function () {
-                    app.views.listPage.updateUserPageButton();
-
-                    app.message("<center><h2>No Internet.</h2></center>" +
-                        "<br/><h3> Record saved.</h3>");
-                    setTimeout(function () {
-                        Backbone.history.navigate('list', {trigger: true});
-                    }, 2000);
-                };
-                app.models.record.save(onSaveSuccess, onError);
-            }
-
-            function onError(err) {
-                app.views.listPage.updateUserPageButton();
-
-                var message = "<center><h2>Error</h2></center>" +
-                    "<p>" + err.message + "</p>" +
-                    "<h3> Record Saved </h3>";
-                app.message(message);
-                setTimeout(function () {
-                    Backbone.history.navigate('list', {trigger: true});
-                }, 2000);
-            }
-        },
-
-        /**
-         * Simulates the login
-         * @param form
-         * @param person
-         */
-        sendSimulate: function (onSendSuccess, onError) {
-            var selection =
-                "<h1>Simulate:</h1>" +
-                "<button id='simulate-success-button'>Success</button>" +
-                "<button id='simulate-failure-button'>Failure</button>" +
-                "<button id='simulate-cancel-button'>Cancel</button>";
-            app.message(selection, 0);
-
-            var that = this;
-            $('#simulate-success-button').on('click', function () {
-                onSendSuccess();
-            });
-            $('#simulate-failure-button').on('click', function () {
-                app.models.record.save(function () {
-                    onError({message: 'Some Error Message.'});
-                }, null);
-            });
-            $('#simulate-cancel-button').on('click', function () {
-                $.mobile.loading('hide');
-            });
         },
 
         /**

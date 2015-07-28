@@ -2,8 +2,9 @@
  * Record page styles.
  *****************************************************************************/
 
-#record_heading {
-  margin: 0 0 0 20%;
+#record_species {
+  text-align: center;
+  margin: 5px 0 20px;
 }
 
 #species-comment-button {
@@ -86,6 +87,7 @@ input.numberInput{
   display: inline-block;
   width: 66%;
   margin-left: 2% !important;
+  margin-top: 0 !important;
   vertical-align: top;
 }
 
