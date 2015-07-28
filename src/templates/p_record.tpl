@@ -19,14 +19,14 @@
         </div>
         <ul data-role="listview" class="core-inputs" data-inset="true">
             <li>
-                <a href="#location" id="location-top-button" class="record-button"
+                <a href="#location" id="location-button" class="record-button"
                    data-role="button" data-icon="location" data-iconpos="right">
                     <h3 class="heading">Location</h3>
                     <p class="descript"></p>
                 </a>
             </li>
             <li>
-                <a href="#date" id="date-top-button" class="record-button"
+                <a href="#date" id="date-button" class="record-button"
                    data-role="button" data-icon="calendar" data-iconpos="right">
                     <h3 class="heading">Date</h3>
                     <p class="descript"></p>

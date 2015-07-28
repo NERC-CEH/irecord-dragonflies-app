@@ -71,13 +71,6 @@ input.numberInput{
   padding-right: 40px;
 }
 
-
-/* Date, SRef and Taxon Inputs */
-#date-button, #sref-button,
-#occurrence, #taxa_taxon_list_id-button, label[for=occurrence\:taxa_taxon_list_id]{
-  display:none;
-}
-
 /* Record button */
 .record-button{
   text-align: left;
@@ -139,4 +132,16 @@ input.numberInput{
 
 textarea#record-comment {
   height:70vh !important;
+}
+
+#location-button.none:after {
+  background-color: rgb(192, 68, 32);
+}
+#list-controls-button.running:after,
+#user-page-button.running:after,
+#location-button.running:after {
+  background-color: rgb(205, 155, 0);
+}
+#location-button.done:after {
+  background-color: rgb(46, 139, 87);
 }

@@ -47,8 +47,11 @@ define([
             this.$certainInputLabel = this.$el.find('#certain-button-label');
             this.$certainInput = this.$el.find('#certain-button');
             this.$photo = this.$el.find('#photo');
-            this.$locationButton = this.$el.find('#location-top-button');
-            this.$dateButton = this.$el.find('#date-top-button');
+            this.$locationButton = this.$el.find('#location-button');
+            this.$numberButton = this.$el.find('#number-button .descript');
+            this.$stageButton = this.$el.find('#stage-button .descript');
+            this.$commentButton = this.$el.find('#comment-button .descript');
+            this.$dateButton = this.$el.find('#date-button .descript');
             return this;
         },
 
@@ -101,6 +104,7 @@ define([
             this.runGeoloc();
 
             this.setImage('input[type="file"]');
+            this.updateDateButton(); //morel sets date automatically, before listeners are attached
         },
 
         /**
@@ -143,7 +147,6 @@ define([
                     app.message(message);
                     return;
                 }
-                app.views.listPage.updateUserPageButton();
 
                 app.message("<center><h2>Record saved.</h2></center>");
                 setTimeout(function () {
@@ -257,25 +260,23 @@ define([
          * Udates the GPS button with the traffic light indication showing GPS status.
          */
         updateGPSButton: function () {
-            var $button = jQuery('#location-top-button .descript');
             var text = '';
 
-            var button = this.$locationButton;
             var accuracy = this.model.get('location_accuracy');
             switch (true) {
                 case (accuracy == -1 || accuracy === 'undefined'):
                     //none
-                    button.addClass('none');
-                    button.removeClass('done');
-                    button.removeClass('running');
+                    this.$locationButton.addClass('none');
+                    this.$locationButton.removeClass('done');
+                    this.$locationButton.removeClass('running');
 
                     text = 'Required';
                     break;
                 case (accuracy > 0):
                     //done
-                    button.addClass('done');
-                    button.removeClass('running');
-                    button.removeClass('none');
+                    this.$locationButton.addClass('done');
+                    this.$locationButton.removeClass('running');
+                    this.$locationButton.removeClass('none');
 
                     var value = this.model.get('location');
                     var location = {
@@ -288,9 +289,9 @@ define([
                     break;
                 case (accuracy == 0):
                     //running
-                    button.addClass('running');
-                    button.removeClass('done');
-                    button.removeClass('none');
+                    this.$locationButton.addClass('running');
+                    this.$locationButton.removeClass('done');
+                    this.$locationButton.removeClass('none');
 
                     text = 'Locating..';
                     break;
@@ -298,14 +299,13 @@ define([
                     _log('views.RecordPage: ERROR no such GPS button state: ' + accuracy, log.WARNING);
             }
 
-            $button.html(text);
+            this.$locationButton.find('.descript').html(text);
         },
 
         updateDateButton: function () {
-            var $dateButton = jQuery('#date-top-button .descript');
             var value = this.model.get('date');
             var text = value || '';
-            $dateButton.html(text);
+            this.$dateButton.html(text);
         },
 
         /**
@@ -323,7 +323,6 @@ define([
          * Updates the button info text.
          */
         updateNumberButton: function () {
-            var $numberButton = jQuery('#number-button .descript');
             var value = this.occurrence.get('number');
             var text = '';
             var keys = Object.keys(morel.Occurrence.KEYS.NUMBER.values);
@@ -333,14 +332,13 @@ define([
                     break;
                 }
             }
-            $numberButton.html(text);
+            this.$numberButton.html(text);
         },
 
         /**
          * Updates the button info text.
          */
         updateStageButton: function () {
-            var $stageButton = jQuery('#stage-button .descript');
             var value = this.occurrence.get('stage');
             var text = '';
             var keys = Object.keys(morel.Occurrence.KEYS.STAGE.values);
@@ -350,18 +348,17 @@ define([
                     break;
                 }
             }
-            $stageButton.html(text);
+            this.$stageButton.html(text);
         },
 
         /**
          * Updates the button info text.
          */
         updateCommentButton: function () {
-            var $commentButton = jQuery('#comment-button .descript');
             var value = this.model.get('comment');
             var ellipsis = value && value.length > 20 ? '...' : '';
             value = value ? value.substring(0, 20) + ellipsis : ''; //cut it down a bit
-            $commentButton.html(value);
+            this.$commentButton.html(value);
         },
 
         /**
