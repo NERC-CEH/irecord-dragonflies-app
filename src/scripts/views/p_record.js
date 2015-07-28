@@ -26,12 +26,6 @@ define([
         initialize: function () {
             _log('views.RecordPage: initialize', log.DEBUG);
 
-            this.model = new morel.Sample();
-            app.models.sample = this.model; //needs to be globally accessible
-
-            this.occurrence = new morel.Occurrence();
-            this.model.occurrences.set(this.occurrence);
-
             this.render();
             this.appendEventListeners();
             this.trip();
@@ -70,14 +64,19 @@ define([
         },
 
         appendEventListeners: function () {
+            this.appendBackButtonListeners();
+        },
+
+        appendSampleListeners: function () {
+            this.sample.on('change:comment', this.updateCommentButton, this);
+            this.sample.on('change:location_accuracy', this.updateGPSButton, this);
+            this.sample.on('change:location', this.updateGPSButton, this);
+            this.sample.on('change:date', this.updateDateButton, this);
+        },
+
+        appendOccurrenceListeners: function () {
             this.occurrence.on('change:number', this.updateNumberButton, this);
             this.occurrence.on('change:stage', this.updateStageButton, this);
-            this.model.on('change:comment', this.updateCommentButton, this);
-            this.model.on('change:location_accuracy', this.updateGPSButton, this);
-            this.model.on('change:location', this.updateGPSButton, this);
-            this.model.on('change:date', this.updateDateButton, this);
-
-            this.appendBackButtonListeners();
         },
 
         /**
@@ -85,7 +84,20 @@ define([
          */
         initRecording: function (speciesID) {
             var specie = app.collections.species.find({id: speciesID});
-            this.occurrence.set('taxon', specie.attributes.warehouse_id);
+            this.occurrence = new morel.Occurrence({
+                attributes: {
+                    'taxon': parseInt(specie.attributes.warehouse_id)
+                }
+            });
+
+            this.sample = new morel.Sample({
+                occurrences: [this.occurrence]
+            });
+
+            app.models.sample = this.sample; //needs to be globally accessible
+
+            this.appendSampleListeners();
+            this.appendOccurrenceListeners();
 
             //add header to the page
             this.$heading.text(specie.attributes.common_name);
@@ -126,7 +138,7 @@ define([
             }
 
             morel.geoloc.run(null, onGeolocSuccess, onError);
-            this.model.set('location_accuracy', 0); //running
+            this.sample.set('location_accuracy', 0); //running
         },
 
         /**
@@ -154,7 +166,7 @@ define([
                 }, 2000);
             }
 
-            app.recordManager.set(this.model, callback);
+            app.recordManager.set(this.sample, callback);
         },
 
         /**
@@ -235,11 +247,11 @@ define([
         _validate: function (attrs, options) {
             var invalids = [];
 
-            if (!this.model.has('date')) {
+            if (!this.sample.has('date')) {
                 invalids.push('Date');
             } else {
                 //check if valid date
-                var input = this.model.get('date');
+                var input = this.sample.get('date');
                 var inputDate = new Date(input);
                 var currentDate =  new Date();
                 if (inputDate > currentDate) {
@@ -247,7 +259,7 @@ define([
                 }
             }
 
-            if (!this.model.has('location')) {
+            if (!this.sample.has('location')) {
                 invalids.push('Location');
             }
             if (!this.occurrence.has('taxon')) {
@@ -262,7 +274,7 @@ define([
         updateGPSButton: function () {
             var text = '';
 
-            var accuracy = this.model.get('location_accuracy');
+            var accuracy = this.sample.get('location_accuracy');
             switch (true) {
                 case (accuracy == -1 || accuracy === 'undefined'):
                     //none
@@ -278,7 +290,7 @@ define([
                     this.$locationButton.removeClass('running');
                     this.$locationButton.removeClass('none');
 
-                    var value = this.model.get('location');
+                    var value = this.sample.get('location');
                     var location = {
                         latitude: value.split(',')[0],
                         longitude: value.split(',')[1]
@@ -303,7 +315,7 @@ define([
         },
 
         updateDateButton: function () {
-            var value = this.model.get('date');
+            var value = this.sample.get('date');
             var text = value || '';
             this.$dateButton.html(text);
         },
@@ -355,7 +367,7 @@ define([
          * Updates the button info text.
          */
         updateCommentButton: function () {
-            var value = this.model.get('comment');
+            var value = this.sample.get('comment');
             var ellipsis = value && value.length > 20 ? '...' : '';
             value = value ? value.substring(0, 20) + ellipsis : ''; //cut it down a bit
             this.$commentButton.html(value);

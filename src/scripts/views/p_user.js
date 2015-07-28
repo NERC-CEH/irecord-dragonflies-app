@@ -15,9 +15,9 @@ define([
         template: app.templates.p_user,
 
         events: {
-            'click #sendall-button': 'sendAllSavedRecords',
-            'click #send-button': 'sendSavedRecord',
-            'click #delete-button': 'deleteSavedRecord',
+            'click #syncAll-button': 'syncAll',
+            'click .sync-button': 'sync',
+            'click .delete-button': 'deleteSavedRecord',
             'click #logout-button': 'signOut'
         },
 
@@ -51,7 +51,7 @@ define([
         /**
          * Recursively sends all the saved user records.
          */
-        sendAllSavedRecords: function () {
+        syncAll: function () {
             $.mobile.loading('show');
 
             function onSuccess() {
@@ -64,11 +64,11 @@ define([
             }
 
             if (app.models.user.hasSignIn()) {
-                morel.io.sendAllSavedRecords(onSuccess, onSuccessAll);
+                app.recordManager.syncAll(onSuccess, onSuccessAll);
             } else {
                 contactDetailsDialog(function () {
                     $.mobile.loading('show');
-                    morel.io.sendAllSavedRecords(onSuccess, onSuccessAll);
+                    app.recordManager.syncAll(onSuccess, onSuccessAll);
                 });
             }
         },
@@ -79,7 +79,7 @@ define([
          * @param e Event of an element that contains the ID of the saved record as
          * data attribute.
          */
-        sendSavedRecord: function (e) {
+        sync: function (e) {
             var recordKey = $(e.currentTarget).data('id');
 
             var onSuccess = null, onError = null;
@@ -132,10 +132,12 @@ define([
          * data attribute.
          */
         deleteSavedRecord: function (e) {
-            var recordKey = $(e.currentTarget).data('id');
-            morel.record.db.remove(recordKey, function () {
-                app.views.listPage.updateUserPageButton();
+            //stop propagation of jqm link
+            e.stopPropagation();
+            e.preventDefault();
 
+            var recordKey = $(e.currentTarget).data('id');
+            app.recordManager.remove(recordKey, function () {
                 app.views.userPage.printList();
             });
         },

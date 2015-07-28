@@ -11,7 +11,7 @@ define([
       '<input type="email" name="user-email" placeholder="Email" data-mini="true">' +
       '<input type="text" name="user-name" placeholder="Name" data-mini="true">' +
       '<input type="text" name="user-surname" placeholder="Surname" data-mini="true">' +
-      '<button id="' + personalDetailsButtonID + '" data-mini="true">Send</button>' +
+      '<button id="' + personalDetailsButtonID + '" data-mini="true">Sync</button>' +
 
       '<center><h4>or</h4></center>' +
       '<a href="#login" data-role="button" data-mini="true">Sign in</a>';

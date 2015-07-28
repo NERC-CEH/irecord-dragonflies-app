@@ -81,12 +81,12 @@ define([
      */
     updateUserPageButton: function () {
       var $userPageButton = this.$userPageButton;
-      function onSuccess(savedRecords) {
+      function onSuccess(err, savedRecords) {
         var savedRecordIDs = Object.keys(savedRecords);
         $userPageButton.toggleClass('running', savedRecordIDs.length > 0);
 
       }
-      morel.record.db.getAll(onSuccess);
+      app.recordManager.getAll(onSuccess);
     },
 
     /**
