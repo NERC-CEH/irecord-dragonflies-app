@@ -38,6 +38,13 @@ for row in reader:
             array = key.find('[]')
             object = key.find('{')
 
+            #translate digits
+            if col.replace('.','',1).isdigit():
+                try:
+                    col = int(col)
+                except ValueError:
+                    col = float(col)
+
             #check if the col name is array
             if array != -1:
                 key = key[:array] #crop the []
