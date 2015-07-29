@@ -183,29 +183,26 @@ define([
                     inputKeys = {},
                     savedRecordIDs = Object.keys(savedRecords);
                 for (var i = 0, length = savedRecordIDs.length; i < length; i++) {
-                    var record = {};
-                    record.id = savedRecordIDs[i];
+                    var record = savedRecords[savedRecordIDs[i]],
+                        templateData = {};
+                    templateData.id = record.id;
+                    templateData.date = record.get('date');
 
-                    flatRecord = savedRecords[record.id].flatten();
+                    if (record.occurrences.length <= 1) {
+                        var taxon = savedRecords[record.id]
+                            .occurrences.getFirst()
+                            .get('taxon');
+                        var specie = app.collections.species.find(function(model) {
+                            return model.get('warehouse_id') === taxon;
+                        });
+                        templateData.common_name = specie ? specie.attributes.common_name : '';
 
-                    inputKeys = Object.keys(flatRecord);
-                    for (var j = 0, inputsLength = inputKeys.length; j < inputsLength; j++) {
-                        var name = inputKeys[j];
-                        var value = flatRecord[name];
-                        switch (name) {
-                            case morel.Sample.KEYS.DATE.name:
-                                record.date = value;
-                                break;
-                            case morel.Occurrence.KEYS.TAXON.name:
-                                var specie = app.collections.species.find(function(model) {
-                                    return model.get('warehouse_id') == value;
-                                });
-                                record.common_name = specie ? specie.attributes.common_name : '';
-                                break;
-                            default:
-                        }
+                    //multi record
+                    } else {
+                        templateData.multiRecord = record.occurrences.length;
                     }
-                    records.push(record);
+
+                    records.push(templateData);
                 }
 
                 $placeholder.html(app.templates.saved_records({'records': records}));

@@ -2,82 +2,95 @@
  * Multi Record Species page view.
  *****************************************************************************/
 define([
-  'views/_page',
-  'templates',
-  'morel',
-  'conf',
-  'helpers/jqm-spinbox'
+    'views/_page',
+    'templates',
+    'morel',
+    'conf',
+    'helpers/jqm-spinbox'
 ], function(Page) {
-  'use strict';
+    'use strict';
 
-  var MultiRecordSpeciesPage = Page.extend({
-    id: 'multi-record-species',
+    var MultiRecordSpeciesPage = Page.extend({
+        id: 'multi-record-species',
 
-    template: app.templates.p_multi_record_species,
+        template: app.templates.p_multi_record_species,
 
-    events: {
-    'click #multi-record-species-save': 'save'
-    },
+        events: {
+            'click #multi-record-species-save': 'save'
+        },
 
-    initialize: function () {
-      _log('views.MultiRecordSpeciesPage: initialize', log.DEBUG);
+        initialize: function () {
+            _log('views.MultiRecordSpeciesPage: initialize', log.DEBUG);
 
-      this.render();
-      this.appendEventListeners();
-    },
+            this.render();
+            this.appendEventListeners();
+        },
 
-    render: function () {
-      _log('views.MultiRecordSpeciesPage: render', log.DEBUG);
+        render: function () {
+            _log('views.MultiRecordSpeciesPage: render', log.DEBUG);
 
-      this.$el.html(this.template());
-      $('body').append($(this.el));
+            this.$el.html(this.template());
+            $('body').append($(this.el));
 
-      return this;
-    },
+            return this;
+        },
 
-    update: function (id) {
-      _log('views.MultiRecordSpeciesPage: updating', log.DEBUG);
-      this.existingRecord = app.models.multiRecord.isRecord(id); //state to see if the record already exists
-      this.model = this.existingRecord || app.models.multiRecord.setRecordSpeciesID(id);
-      this.updateInputs();
-    },
+        update: function (occurrenceID, speciesID) {
+            _log('views.MultiRecordSpeciesPage: updating', log.DEBUG);
 
-    updateInputs: function () {
-      var stages = this.model.get('stages');
-      var $inputs = $('input.stages');
-      $inputs.each(function () {
-        var name = $(this).attr('name');
-        $(this).val(stages[name] || 0);
-      });
-    },
+            //needs to go back the history - twice if coming from list
+            this.existingRecord = occurrenceID;
 
-    appendEventListeners: function () {
-      this.appendBackButtonListeners();
-    },
+            if (occurrenceID) {
+                this.model = app.models.sampleMulti.occurrences.get(occurrenceID); //state to see if the record already exists
+            } else {
+                var specie = app.collections.species.find({id: speciesID});
+                this.model = new morel.Occurrence({
+                    attributes: {
+                        'taxon': parseInt(specie.attributes.warehouse_id),
+                        'adult': 1
+                    }
+                });
 
-    save: function () {
-      _log('views.MultiRecordSpeciesPage: saving', log.DEBUG);
-      var stages = {};
+            }
+            this.updateInputs();
+        },
 
-      var $inputs = $('input.stages');
-      $inputs.each(function () {
-        var val = $(this).val();
-        var name = $(this).attr('name');
+        updateInputs: function () {
+            var that = this,
+                $inputs = $('input.stages');
+            $inputs.each(function () {
+                var name = $(this).attr('name');
+                $(this).val(that.model.get(name) || 0);
+            });
+        },
 
-        stages[name] = parseInt(val);
-      });
-      this.model.set('stages', stages);
+        appendEventListeners: function () {
+            this.appendBackButtonListeners();
+        },
 
-      //needs to go back the history - twice if comming from list
-      if (this.existingRecord) {
-        Backbone.history.history.go(-1);
-      } else {
-        Backbone.history.history.go(-2);
-      }
-    }
+        save: function () {
+            _log('views.MultiRecordSpeciesPage: saving', log.DEBUG);
 
-  });
+            var that = this,
+                $inputs = $('input.stages');
+            $inputs.each(function () {
+                var name = $(this).attr('name');
+                var val = parseInt($(this).val());
+                if (val || val === 0 && that.model.get(name) !== 0) {
+                    that.model.set(name, val);
+                }
+            });
 
-  return MultiRecordSpeciesPage;
+            if (!this.existingRecord) {
+                app.models.sampleMulti.occurrences.add(this.model);
+            }
+
+            Backbone.history.history.go(this.existingRecord ? -1 : -2);
+        }
+
+    });
+
+    return MultiRecordSpeciesPage;
 });
 

@@ -50,6 +50,7 @@ define([
                 app.models.user = new UserModel();
                 app.models.app = new AppModel();
                 app.models.sample = null; //to be set up on record opening
+                app.models.sampleMulti = null; //to be set up on multi-record page init
                 app.collections = {};
                 app.collections.species = new SpeciesCollection(app.data.species);
 

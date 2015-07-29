@@ -2,43 +2,52 @@
  * Multi Record Saved list.
  *****************************************************************************/
 define([
-  'backbone',
-  'templates'
+    'backbone',
+    'templates'
 ], function (Backbone) {
-  'use strict';
+    'use strict';
 
-  var View = Backbone.View.extend({
-    tagName: "li",
+    var View = Backbone.View.extend({
+        tagName: "li",
 
-    attributes: {
-      "data-corners": false,
-      "data-shadow": false,
-      "data-iconshadow": true,
-      "data-wrapperels": "div",
-      "data-icon": "arrow-r",
-      "data-iconpos": "right",
-      "data-theme": "c"
-    },
+        attributes: {
+            "data-corners": false,
+            "data-shadow": false,
+            "data-iconshadow": true,
+            "data-wrapperels": "div",
+            "data-icon": "arrow-r",
+            "data-iconpos": "right",
+            "data-theme": "c"
+        },
 
-    template: app.templates.multi_record_saved_list_item,
+        template: app.templates.multi_record_saved_list_item,
 
-    /**
-     * Renders the individual list item representing the species.
-     *
-     * @returns {SpeciesListItemView}
-     */
-    render: function () {
-      var warehouse_id = this.model.attributes[morel.record.inputs.KEYS.TAXON];
-      var specie = app.collections.species.find(function (model) {
-        return model.get('warehouse_id') === warehouse_id;
-      });
+        /**
+         * Renders the individual list item representing the species.
+         *
+         * @returns {SpeciesListItemView}
+         */
+        render: function () {
+            var warehouse_id = this.model.get('taxon');
+            var specie = app.collections.species.find(function (model) {
+                return model.get('warehouse_id') === warehouse_id;
+            });
 
-      var template_data = $.extend({}, specie.attributes); //clone the object
-      template_data.stages = this.model.get('stages');
-      this.$el.html(this.template(template_data));
-      return this;
-    }
-  });
+            var template_data = $.extend({}, specie.attributes); //clone the object
+            template_data.id = this.model.id;
+            var stages = {};
+            stages.Ad = this.model.get('adult');
+            stages.Co = this.model.get('copulating');
+            stages.Ov = this.model.get('ovipositing');
+            stages.La = this.model.get('larvae');
+            stages.Ex = this.model.get('exuviae');
+            stages.Em = this.model.get('emergent');
+            template_data.stages = stages;
 
-  return View;
+            this.$el.html(this.template(template_data));
+            return this;
+        }
+    });
+
+    return View;
 });

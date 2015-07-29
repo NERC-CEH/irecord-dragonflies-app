@@ -1,4 +1,4 @@
-<a href="#multi-record-species/<%- id %>" data-id="<%- id %>" class="multi-record-recorded-list-item">
+<a href="#multi-record/<%- id %>" data-id="<%- id %>" class="multi-record-recorded-list-item">
 
     <div class="camera-picker"></div>
     <!--img class="multi-record-recorded-species-img" src="images/unknown.png" /-->

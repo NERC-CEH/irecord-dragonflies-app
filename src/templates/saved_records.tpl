@@ -15,7 +15,11 @@
             data-wrapperels="div" data-icon="arrow-r" data-iconpos="right">
             <a href="#user" class="sync-button" data-id="<%- record.id %>">
                 <p><strong><%- record.date %></strong></p>
-                <p><%- record.common_name %></p>
+                <% if (record.multiRecord) { %>
+                    <p><i>Multi-Record:</i> <%- record.multiRecord %> species</p>
+                <% } else { %>
+                    <p><%- record.common_name %></p>
+                <% } %>
             </a>
             <a href="#user" class="delete-button" data-icon="delete" data-ajax="false"
                data-id="<%- record.id %>">Delete</a>

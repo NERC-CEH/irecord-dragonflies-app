@@ -122,10 +122,10 @@ define(['morel', 'helpers/log'], function () {
 
     $.extend(morel.Sample.KEYS, {
         LOCATION_ACCURACY: {
-            name: 'smpXXX:accurracy'
+            id: 'accurracy'
         },
         FULL_LIST: {
-            name: 'smpAttr:full_list',
+            id: 'full_list',
             values: {
                 TRUE: 'true',
                 FALSE: 'false'
@@ -133,21 +133,40 @@ define(['morel', 'helpers/log'], function () {
         }
     });
 
+    var numberRanges = {
+        '1': 665,
+        '2-5': 666,
+        '6-20': 667,
+        '21-100': 668,
+        '101-500': 669,
+        '500+': 670,
+        'Present': 671 //default
+    };
+
     $.extend(morel.Occurrence.KEYS, {
         NUMBER: {
-            name: 'occAttr:379',
-            values: {
-                '1': 665,
-                '2-5': 666,
-                '6-20': 667,
-                '21-100': 668,
-                '101-500': 669,
-                '500+': 670,
-                'Present': 671 //default
-            }
+            id: '379', values: numberRanges
+        },
+        ADULT: {
+            id: '7879997', values: numberRanges
+        },
+        COPULATING: {
+            id: '9998', values: numberRanges
+        },
+        OVIPOSITING: {
+            id: '78787879', values: numberRanges
+        },
+        LARVAE: {
+            id: '789787', values: numberRanges
+        },
+        EXUVIAE: {
+            id: '78798', values: numberRanges
+        },
+        EMERGENT: {
+            id: '8797987', values: numberRanges
         },
         STAGE: {
-            name: 'occAttr:378',
+            id: '378',
             values: {
                 Adult: 4756,
                 Copulating: 4757,
@@ -158,7 +177,7 @@ define(['morel', 'helpers/log'], function () {
             }
         },
         CERTAIN: {
-            name: 'occAttr:32',
+            id: '32',
             values: {
                 TRUE: 663,
                 FALSE: 664 //default

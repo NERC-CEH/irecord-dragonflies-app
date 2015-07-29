@@ -29,7 +29,7 @@
             <a href="#comment" id="comment-button" class="record-button"
                data-role="button"
                data-icon="arrow-r" data-iconpos="right">
-                <h3 class="heading">Comment</h3>
+                <h3 class="heading">Site Comment</h3>
                 <p class="descript"></p>
             </a>
         </li>

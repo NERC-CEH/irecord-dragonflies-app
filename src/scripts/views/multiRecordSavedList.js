@@ -21,7 +21,7 @@ define([
     initialize: function () {
       _log('views.MultiRecordSpeciesList: initialize', log.DEBUG);
 
-      this.listenTo(this.collection, 'change', this.update);
+      this.collection.on('change', this.update, this);
     },
 
     /**
@@ -34,8 +34,10 @@ define([
       var container = document.createDocumentFragment(); //optimising the performance
 
       if (this.collection.length) {
-        _.each(this.collection.models, function (specie) {
-          var item = new MultiRecordSavedListItemView({model: specie});
+        _.each(this.collection.occurrences, function (occurrence) {
+          var item = new MultiRecordSavedListItemView({
+              model: occurrence
+          });
           container.insertBefore(item.render().el, container.firstChild);
         });
 
@@ -47,9 +49,7 @@ define([
           _log('views.MultiRecordSpeciesList: removing saved species.', log.DEBUG);
 
           var id = $(this).data('id');
-          id = parseInt(id);
-
-          app.models.multiRecord.removeRecord(id);
+          app.models.sampleMulti.occurrences.remove(id);
         });
         $('#empty-list-message').hide();
       } else {

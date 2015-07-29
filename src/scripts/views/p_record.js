@@ -68,10 +68,10 @@ define([
         },
 
         appendSampleListeners: function () {
-            this.sample.on('change:comment', this.updateCommentButton, this);
-            this.sample.on('change:location_accuracy', this.updateGPSButton, this);
-            this.sample.on('change:location', this.updateGPSButton, this);
-            this.sample.on('change:date', this.updateDateButton, this);
+            this.model.on('change:comment', this.updateCommentButton, this);
+            this.model.on('change:location_accuracy', this.updateGPSButton, this);
+            this.model.on('change:location', this.updateGPSButton, this);
+            this.model.on('change:date', this.updateDateButton, this);
         },
 
         appendOccurrenceListeners: function () {
@@ -86,15 +86,15 @@ define([
             var specie = app.collections.species.find({id: speciesID});
             this.occurrence = new morel.Occurrence({
                 attributes: {
-                    'taxon': parseInt(specie.attributes.warehouse_id)
+                    'taxon': specie.attributes.warehouse_id
                 }
             });
 
-            this.sample = new morel.Sample({
+            this.model = new morel.Sample({
                 occurrences: [this.occurrence]
             });
 
-            app.models.sample = this.sample; //needs to be globally accessible
+            app.models.sample = this.model; //needs to be globally accessible
 
             this.appendSampleListeners();
             this.appendOccurrenceListeners();
@@ -138,7 +138,7 @@ define([
             }
 
             morel.geoloc.run(null, onGeolocSuccess, onError);
-            this.sample.set('location_accuracy', 0); //running
+            this.model.set('location_accuracy', 0); //running
         },
 
         /**
@@ -166,7 +166,7 @@ define([
                 }, 2000);
             }
 
-            app.recordManager.set(this.sample, callback);
+            app.recordManager.set(this.model, callback);
         },
 
         /**
@@ -247,11 +247,11 @@ define([
         _validate: function (attrs, options) {
             var invalids = [];
 
-            if (!this.sample.has('date')) {
+            if (!this.model.has('date')) {
                 invalids.push('Date');
             } else {
                 //check if valid date
-                var input = this.sample.get('date');
+                var input = this.model.get('date');
                 var inputDate = new Date(input);
                 var currentDate =  new Date();
                 if (inputDate > currentDate) {
@@ -259,7 +259,7 @@ define([
                 }
             }
 
-            if (!this.sample.has('location')) {
+            if (!this.model.has('location')) {
                 invalids.push('Location');
             }
             if (!this.occurrence.has('taxon')) {
@@ -274,7 +274,7 @@ define([
         updateGPSButton: function () {
             var text = '';
 
-            var accuracy = this.sample.get('location_accuracy');
+            var accuracy = this.model.get('location_accuracy');
             switch (true) {
                 case (accuracy == -1 || accuracy === 'undefined'):
                     //none
@@ -290,7 +290,7 @@ define([
                     this.$locationButton.removeClass('running');
                     this.$locationButton.removeClass('none');
 
-                    var value = this.sample.get('location');
+                    var value = this.model.get('location');
                     var location = {
                         latitude: value.split(',')[0],
                         longitude: value.split(',')[1]
@@ -315,7 +315,7 @@ define([
         },
 
         updateDateButton: function () {
-            var value = this.sample.get('date');
+            var value = this.model.get('date');
             var text = value || '';
             this.$dateButton.html(text);
         },
@@ -367,7 +367,7 @@ define([
          * Updates the button info text.
          */
         updateCommentButton: function () {
-            var value = this.sample.get('comment');
+            var value = this.model.get('comment');
             var ellipsis = value && value.length > 20 ? '...' : '';
             value = value ? value.substring(0, 20) + ellipsis : ''; //cut it down a bit
             this.$commentButton.html(value);

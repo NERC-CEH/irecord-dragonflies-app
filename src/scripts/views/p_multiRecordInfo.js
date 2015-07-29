@@ -20,7 +20,6 @@ define([
 
     initialize: function () {
       _log('views.MultiRecordSpeciesInfo: initialize', log.DEBUG);
-      this.model = app.models.multiRecord;
 
       this.render();
       this.appendEventListeners();
@@ -35,25 +34,22 @@ define([
       return this;
     },
 
-    update: function (prevPageId, speciesID) {
+    update: function (prevPageId) {
       _log('views.MultiRecordSpeciesInfo: update.', log.DEBUG);
       switch (prevPageId) {
         case 'list':
-        case 'species':
-          this.initRecording(speciesID);
+          this.initRecording();
           break;
         case '':
           _log('views.RecordPage: coming from unknown page.', log.WARNING);
-          this.initRecording(speciesID);
+          this.initRecording();
         default:
       }
     },
 
-    /**
-     * Initialises the recording form: sets empty image, clears geolocation etc.
-     */
     initRecording: function () {
-      this.model.initialize();
+      this.model = new morel.Sample();
+      app.models.sampleMulti = this.model;
     },
 
     appendEventListeners: function () {

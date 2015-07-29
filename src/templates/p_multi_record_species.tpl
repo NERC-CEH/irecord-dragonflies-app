@@ -10,28 +10,34 @@
 </div>
 <div data-role="content">
     <div class="number-spin">
-        <label for="AD">Adults</label>
-        <input type="text" class="stages" data-mini="true" data-role="spinbox" name="AD" data-options='{"type":"horizontal"}' step="1" value="1" max="800" />
+        <label for="adult">Adults</label>
+        <input type="text" class="stages" data-mini="true" data-role="spinbox"
+               name="adult" data-options='{"type":"horizontal"}' step="1" value="1" max="800" />
     </div>
     <div class="number-spin">
-        <label for="CO">Copulating pair</label>
-        <input type="text" class="stages" data-mini="true" data-role="spinbox" name="CO" data-options='{"type":"horizontal"}' step="1" value="0" max="800" />
+        <label for="copulating">Copulating pair</label>
+        <input type="text" class="stages" data-mini="true" data-role="spinbox"
+               name="copulating" data-options='{"type":"horizontal"}' step="1" value="0" max="800" />
     </div>
     <div class="number-spin">
-        <label for="OV">Ovipositing</label>
-        <input type="text" class="stages" data-mini="true" data-role="spinbox" name="OV" data-options='{"type":"horizontal"}' step="1" value="0" max="800" />
+        <label for="ovipositing">Ovipositing</label>
+        <input type="text" class="stages" data-mini="true" data-role="spinbox"
+               name="ovipositing" data-options='{"type":"horizontal"}' step="1" value="0" max="800" />
     </div>
     <div class="number-spin">
-        <label for="LV">Larvae</label>
-        <input type="text" class="stages" data-mini="true" data-role="spinbox" name="LV" data-options='{"type":"horizontal"}' step="1" value="0" max="800" />
+        <label for="larvae">Larvae</label>
+        <input type="text" class="stages" data-mini="true" data-role="spinbox"
+               name="larvae" data-options='{"type":"horizontal"}' step="1" value="0" max="800" />
     </div>
     <div class="number-spin">
-        <label for="EX">Exuviae</label>
-        <input type="text" class="stages" data-mini="true" data-role="spinbox" name="EX" data-options='{"type":"horizontal"}' step="1" value="0" max="800" />
+        <label for="exuviae">Exuviae</label>
+        <input type="text" class="stages" data-mini="true" data-role="spinbox"
+               name="exuviae" data-options='{"type":"horizontal"}' step="1" value="0" max="800" />
     </div>
     <div class="number-spin">
-        <label for="EM">Emergent</label>
-        <input type="text" class="stages" data-mini="true" data-role="spinbox" name="EM" data-options='{"type":"horizontal"}' step="1" value="0" max="800" />
+        <label for="emergent">Emergent</label>
+        <input type="text" class="stages" data-mini="true" data-role="spinbox"
+               name="emergent" data-options='{"type":"horizontal"}' step="1" value="0" max="800" />
     </div>
 
     <a href="#comment" id="species-comment-button" class="record-button"
