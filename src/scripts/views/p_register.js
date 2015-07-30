@@ -4,10 +4,10 @@
 define([
   'views/_page',
   'templates'
-], function (Page) {
+], function (DefaultPage) {
   'use strict';
 
-  var RegisterPage = Page.extend({
+  var Page = DefaultPage.extend({
     id: 'register',
 
     template: app.templates.p_register,
@@ -134,5 +134,5 @@ define([
 
   });
 
-  return RegisterPage;
+  return Page;
 });

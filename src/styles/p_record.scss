@@ -67,8 +67,7 @@ input.numberInput{
 .descript {
   font-size: .75em !important;
   font-weight: bold !important;
-  width: 50%;
-  padding-right: 40px;
+  width: 46%;
 }
 
 /* Record button */
@@ -134,14 +133,19 @@ textarea#record-comment {
   height:70vh !important;
 }
 
+#record-multi-location.none:after,
 #location-button.none:after {
   background-color: rgb(192, 68, 32);
 }
+
+#record-multi-location.running:after,
 #list-controls-button.running:after,
 #user-page-button.running:after,
 #location-button.running:after {
   background-color: rgb(205, 155, 0);
 }
+
+#record-multi-location.done:after,
 #location-button.done:after {
   background-color: rgb(46, 139, 87);
 }

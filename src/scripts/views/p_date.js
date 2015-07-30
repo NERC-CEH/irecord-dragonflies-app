@@ -6,10 +6,10 @@ define([
     'templates',
     'morel',
     'conf'
-], function (Page) {
+], function (DefaultPage) {
     'use strict';
 
-    var DatePage = Page.extend({
+    var Page = DefaultPage.extend({
         id: 'date',
 
         template: app.templates.p_date,
@@ -21,8 +21,6 @@ define([
         initialize: function () {
             _log('views.DatePage: initialize', log.DEBUG);
 
-            this.model = app.models.sample;
-
             this.render();
 
             this.$input = $('#record-date');
@@ -32,6 +30,10 @@ define([
 
         appendEventListeners: function () {
             this.appendBackButtonListeners();
+        },
+
+        update: function (model) {
+          this.model = model;
         },
 
         render: function () {
@@ -47,11 +49,11 @@ define([
         save: function () {
             var value = this.$input.val();
             if (value !== "") {
-                this.model.set(this.id, value);
+                this.model.set(this.id, morel.formatDate(value));
             }
             window.history.back();
         }
     });
 
-    return DatePage;
+    return Page;
 });

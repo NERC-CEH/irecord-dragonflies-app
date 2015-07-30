@@ -4,13 +4,13 @@
 define([
   'views/_page',
   'views/list',
-  'views/listControls',
+  'views/list_controls',
   'tripjs',
   'templates'
-], function (Page, ListView, ListControlsView) {
+], function (DefaultPage, ListView, ListControlsView) {
   'use strict';
 
-  var ListPage = Page.extend({
+  var Page = DefaultPage.extend({
     id: 'list',
 
     template: app.templates.p_list,
@@ -122,13 +122,13 @@ define([
           animation: 'fadeIn'
         },
         {
-          sel : $('a[href="#species/10"]'),
+          sel : $('a[href="#species/1"]'),
           position : "s",
           content : 'Species Account',
           animation: 'fadeIn'
         },
         {
-          sel : $('a[href="#record/88"]'),
+          sel : $('a[href="#record/2"]'),
           position : "w",
           content : 'Recording',
           animation: 'fadeIn'
@@ -137,5 +137,5 @@ define([
     }
   });
 
-  return ListPage;
+  return Page;
 });

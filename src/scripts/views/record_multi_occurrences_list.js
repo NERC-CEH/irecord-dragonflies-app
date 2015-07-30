@@ -3,9 +3,9 @@
  *****************************************************************************/
 define([
   'backbone',
-  'views/multiRecordSavedListItem',
+  'views/record_multi_occurrences_list_item',
   'templates'
-], function (Backbone, MultiRecordSavedListItemView) {
+], function (Backbone, RecordMultiOccurrencesListItemView) {
   'use strict';
 
   var View = Backbone.View.extend({
@@ -19,7 +19,7 @@ define([
      * Initializes the species list view.
      */
     initialize: function () {
-      _log('views.MultiRecordSpeciesList: initialize', log.DEBUG);
+      _log('views.RecordMultiOccurrencesList: initialize', log.DEBUG);
 
       this.collection.on('change', this.update, this);
     },
@@ -29,13 +29,13 @@ define([
      * @returns {SpeciesListView}
      */
     render: function () {
-      _log('views.MultiRecordSpeciesList: render ', log.DEBUG);
+      _log('views.RecordMultiOccurrencesList: render ', log.DEBUG);
 
       var container = document.createDocumentFragment(); //optimising the performance
 
       if (this.collection.length) {
         _.each(this.collection.occurrences, function (occurrence) {
-          var item = new MultiRecordSavedListItemView({
+          var item = new RecordMultiOccurrencesListItemView({
               model: occurrence
           });
           container.insertBefore(item.render().el, container.firstChild);
@@ -45,8 +45,8 @@ define([
         this.$el.listview().listview('refresh');
 
         //attach listeners
-        $('.multi-record-saved-species-remove').on('click', function () {
-          _log('views.MultiRecordSpeciesList: removing saved species.', log.DEBUG);
+        $('.record-multi-occurrences-remove').on('click', function () {
+          _log('views.RecordMultiOccurrencesList: removing saved occurrence.', log.DEBUG);
 
           var id = $(this).data('id');
           app.models.sampleMulti.occurrences.remove(id);
@@ -60,7 +60,7 @@ define([
     },
 
     update: function () {
-      _log('MultiRecordSpeciesList: updating', log.DEBUG);
+      _log('views.RecordMultiOccurrencesList: updating', log.DEBUG);
 
       this.render();
 

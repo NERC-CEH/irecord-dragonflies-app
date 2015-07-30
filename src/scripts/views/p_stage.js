@@ -6,10 +6,10 @@ define([
     'templates',
     'morel',
     'conf'
-], function (Page) {
+], function (DefaultPage) {
     'use strict';
 
-    var StagePage = Page.extend({
+    var Page = DefaultPage.extend({
         id: 'stage',
 
         template: app.templates.p_stage,
@@ -68,5 +68,5 @@ define([
         }
     });
 
-    return StagePage;
+    return Page;
 });

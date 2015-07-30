@@ -4,10 +4,10 @@
 define([
   'views/_page',
   'templates'
-], function (Page) {
+], function (DefaultPage) {
   'use strict';
 
-  var LoginPage = Page.extend({
+  var Page = DefaultPage.extend({
     id: 'login',
 
     template: app.templates.p_login,
@@ -188,5 +188,5 @@ define([
     }
   });
 
-  return LoginPage;
+  return Page;
 });

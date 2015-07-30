@@ -3,13 +3,13 @@
  *****************************************************************************/
 define([
   'backbone',
-  'models/speciesListSorts',
-  'models/speciesListFilters',
+  'models/species_list_sorts',
+  'models/species_list_filters',
   'templates'
 ], function (Backbone, sorts, filters) {
   'use strict';
 
-  var SpeciesListControlsView = Backbone.View.extend({
+  var View = Backbone.View.extend({
     tagName: 'div',
     id: 'list-controls-tabs',
 
@@ -125,5 +125,5 @@ define([
     }
   });
 
-  return SpeciesListControlsView;
+  return View;
 });

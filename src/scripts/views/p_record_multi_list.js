@@ -3,16 +3,16 @@
  *****************************************************************************/
 define([
   'views/_page',
-  'views/multiRecordList',
-  'views/listControls',
+  'views/record_multi_list',
+  'views/list_controls',
   'templates'
-], function (Page, ListView, ListControlsView) {
+], function (DefaultPage, ListView, ListControlsView) {
   'use strict';
 
-  var Page = Page.extend({
-    id: 'multi-record-list',
+  var Page = DefaultPage.extend({
+    id: 'record-multi-list',
 
-    template: app.templates.p_multi_record_list,
+    template: app.templates.p_record_multi_list,
 
     events: {
       'click #list-controls-save-button': 'toggleListControls',
@@ -21,7 +21,7 @@ define([
     },
 
     initialize: function () {
-      _log('views.MultiRecordListPage: initialize', log.DEBUG);
+      _log('views.RecordMultiListPage: initialize', log.DEBUG);
 
       this.$listControlsButton = this.$el.find('#list-controls-button');
 
@@ -41,7 +41,7 @@ define([
     },
 
     render: function () {
-      _log('views.MultiRecordListPage: render', log.DEBUG);
+      _log('views.RecordMultiListPage: render', log.DEBUG);
 
       this.$el.html(this.template());
       this.addList();
@@ -60,7 +60,7 @@ define([
         collection: app.collections.species,
         record: true
       });
-      this.$list = this.$el.find('#list-placeholder');
+      this.$list = this.$el.find('#record-multi-list-placeholder');
       this.$list.html(this.listView.render().el);
       return this.listView;
     },
@@ -72,7 +72,7 @@ define([
     appendEventListeners: function () {
       this.listenTo(app.models.user, 'change:filters', this.listControlsView.updateListControlsButton);
 
-      $('.multi-record-species-img').on('click', function () {
+      $('.record-multi-list-img').on('click', function (e) {
         //stop propagation of jqm link
         e.stopPropagation();
         e.preventDefault();

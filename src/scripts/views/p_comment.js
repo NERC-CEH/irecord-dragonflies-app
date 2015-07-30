@@ -2,69 +2,67 @@
  * Comment page view.
  *****************************************************************************/
 define([
-  'views/_page',
-  'templates',
-  'morel',
-  'conf'
-], function (Page) {
-  'use strict';
+    'views/_page',
+    'templates',
+    'morel',
+    'conf'
+], function (DefaultPage) {
+    'use strict';
 
-  var CommentPage = Page.extend({
-    id: 'comment',
+    var Page = DefaultPage.extend({
+        id: 'comment',
 
-    template: app.templates.p_comment,
+        template: app.templates.p_comment,
 
-    events: {
-      'click #comment-save': 'save'
-    },
+        events: {
+            'click #comment-save': 'save'
+        },
 
-    initialize: function () {
-      _log('views.CommentPage: initialize', log.DEBUG);
+        initialize: function () {
+            _log('views.CommentPage: initialize', log.DEBUG);
 
-      this.model = app.models.sample;
+            this.render();
 
-      this.render();
+            this.$input = $('#record-comment');
 
-      this.$input = $('#record-comment');
+            this.appendEventListeners();
+        },
 
-      this.appendEventListeners();
-    },
+        render: function () {
+            _log('views.CommentPage: render', log.DEBUG);
 
-    render: function () {
-      _log('views.CommentPage: render', log.DEBUG);
+            this.$el.html(this.template());
+            $('body').append($(this.el));
+            return this;
+        },
 
-      this.$el.html(this.template());
-      $('body').append($(this.el));
-      return this;
-    },
+        /**
+         * Reset the page.
+         */
+        update: function (model) {
+            this.model = model;
 
-    /**
-     * Reset the page.
-     */
-    update: function () {
-      var value = this.model.get(this.id);
-      if (!value) {
-        this.$input.val('');
-      }
-    },
+            var value = this.model.get(this.id);
+            if (!value) {
+                this.$input.val('');
+            }
+        },
 
-    appendEventListeners: function () {
-      this.listenTo(this.model, 'change:' + this.id, this.update);
+        appendEventListeners: function () {
+            this.appendBackButtonListeners();
+        },
 
-      this.appendBackButtonListeners();
-    },
+        /**
+         * Saves the comment to record.
+         */
+        save: function () {
+            var value = this.$input.val();
+            if (value !== "") {
+                this.model.set(this.id, value);
+            }
+            window.history.back();
+        }
+    });
 
-    /**
-     * Saves the comment to record.
-     */
-    save: function () {
-      var value = this.$input.val();
-      if (value !== "") {
-        this.model.set(this.id, value);
-      }
-      window.history.back();
-    }
-  });
-
-  return CommentPage;
+    return Page;
 });

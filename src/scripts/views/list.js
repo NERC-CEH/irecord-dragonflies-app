@@ -3,8 +3,8 @@
  *****************************************************************************/
 define([
   'backbone',
-  'models/speciesListSorts',
-  'models/speciesListFilters',
+  'models/species_list_sorts',
+  'models/species_list_filters',
   'views/listItem',
   'templates'
 ], function (Backbone, sorts, filters, SpeciesListItemView) {

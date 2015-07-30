@@ -13,7 +13,7 @@
     <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
         <button id="list-controls-button" class="header" data-icon="filter"
                 data-iconpos="notext">List Controls</button>
-        <a href="#multi-record-info" id="fav-button" data-role="button"
+        <a href="#record/multi" id="fav-button" data-role="button"
            data-icon="multi-record" data-iconpos="notext">Multi Recording</a>
     </div>
     <div id="list-controls-placeholder"></div>

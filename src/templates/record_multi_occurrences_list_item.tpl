@@ -1,4 +1,4 @@
-<a href="#multi-record/<%- id %>" data-id="<%- id %>" class="multi-record-recorded-list-item">
+<a href="#record/multi/occurrences/<%- id %>" data-id="<%- id %>" class="record-multi-occurrences-list-item">
 
     <div class="camera-picker"></div>
     <!--img class="multi-record-recorded-species-img" src="images/unknown.png" /-->
@@ -25,4 +25,4 @@
         </p>
     <% } %>
 </a>
-<a class="multi-record-saved-species-remove" data-id="<%- id %>" data-icon="minus">Remove</a>
+<a class="record-multi-occurrences-remove" data-id="<%- id %>" data-icon="minus">Remove</a>

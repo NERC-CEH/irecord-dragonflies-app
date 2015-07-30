@@ -3,9 +3,9 @@
  *****************************************************************************/
 define([
     'backbone',
-    'models/speciesListSorts',
-    'models/speciesListFilters',
-    'views/multiRecordListItem',
+    'models/species_list_sorts',
+    'models/species_list_filters',
+    'views/record_multi_list_item',
     'templates'
 ], function (Backbone, sorts, filters, SpeciesListItemRecordView) {
     'use strict';
@@ -48,7 +48,7 @@ define([
                 that.$el.html(container); //appends to DOM only once
 
                 //attach listeners
-                that.$el.find('.multi-record-species-img').on('click', function (e) {
+                that.$el.find('.record-multi-list-item-img').on('click', function (e) {
                     //stop propagation of jqm link
                     e.stopPropagation();
                     e.preventDefault();
@@ -56,7 +56,7 @@ define([
                     Backbone.history.navigate('species/' + $(this).data('id'), {trigger: true});
                 });
 
-                that.$el.find('.multi-record-list-item').on('click', function (e) {
+                that.$el.find('.record-multi-list-item').on('click', function (e) {
                     //stop propagation of jqm link
                     e.stopPropagation();
                     e.preventDefault();

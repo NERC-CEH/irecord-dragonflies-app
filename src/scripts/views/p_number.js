@@ -6,10 +6,10 @@ define([
     'templates',
     'morel',
     'conf'
-], function (Page) {
+], function (DefaultPage) {
     'use strict';
 
-    var NumberPage = Page.extend({
+    var Page = DefaultPage.extend({
         id: 'number',
 
         template: app.templates.p_number,
@@ -67,5 +67,5 @@ define([
         }
     });
 
-    return NumberPage;
+    return Page;
 });

@@ -3,13 +3,13 @@
  *****************************************************************************/
 define([
     'views/_page',
-    'views/contactDetailsDialog',
+    'views/contact_details_dialog',
     'templates',
     'latlon'
-], function (Page, contactDetailsDialog) {
+], function (DefaultPage, contactDetailsDialog) {
     'use strict';
 
-    var UserPage = Page.extend({
+    var Page = DefaultPage.extend({
         id: 'user',
 
         template: app.templates.p_user,
@@ -222,5 +222,5 @@ define([
         }
     });
 
-    return UserPage;
+    return Page;
 });

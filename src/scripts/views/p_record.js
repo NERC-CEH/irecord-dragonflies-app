@@ -4,13 +4,13 @@
 define([
     'views/_page',
     'morel',
-    'views/contactDetailsDialog',
+    'views/contact_details_dialog',
     'templates',
     'conf'
-], function (Page, morel, contactDetailsDialog) {
+], function (DefaultPage, morel, contactDetailsDialog) {
     'use strict';
 
-    var RecordPage = Page.extend({
+    var Page = DefaultPage.extend({
         id: 'record',
 
         template: app.templates.p_record,
@@ -160,6 +160,8 @@ define([
                     return;
                 }
 
+                morel.geoloc.clear();
+
                 app.message("<center><h2>Record saved.</h2></center>");
                 setTimeout(function () {
                     Backbone.history.navigate('list', {trigger: true});
@@ -251,8 +253,8 @@ define([
                 invalids.push('Date');
             } else {
                 //check if valid date
-                var input = this.model.get('date');
-                var inputDate = new Date(input);
+                var input = this.model.get('date').split('/');
+                var inputDate = new Date(parseInt(input[2]), parseInt(input[1]) - 1, parseInt(input[0]));
                 var currentDate =  new Date();
                 if (inputDate > currentDate) {
                     invalids.push('Non future Date');
@@ -421,6 +423,6 @@ define([
         }
     });
 
-    return RecordPage;
+    return Page;
 });
 
