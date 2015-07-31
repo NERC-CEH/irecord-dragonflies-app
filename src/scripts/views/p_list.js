@@ -122,13 +122,13 @@ define([
           animation: 'fadeIn'
         },
         {
-          sel : $('a[href="#species/1"]'),
+          sel : $('a[href="#species/11"]'),
           position : "s",
           content : 'Species Account',
           animation: 'fadeIn'
         },
         {
-          sel : $('a[href="#record/2"]'),
+          sel : $('a[href="#record/11"]'),
           position : "w",
           content : 'Recording',
           animation: 'fadeIn'

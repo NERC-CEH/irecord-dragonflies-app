@@ -30,26 +30,34 @@ define([
             _log('views.RecordMultiOccurrences: render', log.DEBUG);
 
             this.$el.html(this.template());
-            this.renderList();
-
             $('body').append($(this.el));
 
             return this;
         },
 
         update: function () {
+            //assign the model if new
+            if (!this.model) {
+                if (!app.models.sampleMulti) {
+                    app.models.sampleMulti = new morel.Sample();
+                }
+                this.model = app.models.sampleMulti;
+                this.renderList();
 
+            //if working on new sample then update the model
+            } else if (this.model.id !== app.models.sampleMulti.id) {
+                this.model = app.models.sampleMulti;
+                this.renderList();
+            }
         },
 
         appendEventListeners: function () {
-            app.models.sampleMulti.on('change', this.update, this);
-
             this.appendBackButtonListeners();
         },
 
         renderList: function () {
             this.listView = new RecordMultiOccurrencesListView({
-                collection: app.models.sampleMulti.occurrences
+                collection: this.model.occurrences
             });
             this.$list = this.$el.find('#record-multi-occurrences-list');
             this.$list.html(this.listView.render().el);
@@ -81,7 +89,7 @@ define([
                 }, 2000);
             }
 
-            app.recordManager.set(app.models.sampleMulti, callback);
+            app.recordManager.set(this.model, callback);
         },
 
         /**
@@ -121,7 +129,7 @@ define([
          */
         _validate: function () {
             var invalids = [],
-                model = app.models.sampleMulti;
+                model = this.model;
 
             if (!model.has('date')) {
                 invalids.push('Date');

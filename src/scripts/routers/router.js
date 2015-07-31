@@ -211,6 +211,7 @@ define([
                     app.views.recordMultiOccurrencesPage = new RecordMultiOccurrencesPage();
                 }
                 this.changePage(app.views.recordMultiOccurrencesPage);
+                app.views.recordMultiOccurrencesPage.update();
             },
 
             "record/:id": function (id) {
