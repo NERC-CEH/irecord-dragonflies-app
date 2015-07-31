@@ -2,17 +2,12 @@ CACHE MANIFEST
 #2
 
 CACHE:
-styles/images/ajax-loader.gif
-styles/app.css
+styles/main.min.css
 styles/icons.png
 styles/icons@2x.png
-styles/jquery.mobile-1.4.5.css
-styles/photoswipe.css
 styles/error.gif
 styles/loader.gif
 
-
-images/192.png
 images/Aeshna_affinis_f_3_Robert_Geerts___Creative_Commons_Attribution_Share_Alike_3_0_Unported_.jpg
 images/Aeshna_affinis_m_2_Fre_de_ric_Barszezak.jpg
 images/Aeshna_affinis_m_3_Tim_Caroen.jpg
@@ -48,16 +43,10 @@ images/Anax_parthenope_f_Damian_Pinguey.jpg
 images/Anax_parthenope_m_1_Jean_Franc_ois_Bousquet.jpg
 images/Anax_parthenope_m_1_Pablo_M_Darve.jpg
 images/Anax_parthenope_new_final_.svg
-images/app_logo.png
-images/AppIcon60x60.png
-images/AppIcon76x76.png
-images/AppIcon120x120.png
-images/AppIcon152x152.png
 images/Brachytron_pratense_f_1_David_Kitching.jpg
 images/Brachytron_pratense_m_3_David_Kitching.jpg
 images/Brachytron_pratense_m_Mark_Tyrrell.jpg
 images/Brachytron_pratense_new_final_.svg
-images/BRC_approved_logo.png
 images/Calopteryx_splendens_f_2___Alan_Davies.jpg
 images/Calopteryx_splendens_f_Neil_Malton.jpg
 images/Calopteryx_splendens_m_Dennis_Swaby.jpg
@@ -112,7 +101,6 @@ images/Erythromma_viridulum_f_Erland_Neilsen.jpg
 images/Erythromma_viridulum_f_Steve_Covey.jpg
 images/Erythromma_viridulum_m_Pam_Taylor.jpg
 images/Erythromma_viridulum_new_final_.svg
-images/favicon.ico
 images/Gomphus_vulgatissimus_f_1_David_Kitching.jpg
 images/Gomphus_vulgatissimus_m_1_David_Kitching.jpg
 images/Gomphus_vulgatissimus_m_1_Lisa_Ollson.jpg
@@ -152,7 +140,6 @@ images/Libellula_quadrimaculata_f_var_praenubila_Neil_Malton.jpg
 images/Libellula_quadrimaculata_m_1_David_Kitching.jpg
 images/Libellula_quadrimaculata_m_3_David_Kitching.jpg
 images/Libellula_quadrimaculata_new_final_.svg
-images/national_boundary.svg
 images/Orthetrum_cancellatum_f_2_David_Kitching.jpg
 images/Orthetrum_cancellatum_m_1_David_Kitching.jpg
 images/Orthetrum_cancellatum_new_final_.svg
@@ -168,7 +155,6 @@ images/Pyrrhosoma_nymphula_f_2_David_Kitching.jpg
 images/Pyrrhosoma_nymphula_f_melanotum_Stan_and_Dee_Maddams.jpg
 images/Pyrrhosoma_nymphula_m_David_Kitching.jpg
 images/Pyrrhosoma_nymphula_new_final_.svg
-images/unknown.png
 images/Somatochlora_arctica_f_3_Dave_Ashton.jpg
 images/Somatochlora_arctica_m_3_Ewoud_van_der_Ploeg.jpg
 images/Somatochlora_arctica_m___Pat_Batty.jpg
@@ -177,8 +163,6 @@ images/Somatochlora_metallica_f_2_Pierre_Papon.jpg
 images/Somatochlora_metallica_m_1___Pat_Batty.jpg
 images/Somatochlora_metallica_m_2_L._B._Tettenborn_Attribution_Share_Alike_3.0_Unported_license.jpg
 images/Somatochlora_metallica_new_final_.svg
-images/sponsor_logo.png
-images/startup.png
 images/Sympetrum_danae_f_1_David_Kitching.jpg
 images/Sympetrum_danae_m_1_David_Kitching.jpg
 images/Sympetrum_danae_m_3_David_Kitching.jpg
@@ -198,10 +182,30 @@ images/Sympetrum_striolatum_new_final_.svg
 images/anatomy.png
 images/anatomy2.png
 
+images/ajax-loader.gif
+images/app_logo.png
+images/BRC_approved_logo.png
+images/country_coastline.svg
+images/favicon.ico
+images/Icon@2x.png
+images/Icon-60@3x.png
+images/Icon-72.png
+images/Icon-72@2x.png
+images/Icon-76.png
+images/Icon-76@2x.png
+images/Icon-192.png
+images/sponsor_logo.png
+images/unknown.png
+
+scripts/libs/require.min.js
+scripts/data.js
+scripts/main-built.js
+
 scripts/libs/require.js
 scripts/data.js
 scripts/main-built.js
 
+manifest.json
 index.html
 .
 

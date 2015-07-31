@@ -24,8 +24,8 @@ define([
             _log('views.SpeciesList: initialize', log.DEBUG);
 
             this.listenTo(this.collection, 'change', this.update);
-            this.listenTo(app.models.user, 'change:filters',  this.update);
-            this.listenTo(app.models.user, 'change:sort',  this.update);
+            this.listenTo(app.models.user, 'change:filtersMulti',  this.update);
+            this.listenTo(app.models.user, 'change:sortMulti',  this.update);
         },
 
         /**

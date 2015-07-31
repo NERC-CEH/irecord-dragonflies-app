@@ -35,6 +35,9 @@
                 <li>
                     <p>Tom Humphrey (BSBI, app development support)</p>
                 </li>
+                <li>
+                    <p>Martin Harvey (iSpot, app development support)</p>
+                </li>
             </ul>
         </li>
         <li>
