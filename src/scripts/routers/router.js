@@ -70,17 +70,17 @@ define([
                         app.views.listPage.update();
                     }
                 },
-                after: function (record) {
+                after: function (multi) {
                     //leaving out safari home mode because it creates a nasty glitch on 8.3
                     if (!(browser.isIOS() && browser.isHomeMode())) {
-                        var scroll = !record ? app.views.listPage.scroll : app.views.recordMultiListPage.scroll;
+                        var scroll = !multi ? app.views.listPage.scroll : app.views.recordMultiListPage.scroll;
                         if (scroll) {
                             window.scrollTo(0, scroll);
                         }
                     }
                 },
-                leave: function (record) {
-                    if (record) {
+                leave: function (multi) {
+                    if (multi) {
                         app.views.recordMultiListPage.scroll = $(window).scrollTop();
                     } else {
                         app.views.listPage.scroll = $(window).scrollTop();

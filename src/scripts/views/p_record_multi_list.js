@@ -2,95 +2,138 @@
  * List page view.
  *****************************************************************************/
 define([
-  'views/_page',
-  'views/record_multi_list',
-  'views/list_controls',
-  'templates'
+    'views/_page',
+    'views/record_multi_list',
+    'views/list_controls',
+    'templates'
 ], function (DefaultPage, ListView, ListControlsView) {
-  'use strict';
+    'use strict';
 
-  var Page = DefaultPage.extend({
-    id: 'record-multi-list',
+    var Page = DefaultPage.extend({
+        id: 'record-multi-list',
 
-    template: app.templates.p_record_multi_list,
+        template: app.templates.p_record_multi_list,
 
-    events: {
-      'click #list-controls-save-button': 'toggleListControls',
-      'click #list-controls-button': 'toggleListControls',
-      'change input[type=radio]': 'toggleListControls'
-    },
-
-    initialize: function () {
-      _log('views.RecordMultiListPage: initialize', log.DEBUG);
-
-      this.$listControlsButton = this.$el.find('#list-controls-button');
-
-      //todo: enable list controls
-      //this.listControlsView = new ListControlsView(this.$listControlsButton);
-      this.listControlsView = new (Backbone.View.extend({
-        toggleListControls: function () {
-          app.message('<center><b>Disabled</b></center>', 500);
+        events: {
+            'click #list-controls-save-button': 'toggleListControls',
+            'click #list-controls-button': 'toggleListControls',
+            'change input[type=radio]': 'toggleListControls'
         },
-        updateListControlsButton: function (){}
-      }))();
 
-      this.render();
-      this.appendEventListeners();
+        initialize: function () {
+            _log('views.RecordMultiListPage: initialize', log.DEBUG);
 
-      this.$userPageButton = $('#user-page-button');
-    },
+            this.$listControlsButton = this.$el.find('#list-controls-button');
 
-    render: function () {
-      _log('views.RecordMultiListPage: render', log.DEBUG);
+            //todo: enable list controls
+            //this.listControlsView = new ListControlsView(this.$listControlsButton);
+            this.listControlsView = new (Backbone.View.extend({
+                toggleListControls: function () {
+                    app.message('<center><b>Disabled</b></center>', 500);
+                },
+                updateListControlsButton: function (){}
+            }))();
 
-      this.$el.html(this.template());
-      this.addList();
+            this.render();
+            this.appendEventListeners();
 
-      $('body').append($(this.el));
+            this.$userPageButton = $('#user-page-button');
+        },
 
-      //add list controls
-      var $listControls = this.$el.find('#list-controls-placeholder');
-      $listControls.html(this.listControlsView.el);
+        render: function () {
+            _log('views.RecordMultiListPage: render', log.DEBUG);
 
-      return this;
-    },
+            this.$el.html(this.template());
 
-    addList: function () {
-      this.listView = new ListView({
-        collection: app.collections.species,
-        record: true
-      });
-      this.$list = this.$el.find('#record-multi-list-placeholder');
-      this.$list.html(this.listView.render().el);
-      return this.listView;
-    },
+            $('body').append($(this.el));
 
-    update: function () {
-      this.listControlsView.updateListControlsButton();
-    },
+            //add list controls
+            this.$listControls = this.$el.find('#list-controls-placeholder');
+            this.$listControls.html(this.listControlsView.el);
+            this.$list = this.$el.find('#record-multi-list-placeholder');
 
-    appendEventListeners: function () {
-      this.listenTo(app.models.user, 'change:filters', this.listControlsView.updateListControlsButton);
+            return this;
+        },
 
-      $('.record-multi-list-img').on('click', function (e) {
-        //stop propagation of jqm link
-        e.stopPropagation();
-        e.preventDefault();
+        renderList: function () {
+            var speciesCollection = this.getPreparedSpeciesList();
 
-        var id = $(this).data('id');
-        Backbone.history.navigate('species/' + id, {trigger: true});
-      });
+            this.listView = new ListView({
+                collection: speciesCollection
+            });
+            this.$list.html(this.listView.render().el);
+            this.$list.trigger('create');
+            return this.listView;
+        },
 
-      this.appendBackButtonListeners();
-    },
+        update: function () {
+            //assign the model if new
+            if (!this.model) {
+                if (!app.models.sampleMulti) {
+                    app.models.sampleMulti = new morel.Sample();
+                }
+                this.model = app.models.sampleMulti;
+                this.collection = this.model.occurrences;
 
-    /**
-     * Shows/hides the list controls.
-     */
-    toggleListControls: function () {
-      this.listControlsView.toggleListControls();
-    }
-  });
+                this.collection.on('update', this.renderList, this);
+                this.renderList();
 
-  return Page;
+            //if working on new sample then update the model
+            } else if (this.model.id !== app.models.sampleMulti.id) {
+                this.model = app.models.sampleMulti;
+                this.collection = this.model.occurrences;
+
+                this.collection.on('update', this.renderList, this);
+                this.renderList();
+            }
+        },
+
+        getPreparedSpeciesList: function () {
+            var species = new Backbone.Collection(),
+                specie = null,
+                occurrence = null;
+
+            //view is unhappy if collection is just copied
+            app.collections.species.each(function (model) {
+                species.add(model);
+            });
+
+            //remove saved ones
+            for (var i = 0; i < this.collection.length; i++) {
+                occurrence = this.collection.occurrences[i];
+                specie = species.find(function(model) {
+                    return model.get('warehouse_id') === occurrence.get('taxon');
+                });
+                if (specie) {
+                    species.remove(specie);
+                }
+            }
+
+            return species;
+        },
+
+        appendEventListeners: function () {
+            this.listenTo(app.models.user, 'change:filters', this.listControlsView.updateListControlsButton);
+
+            $('.record-multi-list-img').on('click', function (e) {
+                //stop propagation of jqm link
+                e.stopPropagation();
+                e.preventDefault();
+
+                var id = $(this).data('id');
+                Backbone.history.navigate('species/' + id, {trigger: true});
+            });
+
+            this.appendBackButtonListeners();
+        },
+
+        /**
+         * Shows/hides the list controls.
+         */
+        toggleListControls: function () {
+            this.listControlsView.toggleListControls();
+        }
+    });
+
+    return Page;
 });

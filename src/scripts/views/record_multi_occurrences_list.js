@@ -22,6 +22,7 @@ define([
       _log('views.RecordMultiOccurrencesList: initialize', log.DEBUG);
 
       this.collection.on('change', this.update, this);
+      this.collection.on('update', this.update, this);
     },
 
     /**

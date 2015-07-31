@@ -7,7 +7,7 @@ define([
     'models/species_list_filters',
     'views/record_multi_list_item',
     'templates'
-], function (Backbone, sorts, filters, SpeciesListItemRecordView) {
+], function (Backbone, sorts, filters, RecordMultiListItemView) {
     'use strict';
 
     var View = Backbone.View.extend({
@@ -40,7 +40,7 @@ define([
                 var container = document.createDocumentFragment(); //optimising the performance
 
                 _.each(list, function (specie) {
-                    var listSpeciesView = new SpeciesListItemRecordView({model: specie});
+                    var listSpeciesView = new RecordMultiListItemView({model: specie});
 
                     container.appendChild(listSpeciesView.render().el);
                 });
