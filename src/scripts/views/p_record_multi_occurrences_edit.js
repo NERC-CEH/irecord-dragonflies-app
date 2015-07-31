@@ -50,19 +50,39 @@ define([
             //needs to go back the history - twice if coming from list
             this.existingRecord = occurrenceID;
 
-            if (occurrenceID) {
-                this.model = app.models.sampleMulti.occurrences.get(occurrenceID); //state to see if the record already exists
+            //first time
+            if (!this.model){
+                if (occurrenceID) {
+                    this.model = app.models.sampleMulti.occurrences.get(occurrenceID); //state to see if the record already exists
+                } else {
+                    var specie = app.collections.species.find({id: speciesID});
+                    this.model = new morel.Occurrence({
+                        attributes: {
+                            'taxon': parseInt(specie.attributes.warehouse_id),
+                            'adult': 1
+                        }
+                    });
+                }
+                this.renderInputs();
+                this.updateInputs();
+            //update if different occurrence or species
             } else {
-                var specie = app.collections.species.find({id: speciesID});
-                this.model = new morel.Occurrence({
-                    attributes: {
-                        'taxon': parseInt(specie.attributes.warehouse_id),
-                        'adult': 1
-                    }
-                });
+                if (occurrenceID && this.model.id !== occurrenceID) {
+                    this.model = app.models.sampleMulti.occurrences.get(occurrenceID);
+                    this.renderInputs();
+                    this.updateInputs();
+                } else if (speciesID) {
+                    var specie = app.collections.species.find({id: speciesID});
+                    this.model = new morel.Occurrence({
+                        attributes: {
+                            'taxon': parseInt(specie.attributes.warehouse_id),
+                            'adult': 1
+                        }
+                    });
+                    this.renderInputs();
+                    this.updateInputs();
+                }
             }
-            this.renderInputs();
-            this.updateInputs();
         },
 
         updateInputs: function () {
@@ -102,7 +122,22 @@ define([
         template: app.templates.record_multi_occurrences_edit_inputs,
         render: function () {
             this.$el.html(this.template(this.model));
+
+            this.$commentButton = this.$el.find('#species-comment-button .descript');
+            this.model.on('change:comment', this.updateCommentButton, this);
+
+            this.updateCommentButton();
             return this;
+        },
+
+        /**
+         * Updates the button info text.
+         */
+        updateCommentButton: function () {
+            var value = this.model.get('comment');
+            var ellipsis = value && value.length > 20 ? '...' : '';
+            value = value ? value.substring(0, 20) + ellipsis : ''; //cut it down a bit
+            this.$commentButton.html(value);
         }
     });
 

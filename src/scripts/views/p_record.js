@@ -408,15 +408,9 @@ define([
                     animation: 'fadeIn'
                 },
                 {
-                    sel: $('#entry-form-send'),
-                    position: "n",
-                    content: 'Send a record',
-                    animation: 'fadeIn'
-                },
-                {
                     sel: $('#entry-form-save'),
                     position: "n",
-                    content: 'Or save it',
+                    content: 'Save it',
                     animation: 'fadeIn'
                 }
             ], options);
