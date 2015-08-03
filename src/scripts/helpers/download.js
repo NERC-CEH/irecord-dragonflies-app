@@ -55,13 +55,13 @@ define(['jquery'], function ($) {
                         });
                         $('#' + finishedBtnCloseId).on('click', function () {
                             $.mobile.loading('hide');
-                            callback();
+                            callback && callback();
                         });
                     }
 
                     function onError(error) {
                         _log(error, log.ERROR);
-                        callback();
+                        callback && callback();
                     }
 
                     startManifestDownload('appcache', onSuccess, onError);
@@ -76,10 +76,10 @@ define(['jquery'], function ($) {
                 app.models.user.save('downloadedApp', false);
                 app.models.user.save('dontAskDownloadApp', dontAsk);
 
-                callback();
+                callback && callback();
             });
         } else {
-            callback();
+            callback && callback();
         }
     };
 
