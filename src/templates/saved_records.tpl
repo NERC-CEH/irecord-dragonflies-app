@@ -13,7 +13,9 @@
         <% _.each (records, function (record) { %>
         <li data-corners="false" data-shadow="false" data-iconshadow="true"
             data-wrapperels="div" data-icon="arrow-r" data-iconpos="right">
-            <a href="#user" class="sync-button" data-id="<%- record.id %>">
+            <a href="#user" class="sync-button saved-list-item" data-id="<%- record.id %>">
+                <div class="camera-picker"></div>
+
                 <p><strong><%- record.date %></strong></p>
                 <% if (record.multiRecord) { %>
                     <p><i>Multi-Record:</i> <%- record.multiRecord %> species</p>
@@ -21,7 +23,7 @@
                     <p><%- record.common_name %></p>
                 <% } %>
             </a>
-            <a href="#user" class="delete-button" data-icon="delete" data-ajax="false"
+            <a href="#user" class="delete-button" data-icon="minus" data-ajax="false"
                data-id="<%- record.id %>">Delete</a>
         </li>
         <% }); %>
