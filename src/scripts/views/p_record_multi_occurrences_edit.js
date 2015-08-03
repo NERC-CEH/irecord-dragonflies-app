@@ -44,44 +44,18 @@ define([
             this.$inputsPlaceholder.trigger('create');
         },
 
-        update: function (occurrenceID, speciesID) {
+        update: function (occurrenceID) {
             _log('views.RecordMultiOccurrencesEditPage: updating', log.DEBUG);
 
             //needs to go back the history - twice if coming from list
             this.existingRecord = occurrenceID;
 
-            //first time
-            if (!this.model){
-                if (occurrenceID) {
-                    this.model = app.models.sampleMulti.occurrences.get(occurrenceID); //state to see if the record already exists
-                } else {
-                    var specie = app.collections.species.find({id: speciesID});
-                    this.model = new morel.Occurrence({
-                        attributes: {
-                            'taxon': parseInt(specie.attributes.warehouse_id),
-                            'adult': 1
-                        }
-                    });
-                }
+            //first time or update if different occurrence or species
+            if (!this.model || (occurrenceID && this.model.id !== occurrenceID)){
+                this.model = app.models.sampleMulti.occurrences.get(occurrenceID);
+
                 this.renderInputs();
                 this.updateInputs();
-            //update if different occurrence or species
-            } else {
-                if (occurrenceID && this.model.id !== occurrenceID) {
-                    this.model = app.models.sampleMulti.occurrences.get(occurrenceID);
-                    this.renderInputs();
-                    this.updateInputs();
-                } else if (speciesID) {
-                    var specie = app.collections.species.find({id: speciesID});
-                    this.model = new morel.Occurrence({
-                        attributes: {
-                            'taxon': parseInt(specie.attributes.warehouse_id),
-                            'adult': 1
-                        }
-                    });
-                    this.renderInputs();
-                    this.updateInputs();
-                }
             }
         },
 
@@ -118,16 +92,50 @@ define([
         }
     });
 
+    /**
+     * Input buttons
+     */
     var InputsView = Backbone.View.extend({
         template: app.templates.record_multi_occurrences_edit_inputs,
         render: function () {
             this.$el.html(this.template(this.model));
 
             this.$commentButton = this.$el.find('#species-comment-button .descript');
+            this.$numberButtons = this.$el.find('.number-button');
+
+            this.model.on('change:adult', this.updateNumberButtons, this);
+            this.model.on('change:copulating', this.updateNumberButtons, this);
+            this.model.on('change:ovipositing', this.updateNumberButtons, this);
+            this.model.on('change:larvae', this.updateNumberButtons, this);
+            this.model.on('change:exuviae', this.updateNumberButtons, this);
+            this.model.on('change:emergent', this.updateNumberButtons, this);
             this.model.on('change:comment', this.updateCommentButton, this);
 
+            this.updateNumberButtons();
             this.updateCommentButton();
             return this;
+        },
+
+        /**
+         * Updates the descriptions on the number buttons.
+         */
+        updateNumberButtons: function () {
+            var that = this;
+            this.$numberButtons.each(function(){
+                var stage = $(this).data('stage'),
+                    value = that.model.get(stage),
+                    ranges = function (val) {
+                        var range = '';
+                        for (range in morel.Occurrence.KEYS.NUMBER.values) {
+                            if (morel.Occurrence.KEYS.NUMBER.values[range] === val) {
+                                return range;
+                            }
+                        }
+                        return '';
+                    };
+
+                $(this).find('.descript').html(ranges(value));
+            });
         },
 
         /**

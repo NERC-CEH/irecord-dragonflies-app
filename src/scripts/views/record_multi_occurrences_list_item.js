@@ -35,14 +35,26 @@ define([
 
             var template_data = $.extend({}, specie.attributes); //clone the object
             template_data.id = this.model.id;
-            var stages = {};
-            stages.Ad = this.model.get('adult');
-            stages.Co = this.model.get('copulating');
-            stages.Ov = this.model.get('ovipositing');
-            stages.La = this.model.get('larvae');
-            stages.Ex = this.model.get('exuviae');
-            stages.Em = this.model.get('emergent');
+            var stages = {},
+                ranges = function (val) {
+                    var range = '';
+                    for (range in morel.Occurrence.KEYS.NUMBER.values) {
+                        if (morel.Occurrence.KEYS.NUMBER.values[range] === val) {
+                            return range;
+                        }
+                    }
+                };
+            stages.Ad = ranges(this.model.get('adult'));
+            stages.Co = ranges(this.model.get('copulating'));
+            stages.Ov = ranges(this.model.get('ovipositing'));
+            stages.La = ranges(this.model.get('larvae'));
+            stages.Ex = ranges(this.model.get('exuviae'));
+            stages.Em = ranges(this.model.get('emergent'));
             template_data.stages = stages;
+
+            var comment = this.model.get('comment');
+            var ellipsis = comment && comment.length > 20 ? '...' : '';
+            template_data.comment = comment ? comment.substring(0, 20) + ellipsis : ''; //cut it down a bit
 
             this.$el.html(this.template(template_data));
             return this;

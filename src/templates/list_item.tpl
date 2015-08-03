@@ -8,5 +8,4 @@
       <p class="species-list-secondary-name"><i><%- taxon %></i></p>
     <% } %>
 </a>
-<a href="#record/<%- id %>" class="ios-enhanced"
-   data-icon="plus">Record</a>
+<a href="#record/<%- id %>" data-icon="plus">Record</a>

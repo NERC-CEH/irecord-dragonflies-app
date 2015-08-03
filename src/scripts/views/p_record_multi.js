@@ -14,10 +14,6 @@ define([
 
         template: app.templates.p_record_multi,
 
-        events: {
-
-        },
-
         initialize: function () {
             _log('views.RecordMultiPage: initialize', log.DEBUG);
 

@@ -1,36 +1,54 @@
-<div class="number-spin">
-    <label for="adult">Adults</label>
-    <input type="text" class="stages" data-mini="true" data-role="spinbox"
-           name="adult" data-options='{"type":"horizontal"}' step="1" value="1" max="800" />
-</div>
-<div class="number-spin">
-    <label for="copulating">Copulating pair</label>
-    <input type="text" class="stages" data-mini="true" data-role="spinbox"
-           name="copulating" data-options='{"type":"horizontal"}' step="1" value="0" max="800" />
-</div>
-<div class="number-spin">
-    <label for="ovipositing">Ovipositing</label>
-    <input type="text" class="stages" data-mini="true" data-role="spinbox"
-           name="ovipositing" data-options='{"type":"horizontal"}' step="1" value="0" max="800" />
-</div>
-<div class="number-spin">
-    <label for="larvae">Larvae</label>
-    <input type="text" class="stages" data-mini="true" data-role="spinbox"
-           name="larvae" data-options='{"type":"horizontal"}' step="1" value="0" max="800" />
-</div>
-<div class="number-spin">
-    <label for="exuviae">Exuviae</label>
-    <input type="text" class="stages" data-mini="true" data-role="spinbox"
-           name="exuviae" data-options='{"type":"horizontal"}' step="1" value="0" max="800" />
-</div>
-<div class="number-spin">
-    <label for="emergent">Emergent</label>
-    <input type="text" class="stages" data-mini="true" data-role="spinbox"
-           name="emergent" data-options='{"type":"horizontal"}' step="1" value="0" max="800" />
-</div>
+<ul data-role="listview" data-inset="true">
+    <li>
+        <a href="#number/multi/adult/<%- obj.id %>" data-stage="adult" class="number-button"
+           data-role="button" data-icon="arrow-r" data-iconpos="right">
+            <h3 class="heading">Adults</h3>
+            <p class="descript"></p>
+        </a>
+    </li>
+    <li>
+        <a href="#number/multi/copulating/<%- obj.id %>" data-stage="copulating" class="number-button"
+           data-role="button" data-icon="arrow-r" data-iconpos="right">
+            <h3 class="heading">Copulating pair</h3>
+            <p class="descript"></p>
+        </a>
+    </li>
+    <li>
+        <a href="#number/multi/ovipositing/<%- obj.id %>" data-stage="ovipositing" class="number-button"
+           data-role="button" data-icon="arrow-r" data-iconpos="right">
+            <h3 class="heading">Ovipositing</h3>
+            <p class="descript"></p>
+        </a>
+    </li>
+    <li>
+        <a href="#number/multi/larvae/<%- obj.id %>" data-stage="larvae" class="number-button"
+           data-role="button" data-icon="arrow-r" data-iconpos="right">
+            <h3 class="heading">Larvae</h3>
+            <p class="descript"></p>
+        </a>
+    </li>
+    <li>
+        <a href="#number/multi/exuviae/<%- obj.id %>" data-stage="exuviae" class="number-button"
+           data-role="button" data-icon="arrow-r" data-iconpos="right">
+            <h3 class="heading">Exuviae</h3>
+            <p class="descript"></p>
+        </a>
+    </li>
+    <li>
+        <a href="#number/multi/emergent/<%- obj.id %>" data-stage="emergent" class="number-button"
+           data-role="button" data-icon="arrow-r" data-iconpos="right">
+            <h3 class="heading">Emergent</h3>
+            <p class="descript"></p>
+        </a>
+    </li>
+</ul>
 
-<a href="#comment/multi/<%- obj.id %>" id="species-comment-button" class="record-button"
-   data-role="button" data-icon="comment" data-iconpos="right">
-    <h3 class="heading">Comment</h3>
-    <p class="descript"></p>
-</a>
+<ul data-role="listview" data-inset="true">
+    <li>
+        <a href="#comment/multi/<%- obj.id %>" id="species-comment-button"
+           data-role="button" data-icon="comment" data-iconpos="right">
+            <h3 class="heading">Comment</h3>
+            <p class="descript"></p>
+        </a>
+    </li>
+</ul>

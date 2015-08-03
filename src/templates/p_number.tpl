@@ -1,7 +1,7 @@
 <div data-role="header" data-position="fixed" data-tap-toggle="false">
     <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
-        <a href='#' data-rel="back" data-role="button"
-           data-icon="delete">Cancel</a>
+        <a href='#' data-rel="back" data-role="button" data-iconpos="notext"
+           data-icon="arrow-l">Back</a>
     </div>
     <h1>Number</h1>
 </div>
@@ -9,6 +9,8 @@
     <div class="info-message">
         <p>How many individuals of this type?</p>
     </div>
+    <button id="clear-number-button" data-icon="delete" data-iconpos="right">Clear</button>
+
     <fieldset data-role="controlgroup" data-iconpos="right">
         <input type="radio" name="number" id="radio-choice-1" value="1">
         <label for="radio-choice-1">1</label>

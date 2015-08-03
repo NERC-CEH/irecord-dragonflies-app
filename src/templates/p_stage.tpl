@@ -1,7 +1,7 @@
 <div data-role="header" data-position="fixed" data-tap-toggle="false">
     <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
-        <a href='#' data-rel="back" data-role="button"
-           data-icon="delete">Cancel</a>
+        <a href='#' data-rel="back" data-role="button" data-iconpos="notext"
+           data-icon="arrow-l">Back</a>
     </div>
     <h1>Stage</h1>
 </div>

@@ -132,11 +132,15 @@ define([
                 app.views.locationPage.update(multi ? app.models.sampleMulti : app.models.sample);
             },
 
-            "number": function () {
+            "number(/:multi/:stage/:id)": function (multi, stage, id) {
+                var model = multi ?
+                    app.models.sampleMulti.occurrences.get(id) :
+                    app.models.sample.occurrences.getFirst();
                 if (!app.views.numberPage) {
-                    app.views.numberPage = new NumberPage({model: app.models.record});
+                    app.views.numberPage = new NumberPage();
                 }
                 this.changePage(app.views.numberPage);
+                app.views.numberPage.update(model, stage);
             },
 
             "stage": function () {
@@ -187,31 +191,21 @@ define([
                 app.views.recordMultiPage.update(prevPageID);
             },
 
-            "record/multi/occurrences/:id(/:speciesID)": function (id, speciesID) {
-                //existing occurrence
-                if (!speciesID) {
+            "record/multi/occurrences(/:id)": function (id) {
+                if (id) {
                     if (!app.views.recordMultiOccurrencesEditPage) {
                         app.views.recordMultiOccurrencesEditPage = new RecordMultiOccurrencesEditPage();
                     }
                     this.changePage(app.views.recordMultiOccurrencesEditPage);
                     app.views.recordMultiOccurrencesEditPage.update(id);
 
-                //make new occurrence
                 } else {
-                    if (!app.views.recordMultiOccurrencesEditPage) {
-                        app.views.recordMultiOccurrencesEditPage = new RecordMultiOccurrencesEditPage();
+                    if (!app.views.recordMultiOccurrencesPage) {
+                        app.views.recordMultiOccurrencesPage = new RecordMultiOccurrencesPage();
                     }
-                    this.changePage(app.views.recordMultiOccurrencesEditPage);
-                    app.views.recordMultiOccurrencesEditPage.update(null, parseInt(speciesID));
+                    this.changePage(app.views.recordMultiOccurrencesPage);
+                    app.views.recordMultiOccurrencesPage.update();
                 }
-            },
-
-            "record/multi/occurrences": function () {
-                if (!app.views.recordMultiOccurrencesPage) {
-                    app.views.recordMultiOccurrencesPage = new RecordMultiOccurrencesPage();
-                }
-                this.changePage(app.views.recordMultiOccurrencesPage);
-                app.views.recordMultiOccurrencesPage.update();
             },
 
             "record/:id": function (id) {

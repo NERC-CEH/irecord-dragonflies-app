@@ -15,13 +15,13 @@ define([
         template: app.templates.p_number,
 
         events: {
-            'change input[type=radio]': 'save'
+            'change input[type=radio]': 'save',
+            'click #clear-number-button': 'clear'
         },
 
         initialize: function () {
             _log('views.NumberPage: initialize', log.DEBUG);
-
-            this.model = app.models.sample.occurrences.getFirst();
+            this.name = this.id;
 
             this.render();
             this.appendEventListeners();
@@ -33,21 +33,55 @@ define([
             this.$el.html(this.template());
             $('body').append($(this.el));
 
+            this.$clearButton = this.$el.find('#clear-number-button');
             return this;
         },
 
-        update: function () {
-            var value = this.model.get(this.id);
-            if (!value) {
-                //unset all radio buttons
-                this.$el.find("input:radio").attr("checked", false).checkboxradio("refresh");
+        update: function (model, stage) {
+            this.model = model;
+
+            if (stage) {
+                this.name = stage;
+                this.$clearButton.show();
+            } else {
+                this.$clearButton.hide();
+            }
+
+            var value = this.model.get(this.name);
+            //unset all radio buttons
+            this.$el.find("input:radio").attr("checked", false).checkboxradio("refresh");
+            if (value) {
+                var ranges = function (val) {
+                    var range = '';
+                    for (range in morel.Occurrence.KEYS.NUMBER.values) {
+                        if (morel.Occurrence.KEYS.NUMBER.values[range] === val) {
+                            return range;
+                        }
+                    }
+                    return '';
+                };
+
+                var range = ranges(value),
+                    $input = this.$el.find('input:radio[value="' + range + '"]');
+                $input.prop('checked', true).checkboxradio('refresh');
             }
         },
 
         appendEventListeners: function () {
-            this.listenTo(this.model, 'change:' + this.id, this.update);
-
             this.appendBackButtonListeners();
+        },
+
+        /**
+         * Clears the number attribute.
+         *
+         * @param e
+         * @returns {boolean}
+         */
+
+        clear: function (e) {
+            this.model.remove(this.name);
+            window.history.back();
+            return false;
         },
 
         /**
@@ -60,7 +94,7 @@ define([
             var value = e.currentTarget.value;
             value = morel.Occurrence.KEYS.NUMBER.values[value];
             if (value !== "") {
-                this.model.set(this.id, value);
+                this.model.set(this.name, value);
             }
             window.history.back();
             return false;
