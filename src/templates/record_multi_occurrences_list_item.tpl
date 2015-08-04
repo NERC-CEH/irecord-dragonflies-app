@@ -19,5 +19,5 @@
         <% } %>
     </p>
 </a>
-<a class="record-multi-occurrences-remove" data-id="<%- id %>"
-   data-icon="minus">Remove</a>
+<a class="record-multi-occurrences-remove ui-icon-delete ui-nodisc-icon ui-alt-icon"
+   data-id="<%- id %>">Remove</a>

@@ -1,6 +1,7 @@
 <div data-role="header" data-position="fixed" data-tap-toggle="false">
     <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
-        <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+        <a href='#' data-rel='back' class="ui-btn ui-icon-carat-l ui-nodisc-icon
+        ui-alt-icon ui-btn-icon-notext">Back</a>
     </div>
     <h1 id='info_heading'>App Info</h1>
 </div>
@@ -9,21 +10,30 @@
     <div class="app-logo"></div>
     <ul data-role="listview" data-inset="true">
         <li>
-            <a href='#species-info' data-role="button" data-icon="bars" data-prefetch>Species</a>
+            <a href='#species-info'
+               class="ui-btn record-button ui-icon-carat-r ui-btn-icon-right
+               ui-nodisc-icon ui-alt-icon">Species</a>
         </li>
     </ul>
     <ul data-role="listview" data-inset="true">
         <li>
-            <a href='#about' data-role="button" data-icon="info" data-prefetch>About App</a>
+            <a href='#about'
+               class="ui-btn record-button ui-icon-info ui-btn-icon-right
+               ui-nodisc-icon ui-alt-icon">About App</a>
         </li>
         <li>
-            <a href='#privacy' data-role="button" data-icon="lock" data-prefetch>Privacy Policy</a>
+            <a href='#privacy'
+               class="ui-btn record-button ui-icon-lock ui-btn-icon-right
+               ui-nodisc-icon ui-alt-icon">Privacy Policy</a>
         </li>
         <li>
-            <a href='#brc-approved' data-role="button" data-icon="check" data-prefetch>BRC Approved</a>
+            <a href='#brc-approved'
+               class="ui-btn record-button ui-icon-check ui-btn-icon-right
+               ui-nodisc-icon ui-alt-icon">BRC Approved</a>
         </li>
         <li>
-            <a href='#credits' data-role="button" data-icon="heart" data-prefetch>Credits</a>
+            <a href='#credits' class="ui-btn record-button ui-icon-heart ui-btn-icon-right
+               ui-nodisc-icon ui-alt-icon">Credits</a>
         </li>
     </ul>
     <div class="sponsor-logo"></div>

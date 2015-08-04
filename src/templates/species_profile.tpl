@@ -67,7 +67,8 @@
             <p><%- confusion_species %></p>
         </li>
         <li>
-            <a href="#record/<%- id %>" data-role="button" data-icon="plus">
+            <a href="#record/<%- id %>" class="ui-btn ui-icon-plus ui-nodisc-icon
+            ui-alt-icon ui-btn-icon-right">
                 <center>Record Species</center></a>
         </li>
       <% } %>
@@ -75,8 +76,8 @@
     <% if (!general) { %>
     <div data-role="navbar" data-iconpos="left">
         <ul>
-            <li><a href='#species-terms' data-role="button" data-mini="true"
-                   data-icon="info" data-prefetch>Species Terms</a></li>
+            <li><a href='#species-terms' class="ui-btn ui-mini ui-icon-info
+            ui-alt-icon ui-nodisc-icon ui-btn-icon-right">Species Terms</a></li>
         </ul>
     </div>
     <% } %>

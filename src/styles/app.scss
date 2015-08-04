@@ -134,11 +134,11 @@ a.ui-btn > img {
   min-height: 70%;
 }
 
-.ui-btn-icon-left:after,
-.ui-btn-icon-right:after,
-.ui-btn-icon-top:after,
-.ui-btn-icon-bottom:after,
-.ui-btn-icon-notext:after {
-  background-color: $button-color;
+.ui-nodisc-icon.ui-btn:after,
+.ui-nodisc-icon .ui-btn:after{
+  opacity: 0.6;
 }
-
+.ui-btn-b.ui-nodisc-icon.ui-btn:after,
+.ui-btn-b.ui-nodisc-icon .ui-btn:after{
+  opacity: 1;
+}

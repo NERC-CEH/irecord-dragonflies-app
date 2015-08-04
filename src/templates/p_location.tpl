@@ -1,12 +1,12 @@
 <div data-role="header" data-position="fixed" data-tap-toggle="false">
     <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
-        <a href='#' data-rel="back" data-role="button"
-           data-icon="delete">Cancel</a>
+        <a href='#' data-rel='back' class="ui-btn ui-icon-delete ui-nodisc-icon
+        ui-alt-icon">Cancel</a>
     </div>
     <h1>Location</h1>
-
     <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
-        <button id="location-save" data-icon="location" data-iconpos="right">Save</button>
+        <button id="location-save" class="ui-btn ui-icon-plus ui-nodisc-icon
+        ui-alt-icon ui-btn-icon-right">Save</button>
     </div>
 </div>
 <div data-role="content">

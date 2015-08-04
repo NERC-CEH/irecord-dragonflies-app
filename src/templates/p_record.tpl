@@ -1,12 +1,12 @@
 <div data-role="header" data-position="fixed" data-tap-toggle="false">
     <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
-        <a href='#' data-rel='back' data-role="button" data-icon="arrow-l"
-           data-iconpos="notext">Back</a>
+        <a href='#' data-rel='back' class="ui-btn ui-icon-carat-l ui-nodisc-icon
+        ui-alt-icon ui-btn-icon-notext">Back</a>
     </div>
     <h3 id='record_heading'>Record</h3>
     <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
-        <input id="entry-form-save" type="button" value="Save" data-icon="plus"
-               data-theme="b" data-iconpos="right">
+        <button id="entry-form-save" class="ui-btn ui-btn-b ui-icon-plus ui-nodisc-icon
+        ui-btn-icon-right">Save</button>
     </div>
 </div>
 <div data-role="content">
@@ -17,42 +17,43 @@
             <input type="file" id="sample:image" name="sample:image"
                    accept="png|jpg|gif|jpeg"/>
         </div>
-        <ul data-role="listview" class="core-inputs" data-inset="true">
+        <ul data-role="listview" data-inset="true"
+            class="core-inputs ui-nodisc-icon ui-alt-icon">
             <li>
-                <a href="#location" id="location-button" class="record-button"
-                   data-role="button" data-icon="location" data-iconpos="right">
-                    <h3 class="heading">Location</h3>
+                <a href="#location" id="location-button"
+                   class="record-button ui-icon-location">
+                <h3 class="heading">Location</h3>
                     <p class="descript"></p>
                 </a>
             </li>
             <li>
-                <a href="#date" id="date-button" class="record-button"
-                   data-role="button" data-icon="calendar" data-iconpos="right">
-                    <h3 class="heading">Date</h3>
+                <a href="#date" id="date-button"
+                   class="record-button ui-icon-calendar">
+                <h3 class="heading">Date</h3>
                     <p class="descript"></p>
                 </a>
             </li>
         </ul>
     </div>
-    <ul data-role="listview" data-inset="true">
+    <ul data-role="listview" data-inset="true"
+        class="ui-nodisc-icon ui-alt-icon">
         <li>
-            <a href="#number" id="number-button" class="record-button"
-               data-role="button" data-icon="arrow-r" data-iconpos="right">
-                <h3 class="heading">Number</h3>
+            <a href="#number" id="number-button"
+               class="record-button">
+            <h3 class="heading">Number</h3>
                 <p class="descript"></p>
             </a>
         </li>
         <li>
-            <a href="#stage" id="stage-button" class="record-button" data-role="button"
-               data-icon="arrow-r" data-iconpos="right">
-                <h3 class="heading">Life Stage</h3>
+            <a href="#stage" id="stage-button"
+               class="record-button">
+            <h3 class="heading">Life Stage</h3>
                 <p class="descript"></p>
             </a>
         </li>
         <li>
-            <a href="#comment" id="comment-button" class="record-button"
-               data-role="button"
-               data-icon="comment" data-iconpos="right">
+            <a href="#comment" id="comment-button"
+               class="record-button ui-icon-comment">
                 <h3 class="heading">Comment</h3>
                 <p class="descript"></p>
             </a>

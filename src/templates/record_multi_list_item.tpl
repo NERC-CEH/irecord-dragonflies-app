@@ -8,4 +8,4 @@
     <p class="species-list-secondary-name"><i><%- taxon %></i></p>
     <% } %>
 </a>
-<a href="#species/<%- id %>" data-icon="info">Species</a>
+<a href="#species/<%- id %>" class="ui-icon-info ui-nodisc-icon ui-alt-icon">Species</a>

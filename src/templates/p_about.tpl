@@ -1,6 +1,7 @@
 <div data-role="header" data-position="fixed" data-tap-toggle="false">
     <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
-        <a href='#' data-rel='back' data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+        <a href='#' data-rel='back' class="ui-btn ui-icon-carat-l ui-nodisc-icon
+        ui-alt-icon ui-btn-icon-notext">Back</a>
     </div>
     <h1 id='about_heading'>About App</h1>
 </div>
@@ -37,7 +38,7 @@
                 please do not hesitate to <a href='mailto:karkaz@ceh.ac.uk'>contact us</a>.</p>
         </li>
         <li>
-            <p><i>Your App version: <%- app.VERSION %></i></p>
+            <p><i>App version: <%- app.VERSION %></i></p>
         </li>
     </ul>
 </div>
