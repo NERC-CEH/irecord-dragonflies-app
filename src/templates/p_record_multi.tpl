@@ -10,6 +10,11 @@
     </div>
 </div>
 <div data-role="content">
+    <div class="info-message">
+        <p>Use this to record all of the dragonflies you see during a walk/survey
+            of a site. You can build up a list of the species seen, alter
+            the numbers of each species stage as you go along and more.
+    </div>
     <ul data-role="listview" data-inset="true"
         class="core-inputs ui-nodisc-icon ui-alt-icon">
         <li>

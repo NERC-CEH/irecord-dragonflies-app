@@ -43,7 +43,7 @@ define([
         },
 
         appendEventListeners: function () {
-            this.listenTo(app.models.user, 'change:email', this.update);
+            this.listenTo(app.models.user, 'change:location', this.update);
 
             this.appendBackButtonListeners();
         },

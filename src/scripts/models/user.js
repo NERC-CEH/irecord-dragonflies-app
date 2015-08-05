@@ -19,6 +19,7 @@ define([
             secret: '',
             location: null,
             location_acc: -1,
+            autosync: true,
             sort: 'common_name',
             filters: {},
             favourites: []

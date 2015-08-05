@@ -7,6 +7,7 @@ define([
     'views/p_list',
     'views/p_species',
     'views/p_user',
+    'views/p_settings',
     'views/p_login',
     'views/p_register',
     'views/p_record',
@@ -20,7 +21,7 @@ define([
     'views/p_stage',
     'views/p_comment',
     'helpers/browser'
-], function(ext, Page, ListPage, SpeciesPage, UserPage, LoginPage, RegisterPage,
+], function(ext, Page, ListPage, SpeciesPage, UserPage, SettingsPage, LoginPage, RegisterPage,
             RecordPage, RecordMultiPage, RecordMultiOccurrencesPage, RecordMultiOccurrencesEditPage,
             RecordMultiListPage, DatePage, LocationPage, NumberPage, StagePage,
             CommentPage, browser) {
@@ -106,6 +107,14 @@ define([
                 app.views.userPage.update();
             },
 
+            "settings": function () {
+                if (!app.views.settingsPage) {
+                    app.views.settingsPage = new SettingsPage();
+                }
+                this.changePage(app.views.settingsPage);
+                app.views.settingsPage.update();
+            },
+
             "terms": function () {
                 this.navigateToStandardPage('terms');
             },
@@ -124,12 +133,18 @@ define([
                 this.changePage(app.views.registerPage);
             },
 
-            "location(/:multi)": function (multi) {
+            "location(/:type)": function (type) {
+                var model = app.models.sample;
+
                 if (!app.views.locationPage) {
                     app.views.locationPage = new LocationPage();
                 }
                 this.changePage(app.views.locationPage);
-                app.views.locationPage.update(multi ? app.models.sampleMulti : app.models.sample);
+
+                if (type) {
+                    model = type === 'multi' ? app.models.sampleMulti : app.models.user;
+                }
+                app.views.locationPage.update(model);
             },
 
             "number(/:multi/:stage/:id)": function (multi, stage, id) {

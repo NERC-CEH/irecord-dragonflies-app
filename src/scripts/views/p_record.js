@@ -171,6 +171,11 @@ define([
             app.recordManager.set(this.model, callback);
         },
 
+        saveCertain: function (e) {
+            var checked = $(e.target).prop('checked');
+            this.model.set('certain', checked);
+        },
+
         /**
          * Sets the user selected species image as a background of the image picker.
          *

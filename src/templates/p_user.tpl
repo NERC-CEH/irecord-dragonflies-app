@@ -5,8 +5,8 @@
     </div>
     <h1 id='user_heading'> My Account </h1>
     <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
-        <a href='#user' id="logout-button" data-role="button"
-           data-icon="user">Sign out</a>
+        <a href='#settings' class="ui-btn ui-icon-gear ui-alt-icon ui-nodisc-icon
+        ui-btn-icon-right">Settings</a>
     </div>
 </div>
 
@@ -14,8 +14,7 @@
     <div id="login-warning" class="warning-message">Looks like you have not Signed
         in to your iRecord account yet. Please do so, if you wish to have a full access
         to your submitted records on iRecord.
-        <a href='#login' data-role="button" data-icon="carat-r" data-iconpos="user">Sign
-            in</a>
+        <a href='#login' data-role="button">Sign in</a>
     </div>
     <div id="saved-list-placeholder"></div>
 </div>
