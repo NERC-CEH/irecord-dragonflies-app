@@ -279,8 +279,9 @@ define([
             if (images.length > 0) {
                 this.gallery = images.photoSwipe({
                     jQueryMobile: true,
+                    preventSlideshow: true,
+                    allowUserZoom: true,
                     loop: true,
-                    allowUserZoom: false,
                     captionAndToolbarAutoHideDelay: 0,
                     enableMouseWheel: true,
                     enableKeyboard: true
