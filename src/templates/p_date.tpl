@@ -1,7 +1,7 @@
 <div data-role="header" data-position="fixed" data-tap-toggle="false">
     <div class='ui-btn-left' data-role='controlgroup' data-type='horizontal'>
         <a href='#' data-rel='back' class="ui-btn ui-icon-delete ui-nodisc-icon
-        ui-alt-icon">Cancel</a>
+        ui-alt-icon ui-btn-icon-left">Cancel</a>
     </div>
     <h1>Date</h1>
     <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>

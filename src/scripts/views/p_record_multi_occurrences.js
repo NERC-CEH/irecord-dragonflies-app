@@ -67,7 +67,8 @@ define([
 
         save: function () {
             _log('views.RecordMultiOccurrences: saving record.', log.DEBUG);
-            $.mobile.loading('show');
+
+            var that = this;
 
             if (!this.valid()) {
                 return;
@@ -89,7 +90,31 @@ define([
                 }, 2000);
             }
 
-            app.recordManager.set(this.model, callback);
+            var yesButtonID = 'yes-button',
+                noButtonID = 'no-button';
+
+            var message =
+                '<h3>Recorded all species?</h3>' +
+
+                '<button id="' + yesButtonID + '" style="width:43%"' +
+                'class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ' +
+                'ui-mini">Yes</button>' +
+
+                '<button id="' + noButtonID + '" style="width:43%"' +
+                'class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left ' +
+                'ui-mini">No</button>';
+
+            app.message(message, 0);
+
+            $('#' + yesButtonID).on('click', function () {
+                that.model.set('recordedall', 'true');
+                app.recordManager.set(that.model, callback);
+            });
+
+            $('#' + noButtonID).on('click', function () {
+                that.model.set('recordedall', 'false');
+                app.recordManager.set(that.model, callback);
+            });
         },
 
         /**

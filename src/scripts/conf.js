@@ -10,7 +10,7 @@ define(['morel', 'helpers/log'], function () {
     app.CONF = {
         //app feature settings
         OFFLINE: {
-            STATUS: true,
+            STATUS: false,
             APPCACHE_URL: "appcache.html"
         },
         GA: {
@@ -124,11 +124,11 @@ define(['morel', 'helpers/log'], function () {
         LOCATION_ACCURACY: {
             id: 'accurracy'
         },
-        FULL_LIST: {
-            id: 'full_list',
+        RECORDEDALL: {
+            id: '2222',
             values: {
-                TRUE: 'true',
-                FALSE: 'false'
+                'true': 663,
+                'false': 664
             }
         }
     });
