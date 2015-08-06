@@ -17,10 +17,7 @@ define([
 
         events: {
             'click #entry-form-save': 'save',
-            'change input[type="checkbox"]': 'saveCertain',
-            'click #photo': function (event) {
-                $('input[type="file"]').trigger('click');
-            }
+            'change input[type="checkbox"]': 'saveCertain'
         },
 
         initialize: function () {
@@ -46,6 +43,9 @@ define([
             this.$stageButton = this.$el.find('#stage-button .descript');
             this.$commentButton = this.$el.find('#comment-button .descript');
             this.$dateButton = this.$el.find('#date-button .descript');
+            this.$imgPickerDisplay = this.$el.find('.img-picker-display');
+            this.$imgPickerFile = this.$el.find('.img-picker-file');
+
             return this;
         },
 
@@ -65,6 +65,7 @@ define([
 
         appendEventListeners: function () {
             this.appendBackButtonListeners();
+            this.setPhotoPickerListener();
         },
 
         appendSampleListeners: function () {
@@ -101,7 +102,16 @@ define([
 
             //add header to the page
             this.$heading.text(specie.attributes.common_name);
+
             this.resetButtons();
+
+            //reset photo picker
+            this.$imgPickerDisplay.empty();
+            this.$imgPickerDisplay.removeClass('selected');
+            //http://stackoverflow.com/questions/20549241/how-to-reset-input-type-file
+            var tmpPicker = this.$imgPickerFile.val('').clone(true);
+            this.$imgPickerFile.replaceWith(tmpPicker);
+            this.$imgPickerFile = tmpPicker;
 
             //turn off certainty option on general ones
             if (specie.attributes.general) {
@@ -115,7 +125,6 @@ define([
             //start geolocation
             this.runGeoloc();
 
-            this.setImage('input[type="file"]');
             this.updateDateButton(); //morel sets date automatically, before listeners are attached
         },
 
@@ -125,7 +134,6 @@ define([
         runGeoloc: function () {
             function onGeolocSuccess(location) {
                 _log('views.RecordPage: saving location.', log.DEBUG);
-                morel.geoloc.set(location.lat, location.lon, location.acc);
 
                 var sref = location.lat + ', ' + location.lon;
                 app.models.sample.set('location', sref);
@@ -182,35 +190,25 @@ define([
          * @param input
          * @returns {boolean}
          */
-        setImage: function (input) {
-            var img_holder = 'sample-image-placeholder';
-            var upload = $(input);
+        setPhotoPickerListener: function () {
+            var that = this;
 
-            if (!window.FileReader) {
-                return false;
-            }
-
-            $('#' + img_holder).remove();
-            this.$photo.append('<div id="' + img_holder + '" class="camera-picker"></div>');
-
-            upload.change(function (e) {
+            this.$imgPickerFile.change(function (e) {
                 e.preventDefault();
-                var file = this.files[0];
-                var reader = new FileReader();
+                $.mobile.loading('show');
 
-                reader.onload = function (event) {
-                    var img = new Image();
-                    img.src = event.target.result;
-                    // note: no onload required since we've got the dataurl...I think! :)
-                    if (img.width > 560) { // holder width
-                        img.width = 560;
-                    }
-                    $('#sample-image-placeholder').empty().append(img);
-                    var pic = $('#' + img_holder);
-                    pic.css('border', '0px');
-                    pic.css('background-image', 'none');
+                var callback = function (err, data, fileType) {
+                    morel.Image.resize(data, fileType, 2800, 2800, function (err, image, data) {
+                        that.occurrence.images.set(new morel.Image(data));
+
+                        that.$imgPickerDisplay.empty().append(image);
+                        that.$imgPickerDisplay.addClass('selected');
+
+                        $.mobile.loading('hide');
+                    });
                 };
-                reader.readAsDataURL(file);
+
+                morel.Image.toString(this.files[0], callback);
 
                 return false;
             });

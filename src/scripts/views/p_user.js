@@ -189,13 +189,15 @@ define([
                     templateData.date = record.get('date');
 
                     if (record.occurrences.length <= 1) {
-                        var taxon = savedRecords[record.id]
-                            .occurrences.getFirst()
-                            .get('taxon');
+                        var occurrence = savedRecords[record.id]
+                            .occurrences.getFirst(),
+                            taxon = occurrence.get('taxon');
                         var specie = app.collections.species.find(function(model) {
                             return model.get('warehouse_id') === taxon;
                         });
                         templateData.common_name = specie ? specie.attributes.common_name : '';
+
+                        templateData.img = occurrence.images.getFirst();
 
                     //multi record
                     } else {

@@ -82,31 +82,30 @@ input.numberInput{
 /* 	Photo picker. */
 /*	Dynamic height css from:
 	http://stackoverflow.com/questions/5445491/height-equal-to-dynamic-width-css-fluid-layout */
-#photo {
+
+/* Image Picker */
+
+$photo-picker-height: 20vh;
+
+.img-picker {
   display: inline-block;
   position: relative;
   width: 30%;
-  height: 20vh;
+  height: $photo-picker-height;
 }
 
-#photo-picker {
+.img-picker-file {
+  font-size: $photo-picker-height;
+  width: 100%;
+  position: absolute;
+  padding: .4em;
   opacity: 0;
-  font-size: 70px;
-  height: 20vh;
-  position: absolute;
-  top: 40px;
-  left: 5%;
-  overflow: hidden;
-  width: 25%;
 }
 
-.camera-picker {
+.img-picker-display {
+  height: $photo-picker-height;
+
   overflow: hidden;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
 
   border-style: dashed;
   border-color: #A0A286;
@@ -118,11 +117,15 @@ input.numberInput{
   background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpath%20style%3D%22fill%3A%23FFFFFF%3B%22%20d%3D%22M12%2C2.5H9.908c-0.206-0.581-0.756-1-1.408-1h-3c-0.652%2C0-1.202%2C0.419-1.408%2C1H2c-1.104%2C0-2%2C0.896-2%2C2%20v6c0%2C1.104%2C0.896%2C2%2C2%2C2h10c1.104%2C0%2C2-0.896%2C2-2v-6C14%2C3.396%2C13.104%2C2.5%2C12%2C2.5z%20M7%2C10.5c-1.657%2C0-3-1.344-3-3c0-1.657%2C1.343-3%2C3-3%20s3%2C1.343%2C3%2C3C10%2C9.156%2C8.657%2C10.5%2C7%2C10.5z%20M7%2C5.5c-1.104%2C0-2%2C0.896-2%2C2c0%2C1.104%2C0.896%2C2%2C2%2C2c1.104%2C0%2C2-0.896%2C2-2%20C9%2C6.396%2C8.104%2C5.5%2C7%2C5.5z%22%2F%3E%3C%2Fsvg%3E");
 }
 
-#sample-image-placeholder img {
-  position:absolute;
+.img-picker-display img {
   min-height:100%;
   min-width:100%;
   display:block;
+}
+
+.img-picker-display.selected {
+  border: 0px;
+  background-image: none;
 }
 
 textarea#record-comment {

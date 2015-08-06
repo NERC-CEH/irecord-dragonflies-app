@@ -100,7 +100,7 @@ define([
 
             //remove saved ones
             for (var i = 0; i < this.collection.length; i++) {
-                occurrence = this.collection.occurrences[i];
+                occurrence = this.collection.data[i];
                 specie = species.find(function(model) {
                     return model.get('warehouse_id') === occurrence.get('taxon');
                 });

@@ -35,7 +35,7 @@ define([
             var container = document.createDocumentFragment(); //optimising the performance
 
             if (this.collection.length) {
-                _.each(this.collection.occurrences, function (occurrence) {
+                _.each(this.collection.data, function (occurrence) {
                     var item = new RecordMultiOccurrencesListItemView({
                         model: occurrence
                     });

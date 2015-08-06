@@ -11,13 +11,20 @@
         <% _.each (records, function (record) { %>
         <li>
             <a href="#user" class="sync-button saved-list-item" data-id="<%- record.id %>">
-                <div class="camera-picker"></div>
+                <% if (record.img) { %>
+                    <div class="img-picker-display <%- record.multiRecord ? 'multi':'' %>"
+                         style="background-image: none; border: 0px; height: 55px; width: 55px;">
+                        <img src="<%- record.img.data %>">
+                    </div>
+                <% } else { %>
+                    <div class="img-picker-display <%- record.multiRecord ? 'multi':'' %>"></div>
+                <% } %>
 
                 <p><strong><%- record.date %></strong></p>
                 <% if (record.multiRecord) { %>
-                    <p><i>Multi-Record:</i> <%- record.multiRecord %> species</p>
+                    <p><i><%- record.multiRecord %> species</i></p>
                 <% } else { %>
-                    <p><%- record.common_name %></p>
+                    <p><i><%- record.common_name %></i></p>
                 <% } %>
             </a>
             <a href="#user" class="delete-button ui-icon-delete"

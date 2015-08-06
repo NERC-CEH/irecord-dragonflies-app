@@ -121,12 +121,15 @@ define([
                         app.message(message, 0);
 
                         $('#' + finishedBtnCloseId ).on('click', function () {
-                            if (app.CONF.OFFLINE.STATUS) {
-                                finishedTrips.push('welcome');
-                                app.models.user.set('trips', finishedTrips);
-                                app.models.user.save();
+                            finishedTrips.push('welcome');
+                            app.models.user.set('trips', finishedTrips);
+                            app.models.user.save();
 
+                            if (app.CONF.OFFLINE.STATUS) {
                                 download(callback);
+                            } else {
+                                $.mobile.loading('hide');
+                                callback && callback();
                             }
                         });
                     }, 500);
