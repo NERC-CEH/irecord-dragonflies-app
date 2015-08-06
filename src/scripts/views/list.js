@@ -5,7 +5,7 @@ define([
   'backbone',
   'models/species_list_sorts',
   'models/species_list_filters',
-  'views/listItem',
+  'views/list_item',
   'templates'
 ], function (Backbone, sorts, filters, SpeciesListItemView) {
   'use strict';
