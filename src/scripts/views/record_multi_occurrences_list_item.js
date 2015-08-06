@@ -10,17 +10,14 @@ define([
     var View = Backbone.View.extend({
         tagName: "li",
 
-        attributes: {
-            "data-corners": false,
-            "data-shadow": false,
-            "data-iconshadow": true,
-            "data-wrapperels": "div",
-            "data-icon": "arrow-r",
-            "data-iconpos": "right",
-            "data-theme": "c"
-        },
-
         template: app.templates.record_multi_occurrences_list_item,
+
+        initialize: function () {
+            _log('views.RecordMultiOccurrencesListItem: initialize', log.DEBUG);
+
+            this.render();
+            this.appendEventListeners();
+        },
 
         /**
          * Renders the individual list item representing the species.
@@ -56,8 +53,38 @@ define([
             var ellipsis = comment && comment.length > 20 ? '...' : '';
             template_data.comment = comment ? comment.substring(0, 20) + ellipsis : ''; //cut it down a bit
 
+            template_data.img = this.model.images.getFirst();
+
             this.$el.html(this.template(template_data));
+
+            this.$imgPickerFile = this.$el.find('.img-picker-file');
+            this.$imgPickerDisplay = this.$el.find('.img-picker-display');
+
             return this;
+        },
+
+        appendEventListeners: function () {
+            //attach event listeners
+            var that = this;
+
+            this.$imgPickerFile.change(function () {
+                $.mobile.loading('show');
+
+                var callback = function (err, data, fileType) {
+                    morel.Image.resize(data, fileType, 800, 800, function (err, image, data) {
+                        that.model.images.set(new morel.Image(data));
+
+                        that.$imgPickerDisplay.empty().append(image);
+                        that.$imgPickerDisplay.addClass('selected');
+
+                        $.mobile.loading('hide');
+                    });
+                };
+
+                morel.Image.toString(this.files[0], callback);
+
+                return false;
+            });
         }
     });
 

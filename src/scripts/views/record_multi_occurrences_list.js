@@ -39,7 +39,7 @@ define([
                     var item = new RecordMultiOccurrencesListItemView({
                         model: occurrence
                     });
-                    container.insertBefore(item.render().el, container.firstChild);
+                    container.insertBefore(item.el, container.firstChild);
                 });
 
                 this.$el.html(container); //appends to DOM only once
@@ -65,15 +65,6 @@ define([
             _log('views.RecordMultiOccurrencesList: updating', log.DEBUG);
 
             this.render();
-
-            //attach event listeners
-            this.$el.find('.camera-picker').on('click', function (e) {
-                //disable jqm link
-                e.stopPropagation();
-                e.preventDefault();
-
-                app.message('<center><b>Photo picker disabled</b></center>', 500);
-            });
         }
     });
 

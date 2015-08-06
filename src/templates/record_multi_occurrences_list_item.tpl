@@ -1,6 +1,17 @@
 <a href="#record/multi/occurrences/<%- id %>" data-id="<%- id %>"
    class="record-multi-occurrences-list-item">
-    <div class="camera-picker"></div>
+    <div class="img-picker multi">
+        <input class="img-picker-file" type="file" accept="png|jpg|gif|jpeg" data-role="none"/>
+
+        <% if (img) { %>
+            <div class="img-picker-display" style="background-image: none; border: 0px; height: 75px; width: 75px;">
+                <img src="<%- img.data %>">
+            </div>
+        <% } else { %>
+            <div class="img-picker-display"></div>
+        <% } %>
+
+    </div>
 
     <% if (app.models.user.isSortScientific()) { %>
         <p class="species-list-main-name"><b><i><%- taxon %></i></b></p>

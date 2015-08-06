@@ -198,7 +198,7 @@ define([
                 $.mobile.loading('show');
 
                 var callback = function (err, data, fileType) {
-                    morel.Image.resize(data, fileType, 2800, 2800, function (err, image, data) {
+                    morel.Image.resize(data, fileType, 800, 800, function (err, image, data) {
                         that.occurrence.images.set(new morel.Image(data));
 
                         that.$imgPickerDisplay.empty().append(image);
