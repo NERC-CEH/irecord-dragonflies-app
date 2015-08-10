@@ -11,7 +11,7 @@
                     <label class="filter">
                         <input class="filter" id="<%- filterID %>"
                                data-group="<%- filterGroupID %>" type="<%- filterGroup.type %>"
-                               data-iconpos="right" <%- filter.checked %>><%- filter.label %>
+                                <%- filter.checked %>><%- filter.label %>
                     </label>
                     <% }); %>
 
