@@ -82,7 +82,7 @@ define([
                     return;
                 }
 
-                morel.geoloc.clear();
+                morel.Geoloc.clear();
 
                 app.message("<center><h2>Record saved.</h2></center>");
                 setTimeout(function () {
@@ -94,7 +94,7 @@ define([
                 noButtonID = 'no-button';
 
             var message =
-                '<h3>Recorded all species?</h3>' +
+                '<h3><center>Recorded all species?</center></h3>' +
 
                 '<button id="' + yesButtonID + '" style="width:43%"' +
                 'class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ' +
@@ -123,12 +123,12 @@ define([
          * @returns {*}
          */
         valid: function () {
-            //validate gps
-            var gps = morel.geoloc.valid();
-            if (gps === morel.ERROR || gps === morel.FALSE) {
-                //redirect to gps page
+            //validate location
+            var accuracy = morel.Geoloc.accuracy;
+            if (accuracy === -1 || accuracy > app.CONF.GPS_ACCURACY_LIMIT) {
+                //redirect to location page
                 Backbone.history.navigate('location/multi', {trigger: true});
-                return false;
+                return morel.FALSE;
             }
 
             //validate the rest

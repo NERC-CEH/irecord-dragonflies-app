@@ -29,6 +29,44 @@ define([
 
     app.views = {};
 
+    var welcome = {
+        route: function (multi) {
+            if (multi) {
+                if (!app.views.recordMultiListPage) {
+                    app.views.recordMultiListPage = new RecordMultiListPage();
+                }
+                this.changePage(app.views.recordMultiListPage);
+
+                app.views.recordMultiListPage.update();
+
+                //normal list
+            } else {
+                if (!app.views.listPage) {
+                    app.views.listPage = new ListPage();
+                }
+                this.changePage(app.views.listPage);
+
+                app.views.listPage.update();
+            }
+        },
+        after: function (multi) {
+            //leaving out safari home mode because it creates a nasty glitch on 8.3
+            if (!(browser.isIOS() && browser.isHomeMode())) {
+                var scroll = !multi ? app.views.listPage.scroll : app.views.recordMultiListPage.scroll;
+                if (scroll) {
+                    window.scrollTo(0, scroll);
+                }
+            }
+        },
+        leave: function (multi) {
+            if (multi) {
+                app.views.recordMultiListPage.scroll = $(window).scrollTop();
+            } else {
+                app.views.listPage.scroll = $(window).scrollTop();
+            }
+        }
+    };
+
     var Router = Backbone.Router.extend({
         /**
          * Initialize the router.
@@ -44,50 +82,9 @@ define([
          * Routes to listen to.
          */
         routes: {
-            "": function () {
-                if (!app.views.listPage) {
-                    app.views.listPage = new ListPage();
-                }
-                this.changePage(app.views.listPage);
-            },
+            "": welcome,
 
-            "list(/:multi)": {
-                route: function (multi) {
-                    if (multi) {
-                        if (!app.views.recordMultiListPage) {
-                            app.views.recordMultiListPage = new RecordMultiListPage();
-                        }
-                        this.changePage(app.views.recordMultiListPage);
-
-                        app.views.recordMultiListPage.update();
-
-                    //normal list
-                    } else {
-                        if (!app.views.listPage) {
-                            app.views.listPage = new ListPage();
-                        }
-                        this.changePage(app.views.listPage);
-
-                        app.views.listPage.update();
-                    }
-                },
-                after: function (multi) {
-                    //leaving out safari home mode because it creates a nasty glitch on 8.3
-                    if (!(browser.isIOS() && browser.isHomeMode())) {
-                        var scroll = !multi ? app.views.listPage.scroll : app.views.recordMultiListPage.scroll;
-                        if (scroll) {
-                            window.scrollTo(0, scroll);
-                        }
-                    }
-                },
-                leave: function (multi) {
-                    if (multi) {
-                        app.views.recordMultiListPage.scroll = $(window).scrollTop();
-                    } else {
-                        app.views.listPage.scroll = $(window).scrollTop();
-                    }
-                }
-            },
+            "list(/:multi)": welcome,
 
             "species/:id": function (id) {
                 if (!app.views.speciesPage) {
@@ -165,7 +162,7 @@ define([
                 this.changePage(app.views.stagePage);
             },
 
-            "comment/:multi(/:id)": function (multi, id) {
+            "comment/multi(/:id)": function (id) {
                 var model = id ? app.models.sampleMulti.occurrences.get(id) :
                         app.models.sampleMulti;
 
@@ -206,21 +203,20 @@ define([
                 app.views.recordMultiPage.update(prevPageID);
             },
 
-            "record/multi/occurrences(/:id)": function (id) {
-                if (id) {
-                    if (!app.views.recordMultiOccurrencesEditPage) {
-                        app.views.recordMultiOccurrencesEditPage = new RecordMultiOccurrencesEditPage();
-                    }
-                    this.changePage(app.views.recordMultiOccurrencesEditPage);
-                    app.views.recordMultiOccurrencesEditPage.update(id);
-
-                } else {
+            "record/multi/occurrences": function () {
                     if (!app.views.recordMultiOccurrencesPage) {
                         app.views.recordMultiOccurrencesPage = new RecordMultiOccurrencesPage();
                     }
                     this.changePage(app.views.recordMultiOccurrencesPage);
                     app.views.recordMultiOccurrencesPage.update();
+            },
+
+            "record/multi/occurrences/:id": function (id) {
+                if (!app.views.recordMultiOccurrencesEditPage) {
+                    app.views.recordMultiOccurrencesEditPage = new RecordMultiOccurrencesEditPage();
                 }
+                this.changePage(app.views.recordMultiOccurrencesEditPage);
+                app.views.recordMultiOccurrencesEditPage.update(id);
             },
 
             "record/:id": function (id) {

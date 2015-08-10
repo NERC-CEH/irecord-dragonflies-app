@@ -21,6 +21,7 @@
         </div>
         <div id="gps" class="ui-body-d ui-content">
             <div id="location-gps-placeholder"></div>
+            <button id="gps-button">Locate</button>
         </div>
         <div id="map" class="ui-body-d ui-content">
             <div class="info-message" id="map-message">

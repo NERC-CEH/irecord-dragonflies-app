@@ -8,9 +8,11 @@ define(['morel', 'helpers/log'], function () {
     app.NAME = 'app'; //name grunt replaced
 
     app.CONF = {
+        GPS_ACCURACY_LIMIT: 100,
+
         //app feature settings
         OFFLINE: {
-            STATUS: false,
+            STATUS: true,
             APPCACHE_URL: "appcache.html"
         },
         GA: {
@@ -117,7 +119,8 @@ define(['morel', 'helpers/log'], function () {
         appname: "test",
         appsecret: "mytest",
         website_id: 23,
-        survey_id: 256
+        survey_id: 256,
+        Storage: morel.DatabaseStorage
     };
 
     $.extend(morel.Sample.KEYS, {

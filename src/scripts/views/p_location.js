@@ -13,12 +13,19 @@ define([
     var Page = DefaultPage.extend({
         id: 'location',
 
+        map: {},
+        latitude: null,
+        longitude: null,
+        accuracy: -1,
+        name: '',
+
         template: app.templates.p_location,
 
         events: {
             'click #grid-ref-set': 'gridRefConvert',
             'click #location-save': 'save',
-            'tabsactivate #location-opts': 'refreshMap'
+            'tabsactivate #location-opts': 'refreshMap',
+            'click #gps-button': 'geolocate'
         },
 
         initialize: function () {
@@ -53,13 +60,61 @@ define([
             $('body').append($(this.el));
 
             $('#location-opts').tabs().tabs( "option", "disabled", [1] ); //disable map
+
+            this.$locationMessage = $('#location-message');
+            this.$coordinates = $('#coordinates');
+            this.$locationGPSPlaceholder = $('#location-gps-placeholder');
+            this.$gpsButton = $('#gps-button');
             return this;
+        },
+
+        /**
+         * Renders the GPS tab with the gps state.
+         *
+         * @param state
+         * @param location
+         */
+        renderGPStab: function (location) {
+            var template = app.templates.location_gps,
+                accuracy = location && location.accuracy;
+
+            this.$locationGPSPlaceholder.html(template({
+                state: this.geoloc.state,
+                accuracy: accuracy
+            }));
+            this.$locationGPSPlaceholder.trigger('create');
         },
 
         update: function (model) {
             this.model = model;
-            app.views.locationPage.renderGPStab('init');
+            var location = this.model.get('location');
+            if (location) {
+                var locSplit = location.split(',');
+                this.latitude = locSplit[0];
+                this.longitude = locSplit[1];
+                this.accuracy = this.model.get('location_accuracy');
+                this.updateLocationMessage();
+            }
+
+            app.views.locationPage.renderGPStab();
         },
+
+        /**
+         * Updates the main location page message.
+         */
+        updateLocationMessage: function () {
+            //convert coords to Grid Ref
+            var location = this.get();
+            var p = new LatLon(location.latitude, location.longitude, LatLon.datum.WGS84);
+            var grid = OsGridRef.latLonToOsGrid(p);
+            var gref = grid.toString();
+
+            this.$locationMessage.show();
+            this.$locationMessage.removeClass();
+            this.$locationMessage.addClass('success-message');
+            this.$locationMessage.empty().append('<p>Grid Ref:<br/>' + gref + '</p>');
+        },
+
 
         /**
          * Saves the location to the record and returns to the previous page.
@@ -68,7 +123,7 @@ define([
             var location = this.get();
 
             if (location.latitude && location.longitude) {
-                morel.geoloc.set(location.latitude, location.longitude, location.accuracy);
+                morel.Geoloc.set(location.latitude, location.longitude, location.accuracy);
 
                 var sref = location.latitude + ', ' + location.longitude;
                 this.model.set('location', sref);
@@ -79,15 +134,8 @@ define([
             } else {
                 _log('views.LocationPage: invalid location to set', log.WARNING);
             }
-
             window.history.back();
         },
-
-        map: {},
-        latitude: null,
-        longitude: null,
-        accuracy: -1,
-        name: '',
 
         /**
          * Sets the location.
@@ -119,162 +167,118 @@ define([
         },
 
         /**
-         * Updates the text on the page with current location information as Grid Reference.
-         *
-         * @param latitude
-         * @param longitude
-         * @param accuracy
+         * User geolocation controls.
          */
-        updateCoordinateDisplay: function (latitude, longitude, accuracy) {
-            var info = 'Your coordinates: ' + latitude + ', ' + longitude + ' (Accuracy: ' + accuracy + ')';
-            $('#coordinates').text(info);
-        },
-
-        /**
-         * Renders the GPS tab with the gps state.
-         *
-         * @param state
-         * @param location
-         */
-        renderGPStab: function (state, location) {
-            var template = null;
-            var placeholder = $('#location-gps-placeholder');
-
-            switch (state) {
-                case 'init':
-                    var currentLocation = app.views.locationPage.get();
-                    if (currentLocation.accuracy === -1) {
-                        currentLocation = null;
-                    } else {
-                        location = currentLocation;
-                    }
-
-                    template = app.templates.location_gps;
+        geolocate: function () {
+            switch (this.geoloc.state) {
+                case 'finished':
+                    this.geoloc.start();
+                    this.$gpsButton.html('Stop');
                     break;
                 case 'running':
-                    template = app.templates.location_gps_running;
+                    this.geoloc.stop();
+                    this.$gpsButton.html('Start');
                     break;
-                case 'finished':
-                    template = app.templates.location_gps_finished;
-                    break;
+                case 'init':
                 default:
-                    _log('views.LocationPage: unknown render gps tab.', log.WARNING);
+                    this.geoloc.start();
+                    this.$gpsButton.html('Stop');
             }
-
-            placeholder.html(template({location: location}));
-            placeholder.trigger('create');
-
-            //attach event listeners
-            $('#gps-start-button').on('click', app.views.locationPage.startGeoloc);
-            $('#gps-stop-button').on('click', app.views.locationPage.stopGeoloc);
-            $('#gps-improve-button').on('click', app.views.locationPage.startGeoloc);
-
         },
 
         /**
          * Variable for storing location details while running geolocation.
          */
         geoloc: {
+            state: 'init',
             latitude: null,
             longitude: null,
-            accuracy: -1
-        },
+            accuracy: -1,
 
-        /**
-         * Sets location if geolocation has an improved update of current location.
-         *
-         * @param location
-         */
-        setGeoloc: function (location){
-            if (location){
-                var geoloc = this.getGeoloc();
-                if (geoloc.accuracy === -1 || (geoloc.accuracy >= location.accuracy)) {
-                    this.geoloc = location;
-                    this.set(location.latitude, location.longitude, location.accuracy);
+            /**
+             * Sets location if geolocation has an improved update of current location.
+             *
+             * @param location
+             */
+            set: function (location){
+                if (this.accuracy === -1 || (this.accuracy >= location.accuracy)) {
+                    this.latitude = location.latitude;
+                    this.longitude = location.longitude;
+                    this.accuracy = location.accuracy;
+
+                    app.views.locationPage.set(this.latitude, this.longitude, this.accuracy);
                     app.views.locationPage.updateLocationMessage();
-                } else if (geoloc.accuracy !== -1) {
+
+                } else if (this.accuracy !== -1) {
                     //geoloc->map->geoloc case where we should set old geoloc
-                    location = this.getGeoloc();
-                    this.set(location.latitude, location.longitude, location.accuracy);
+                    app.views.locationPage.set(this.latitude, this.longitude, this.accuracy);
                     app.views.locationPage.updateLocationMessage();
                 }
-            }
-        },
 
-        /**
-         * Returns the geolocation variable.
-         *
-         * @returns {*}
-         */
-        getGeoloc: function() {
-            return this.geoloc;
-        },
+                return {
+                    latitude: this.latitude,
+                    longitude: this.longitude,
+                    accuracy: this.accuracy
+                };
+            },
 
-        /**
-         * Starts a geolocation service and modifies the DOM with new UI.
-         */
-        startGeoloc: function () {
-            $.mobile.loading('show');
+            /**
+             * Starts a geolocation service and modifies the DOM with new UI.
+             */
+            start: function () {
+                $.mobile.loading('show');
 
-            function onUpdate(location) {
-                app.views.locationPage.setGeoloc({
-                    latitude: location.lat,
-                    longitude: location.lon,
-                    accuracy: location.acc
-                });
-                location = app.views.locationPage.getGeoloc();
+                var that = this;
+                this.state = 'running';
+
+                function onUpdate(location) {
+                    location = app.views.locationPage.geoloc.set({
+                        latitude: location.lat,
+                        longitude: location.lon,
+                        accuracy: location.acc
+                    });
+
+                    //modify the UI
+                    app.views.locationPage.renderGPStab(location);
+                }
+
+                function callback(err, location) {
+                    $.mobile.loading('hide');
+
+                    if (err) {
+                        that.state = 'init';
+
+                        app.message(err.message);
+                        app.views.locationPage.renderGPStab();
+                        return;
+                    }
+
+                    app.views.locationPage.$gpsButton.html('Improve');
+                    that.state = 'finished';
+                    onUpdate(location);
+                }
 
                 //modify the UI
-                app.views.locationPage.renderGPStab('running', location);
-            }
+                app.views.locationPage.renderGPStab();
 
-            function onSuccess(location) {
+                //start geoloc
+                var accuracyLimit = this.accuracy > 0 ? this.accuracy: null; //if improve geoloc
+                morel.Geoloc.run(onUpdate, callback, accuracyLimit);
+            },
+
+            /**
+             * Stops any geolocation service and modifies the DOM with new UI.
+             */
+            stop: function () {
                 $.mobile.loading('hide');
 
-                app.views.locationPage.setGeoloc({
-                    latitude: location.lat,
-                    longitude: location.lon,
-                    accuracy: location.acc
-                });
-                location = app.views.locationPage.getGeoloc();
+                this.state = 'init';
 
-                app.views.locationPage.renderGPStab('finished', location);
-            }
-
-            function onError(err) {
-                $.mobile.loading('show', {
-                    text: "Sorry! " + err.message + '.',
-                    theme: "b",
-                    textVisible: true,
-                    textonly: true
-                });
-                setTimeout(function () {
-                    $.mobile.loading('hide');
-                }, 5000);
-
+                //stop geoloc
+                morel.Geoloc.stop();
                 //modify the UI
-
-                app.views.locationPage.renderGPStab('init');
+                app.views.locationPage.renderGPStab();
             }
-
-            //modify the UI
-            app.views.locationPage.renderGPStab('running');
-
-            //start geoloc
-            morel.geoloc.run(onUpdate, onSuccess, onError);
-        },
-
-        /**
-         * Stops any geolocation service and modifies the DOM with new UI.
-         */
-        stopGeoloc: function () {
-            $.mobile.loading('hide');
-
-            //stop geoloc
-            morel.geoloc.stop();
-
-            //modify the UI
-            app.views.locationPage.renderGPStab('init');
         },
 
         /**
@@ -282,7 +286,6 @@ define([
          */
         initializeMap: function () {
             _log("location: initialising map.", log.DEBUG);
-            //todo: add checking
 
             $('#location-opts').tabs( "option", "disabled", [] ); //enable map tab
 
@@ -418,25 +421,7 @@ define([
             script.type = 'text/javascript';
             script.src = src;
             document.body.appendChild(script);
-        },
-
-        /**
-         * Updates the main location page message.
-         */
-        updateLocationMessage: function () {
-            //convert coords to Grid Ref
-            var location = this.get();
-            var p = new LatLon(location.latitude, location.longitude, LatLon.datum.WGS84);
-            var grid = OsGridRef.latLonToOsGrid(p);
-            var gref = grid.toString();
-
-            var message = $('#location-message');
-            message.show();
-            message.removeClass();
-            message.addClass('success-message');
-            message.empty().append('<p>Grid Ref:<br/>' + gref + '</p>');
         }
-
     });
 
     return Page;

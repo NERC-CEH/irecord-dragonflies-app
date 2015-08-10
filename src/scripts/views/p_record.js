@@ -128,25 +128,31 @@ define([
             this.updateDateButton(); //morel sets date automatically, before listeners are attached
         },
 
+
         /**
          * Runs geolocation service in the background and updates the record on success.
          */
         runGeoloc: function () {
-            function onGeolocSuccess(location) {
+            var that = this;
+            this.model.set('location_accuracy', 0); //running
+
+            function callback(err, location) {
+                if (err) {
+                    if (err.number != morel.Geoloc.TIMEOUT_ERR) {
+                        app.message(err.message);
+                    }
+                    that.model.set('location_accuracy', -1); //stopped
+                    return;
+                }
+
                 _log('views.RecordPage: saving location.', log.DEBUG);
 
                 var sref = location.lat + ', ' + location.lon;
-                app.models.sample.set('location', sref);
-                app.models.sample.set('location_accuracy', location.acc);
+                that.model.set('location', sref);
+                that.model.set('location_accuracy', location.acc);
             }
 
-            function onError(err) {
-                //modify the UI
-                app.models.sample.set('location_accuracy', -1); //stopped
-            }
-
-            morel.geoloc.run(null, onGeolocSuccess, onError);
-            this.model.set('location_accuracy', 0); //running
+            morel.Geoloc.run(null, callback);
         },
 
         /**
@@ -168,7 +174,7 @@ define([
                     return;
                 }
 
-                morel.geoloc.clear();
+                morel.Geoloc.clear();
 
                 app.message("<center><h2>Record saved.</h2></center>");
                 setTimeout(function () {
@@ -220,10 +226,10 @@ define([
          * @returns {*}
          */
         valid: function () {
-            //validate gps
-            var gps = morel.geoloc.valid();
-            if (gps === morel.ERROR || gps === morel.FALSE) {
-                //redirect to gps page
+            //validate location
+            var accuracy = morel.Geoloc.accuracy;
+            if (accuracy === -1 || accuracy > app.CONF.GPS_ACCURACY_LIMIT) {
+                //redirect to location page
                 Backbone.history.navigate('location', {trigger: true});
                 return morel.FALSE;
             }

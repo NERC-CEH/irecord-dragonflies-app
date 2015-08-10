@@ -65,22 +65,26 @@ define([
          * Runs geolocation service in the background and updates the record on success.
          */
         runGeoloc: function () {
-            function onGeolocSuccess(location) {
+            var that = this;
+            this.model.set('location_accuracy', 0); //running
+
+            function callback(err, location) {
+                if (err) {
+                    if (err.number != morel.Geoloc.TIMEOUT_ERR) {
+                        app.message(err.message);
+                    }
+                    that.model.set('location_accuracy', -1); //stopped
+                    return;
+                }
+
                 _log('views.RecordPage: saving location.', log.DEBUG);
-                morel.geoloc.set(location.lat, location.lon, location.acc);
 
                 var sref = location.lat + ', ' + location.lon;
-                app.models.sampleMulti.set('location', sref);
-                app.models.sampleMulti.set('location_accuracy', location.acc);
+                that.model.set('location', sref);
+                that.model.set('location_accuracy', location.acc);
             }
 
-            function onError(err) {
-                //modify the UI
-                app.models.sampleMulti.set('location_accuracy', -1); //stopped
-            }
-
-            morel.geoloc.run(null, onGeolocSuccess, onError);
-            this.model.set('location_accuracy', 0); //running
+            morel.Geoloc.run(null, callback);
         },
 
         appendEventListeners: function () {
