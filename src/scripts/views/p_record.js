@@ -87,7 +87,8 @@ define([
             var specie = app.collections.species.find({id: speciesID});
             this.occurrence = new morel.Occurrence({
                 attributes: {
-                    'taxon': specie.attributes.warehouse_id
+                    'taxon': specie.attributes.warehouse_id,
+                    'number': morel.Occurrence.KEYS.NUMBER.values['Present']
                 }
             });
 
