@@ -36,7 +36,7 @@ define([
             $('body').append($(this.el));
 
             //add list controls
-            this.$listControlsButton = this.$el.find('#list-controls-button');
+            this.$listControlsButton = this.$el.find('#record-multi-list-controls-button');
             this.listControlsView = new ListControlsView({
                 id: 'list-controls-tabs-multi',
                 multi: true,
@@ -64,6 +64,8 @@ define([
         },
 
         update: function () {
+            this.updateListControlsButton();
+
             //assign the model if new
             if (!this.model) {
                 if (!app.models.sampleMulti) {
@@ -110,7 +112,7 @@ define([
         },
 
         appendEventListeners: function () {
-            this.listenTo(app.models.user, 'change:filters', this.listControlsView.updateListControlsButton);
+            this.listenTo(app.models.user, 'change:filtersMulti', this.updateListControlsButton);
 
             $('.record-multi-list-img').on('click', function (e) {
                 //stop propagation of jqm link
@@ -125,10 +127,31 @@ define([
         },
 
         /**
-         * Shows/hides the list controls.
+         * Shows/closes list controls.
          */
-        toggleListControls: function () {
-            this.listControlsView.toggleListControls();
+        toggleListControls: function (e) {
+            if (this.listControlsView.$el.is(":hidden")) {
+                this.listControlsView.$el.slideDown("slow");
+            } else {
+                this.listControlsView.$el.slideUp("slow");
+            }
+        },
+
+        /**
+         * Updates the list controls button with the current state of the filtering.
+         * If one or more filters is turned on then the button is
+         * coloured accordingly.
+         */
+        updateListControlsButton: function () {
+            var filters = app.models.user.get('filtersMulti');
+            var activate = false;
+            _.each(filters, function (filterGroup, filterGroupID){
+                if (filterGroup.length > 0) {
+                    activate = true;
+                }
+            });
+
+            $(this.$listControlsButton.selector).toggleClass('running', activate);
         }
     });
 

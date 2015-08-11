@@ -46,7 +46,7 @@ define([
 
             //add list controls
             this.$listControlsButton = this.$el.find('#list-controls-button');
-            this.listControlsView = new ListControlsView(this.$listControlsButton);
+            this.listControlsView = new ListControlsView();
 
             var $listControls = this.$el.find('#list-controls-placeholder');
             $listControls.html(this.listControlsView.el);
@@ -61,21 +61,42 @@ define([
         },
 
         update: function () {
-            this.listControlsView.updateListControlsButton();
+            this.updateListControlsButton();
             this.updateUserPageButton();
         },
 
         appendEventListeners: function () {
-            this.listenTo(app.models.user, 'change:filters', this.listControlsView.updateListControlsButton);
+            this.listenTo(app.models.user, 'change:filters', this.updateListControlsButton);
 
             this.appendBackButtonListeners();
         },
 
         /**
-         * Shows/hides the list controls.
+         * Shows/closes list controls.
          */
-        toggleListControls: function () {
-            this.listControlsView.toggleListControls();
+        toggleListControls: function (e) {
+            if (this.listControlsView.$el.is(":hidden")) {
+                this.listControlsView.$el.slideDown("slow");
+            } else {
+                this.listControlsView.$el.slideUp("slow");
+            }
+        },
+
+        /**
+         * Updates the list controls button with the current state of the filtering.
+         * If one or more filters is turned on then the button is
+         * coloured accordingly.
+         */
+        updateListControlsButton: function () {
+            var filters = app.models.user.get('filters');
+            var activate = false;
+            _.each(filters, function (filterGroup, filterGroupID){
+                if (filterGroup.length > 0) {
+                    activate = true;
+                }
+            });
+
+            $(this.$listControlsButton.selector).toggleClass('running', activate);
         },
 
         /**

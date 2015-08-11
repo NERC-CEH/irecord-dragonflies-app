@@ -88,7 +88,7 @@ define([
             _log('views.RecordMultiList: updating', log.DEBUG);
 
             this.render(function($el){
-                $el.listview('refresh');
+                $el.listview().listview('refresh');
             });
         },
 

@@ -18,8 +18,8 @@ define([
         template_filter: app.templates.list_controls_filter,
 
         initialize: function (options) {
+            options || (options = {});
             this.multi = options.multi;
-            this.$listControlsButton = options.button;
             this.filtersKey = options.filtersKey || 'filters';
             this.sortKey = options.sortKey || 'sort';
             this.render();
@@ -38,18 +38,6 @@ define([
                 "data-role": 'tabs'
             };
         },
-
-        /**
-         * Shows/closes list controlls.
-         */
-        toggleListControls: function (e) {
-            if (this.$el.is(":hidden")) {
-                this.$el.slideDown("slow");
-            } else {
-                this.$el.slideUp("slow");
-            }
-        },
-
 
         /**
          * Renders and appends the list sort controls.
@@ -98,34 +86,13 @@ define([
          */
         setListControlsListeners: function () {
             var that = this;
-            //initial list control button setup
-            this.updateListControlsButton();
-
             this.$el.find('.sort').on('change', function () {
                 app.models.user.save(that.sortKey, $(this).data('id'));
             });
 
             this.$el.find('.filter').on('change', function (e) {
                 app.models.user.toggleListFilter(this.id, $(this).data('group'), that.multi);
-                that.updateListControlsButton();
             });
-        },
-
-        /**
-         * Updates the list controls button with the current state of the filtering.
-         * If one or more filters is turned on then the button is
-         * coloured accordingly.
-         */
-        updateListControlsButton: function () {
-            var filters = app.models.user.get(this.filtersKey);
-            var activate = false;
-            _.each(filters, function (filterGroup, filterGroupID){
-                if (filterGroup.length > 0) {
-                    activate = true;
-                }
-            });
-
-            $(this.$listControlsButton.selector).toggleClass('running', activate);
         }
     });
 
