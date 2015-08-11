@@ -2,38 +2,44 @@
  * Displays a self disappearing lightweight message.
  *****************************************************************************/
 define(['jquery', 'jquery.mobile'], function ($, jqm) {
-  /**
-   *
-   * @param text
-   * @param time 0 if no hiding, null gives default 3000ms delay
-   * @constructor
-   */
-  var Message = function (text, time) {
-    if (!text) {
-      _log('NAVIGATION: no text provided to message.', log.ERROR);
-      return;
-    }
+    /**
+     *
+     * @param text
+     * @param time 0 if no hiding, null gives default 3000ms delay
+     * @constructor
+     */
+    var Message = function (text, time, close) {
+        var CLOSE_ID = 'loader-close',
+            CLOSE_HTML = '<div id="' + CLOSE_ID + '" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right"></div>';
 
-    var messageId = 'morelLoaderMessage';
+        if (!text) {
+            _log('NAVIGATION: no text provided to message.', log.ERROR);
+            return;
+        }
 
-    text = '<div id="' + messageId + '">' + text + '</div>';
+        var messageId = 'loaderMessage';
+        var html = '<div id="' + messageId + '">' + (close ? CLOSE_HTML : '') + text + '</div>';
 
-    $.mobile.loading('show', {
-      theme: "b",
-      textVisible: true,
-      textonly: true,
-      html: text
-    });
+        $.mobile.loading('show', {
+            theme: "b",
+            textVisible: true,
+            textonly: true,
+            html: html
+        });
 
-    //trigger JQM beauty
-    $('#' + messageId).trigger('create');
+        //trigger JQM beauty
+        $('#' + messageId).trigger('create');
 
-    if (time !== 0) {
-      setTimeout(function () {
-        $.mobile.loading('hide');
-      }, time || 3000);
-    }
-  };
+        $('#' + CLOSE_ID).on('click', function () {
+            $.mobile.loading('hide');
+        });
 
-  app.message = Message;
+        if (time !== 0) {
+            setTimeout(function () {
+                $.mobile.loading('hide');
+            }, time || 3000);
+        }
+    };
+
+    app.message = Message;
 });
