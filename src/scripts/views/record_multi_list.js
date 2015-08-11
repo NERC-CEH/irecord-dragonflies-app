@@ -1,5 +1,5 @@
 /******************************************************************************
- * List view of the species used in ListPage view.
+ * List view of the species used in Record Multi List view.
  *****************************************************************************/
 define([
     'backbone',
@@ -21,7 +21,7 @@ define([
          * Initializes the species list view.
          */
         initialize: function () {
-            _log('views.SpeciesList: initialize', log.DEBUG);
+            _log('views.RecordMultiList: initialize', log.DEBUG);
 
             this.listenTo(this.collection, 'change', this.update);
             this.listenTo(app.models.user, 'change:filtersMulti',  this.update);
@@ -33,7 +33,7 @@ define([
          * @returns {SpeciesListView}
          */
         render: function (callback) {
-            _log('views.SpeciesList: render ', log.DEBUG);
+            _log('views.RecordMultiList: render ', log.DEBUG);
 
             var that = this;
             this.prepareList(function (list){
@@ -85,7 +85,7 @@ define([
         },
 
         update: function () {
-            _log('list: updating', log.DEBUG);
+            _log('views.RecordMultiList: updating', log.DEBUG);
 
             this.render(function($el){
                 $el.listview('refresh');
@@ -96,8 +96,8 @@ define([
          * Prepares the species list - filters, sorts.
          */
         prepareList: function (callback) {
-            var filtersToApply = _.cloneDeep(app.models.user.get('filters'));
-            var sort = app.models.user.get('sort');
+            var filtersToApply = _.cloneDeep(app.models.user.get('filtersMulti'));
+            var sort = app.models.user.get('sortMulti');
             var list = this.collection.models.slice(); //shallow copy of array
             this.prepareListCore(list, sort, filtersToApply, callback);
         },
@@ -110,9 +110,6 @@ define([
          * @param filters
          */
         prepareListCore: function (list, sort, filtersToApply, callback) {
-            //todo: might need to move UI functionality to higher grounds
-            $.mobile.loading("show");
-
             var that = this;
             //filter list
             var filterGroups = Object.keys(filtersToApply);
@@ -136,14 +133,12 @@ define([
             }
 
             function onSortSuccess() {
-                //todo: might need to move UI functionality to higher grounds
-                $.mobile.loading("hide");
                 if (callback) {
                     callback(list);
                 }
             }
 
-            sorts[sort].sort(list, onSortSuccess);
+            sorts[sort].sort(list, onSortSuccess, true);
         },
 
         /**
@@ -165,7 +160,7 @@ define([
                     var uniqueFilteredList = _.uniq(filteredList);
                     that.filterGroupCore(list, uniqueFilteredList, filterGroup, filterGroupID, callback);
                 };
-                filter.run(list, filteredList, onSuccess);
+                filter.run(list, filteredList, onSuccess, true);
 
             } else {
                 callback(filteredList);

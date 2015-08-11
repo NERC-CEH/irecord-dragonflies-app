@@ -99,11 +99,11 @@ define([], function () {
     },
     probability_sort: {
       label: 'Probability',
-        sort: function (list, onSuccess){
+        sort: function (list, onSuccess, multi){
         var sref = app.models.user.getLocationSref();
         if (sref == null) {
-          app.models.user.save('sort', 'common_name'); //todo: should be done with error handler
-          Backbone.history.navigate('location', {trigger:true});
+          app.models.user.save(multi ? 'sortMulti' : 'sort', 'common_name'); //todo: should be done with error handler
+          Backbone.history.navigate('location/settings', {trigger:true});
           return;
         }
 

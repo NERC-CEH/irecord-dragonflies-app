@@ -1,6 +1,6 @@
 <a href="#record/multi" data-id="<%- id %>" class="record-multi-list-item <%- favourite ? 'favourite': '' %>">
     <img class="record-multi-list-img" src="<%- profile_pic %>" data-id="<%- id %>"/>
-    <% if (app.models.user.isSortScientific()) { %>
+    <% if (app.models.user.isSortScientific(true)) { %>
     <p class="species-list-main-name"><i><%- taxon %></i></p>
     <p class="species-list-secondary-name"><%- common_name %></p>
     <% } else { %>

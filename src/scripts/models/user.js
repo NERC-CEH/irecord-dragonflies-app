@@ -21,7 +21,9 @@ define([
             location_acc: -1,
             autosync: true,
             sort: 'common_name',
+            sortMulti: 'common_name',
             filters: {},
+            filtersMulti: {},
             favourites: []
         },
 
@@ -184,8 +186,8 @@ define([
         /**
          * @returns {boolean} Scientific or different type of sorting is selected
          */
-        isSortScientific: function () {
-            var sort = this.get('sort');
+        isSortScientific: function (multi) {
+            var sort = this.get(multi ? 'sortMulti' : 'sort');
             return sort === 'scientific' || sort === 'scientific_r';
         }
     });

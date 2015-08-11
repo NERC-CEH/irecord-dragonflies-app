@@ -64,12 +64,13 @@ define([], function () {
             filters: {
                 probability: {
                     label: 'Species in your location',
-                    run: function (list, filteredList, onSuccess) {
+                    run: function (list, filteredList, onSuccess, multi) {
                         var sref = app.models.user.getLocationSref();
                         if (sref == null) {
 
-                            app.models.user.toggleListFilter('probability', 'probabilityGroup');
-                            $('#probability.filter').prop('checked', false).checkboxradio('refresh');
+                            app.models.user.toggleListFilter('probability', 'probabilityGroup', multi);
+                            var $button = $('#list-controls-tabs' + (multi ? '-multi' : '')).find('#probability.filter');
+                            $button.prop('checked', false).checkboxradio('refresh');
 
                             var initBtn = "init-button";
                             var initCancelBtnId = "init-cancel-button";

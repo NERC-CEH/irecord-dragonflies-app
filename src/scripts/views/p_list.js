@@ -26,9 +26,6 @@ define([
         initialize: function () {
             _log('views.ListPage: initialize', log.DEBUG);
 
-            this.$listControlsButton = this.$el.find('#list-controls-button');
-            this.listControlsView = new ListControlsView(this.$listControlsButton);
-
             this.render();
             this.appendEventListeners();
 
@@ -41,11 +38,16 @@ define([
             _log('views.ListPage: render', log.DEBUG);
 
             this.$el.html(this.template());
+
+            this.$list = this.$el.find('#list-placeholder');
             this.renderList();
 
             $('body').append($(this.el));
 
             //add list controls
+            this.$listControlsButton = this.$el.find('#list-controls-button');
+            this.listControlsView = new ListControlsView(this.$listControlsButton);
+
             var $listControls = this.$el.find('#list-controls-placeholder');
             $listControls.html(this.listControlsView.el);
 
@@ -54,7 +56,6 @@ define([
 
         renderList: function () {
             this.listView = new ListView({collection: app.collections.species});
-            this.$list = this.$el.find('#list-placeholder');
             this.$list.html(this.listView.render().el);
             return this.listView;
         },

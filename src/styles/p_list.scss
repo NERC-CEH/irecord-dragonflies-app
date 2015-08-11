@@ -71,16 +71,6 @@ ol[data-role="listview"] > li > p {
 }
 
 @media only screen and (max-width: 400px) {
-
-  h1.taxon {
-    display: none !important;
-  }
-  div.taxon {
-    font-style: italic;
-    float: left;
-    display: block !important;
-  }
-
   .common-name {
     white-space: initial !important;
     font-size: 1.2em;

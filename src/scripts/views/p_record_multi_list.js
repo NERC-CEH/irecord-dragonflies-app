@@ -16,23 +16,12 @@ define([
 
         events: {
             'click #list-controls-save-button': 'toggleListControls',
-            'click #list-controls-button': 'toggleListControls',
+            'click #record-multi-list-controls-button': 'toggleListControls',
             'change input[type=radio]': 'toggleListControls'
         },
 
         initialize: function () {
             _log('views.RecordMultiListPage: initialize', log.DEBUG);
-
-            this.$listControlsButton = this.$el.find('#list-controls-button');
-
-            //todo: enable list controls
-            //this.listControlsView = new ListControlsView(this.$listControlsButton);
-            this.listControlsView = new (Backbone.View.extend({
-                toggleListControls: function () {
-                    app.message('<center><b>Disabled</b></center>', 500);
-                },
-                updateListControlsButton: function (){}
-            }))();
 
             this.render();
             this.appendEventListeners();
@@ -44,14 +33,22 @@ define([
             _log('views.RecordMultiListPage: render', log.DEBUG);
 
             this.$el.html(this.template());
-
             $('body').append($(this.el));
 
             //add list controls
-            this.$listControls = this.$el.find('#list-controls-placeholder');
-            this.$listControls.html(this.listControlsView.el);
+            this.$listControlsButton = this.$el.find('#list-controls-button');
+            this.listControlsView = new ListControlsView({
+                id: 'list-controls-tabs-multi',
+                multi: true,
+                button: this.$listControlsButton,
+                filtersKey: 'filtersMulti',
+                sortKey: 'sortMulti'
+            });
+
             this.$list = this.$el.find('#record-multi-list-placeholder');
 
+            var $listControls = this.$el.find('#record-multi-list-controls-placeholder');
+            $listControls.html(this.listControlsView.el);
             return this;
         },
 

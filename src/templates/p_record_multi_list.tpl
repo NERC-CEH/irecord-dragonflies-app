@@ -8,8 +8,8 @@
     <h1 class="record-multi-list-heading">Select Species</h1>
 
     <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
-        <button id="list-controls-button" class="header" data-icon="filter"
-                data-iconpos="notext">List Controls</button>
+        <button id="record-multi-list-controls-button" class="header ui-btn ui-icon-filter ui-nodisc-icon
+        ui-btn-icon-notext">List Controls</button>
     </div>
     <div id="record-multi-list-controls-placeholder"></div>
 </div>
