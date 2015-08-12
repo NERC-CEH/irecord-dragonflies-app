@@ -16,7 +16,7 @@ define([
 
         events: {
             'click #syncAll-button': 'syncAll',
-            'click .sync-button': 'sync',
+            'click .sync': 'sync',
             'click .delete-button': 'deleteSavedRecord',
             'click #logout-button': 'signOut'
         },
@@ -51,24 +51,33 @@ define([
         /**
          * Recursively sends all the saved user records.
          */
-        syncAll: function () {
-            $.mobile.loading('show');
+        syncAll: function (e) {
+            var $button = $(e.currentTarget);
+            $button.addClass('sync-icon-reload');
 
             function onSuccess() {
                 app.views.userPage.printList();
             }
 
-            function onSuccessAll() {
-                $.mobile.loading('hide');
+            function callback(err) {
+                $button.removeClass('sync-icon-reload');
+                if (err) {
+                    var message =
+                        "<center><h2>Error</h2></center> <br/>" +
+                        err.message || '<h3>Some problem occurred </h3>';
+
+                    app.message(message);
+                    return;
+                }
                 app.views.listPage.updateUserPageButton();
             }
 
             if (app.models.user.hasSignIn()) {
-                app.recordManager.syncAll(onSuccess, onSuccessAll);
+                app.recordManager.syncAll(onSuccess, callback);
             } else {
                 contactDetailsDialog(function () {
-                    $.mobile.loading('show');
-                    app.recordManager.syncAll(onSuccess, onSuccessAll);
+                    $button.addClass('sync-icon-reload');
+                    app.recordManager.syncAll(onSuccess, callback);
                 });
             }
         },
@@ -80,42 +89,33 @@ define([
          * data attribute.
          */
         sync: function (e) {
-            var recordKey = $(e.currentTarget).data('id');
+            var $button = $(e.currentTarget),
+                recordKey = $button.data('id');
 
-            var onSuccess = null, onError = null;
+            var callback = null;
             if (navigator.onLine) {
+
+                $button.addClass('sync-icon-reload');
                 //online
-                $.mobile.loading('show');
+                callback = function (err) {
+                    $button.removeClass('sync-icon-reload');
 
-                onSuccess = function () {
-                    //for some reason need a timeout
-                    setTimeout(function () {
-                        app.views.listPage.updateUserPageButton();
-                    }, 100);
+                    if (err) {
+                        var message =
+                            "<center><h2>Error</h2></center> <br/>" +
+                            error.message || '<h3>Some problem occurred </h3>';
 
-                    app.message("<center><h2>Done</h2></center>");
-
-                    morel.record.db.remove(recordKey, function () {
-                        app.views.userPage.printList();
-                    });
-                };
-
-                onError = function (error) {
-                    _log(error, log.ERROR);
-
-                    var message =
-                        "<center><h2>Error</h2></center> <br/>" +
-                        error.message || '<h3>Some problem occurred </h3>';
-
-                    app.message(message);
+                        app.message(message);
+                        return;
+                    }
                 };
 
                 if (app.models.user.hasSignIn()) {
-                    morel.io.sendSavedRecord(recordKey, onSuccess, onError);
+                    app.recordManager.sync(recordKey, callback);
                 } else {
                     contactDetailsDialog(function () {
-                        $.mobile.loading('show');
-                        morel.io.sendSavedRecord(recordKey, onSuccess, onError);
+                        $button.addClass('sync-icon-reload');
+                        app.recordManager.sync(recordKey, callback);
                     });
                 }
             } else {

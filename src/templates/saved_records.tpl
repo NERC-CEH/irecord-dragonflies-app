@@ -10,7 +10,7 @@
         </li>
         <% _.each (records, function (record) { %>
         <li>
-            <a href="#user" class="sync-button saved-list-item" data-id="<%- record.id %>">
+            <a href="#user" class="sync sync-icon-local saved-list-item" data-id="<%- record.id %>">
                 <% if (record.img) { %>
                     <div class="img-picker-display <%- record.multiRecord ? 'multi':'' %>"
                          style="background-image: none; border: 0px; height: 55px; width: 55px;">
