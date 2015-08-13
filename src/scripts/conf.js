@@ -22,12 +22,8 @@ define(['morel', 'helpers/log'], function () {
         },
         LOGIN: {
             STATUS: true,
-            URL: "http://192.171.199.230/irecord7/user/mobile/register",
+            URL: "http://192.171.199.230/dragonfly/user/mobile/register",
             TIMEOUT: 80000
-        },
-        SEND_RECORD: {
-            STATUS: true,
-            URL: "http://192.171.199.230/irecord7/mobile/submit"
         },
         REGISTER: {
             STATUS: true
@@ -115,75 +111,84 @@ define(['morel', 'helpers/log'], function () {
 
     //morel configuration
     app.CONF.morel = {
-        url: 'http://192.171.199.230/irecord7/mobile/submit',
+        url: 'http://192.171.199.230/dragonfly/mobile/submit',
         appname: "test",
         appsecret: "mytest",
-        website_id: 23,
-        survey_id: 256,
+        website_id: 99,
+        survey_id: 178,
         Storage: morel.DatabaseStorage
     };
 
     $.extend(morel.Sample.KEYS, {
-        LOCATION_ACCURACY: {
-            id: 'accurracy'
+        NAME: {
+            id: '12'
         },
-        RECORDEDALL: {
-            id: '2222',
+        SURNAME: {
+          id: '13'
+        },
+        EMAIL: {
+            id: '9'
+        },
+        LOCATION_ACCURACY: {
+            id: '273'
+        },
+        RECORDED_ALL: {
+            id: '115',
             values: {
-                'true': 663,
-                'false': 664
+                'true': 1,
+                'false': 0
             }
         }
     });
 
     var numberRanges = {
-        '1': 665,
-        '2-5': 666,
-        '6-20': 667,
-        '21-100': 668,
-        '101-500': 669,
-        '500+': 670,
-        'Present': 671 //default
+        '1': 760,
+        '2-5': 761,
+        '6-20': 762,
+        '21-100': 763,
+        '101-500': 764,
+        '500+': 765,
+        'Present': 766 //default
     };
 
     $.extend(morel.Occurrence.KEYS, {
         NUMBER: {
-            id: '379', values: numberRanges
+            id: '285', values: numberRanges
         },
         ADULT: {
-            id: '7879997', values: numberRanges
+            id: '48', values: numberRanges
         },
         COPULATING: {
-            id: '9998', values: numberRanges
+            id: '49', values: numberRanges
         },
         OVIPOSITING: {
-            id: '78787879', values: numberRanges
+            id: '50', values: numberRanges
         },
         LARVAE: {
-            id: '789787', values: numberRanges
+            id: '51', values: numberRanges
         },
         EXUVIAE: {
-            id: '78798', values: numberRanges
+            id: '52', values: numberRanges
         },
         EMERGENT: {
-            id: '8797987', values: numberRanges
+            id: '53', values: numberRanges
         },
         STAGE: {
-            id: '378',
+            id: '286',
             values: {
-                Adult: 4756,
-                Copulating: 4757,
-                Ovipositing: 4758,
-                Larva: 4759,
-                Exuvia: 4760,
-                Emergent: 4761
+                Adult: 3640,
+                Copulating: 3641,
+                Ovipositing: 3642,
+                Larva: 3643,
+                Exuviae: 3644,
+                Emergent: 3645
             }
         },
         CERTAIN: {
-            id: '32',
+            id: '223',
             values: {
-                TRUE: 663,
-                FALSE: 664 //default
+                TRUE: 1, //default
+                FALSE: 0
             }
         }
     });

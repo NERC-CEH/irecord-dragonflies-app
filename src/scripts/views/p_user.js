@@ -222,10 +222,8 @@ define([
 
             if (this.model.occurrences.length <= 1) {
                 var occurrence = this.model.occurrences.getFirst(),
-                    taxon = occurrence.get('taxon');
-                var specie = app.collections.species.find(function(model) {
-                    return model.get('warehouse_id') === taxon;
-                });
+                    speciesID = occurrence.get('taxon');
+                var specie = app.collections.species.find({id: speciesID});
                 templateData.common_name = specie ? specie.attributes.common_name : '';
 
                 templateData.img = occurrence.images.getFirst();

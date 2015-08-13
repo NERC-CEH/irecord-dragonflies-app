@@ -87,8 +87,8 @@ define([
             var specie = app.collections.species.find({id: speciesID});
             this.occurrence = new morel.Occurrence({
                 attributes: {
-                    'taxon': specie.attributes.warehouse_id,
-                    'number': morel.Occurrence.KEYS.NUMBER.values['Present']
+                    'taxon': speciesID,
+                    'number': 'Present'
                 }
             });
 
@@ -349,15 +349,7 @@ define([
          */
         updateNumberButton: function () {
             var value = this.occurrence.get('number');
-            var text = '';
-            var keys = Object.keys(morel.Occurrence.KEYS.NUMBER.values);
-            for (var i = 0; i < keys.length; i++) {
-                if (morel.Occurrence.KEYS.NUMBER.values[keys[i]] === value) {
-                    text = keys[i];
-                    break;
-                }
-            }
-            this.$numberButton.html(text);
+            this.$numberButton.html(value);
         },
 
         /**
@@ -365,15 +357,7 @@ define([
          */
         updateStageButton: function () {
             var value = this.occurrence.get('stage');
-            var text = '';
-            var keys = Object.keys(morel.Occurrence.KEYS.STAGE.values);
-            for (var i = 0; i < keys.length; i++) {
-                if (morel.Occurrence.KEYS.STAGE.values[keys[i]] === value) {
-                    text = keys[i];
-                    break;
-                }
-            }
-            this.$stageButton.html(text);
+            this.$stageButton.html(value);
         },
 
         /**

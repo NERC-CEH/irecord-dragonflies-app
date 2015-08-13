@@ -51,18 +51,7 @@ define([
             //unset all radio buttons
             this.$el.find("input:radio").attr("checked", false).checkboxradio("refresh");
             if (value) {
-                var ranges = function (val) {
-                    var range = '';
-                    for (range in morel.Occurrence.KEYS.NUMBER.values) {
-                        if (morel.Occurrence.KEYS.NUMBER.values[range] === val) {
-                            return range;
-                        }
-                    }
-                    return '';
-                };
-
-                var range = ranges(value),
-                    $input = this.$el.find('input:radio[value="' + range + '"]');
+                var $input = this.$el.find('input:radio[value="' + value + '"]');
                 $input.prop('checked', true).checkboxradio('refresh');
             }
         },
@@ -92,7 +81,6 @@ define([
          */
         save: function (e) {
             var value = e.currentTarget.value;
-            value = morel.Occurrence.KEYS.NUMBER.values[value];
             if (value !== "") {
                 this.model.set(this.name, value);
             }

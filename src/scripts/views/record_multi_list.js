@@ -66,8 +66,8 @@ define([
 
                     var occurrence = new morel.Occurrence({
                             attributes: {
-                                'taxon': parseInt(specie.attributes.warehouse_id),
-                                'adult': morel.Occurrence.KEYS.NUMBER.values['1']
+                                'taxon': speciesID,
+                                'adult': '1'
                             }
                         });
 

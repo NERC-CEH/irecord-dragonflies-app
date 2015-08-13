@@ -60,7 +60,6 @@ define([
          */
         save: function (e) {
             var value = e.currentTarget.value;
-            value = morel.Occurrence.KEYS.STAGE.values[value];
             if (value) {
                 this.model.set(this.id, value);
             }

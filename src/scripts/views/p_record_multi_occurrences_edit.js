@@ -123,18 +123,9 @@ define([
             var that = this;
             this.$numberButtons.each(function(){
                 var stage = $(this).data('stage'),
-                    value = that.model.get(stage),
-                    ranges = function (val) {
-                        var range = '';
-                        for (range in morel.Occurrence.KEYS.NUMBER.values) {
-                            if (morel.Occurrence.KEYS.NUMBER.values[range] === val) {
-                                return range;
-                            }
-                        }
-                        return '';
-                    };
+                    value = that.model.get(stage);
 
-                $(this).find('.descript').html(ranges(value));
+                $(this).find('.descript').html(value || '');
             });
         },
 

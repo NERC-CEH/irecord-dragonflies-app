@@ -109,13 +109,13 @@ define([
 
             $('#' + yesButtonID).on('click', function () {
                 that.model.offAll();
-                that.model.set('recordedall', 'true');
+                that.model.set('recorded_all', true);
                 app.recordManager.set(that.model, callback);
             });
 
             $('#' + noButtonID).on('click', function () {
                 that.model.offAll();
-                that.model.set('recordedall', 'false');
+                that.model.set('recorded_all', false);
                 app.recordManager.set(that.model, callback);
             });
         },
