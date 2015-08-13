@@ -83,6 +83,7 @@ define([
                 }
 
                 morel.Geoloc.clear();
+                that.model.offAll();
 
                 app.message("<center><h2>Record saved.</h2></center>");
                 setTimeout(function () {
@@ -107,11 +108,13 @@ define([
             app.message(message, 0);
 
             $('#' + yesButtonID).on('click', function () {
+                that.model.offAll();
                 that.model.set('recordedall', 'true');
                 app.recordManager.set(that.model, callback);
             });
 
             $('#' + noButtonID).on('click', function () {
+                that.model.offAll();
                 that.model.set('recordedall', 'false');
                 app.recordManager.set(that.model, callback);
             });

@@ -183,6 +183,7 @@ define([
                 }, 2000);
             }
 
+            this.model.offAll();
             app.recordManager.set(this.model, callback);
         },
 
