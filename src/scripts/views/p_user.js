@@ -17,12 +17,13 @@ define([
         events: {
             'click #syncAll-button': 'syncAll',
             'click .sync': 'sync',
-            'click .delete-button': 'deleteSavedRecord',
-            'click #logout-button': 'signOut'
+            'click .delete-button': 'deleteSavedRecord'
         },
 
         initialize: function () {
             _log('views.UserPage: initialize', log.DEBUG);
+
+            this.model = app.models.user;
 
             this.render();
             this.appendEventListeners();
@@ -34,18 +35,50 @@ define([
             this.$el.html(this.template());
             $('body').append($(this.el));
 
+            this.$loginWarning = this.$el.find('#login-warning');
+            this.$list = this.$el.find('#samples-list-placeholder');
+            this.$heading = this.$el.find('#user_heading');
+
+            this.renderUserControls();
+            this.renderList();
+
             return this;
         },
 
-        update: function () {
-            this.printUserControls();
-            this.printList();
+        renderList: function () {
+            var that = this;
+            app.recordManager.getAll(function (err, samples) {
+                if (err) {
+                    app.message(err.message);
+                    return;
+                }
+                that.listView = new SamplesList({
+                    collection: samples
+                });
+                that.$list.html(that.listView.el);
+            });
+        },
+
+        /**
+         * Renders the user login information.
+         */
+        renderUserControls: function () {
+            if (app.models.user.hasSignIn()){
+                //logged in
+                var name = app.models.user.get('name');
+                var surname = app.models.user.get('surname');
+                this.$heading.html(name + ' ' + surname);
+                this.$loginWarning.hide();
+            } else {
+                //logged out
+                this.$heading.html('My Account');
+                this.$loginWarning.show();
+            }
         },
 
         appendEventListeners: function () {
-            this.listenTo(app.models.user, 'change:location', this.update);
-
             this.appendBackButtonListeners();
+            this.listenTo(this.model, 'change:secret', this.renderUserControls);
         },
 
         /**
@@ -53,10 +86,9 @@ define([
          */
         syncAll: function (e) {
             var $button = $(e.currentTarget);
-            $button.addClass('sync-icon-reload');
 
             function onSuccess() {
-                app.views.userPage.printList();
+               // app.views.userPage.renderList();
             }
 
             function callback(err) {
@@ -73,6 +105,7 @@ define([
             }
 
             if (app.models.user.hasSignIn()) {
+                $button.addClass('sync-icon-reload');
                 app.recordManager.syncAll(onSuccess, callback);
             } else {
                 contactDetailsDialog(function () {
@@ -90,34 +123,31 @@ define([
          */
         sync: function (e) {
             var $button = $(e.currentTarget),
-                recordKey = $button.data('id');
+                sampleID = $button.data('id');
 
             var callback = null;
             if (navigator.onLine) {
-
-                $button.addClass('sync-icon-reload');
                 //online
-                callback = function (err) {
-                    $button.removeClass('sync-icon-reload');
+                app.recordManager.get(sampleID, function (err, sample) {
+                    callback = function (err) {
+                        if (err) {
+                            var message =
+                                "<center><h2>Error</h2></center> <br/>" +
+                                err.message || '<h3>Some problem occurred </h3>';
 
-                    if (err) {
-                        var message =
-                            "<center><h2>Error</h2></center> <br/>" +
-                            error.message || '<h3>Some problem occurred </h3>';
+                            app.message(message);
+                            return;
+                        }
+                    };
 
-                        app.message(message);
-                        return;
+                    if (app.models.user.hasSignIn()) {
+                        app.recordManager.sync(sample, callback);
+                    } else {
+                        contactDetailsDialog(function () {
+                            app.recordManager.sync(sample, callback);
+                        });
                     }
-                };
-
-                if (app.models.user.hasSignIn()) {
-                    app.recordManager.sync(recordKey, callback);
-                } else {
-                    contactDetailsDialog(function () {
-                        $button.addClass('sync-icon-reload');
-                        app.recordManager.sync(recordKey, callback);
-                    });
-                }
+                });
             } else {
                 //offline
                 app.message("<center><h2>Sorry</h2></center>" +
@@ -137,90 +167,96 @@ define([
             e.preventDefault();
 
             var recordKey = $(e.currentTarget).data('id');
-            app.recordManager.remove(recordKey, function () {
-                app.views.userPage.printList();
+            app.recordManager.remove(recordKey);
+        }
+    });
+
+    var SamplesList = Backbone.View.extend({
+        template: app.templates.samples_list,
+
+        initialize: function () {
+            this.render();
+            //update view on saved samples update
+            this.collection.on('update', this.render, this);
+        },
+
+        render: function () {
+            this.$el.html(this.template());
+            this.$list = this.$el.find('#samples-list');
+            this.renderList();
+            this.$list.listview().listview('refresh');
+        },
+
+        renderList: function () {
+            var that = this;
+            this.collection.each(function (sample) {
+                var sampleView = new SamplesListItem({
+                    model: sample
+                });
+                that.$list.append(sampleView.el);
             });
+        }
+    });
+
+    var SamplesListItem = Backbone.View.extend({
+        tagName: "li",
+
+        template: app.templates.samples_list_item,
+
+        initialize: function () {
+            this.render();
+            this.$syncButton = this.$el.find('.sync');
+
+            this.showSyncStatus();
+            this.model.on('change', this.render, this);
+            this.model.on('sync:done', this.showSyncStatus, this);
+            this.model.on('sync:error', this.showSyncStatus, this);
+            this.model.on('sync:request', this.showSync, this);
+
         },
 
-        /**
-         * Renders the user login information.
-         */
-        printUserControls: function () {
-            var $logoutButton = $('#logout-button');
-            var $loginWarning = $('#login-warning');
+        render: function () {
+            var templateData = {};
+            templateData.id = this.model.id;
+            templateData.date = this.model.get('date');
 
-            if (app.models.user.hasSignIn()){
-                //logged in
-                var name = app.models.user.get('name');
-                var surname = app.models.user.get('surname');
-                $('#user_heading').html(name + ' ' + surname);
+            if (this.model.occurrences.length <= 1) {
+                var occurrence = this.model.occurrences.getFirst(),
+                    taxon = occurrence.get('taxon');
+                var specie = app.collections.species.find(function(model) {
+                    return model.get('warehouse_id') === taxon;
+                });
+                templateData.common_name = specie ? specie.attributes.common_name : '';
 
-                $logoutButton.show();
-                $loginWarning.hide();
+                templateData.img = occurrence.images.getFirst();
+
+                //multi record
             } else {
-                //logged out
-                $('#user_heading').html('My Account');
+                templateData.multiRecord = this.model.occurrences.length;
+            }
 
-                $logoutButton.hide();
-                $loginWarning.show();
+            this.$el.html(this.template(templateData));
+            //trigger create
+        },
+
+        showSyncStatus: function () {
+            if (this.model.warehouse_id) {
+                //on cloud
+                this.$syncButton.removeClass('sync-icon-reload');
+                this.$syncButton.removeClass('sync-icon-local');
+                this.$syncButton.addClass('sync-icon-cloud');
+            } else {
+                //local
+                this.$syncButton.removeClass('sync-icon-reload');
+                this.$syncButton.removeClass('sync-icon-cloud');
+                this.$syncButton.addClass('sync-icon-local');
             }
         },
 
-        /**
-         * Renders the list of the saved records.
-         */
-        printList: function () {
-            function callback(err, savedRecords) {
-                var $placeholder = $('#saved-list-placeholder');
-
-                if (err) {
-                    $placeholder.html('Error getting saved records');
-                    return;
-                }
-
-                var records = [],
-                    flatRecord = {},
-                    inputKeys = {},
-                    savedRecordIDs = Object.keys(savedRecords);
-                for (var i = 0, length = savedRecordIDs.length; i < length; i++) {
-                    var record = savedRecords[savedRecordIDs[i]],
-                        templateData = {};
-                    templateData.id = record.id;
-                    templateData.date = record.get('date');
-
-                    if (record.occurrences.length <= 1) {
-                        var occurrence = savedRecords[record.id]
-                            .occurrences.getFirst(),
-                            taxon = occurrence.get('taxon');
-                        var specie = app.collections.species.find(function(model) {
-                            return model.get('warehouse_id') === taxon;
-                        });
-                        templateData.common_name = specie ? specie.attributes.common_name : '';
-
-                        templateData.img = occurrence.images.getFirst();
-
-                    //multi record
-                    } else {
-                        templateData.multiRecord = record.occurrences.length;
-                    }
-
-                    records.push(templateData);
-                }
-
-                $placeholder.html(app.templates.saved_records({'records': records}));
-                $placeholder.trigger('create');
-            }
-
-            app.recordManager.getAll(callback);
-        },
-
-        /**
-         * Signs the user out.
-         */
-        signOut: function () {
-            _log('user: logging out', log.DEBUG);
-            app.models.user.signOut();
-            this.update();
+        showSync: function () {
+            this.$syncButton.removeClass('sync-icon-local');
+            this.$syncButton.removeClass('sync-icon-cloud');
+            this.$syncButton.addClass('sync-icon-reload');
         }
     });
 

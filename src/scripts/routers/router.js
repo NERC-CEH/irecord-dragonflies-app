@@ -100,8 +100,6 @@ define([
                     app.views.userPage = new UserPage();
                 }
                 this.changePage(app.views.userPage);
-
-                app.views.userPage.update();
             },
 
             "settings": function () {

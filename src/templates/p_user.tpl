@@ -16,5 +16,5 @@
         to your submitted records on iRecord.
         <a href='#login' data-role="button">Sign in</a>
     </div>
-    <div id="saved-list-placeholder"></div>
+    <div id="samples-list-placeholder"></div>
 </div>

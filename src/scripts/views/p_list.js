@@ -30,6 +30,7 @@ define([
             this.appendEventListeners();
 
             this.$userPageButton = $('#user-page-button');
+            this.updateUserPageButton();
 
             this.trip();
         },
@@ -62,12 +63,11 @@ define([
 
         update: function () {
             this.updateListControlsButton();
-            this.updateUserPageButton();
         },
 
         appendEventListeners: function () {
             this.listenTo(app.models.user, 'change:filters', this.updateListControlsButton);
-
+            app.recordManager.on('update', this.updateUserPageButton, this);
             this.appendBackButtonListeners();
         },
 
@@ -101,14 +101,17 @@ define([
 
         /**
          * Updates the user page navigation button with the state of saved records.
-         * Todo: hook into some record counter event
          */
         updateUserPageButton: function () {
-            var $userPageButton = this.$userPageButton;
+            _log('views.ListPage: updating user button.', log.DEBUG);
+            var that = this;
 
-            function onSuccess(err, savedRecords) {
-                var savedRecordIDs = Object.keys(savedRecords);
-                $userPageButton.toggleClass('running', savedRecordIDs.length > 0);
+            function onSuccess(err, samples) {
+                var unsent = 0;
+                samples.each(function (sample) {
+                    if (!sample.warehouse_id) unsent++;
+                });
+                that.$userPageButton.toggleClass('running', unsent > 0);
             }
             app.recordManager.getAll(onSuccess);
         },

@@ -13,7 +13,7 @@
 
     </div>
 
-    <% if (app.models.user.isSortScientific()) { %>
+    <% if (app.models.user.isSortScientific(true)) { %>
         <p class="species-list-main-name"><b><i><%- taxon %></i></b></p>
     <% } else { %>
         <p class="species-list-main-name"><b><%- common_name %></b></p>
