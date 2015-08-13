@@ -121,23 +121,19 @@ define(['morel', 'helpers/log'], function () {
 
     $.extend(morel.Sample.KEYS, {
         NAME: {
-            id: '12'
+            id: 12
         },
         SURNAME: {
-          id: '13'
+            id: 13
         },
         EMAIL: {
-            id: '9'
+            id: 9
         },
         LOCATION_ACCURACY: {
-            id: '273'
+            id: 273
         },
         RECORDED_ALL: {
-            id: '115',
-            values: {
-                'true': 1,
-                'false': 0
-            }
+            id: 115
         }
     });
 
@@ -153,28 +149,28 @@ define(['morel', 'helpers/log'], function () {
 
     $.extend(morel.Occurrence.KEYS, {
         NUMBER: {
-            id: '285', values: numberRanges
+            id: 285, values: numberRanges
         },
         ADULT: {
-            id: '48', values: numberRanges
+            id: 48, values: numberRanges
         },
         COPULATING: {
-            id: '49', values: numberRanges
+            id: 49, values: numberRanges
         },
         OVIPOSITING: {
-            id: '50', values: numberRanges
+            id: 50, values: numberRanges
         },
         LARVAE: {
-            id: '51', values: numberRanges
+            id: 51, values: numberRanges
         },
         EXUVIAE: {
-            id: '52', values: numberRanges
+            id: 52, values: numberRanges
         },
         EMERGENT: {
-            id: '53', values: numberRanges
+            id: 53, values: numberRanges
         },
         STAGE: {
-            id: '286',
+            id: 286,
             values: {
                 Adult: 3640,
                 Copulating: 3641,
@@ -185,10 +181,56 @@ define(['morel', 'helpers/log'], function () {
             }
         },
         CERTAIN: {
-            id: '223',
+            id: 223
+        },
+        TAXON: {
+            id: 'taxon',
             values: {
-                TRUE: 1, //default
-                FALSE: 0
+                1: 4617,
+                2: 4696,
+                3: 4612,
+                4: 4615,
+                5: 4609,
+                6: 4611,
+                7: 4644,
+                8: 4642,
+                9: 4618,
+                10: 4622,
+                11: 4627,
+                12: 4628,
+                13: 4624,
+                14: 4637,
+                15: 4630,
+                16: 4632,
+                17: 4639,
+                18: 4640,
+                19: 4635,
+                20: 4700,
+                21: 4646,
+                22: 4648,
+                23: 4650,
+                24: 4654,
+                25: 4656,
+                26: 4652,
+                27: 4658,
+                28: 4660,
+                29: 4662,
+                30: 4665,
+                31: 4666,
+                32: 4668,
+                33: 4671,
+                34: 4673,
+                35: 4674,
+                36: 4677,
+                37: 4678,
+                38: 4681,
+                39: 4683,
+                40: 4685,
+                41: 4687,
+                42: 4691,
+                43: 4693,
+                44: 4695,
+                45: 878675
             }
         }
     });
