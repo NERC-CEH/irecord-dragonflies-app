@@ -28,8 +28,21 @@ div.loading {
   color: white;
 }
 
-#safari-add-homescreen {
-  margin: auto;
+.add-homescreen > ol {
+  padding-left: 30px;
+}
+
+.instruction {
+  height: 50px;
+}
+
+.instruction > p {
+  width: 70%;
+}
+
+.instruction > img{
+  float:right;
+  width: 34px;
 }
 
 /* User details dialog */
