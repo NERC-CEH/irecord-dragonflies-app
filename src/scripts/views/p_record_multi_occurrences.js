@@ -95,7 +95,7 @@ define([
                 noButtonID = 'no-button';
 
             var message =
-                '<h3><center>Recorded all species?</center></h3>' +
+                '<h3><center>Did you record all species present?</center></h3>' +
 
                 '<button id="' + yesButtonID + '" style="width:43%"' +
                 'class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ' +

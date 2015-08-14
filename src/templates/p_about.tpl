@@ -38,7 +38,7 @@
                 please do not hesitate to <a href='mailto:karkaz@ceh.ac.uk'>contact us</a>.</p>
         </li>
         <li>
-            <p><i>App version: <%- app.VERSION %></i></p>
+            <p class="app-version">v<%- app.VERSION %></p>
         </li>
     </ul>
 </div>

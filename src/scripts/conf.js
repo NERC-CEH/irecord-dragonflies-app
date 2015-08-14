@@ -184,7 +184,6 @@ define(['morel', 'helpers/log'], function () {
             id: 223
         },
         TAXON: {
-            id: 'taxon',
             values: {
                 1: 4617,
                 2: 4696,
