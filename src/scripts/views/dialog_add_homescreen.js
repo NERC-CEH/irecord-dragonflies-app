@@ -5,8 +5,6 @@ define(['jquery', 'helpers/browser'], function ($, browser) {
     var Dialog = function (callback) {
         if(browser.isMobile() && !browser.isHomeMode()) {
             setTimeout(function(){
-                var finishedBtnCloseId = 'finished-ok-button';
-
                 var addingToHomeScreen = '<p>1. Open <strong>Browser Options</strong></p>' +
                     '<p>2. Tap <strong>Add to Home Screen</strong></p>';
 
@@ -27,16 +25,10 @@ define(['jquery', 'helpers/browser'], function ($, browser) {
 
                 var message =
                     '<div class="add-homescreen">' +
-                    '<center><h2>Add to Homescreen</h2></center>' +
-                    addingToHomeScreen +
-                    '<button id="' + finishedBtnCloseId + '">OK</button>' +
-                    '</div>';
+                    '<center><h2>Save app to Homescreen</h2></center>' +
+                    addingToHomeScreen + '</div>';
 
-                app.message(message, 0);
-
-                $('#' + finishedBtnCloseId ).on('click', function () {
-                    callback();
-                });
+                app.message(message, 0, callback);
             }, 500);
         }
     };

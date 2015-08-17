@@ -5,8 +5,8 @@ define([
     'views/_page',
     'views/list',
     'views/list_controls',
-    'helpers/download',
-    'helpers/add_homescreen_dialog',
+    'views/dialog_download',
+    'views/dialog_add_homescreen',
     'tripjs',
     'templates'
 ], function (DefaultPage, ListView, ListControlsView, download, addHomescreenDialog) {

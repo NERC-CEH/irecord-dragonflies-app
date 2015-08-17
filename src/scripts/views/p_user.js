@@ -3,7 +3,7 @@
  *****************************************************************************/
 define([
     'views/_page',
-    'views/contact_details_dialog',
+    'views/dialog_user_details',
     'templates',
     'latlon'
 ], function (DefaultPage, contactDetailsDialog) {

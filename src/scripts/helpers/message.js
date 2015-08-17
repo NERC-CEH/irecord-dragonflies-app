@@ -2,15 +2,18 @@
  * Displays a self disappearing lightweight message.
  *****************************************************************************/
 define(['jquery', 'jquery.mobile'], function ($, jqm) {
+
+    $('body').append("<div class='ui-loader-background'> </div>");
+
     /**
      *
      * @param text
      * @param time 0 if no hiding, null gives default 3000ms delay
      * @constructor
      */
-    var Message = function (text, time, close) {
+    var Message = function (text, time, callback) {
         var CLOSE_ID = 'loader-close',
-            CLOSE_HTML = '<div id="' + CLOSE_ID + '" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right"></div>';
+            CLOSE_HTML = '<div id="' + CLOSE_ID + '" class="ui-btn ui-loader-close ui-icon-delete ui-btn-icon-notext ui-btn-right"></div>';
 
         if (!text) {
             _log('NAVIGATION: no text provided to message.', log.ERROR);
@@ -18,7 +21,7 @@ define(['jquery', 'jquery.mobile'], function ($, jqm) {
         }
 
         var messageId = 'loaderMessage';
-        var html = '<div id="' + messageId + '">' + (close ? CLOSE_HTML : '') + text + '</div>';
+        var html = '<div id="' + messageId + '">' + (callback ? CLOSE_HTML : '') + text + '</div>';
 
         $.mobile.loading('show', {
             theme: "b",
@@ -32,6 +35,7 @@ define(['jquery', 'jquery.mobile'], function ($, jqm) {
 
         $('#' + CLOSE_ID).on('click', function () {
             $.mobile.loading('hide');
+            callback && callback();
         });
 
         if (time !== 0) {

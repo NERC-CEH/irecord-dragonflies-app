@@ -4,25 +4,30 @@
 define(['jquery'], function ($) {
     var Download = function (callback) {
         var downloadedApp = app.models.user.get('downloadedApp');
-        var dontAskDownloadApp = app.models.user.get('dontAskDownloadApp');
 
-        if (!downloadedApp && !dontAskDownloadApp) {
-            var donwloadBtnId = "download-button";
-            var donwloadCancelBtnId = "download-cancel-button";
-            var downloadCheckbox = "download-checkbox";
+        if (!downloadedApp) {
+            var yesButtonID = 'yes-button',
+                noButtonID = 'no-button';
 
             var message =
-                '<center><h3>Download the app for offline use?</h3></center>' +
+                '<h3><center>Download app for offline use?</center></h3>' +
 
-                '<label><input id="' + downloadCheckbox + '" type="checkbox" name="checkbox-0 ">Don\'t ask again' +
-                '</label> </br>' +
+                '<button id="' + yesButtonID + '" style="width:43%"' +
+                'class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ' +
+                'ui-mini">Yes</button>' +
 
-                '<button id="' + donwloadBtnId + '" class="ui-btn">Download</button>' +
-                '<button id="' + donwloadCancelBtnId + '" class="ui-btn">Cancel</button>';
+                '<button id="' + noButtonID + '" style="width:43%"' +
+                'class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left ' +
+                'ui-mini">No</button>';
 
-            app.message(message, 0);
+            app.message(message, 0, function () {
+                _log('helpers: appcache download canceled.', log.DEBUG);
 
-            $('#' + donwloadBtnId).on('click', function () {
+                app.models.user.save('downloadedApp', false);
+                callback && callback();
+            });
+
+            $('#' + yesButtonID).on('click', function () {
                 _log('helpers: starting appcache downloading process.', log.DEBUG);
                 $.mobile.loading('hide');
 
@@ -68,16 +73,11 @@ define(['jquery'], function ($) {
                 }, 500);
             });
 
-            $('#' + donwloadCancelBtnId).on('click', function () {
-                _log('helpers: appcache dowload canceled.', log.DEBUG);
+            $('#' + noButtonID).on('click', function () {
                 $.mobile.loading('hide');
-
-                var dontAsk = $('#' + downloadCheckbox).prop('checked');
-                app.models.user.save('downloadedApp', false);
-                app.models.user.save('dontAskDownloadApp', dontAsk);
-
                 callback && callback();
             });
+
         } else {
             callback && callback();
         }
