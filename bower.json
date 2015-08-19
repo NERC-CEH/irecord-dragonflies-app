@@ -14,6 +14,7 @@
     "photoswipe": "https://github.com/downloads/codecomputerlove/PhotoSwipe/code.photoswipe-3.0.5.zip",
     "fastclick": "1.0.3",
     "d3": "3.5.3",
+    "touchswipe": "mattbryson/TouchSwipe-Jquery-Plugin",
     "tripjs": "EragonJ/Trip.js#3.0.0"
   },
   "exportsOverride": {
@@ -63,6 +64,12 @@
         "lib/klass.min.js"
         ],
       "css": [ "photoswipe.css", "*.png", "*.gif"]
+    },
+    "touchswipe": {
+      "js": "jquery.touchSwipe.min.js"
+    },
+    "hammer": {
+      "js": ["hammer.min.js", "hammer.js"]
     },
     "tripjs": {
       "js": "dist/trip.min.js",

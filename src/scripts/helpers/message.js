@@ -35,7 +35,7 @@ define(['jquery', 'jquery.mobile'], function ($, jqm) {
 
         $('#' + CLOSE_ID).on('click', function () {
             $.mobile.loading('hide');
-            callback && callback();
+            typeof callback === 'function' && callback();
         });
 
         if (time !== 0) {

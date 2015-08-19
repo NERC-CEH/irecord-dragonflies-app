@@ -7,9 +7,11 @@ define([
     'views/list_controls',
     'views/dialog_download',
     'views/dialog_add_homescreen',
+    'helpers/browser',
     'tripjs',
     'templates'
-], function (DefaultPage, ListView, ListControlsView, download, addHomescreenDialog) {
+], function (DefaultPage, ListView, ListControlsView, download, addHomescreenDialog,
+browser) {
     'use strict';
 
     var Page = DefaultPage.extend({
@@ -20,7 +22,8 @@ define([
         events: {
             'click #list-controls-save-button': 'toggleListControls',
             'click #list-controls-button': 'toggleListControls',
-            'change input[type=radio]': 'toggleListControls'
+            'change input[type=radio]': 'toggleListControls',
+            'click #download-button': 'tripDownload'
         },
 
         initialize: function () {
@@ -51,6 +54,12 @@ define([
 
             var $listControls = this.$el.find('#list-controls-placeholder');
             $listControls.html(this.listControlsView.el);
+
+            //disable/enable downloading
+            this.$footer = this.$el.find('#list-footer');
+            if (app.models.user.get('downloaded-app')) {
+              this.$footer.hide();
+            }
 
             return this;
         },
@@ -120,78 +129,21 @@ define([
          * Shows the user around the page.
          */
         trip: function () {
-            var callback = this.listTrip;
-            var finishedTrips = app.models.user.get('trips') || [];
-
-            //run trip only once
-            if (finishedTrips.indexOf('welcome') < 0) {
-                addHomescreenDialog(function () {
-                    finishedTrips.push('welcome');
-                    app.models.user.set('trips', finishedTrips);
-                    app.models.user.save();
-
-                    if (app.CONF.OFFLINE.STATUS) {
-                        download(callback);
-                    } else {
-                        $.mobile.loading('hide');
-                        callback && callback();
-                    }
-                });
-            } else {
-                setTimeout(function() {
-                    download(callback);
-                }, 500);
+            var downloaded = app.models.user.get('downloaded-app');
+            if (!downloaded && browser.isIOS() && browser.isHomeMode()) {
+                download();
             }
-            //
-            ////in case the home screen mode was not detected correctly
-            //if (app.CONF.OFFLINE.STATUS) {
-            //    setTimeout(download, 500);
-            //}
         },
 
-        listTrip: function () {
-            var finishedTrips = app.models.user.get('trips') || [];
-
-            if (finishedTrips.indexOf('list') < 0) {
-                finishedTrips.push('list');
-                app.models.user.set('trips', finishedTrips);
-                app.models.user.save();
-
-                setTimeout(function () {
-                    trip.start();
-                }, 500);
-            }
-
-            var options = {
-                delay: 1500
+        tripDownload: function () {
+            var callback = function () {
+              app.views.listPage.$footer.hide();
             };
-
-            var trip = new Trip([
-                {
-                    sel: $('#user-page-button'),
-                    position: "s",
-                    content: 'Your Account',
-                    animation: 'fadeIn'
-                },
-                {
-                    sel: $('#fav-button'),
-                    position: "s",
-                    content: 'List Controls',
-                    animation: 'fadeIn'
-                },
-                {
-                    sel: $('a[href="#species/11"]'),
-                    position: "s",
-                    content: 'Species Account',
-                    animation: 'fadeIn'
-                },
-                {
-                    sel: $('a[href="#record/11"]'),
-                    position: "w",
-                    content: 'Recording',
-                    animation: 'fadeIn'
+            addHomescreenDialog(function () {
+                if (app.CONF.OFFLINE.STATUS) {
+                    download(callback);
                 }
-            ], options);
+            });
         }
     });
 

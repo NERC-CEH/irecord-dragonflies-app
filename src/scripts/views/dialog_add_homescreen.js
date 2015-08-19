@@ -4,13 +4,13 @@
 define(['jquery', 'helpers/browser'], function ($, browser) {
     var Dialog = function (callback) {
         if(browser.isMobile() && !browser.isHomeMode()) {
-            setTimeout(function(){
-                var addingToHomeScreen = '<p>1. Open <strong>Browser Options</strong></p>' +
-                    '<p>2. Tap <strong>Add to Home Screen</strong></p>';
+            var nextButtonID = 'next-dialog-button',
+                message = '';
 
-                if(browser.isIOS()){
-                    addingToHomeScreen =
-
+            if(browser.isIOS()){
+                message =
+                    '<div class="add-homescreen">' +
+                        '<center><h2>Download instructions</h2></center>' +
                         '<ol>' +
                         '<li class="instruction">' +
                             '<img id="safari-add-homescreen" src="images/add_homescreen_1.png">' +
@@ -20,17 +20,41 @@ define(['jquery', 'helpers/browser'], function ($, browser) {
                             '<img id="safari-add-homescreen" src="images/add_homescreen_2.png">' +
                             '<p>Tap <b>Add to home screen</b></p>' +
                         '</li>' +
-                        '</ol>';
-                }
+                        '<li class="instruction">' +
+                            '<img id="safari-add-homescreen" src="images/Icon-48.png">' +
+                            '<p><b>Open app</b> from home screen.</p>' +
+                        '</li>' +
+                        '</ol>' +
+                    '</div>';
 
-                var message =
+            } else {
+                message =
                     '<div class="add-homescreen">' +
-                    '<center><h2>Save app to Homescreen</h2></center>' +
-                    addingToHomeScreen + '</div>';
+                        '<center><h2>Download instructions</h2></center>' +
+                        '<ol>' +
+                        '<li class="instruction">' +
+                            '<img id="safari-add-homescreen" src="images/add_homescreen_1_android.png">' +
+                            '<p>Open <strong>Browser Options</strong></p>' +
+                        '</li>' +
+                        '<li class="instruction">' +
+                            '<img id="safari-add-homescreen" src="images/Icon-48.png">' +
+                            '<p>Tap <strong>Add to Home Screen</strong></p>' +
+                        '</li>' +
+                        '</ol>' +
 
-                app.message(message, 0, callback);
-            }, 500);
+                        '<button id="' + nextButtonID + '" style="width:43%; float:right"' +
+                        'class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-right ' +
+                        'ui-mini">Close</button>' +
+                '</div>';
+            }
+
+            app.message(message, 0, true);
+
+            $('#' + nextButtonID).on('click', callback);
+        } else {
+            callback();
         }
+
     };
 
     return Dialog;

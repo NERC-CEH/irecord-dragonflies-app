@@ -374,41 +374,41 @@ define([
          * Shows the user around the page.
          */
         trip: function () {
-            var finishedTrips = app.models.user.get('trips') || [];
-            if (finishedTrips.indexOf('record') < 0) {
-                finishedTrips.push('record');
-                app.models.user.set('trips', finishedTrips);
-                app.models.user.save();
-
-                setTimeout(function () {
-                    trip.start();
-                }, 500);
-            }
-
-            var options = {
-                delay: 1500
-            };
-
-            var trip = new Trip([
-                {
-                    sel: $('#photo-picker'),
-                    position: "s",
-                    content: 'Snap a picture',
-                    animation: 'fadeIn'
-                },
-                {
-                    sel: $('#number-button'),
-                    position: "s",
-                    content: 'Fill in the details',
-                    animation: 'fadeIn'
-                },
-                {
-                    sel: $('#entry-form-save'),
-                    position: "n",
-                    content: 'Save it',
-                    animation: 'fadeIn'
-                }
-            ], options);
+            //var finishedTrips = app.models.user.get('trips') || [];
+            //if (finishedTrips.indexOf('record') < 0) {
+            //    finishedTrips.push('record');
+            //    app.models.user.set('trips', finishedTrips);
+            //    app.models.user.save();
+            //
+            //    setTimeout(function () {
+            //        trip.start();
+            //    }, 500);
+            //}
+            //
+            //var options = {
+            //    delay: 1500
+            //};
+            //
+            //var trip = new Trip([
+            //    {
+            //        sel: $('#photo-picker'),
+            //        position: "s",
+            //        content: 'Snap a picture',
+            //        animation: 'fadeIn'
+            //    },
+            //    {
+            //        sel: $('#number-button'),
+            //        position: "s",
+            //        content: 'Fill in the details',
+            //        animation: 'fadeIn'
+            //    },
+            //    {
+            //        sel: $('#entry-form-save'),
+            //        position: "n",
+            //        content: 'Save it',
+            //        animation: 'fadeIn'
+            //    }
+            //], options);
         }
     });
 

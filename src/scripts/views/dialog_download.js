@@ -3,84 +3,46 @@
  *****************************************************************************/
 define(['jquery'], function ($) {
     var Download = function (callback) {
-        var downloadedApp = app.models.user.get('downloadedApp');
+        //for some unknown reason on timeout the popup does not disappear
+        setTimeout(function () {
+            function onSuccess() {
+                app.models.user.set('downloaded-app', true);
+                app.models.user.save();
 
-        if (!downloadedApp) {
-            var yesButtonID = 'yes-button',
-                noButtonID = 'no-button';
+                //Send update to Google Analytics
+                if (app.CONF.GA.STATUS){
+                    require(['ga'], function (ga) {
+                        ga('send', 'event', 'app', 'downloadSuccess');
+                    });
+                }
 
-            var message =
-                '<h3><center>Download app for offline use?</center></h3>' +
+                //finished reload popup
+                var finishedBtnId = 'download-finished-restart-button';
+                var finishedBtnCloseId = 'download-finished-close-button';
 
-                '<button id="' + yesButtonID + '" style="width:43%"' +
-                'class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ' +
-                'ui-mini">Yes</button>' +
+                var message =
+                    '<center><h3>App can be used offline now</h3></center>' +
+                    '<p>Do you want to restart it?</p>' +
+                    '<button id="' + finishedBtnId + '">Restart Now</button>' +
+                    '<button id="' + finishedBtnCloseId+ '">Restart Later</button>';
 
-                '<button id="' + noButtonID + '" style="width:43%"' +
-                'class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left ' +
-                'ui-mini">No</button>';
+                app.message(message, 0);
 
-            app.message(message, 0, function () {
-                _log('helpers: appcache download canceled.', log.DEBUG);
+                $('#' + finishedBtnId).on('click', function () {
+                    window.location.reload();
+                });
+                $('#' + finishedBtnCloseId).on('click', function () {
+                    $.mobile.loading('hide');
+                    callback && callback(null);
+                });
+            }
 
-                app.models.user.save('downloadedApp', false);
-                callback && callback();
-            });
+            function onError(error) {
+                _log(error, log.ERROR);
+            }
 
-            $('#' + yesButtonID).on('click', function () {
-                _log('helpers: starting appcache downloading process.', log.DEBUG);
-                $.mobile.loading('hide');
-
-                //for some unknown reason on timeout the popup does not disappear
-                setTimeout(function () {
-                    function onSuccess() {
-                        app.models.user.save('downloadedApp', true);
-
-                        //Send update to Google Analytics
-                        if (app.CONF.GA.STATUS){
-                            require(['ga'], function (ga) {
-                                ga('send', 'event', 'app', 'downloadSuccess');
-                            });
-                        }
-
-                        //finished reload popup
-                        var finishedBtnId = 'download-finished-restart-button';
-                        var finishedBtnCloseId = 'download-finished-close-button';
-
-                        var message =
-                            '<center><h3>App can be used offline now</h3></center>' +
-                            '<p>Do you want to restart it?</p>' +
-                            '<button id="' + finishedBtnId + '">Restart Now</button>' +
-                            '<button id="' + finishedBtnCloseId+ '">Restart Later</button>';
-
-                        app.message(message, 0);
-
-                        $('#' + finishedBtnId).on('click', function () {
-                            window.location.reload();
-                        });
-                        $('#' + finishedBtnCloseId).on('click', function () {
-                            $.mobile.loading('hide');
-                            callback && callback();
-                        });
-                    }
-
-                    function onError(error) {
-                        _log(error, log.ERROR);
-                        callback && callback();
-                    }
-
-                    startManifestDownload('appcache', onSuccess, onError);
-                }, 500);
-            });
-
-            $('#' + noButtonID).on('click', function () {
-                $.mobile.loading('hide');
-                callback && callback();
-            });
-
-        } else {
-            callback && callback();
-        }
+            startManifestDownload('appcache', onSuccess, onError);
+        }, 500);
     };
 
     /**

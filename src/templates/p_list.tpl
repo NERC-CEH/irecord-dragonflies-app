@@ -21,3 +21,7 @@
     <div id="list-controls-placeholder"></div>
 </div>
 <div data-role="content" id="list-placeholder"></div>
+<div data-role="footer" id="list-footer" data-position="fixed"
+     data-tap-toggle="false">
+        <button id="download-button" class="ui-btn ui-btn-b ui-icon-arrow-d">Download App</button>
+</div>

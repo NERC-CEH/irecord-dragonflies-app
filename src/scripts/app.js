@@ -60,8 +60,6 @@ define([
                 app.router = new Router();
                 Backbone.history.start();
 
-                //app.fixIOSbuttons();
-
                 FastClick.attach(document.body);
 
                 //turn off the loading splash screen

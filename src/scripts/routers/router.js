@@ -4,6 +4,7 @@
 define([
     'routers/router_extension',
     'views/_page',
+    'views/p_welcome',
     'views/p_list',
     'views/p_species',
     'views/p_user',
@@ -21,51 +22,13 @@ define([
     'views/p_stage',
     'views/p_comment',
     'helpers/browser'
-], function(ext, Page, ListPage, SpeciesPage, UserPage, SettingsPage, LoginPage, RegisterPage,
+], function(ext, Page, WelcomePage, ListPage, SpeciesPage, UserPage, SettingsPage, LoginPage, RegisterPage,
             RecordPage, RecordMultiPage, RecordMultiOccurrencesPage, RecordMultiOccurrencesEditPage,
             RecordMultiListPage, DatePage, LocationPage, NumberPage, StagePage,
             CommentPage, browser) {
     'use strict';
 
     app.views = {};
-
-    var welcome = {
-        route: function (multi) {
-            if (multi) {
-                if (!app.views.recordMultiListPage) {
-                    app.views.recordMultiListPage = new RecordMultiListPage();
-                }
-                this.changePage(app.views.recordMultiListPage);
-
-                app.views.recordMultiListPage.update();
-
-                //normal list
-            } else {
-                if (!app.views.listPage) {
-                    app.views.listPage = new ListPage();
-                }
-                this.changePage(app.views.listPage);
-
-                app.views.listPage.update();
-            }
-        },
-        after: function (multi) {
-            //leaving out safari home mode because it creates a nasty glitch on 8.3
-            if (!(browser.isIOS() && browser.isHomeMode())) {
-                var scroll = !multi ? app.views.listPage.scroll : app.views.recordMultiListPage.scroll;
-                if (scroll) {
-                    window.scrollTo(0, scroll);
-                }
-            }
-        },
-        leave: function (multi) {
-            if (multi) {
-                app.views.recordMultiListPage.scroll = $(window).scrollTop();
-            } else {
-                app.views.listPage.scroll = $(window).scrollTop();
-            }
-        }
-    };
 
     var Router = Backbone.Router.extend({
         /**
@@ -82,9 +45,69 @@ define([
          * Routes to listen to.
          */
         routes: {
-            "": welcome,
+            "": function () {
+                var trips = app.models.user.get('trips');
 
-            "list(/:multi)": welcome,
+                if (trips && (trips.indexOf('welcome') >= 0)) {
+                    Backbone.history.navigate('list', {trigger: true});
+                    return;
+                }
+
+                if (!app.views.welcomePage) {
+                    app.views.welcomePage = new WelcomePage();
+                }
+                this.changePage(app.views.welcomePage);
+
+                app.views.listPage = new ListPage();
+                app.views.speciesPage = new SpeciesPage();
+                app.views.recordPage = new RecordPage();
+                app.views.userPage = new UserPage();
+                app.views.infoPage = new Page('info');
+            },
+
+            "list(/:path)": {
+                route: function (path) {
+                    var multi = path === 'multi';
+
+                    if (multi) {
+                        if (!app.views.recordMultiListPage) {
+                            app.views.recordMultiListPage = new RecordMultiListPage();
+                        }
+                        this.changePage(app.views.recordMultiListPage);
+
+                        app.views.recordMultiListPage.update();
+
+                        //normal list
+                    } else {
+                        if (!app.views.listPage) {
+                            app.views.listPage = new ListPage();
+                        }
+                        this.changePage(app.views.listPage);
+
+                        app.views.listPage.update();
+                    }
+                },
+                after: function (path) {
+                    var multi = path === 'multi';
+
+                    //leaving out safari home mode because it creates a nasty glitch on 8.3
+                    if (!(browser.isIOS() && browser.isHomeMode())) {
+                        var scroll = !multi ? app.views.listPage.scroll : app.views.recordMultiListPage.scroll;
+                        if (scroll) {
+                            window.scrollTo(0, scroll);
+                        }
+                    }
+                },
+                leave: function (path) {
+                    var multi = path === 'multi';
+
+                    if (multi) {
+                        app.views.recordMultiListPage.scroll = $(window).scrollTop();
+                    } else {
+                        app.views.listPage.scroll = $(window).scrollTop();
+                    }
+                }
+            },
 
             "species/:id": function (id) {
                 if (!app.views.speciesPage) {
