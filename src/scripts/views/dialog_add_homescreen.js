@@ -21,7 +21,7 @@ define(['jquery', 'helpers/browser'], function ($, browser) {
                             '<p>Tap <b style="white-space: nowrap;">Add to home screen</b></p>' +
                         '</li>' +
                         '<li class="instruction">' +
-                            '<img id="safari-add-homescreen" src="images/Icon-48.png" style="margin-right: 2px;width: 29px;">' +
+                            '<img id="safari-add-homescreen" src="images/Icon-48.png" style="margin-right: -2px;width: 29px;">' +
                             '<p><b>Open app</b> from home screen.</p>' +
                         '</li>' +
                         '</ol>' +
@@ -37,7 +37,7 @@ define(['jquery', 'helpers/browser'], function ($, browser) {
                             '<p>Find <strong style="white-space: nowrap;">Browser Options</strong></p>' +
                         '</li>' +
                         '<li class="instruction">' +
-                            '<img id="safari-add-homescreen" src="images/Icon-48.png" style="margin-right: 2px;width: 29px;">' +
+                            '<img id="safari-add-homescreen" src="images/Icon-48.png" style="margin-right: -2px;width: 29px;">' +
                             '<p>Tap <strong style="white-space: nowrap;">Add to Home Screen</strong></p>' +
                         '</li>' +
                         '</ol>' +

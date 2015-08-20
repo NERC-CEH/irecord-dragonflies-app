@@ -385,9 +385,10 @@ define([
                 var  message =
                     '<div class="add-homescreen">' +
                         '<center><h2>Recording species</h2></center>' +
-                        '<p>Use this to submit <b>individual</b> sightings of dragonflies. ' +
-                        'For recording multiple species from an area, go back to the home' +
-                        'page and click a double-plus button (top-right).</p>' +
+                        '<p>Use this to submit <b>individual</b> sightings of dragonflies. </p>' +
+                        '<p>For recording multiple species from an area, go back to the ' +
+                        '<b style="white-space: nowrap">home page</b> and click a ' +
+                        '<b style="white-space: nowrap">double-plus button</b> (top-right).</p>' +
                         '<button id="' + okBtnID + '">OK</button>' +
                 '</div>';
 
