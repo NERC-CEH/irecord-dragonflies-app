@@ -4,21 +4,22 @@
             <div class="swap first">
                 <div class="message">
                     <h2>Welcome</h2>
-                    <p>You are going to do great things with iRecord Dragonflies.
+                    <p>You are going to do great things with <b style="white-space: nowrap;">iRecord Dragonflies</b>.
                         Learn more by swiping left.</p>
                 </div>
             </div>
             <div class="swap second">
                 <div class="message">
                     <h2>Identify</h2>
-                    <p>A list of over 40 most common Britain's species. Filter by colour,
-                    type or by your location.</p>
+                    <p>A list of over 40 of the most common species in Britain.
+                        Filter by colour, type or by your location.</p>
                 </div>
             </div>
             <div class="swap third">
                 <div class="message">
                     <h2>Species</h2>
-                    <p>Learn more about each species. Photo galleries, distribution maps, phenology charts and much more.</p>
+                    <p>Learn more about each species. View photo galleries,
+                        distribution maps, phenology charts and much more.</p>
                 </div>
             </div>
             <div class="swap fourth">
@@ -28,6 +29,14 @@
                     help these vulnerable creatures.</p>
                 </div>
             </div>
+            <div class="swap fifth">
+                <div class="message">
+                    <h2>Lets start!</h2>
+                    <p>All that’s left to do is to click on the <b style="white-space: nowrap;">Get Started</b> button below,
+                        then click on <b style="white-space: nowrap;">Download App</b> on the next screen and follow
+                        the next instructions.</p>
+                </div>
+            </div>
         </div>
     </div>
     <div class="progress">
@@ -35,6 +44,7 @@
         <div class="circle" data-id="1"></div>
         <div class="circle" data-id="2"></div>
         <div class="circle" data-id="3"></div>
+        <div class="circle" data-id="4"></div>
     </div>
 </div>
 <div data-role="footer" id="welcome-footer" data-position="fixed"

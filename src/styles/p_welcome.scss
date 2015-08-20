@@ -2,11 +2,12 @@
  * Welcome page styles.
  *****************************************************************************/
 $height: 100vh;
-$width: 400vw;
+$width: 500vw;
 
 #welcome {
   width: 100%;
   text-shadow: none;
+  padding-bottom: 0!important;
 }
 
 #welcome-footer {
@@ -70,7 +71,7 @@ $width: 400vw;
   margin-right: auto;
   margin-left: auto;
   bottom: 70px;
-  left: 45%;
+  left: 43%;
 }
 
 .circle {
@@ -119,6 +120,12 @@ $width: 400vw;
   background-size: cover;
 }
 
+.fifth {
+  background: url("../images/welcome_5.jpg") no-repeat;
+  background-position: left;
+  background-size: cover;
+}
+
 .message {
   position: absolute;
   width: 50%;
@@ -155,9 +162,14 @@ $width: 400vw;
 
 .fourth .message {
   text-align: right;
-  bottom: 13%;
+  bottom: 16%;
   right: 14px;
 }
 
+.fifth .message {
+  text-align: left;
+  bottom: 16%;
+  left: 14px;
+}
 
 

@@ -14,14 +14,14 @@ define(['jquery', 'helpers/browser'], function ($, browser) {
                         '<ol>' +
                         '<li class="instruction">' +
                             '<img id="safari-add-homescreen" src="images/add_homescreen_1.png">' +
-                            '<p>Click <b>Sharing button</b></p>' +
+                            '<p>Click <b style="white-space: nowrap;">Sharing button</b></p>' +
                         '</li>' +
                         '<li class="instruction">' +
                             '<img id="safari-add-homescreen" src="images/add_homescreen_2.png">' +
-                            '<p>Tap <b>Add to home screen</b></p>' +
+                            '<p>Tap <b style="white-space: nowrap;">Add to home screen</b></p>' +
                         '</li>' +
                         '<li class="instruction">' +
-                            '<img id="safari-add-homescreen" src="images/Icon-48.png">' +
+                            '<img id="safari-add-homescreen" src="images/Icon-48.png" style="margin-right: 2px;width: 29px;">' +
                             '<p><b>Open app</b> from home screen.</p>' +
                         '</li>' +
                         '</ol>' +
@@ -34,11 +34,11 @@ define(['jquery', 'helpers/browser'], function ($, browser) {
                         '<ol>' +
                         '<li class="instruction">' +
                             '<img id="safari-add-homescreen" src="images/add_homescreen_1_android.png">' +
-                            '<p>Find <strong>Browser Options</strong></p>' +
+                            '<p>Find <strong style="white-space: nowrap;">Browser Options</strong></p>' +
                         '</li>' +
                         '<li class="instruction">' +
-                            '<img id="safari-add-homescreen" src="images/Icon-48.png">' +
-                            '<p>Tap <strong>Add to Home Screen</strong> option</p>' +
+                            '<img id="safari-add-homescreen" src="images/Icon-48.png" style="margin-right: 2px;width: 29px;">' +
+                            '<p>Tap <strong style="white-space: nowrap;">Add to Home Screen</strong></p>' +
                         '</li>' +
                         '</ol>' +
 

@@ -55,14 +55,16 @@ div.loading {
 }
 
 .instruction {
-  height: 50px;
+  margin-top: 30px;
+  height: 35px;
 }
 
 .instruction > p {
   width: 70%;
 }
 
-.instruction > img{
+.instruction > img {
+  margin-top: -10px;
   float:right;
   width: 34px;
 }

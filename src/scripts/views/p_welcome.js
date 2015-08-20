@@ -40,7 +40,7 @@ define([
             var that = this,
                 WIDTH = $(document).width(),
                 currentImg = 0,
-                maxImages = 4,
+                maxImages = 5,
                 speed = 500,
                 imgs = null,
 
