@@ -34,17 +34,17 @@ define(['jquery', 'helpers/browser'], function ($, browser) {
                         '<ol>' +
                         '<li class="instruction">' +
                             '<img id="safari-add-homescreen" src="images/add_homescreen_1_android.png">' +
-                            '<p>Open <strong>Browser Options</strong></p>' +
+                            '<p>Find <strong>Browser Options</strong></p>' +
                         '</li>' +
                         '<li class="instruction">' +
                             '<img id="safari-add-homescreen" src="images/Icon-48.png">' +
-                            '<p>Tap <strong>Add to Home Screen</strong></p>' +
+                            '<p>Tap <strong>Add to Home Screen</strong> option</p>' +
                         '</li>' +
                         '</ol>' +
 
                         '<button id="' + nextButtonID + '" style="width:43%; float:right"' +
-                        'class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-right ' +
-                        'ui-mini">Close</button>' +
+                        'class="ui-btn ui-btn-inline ui-icon-carat-r ui-btn-icon-right ' +
+                        'ui-mini">Next</button>' +
                 '</div>';
             }
 

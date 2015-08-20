@@ -14,14 +14,18 @@ define([
         'models/species',
         'helpers/update',
         'helpers/brcart',
+        'helpers/browser',
         'helpers/message',
         'helpers/log',
         'data'
     ],
     function ($, jqm, Backbone, FastClick, klass, morel, Router, AppModel, UserModel,
-              SpeciesCollection, update, brcArt) {
+              SpeciesCollection, update, brcArt, browser, message) {
         var App = {
             init: function () {
+                app.browser = browser;
+                app.message = message;
+
                 //init Google Analytics
                 //http://veithen.github.io/2015/02/14/requirejs-google-analytics.html
                 if (app.CONF.GA.STATUS){

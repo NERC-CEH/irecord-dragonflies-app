@@ -16,25 +16,11 @@ define(['jquery'], function ($) {
                     });
                 }
 
-                //finished reload popup
-                var finishedBtnId = 'download-finished-restart-button';
-                var finishedBtnCloseId = 'download-finished-close-button';
-
                 var message =
-                    '<center><h3>App can be used offline now</h3></center>' +
-                    '<p>Do you want to restart it?</p>' +
-                    '<button id="' + finishedBtnId + '">Restart Now</button>' +
-                    '<button id="' + finishedBtnCloseId+ '">Restart Later</button>';
+                    '<center><h3>Lovely jubbly, you are ready to go!</h3></center>';
+                app.message(message, 2000);
 
-                app.message(message, 0);
-
-                $('#' + finishedBtnId).on('click', function () {
-                    window.location.reload();
-                });
-                $('#' + finishedBtnCloseId).on('click', function () {
-                    $.mobile.loading('hide');
-                    callback && callback(null);
-                });
+                callback && callback();
             }
 
             function onError(error) {

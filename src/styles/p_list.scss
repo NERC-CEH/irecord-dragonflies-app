@@ -8,6 +8,10 @@
   min-height: 94vh;
 }
 
+#list-footer {
+  height: 55px;
+}
+
 /* This is needed for expanding header not to make a gap in the list
  if the list is left and returned. */
 .ui-page-header-fixed {
@@ -106,7 +110,7 @@ ol[data-role="listview"] > li > p {
 #download-button {
   font-size: medium;
   display: block;
-  width: 100%;
-  height: 56px;
-  margin: 0;
+  width: 50%;
+  height: 45px;
+  margin: 4px auto;
 }

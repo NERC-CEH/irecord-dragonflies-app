@@ -32,10 +32,18 @@
         </li>
     </ul>
     <ul data-role="listview" data-inset="true" style="max-width:800px;">
+        <% if (!app.browser.isIOS()) { %>
+            <li>
+                <strong>How to download the app?</strong>
+                <p>1. Navigate to <a href="#list">home page</a></p>
+                <p>2. Find and open your <strong>Browser Options</strong></p>
+                <p>3. Tap <strong>Add to Home Screen</strong> option</p>
+            </li>
+        <% } %>
         <li>
             <strong>App Development</strong>
-            <p>This app was developed by the BRC mobile development team. For suggestions and improvements
-                please do not hesitate to <a href='mailto:karkaz@ceh.ac.uk'>contact us</a>.</p>
+            <p>This app was developed by the BRC mobile development team. For suggestions and feedback
+                please do not hesitate to <a href='mailto:karkaz%40ceh.ac.uk?subject=iRecord%20Dragonflies%20Support%26Feedback&body=%0A%0A%0AVersion%3A%20<%- app.VERSION %>%0ABrowser%3A <%- window.navigator.appVersion %>%0A'>contact us</a>.</p>
         </li>
         <li>
             <p class="app-version">v<%- app.VERSION %></p>

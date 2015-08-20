@@ -8,8 +8,8 @@
            ui-btn-icon-notext">User</a>
     </div>
 
-    <h1 class="heading-short">iRD </h1>
-    <h1 class="heading-long">iRecord Dragonfly</h1>
+    <h1 class="heading-short">Dragonflies</h1>
+    <h1 class="heading-long">iRecord Dragonflies</h1>
 
     <div class='ui-btn-right' data-role='controlgroup' data-type='horizontal'>
         <button id="list-controls-button" class="header ui-btn ui-icon-filter ui-nodisc-icon
@@ -23,5 +23,5 @@
 <div data-role="content" id="list-placeholder"></div>
 <div data-role="footer" id="list-footer" data-position="fixed"
      data-tap-toggle="false">
-        <button id="download-button" class="ui-btn ui-btn-b ui-icon-arrow-d">Download App</button>
+        <button id="download-button" class="ui-btn ui-btn-b ui-corner-all">Download App</button>
 </div>

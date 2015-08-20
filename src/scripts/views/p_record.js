@@ -25,7 +25,6 @@ define([
 
             this.render();
             this.appendEventListeners();
-            this.trip();
         },
 
         render: function () {
@@ -61,6 +60,8 @@ define([
                     this.initRecording(speciesID);
                 default:
             }
+
+            this.trip();
         },
 
         appendEventListeners: function () {
@@ -374,41 +375,29 @@ define([
          * Shows the user around the page.
          */
         trip: function () {
-            //var finishedTrips = app.models.user.get('trips') || [];
-            //if (finishedTrips.indexOf('record') < 0) {
-            //    finishedTrips.push('record');
-            //    app.models.user.set('trips', finishedTrips);
-            //    app.models.user.save();
-            //
-            //    setTimeout(function () {
-            //        trip.start();
-            //    }, 500);
-            //}
-            //
-            //var options = {
-            //    delay: 1500
-            //};
-            //
-            //var trip = new Trip([
-            //    {
-            //        sel: $('#photo-picker'),
-            //        position: "s",
-            //        content: 'Snap a picture',
-            //        animation: 'fadeIn'
-            //    },
-            //    {
-            //        sel: $('#number-button'),
-            //        position: "s",
-            //        content: 'Fill in the details',
-            //        animation: 'fadeIn'
-            //    },
-            //    {
-            //        sel: $('#entry-form-save'),
-            //        position: "n",
-            //        content: 'Save it',
-            //        animation: 'fadeIn'
-            //    }
-            //], options);
+            var finishedTrips = app.models.user.get('trips') || [];
+            if (finishedTrips.indexOf('record') < 0) {
+                finishedTrips.push('record');
+                app.models.user.set('trips', finishedTrips);
+                app.models.user.save();
+
+                var okBtnID = 'OK-dialog-button';
+                var  message =
+                    '<div class="add-homescreen">' +
+                        '<center><h2>Recording species</h2></center>' +
+                        '<p>Use this to submit <b>individual</b> sightings of dragonflies. ' +
+                        'For recording multiple species from an area, go back to the home' +
+                        'page and click a double-plus button (top-right).</p>' +
+                        '<button id="' + okBtnID + '">OK</button>' +
+                '</div>';
+
+                app.message(message, 0);
+
+                $('#' + okBtnID).on('click', function () {
+                    $.mobile.loading('hide');
+                });
+            }
+
         }
     });
 

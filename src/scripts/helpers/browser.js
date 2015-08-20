@@ -8,75 +8,75 @@
  * Safari has to have an ID of only Safari and not Chrome
  *****************************************************************************/
 define([], function () {
-  "use strict";
-  var ua = navigator.userAgent.toLowerCase();
-
-  var isIPhone = is('iphone');
-  var isIPad = is('ipad');
-  var isIPod = is('ipad');
-  var isChrome = is('chrome') || is('crmo');
-  var isFirefox = is('firefox');
-
-
-  function is (string) {
-    return ua.search(string) >= 0;
-  }
-
-  var detect = function (browser) {
-    browser = browser.toLowerCase();
-
     "use strict";
-    if (browser === 'chrome' || browser === 'safari') {
-      var isChrome = is('chrome'),
-        isSafari = is("safari");
+    var ua = navigator.userAgent.toLowerCase();
 
-      if (isSafari) {
-        if (browser === 'chrome') {
-          //Chrome
-          return isChrome;
-        }
-        //Safari
-        return !isChrome;
-      }
-      if (isMobile()) {
-        //Safari homescreen Agent has only 'Mobile'
-        return true;
-      }
-      return false;
+    var isIPhone = is('iphone');
+    var isIPad = is('ipad');
+    var isIPod = is('ipad');
+    var isChrome = is('chrome') || is('crmo');
+    var isFirefox = is('firefox');
+
+
+    function is (string) {
+        return ua.search(string) >= 0;
     }
-    return (is(browser));
-  };
 
-  var isMobile = function () {
-    return is('mobile') || is('android');
-  };
+    var detect = function (browser) {
+        browser = browser.toLowerCase();
 
-  var isIOS = function () {
-    return isIPad || isIPod || isIPhone;
-  };
+        "use strict";
+        if (browser === 'chrome' || browser === 'safari') {
+            var isChrome = is('chrome'),
+                isSafari = is("safari");
 
-  var isAndroidChrome = function () {
-    return is('android') && isChrome;
-  };
+            if (isSafari) {
+                if (browser === 'chrome') {
+                    //Chrome
+                    return isChrome;
+                }
+                //Safari
+                return !isChrome;
+            }
+            if (isMobile()) {
+                //Safari homescreen Agent has only 'Mobile'
+                return true;
+            }
+            return false;
+        }
+        return (is(browser));
+    };
 
-  var getIOSVersion = function () {
-    var ver = /i.*OS (\d+)_(\d+)(?:_(\d+))?/i.exec(ua);
-    return ver[1];
-  };
+    var isMobile = function () {
+        return is('mobile') || is('android');
+    };
 
-  var isHomeMode = function () {
-    return window.navigator.standalone ||
-      (window.external && window.external.msIsSiteMode && window.external.msIsSiteMode());
-  };
+    var isIOS = function () {
+        return isIPad || isIPod || isIPhone;
+    };
 
-  return {
-    detect: detect,
-    isMobile: isMobile,
-    isIOS: isIOS,
-    isAndroidChrome: isAndroidChrome,
-    getIOSVersion: getIOSVersion,
-    isHomeMode: isHomeMode
-  };
+    var isAndroidChrome = function () {
+        return is('android') && isChrome;
+    };
+
+    var getIOSVersion = function () {
+        var ver = /i.*OS (\d+)_(\d+)(?:_(\d+))?/i.exec(ua);
+        return ver[1];
+    };
+
+    var isHomeMode = function () {
+        return window.navigator.standalone ||
+            (window.external && window.external.msIsSiteMode && window.external.msIsSiteMode());
+    };
+
+    return {
+        detect: detect,
+        isMobile: isMobile,
+        isIOS: isIOS,
+        isAndroidChrome: isAndroidChrome,
+        getIOSVersion: getIOSVersion,
+        isHomeMode: isHomeMode
+    };
 });
 
 

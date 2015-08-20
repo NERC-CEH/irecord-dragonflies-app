@@ -7,10 +7,14 @@ $width: 400vw;
 #welcome {
   width: 100%;
   text-shadow: none;
-  padding-bottom: 0 !important;
 }
 
 #welcome-footer {
+  width: 50%;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
   background-color: rgba(0,0,0,0) !important;
 }
 
@@ -65,8 +69,8 @@ $width: 400vw;
   display: block;
   margin-right: auto;
   margin-left: auto;
-  bottom: 65px;
-  left: 48%;
+  bottom: 70px;
+  left: 45%;
 }
 
 .circle {
@@ -133,13 +137,13 @@ $width: 400vw;
 
 .first .message {
   text-align: right;
-  bottom: 14%;
+  bottom: 16%;
   right: 14px;
 }
 
 .second .message {
   text-align: left;
-  bottom: 14%;
+  bottom: 16%;
   left: 14px;
 }
 
@@ -155,10 +159,5 @@ $width: 400vw;
   right: 14px;
 }
 
-
-@media only screen and (min-width: 650px) {
-
-
-}
 
 

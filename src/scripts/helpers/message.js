@@ -45,5 +45,5 @@ define(['jquery', 'jquery.mobile'], function ($, jqm) {
         }
     };
 
-    app.message = Message;
+    return Message;
 });
