@@ -12,7 +12,7 @@
         <li>
             <a href='#species-differences'
                class="ui-btn record-button ui-icon-carat-r ui-btn-icon-right
-               ui-nodisc-icon ui-alt-icon">Species differences</a>
+               ui-nodisc-icon ui-alt-icon">Species Differences</a>
         </li>
         <li>
             <a href='#species-anatomy'

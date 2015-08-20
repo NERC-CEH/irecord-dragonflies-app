@@ -12,7 +12,7 @@
         <li>
             <a href='#species-info'
                class="ui-btn record-button ui-icon-carat-r ui-btn-icon-right
-               ui-nodisc-icon ui-alt-icon">Species</a>
+               ui-nodisc-icon ui-alt-icon">Species Info</a>
         </li>
     </ul>
     <ul data-role="listview" data-inset="true">

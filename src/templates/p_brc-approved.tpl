@@ -7,11 +7,10 @@
 </div>
 
 <div data-role="content">
+    <img src="../images/BRC_approved_logo.png" class="brc-approved-logo"/>
+
     <ul data-role="listview" data-inset="true" style="max-width:800px;">
-
         <li>
-            <p class="brc-approved-logo"></p>
-
             <p>Wherever you see this logo on a biological recording app you can be assured that the
                 data you submit will be: made available to experts for quality assurance;
                 made available for conservation and research and preserved for long-term use.</p>

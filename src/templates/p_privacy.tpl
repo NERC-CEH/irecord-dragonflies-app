@@ -14,7 +14,7 @@
                 how any personal data you submit to the <i>iRecord Dragonflies</i> app will be stored and used.</p>
         </li>
         <li>
-            <strong>Name</strong>
+            <strong>Use of your name</strong>
 
             <p>If you choose to create a user account for the app, this will be created on the Biological
                 Record Centre's iRecord system: <a href="http://www.brc.ac.uk/irecord" rel="external">http://www.brc.ac.uk/irecord</a>.

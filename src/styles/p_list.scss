@@ -12,26 +12,15 @@
   height: 55px;
 }
 
+#list-heading img{
+  height: 20px;
+}
+
+
 /* This is needed for expanding header not to make a gap in the list
  if the list is left and returned. */
 .ui-page-header-fixed {
   padding-top: 2.5em !important;
-}
-
-.heading-short {
-  display: none !important;
-}
-.heading-long {
-  display: block !important;
-}
-
-@media only screen and (max-width: 400px) {
-  .heading-short {
-    display: block !important;
-  }
-  .heading-long {
-    display: none !important;
-  }
 }
 
 .list-normal-white-space > li > p,

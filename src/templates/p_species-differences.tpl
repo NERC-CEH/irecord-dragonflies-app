@@ -10,7 +10,7 @@
     <div class="info-message">
         <p>These are general trends – there are always exceptions to the rule!</p>
     </div>
-    <table data-role="table" data-mode="reflow"  class="ui-responsive table-stroke" style="background-color: white">
+    <table class="differences-table ui-corner-all">
         <thead>
         <tr>
             <th></th>
