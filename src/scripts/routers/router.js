@@ -177,10 +177,12 @@ define([
             },
 
             "stage": function () {
+                var model = app.models.sample.occurrences.getFirst();
                 if (!app.views.stagePage) {
                     app.views.stagePage = new StagePage({model: app.models.record});
                 }
                 this.changePage(app.views.stagePage);
+                app.views.stagePage.update(model);
             },
 
             "comment/multi(/:id)": function (id) {

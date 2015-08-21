@@ -21,8 +21,6 @@ define([
         initialize: function () {
             _log('views.StagePage: initialize', log.DEBUG);
 
-            this.model = app.models.sample.occurrences.getFirst();
-
             this.render();
             this.appendEventListeners();
         },
@@ -39,17 +37,19 @@ define([
         /**
          * Reset the page.
          */
-        update: function () {
+        update: function (model) {
+            this.model = model;
+
             var value = this.model.get(this.id);
-            if (!value) {
-                //unset all radio buttons
-                this.$el.find("input:radio").attr("checked", false).checkboxradio("refresh");
+            //unset all radio buttons
+            this.$el.find("input:radio").attr("checked", false).checkboxradio("refresh");
+            if (value) {
+                var $input = this.$el.find('input:radio[value="' + value + '"]');
+                $input.prop('checked', true).checkboxradio('refresh');
             }
         },
 
         appendEventListeners: function () {
-            this.listenTo(this.model, 'change:' + this.id, this.update);
-
             this.appendBackButtonListeners();
         },
 

@@ -43,7 +43,7 @@ define([
                 });
 
                 $.mobile.loading('hide');
-                callback();
+                callback(email, name, surname);
             }
 
             function validateUserDetails (email, name, surname) {

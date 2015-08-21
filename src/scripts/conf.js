@@ -119,20 +119,20 @@ define(['morel', 'helpers/log'], function () {
         Storage: morel.DatabaseStorage
     };
 
-    $.extend(morel.Sample.KEYS, {
-        NAME: {
+    $.extend(true, morel.Sample.keys, {
+        name: {
             id: 12
         },
-        SURNAME: {
+        surname: {
             id: 13
         },
-        EMAIL: {
+        email: {
             id: 9
         },
-        LOCATION_ACCURACY: {
+        location_accuracy: {
             id: 273
         },
-        RECORDED_ALL: {
+        recorded_all: {
             id: 115
         }
     });
@@ -147,29 +147,29 @@ define(['morel', 'helpers/log'], function () {
         'Present': 766 //default
     };
 
-    $.extend(morel.Occurrence.KEYS, {
-        NUMBER: {
+    $.extend(true, morel.Occurrence.keys, {
+        number: {
             id: 285, values: numberRanges
         },
-        ADULT: {
+        adult: {
             id: 48, values: numberRanges
         },
-        COPULATING: {
+        copulating: {
             id: 49, values: numberRanges
         },
-        OVIPOSITING: {
+        ovipositing: {
             id: 50, values: numberRanges
         },
-        LARVAE: {
+        larvae: {
             id: 51, values: numberRanges
         },
-        EXUVIAE: {
+        exuviae: {
             id: 52, values: numberRanges
         },
-        EMERGENT: {
+        emergent: {
             id: 53, values: numberRanges
         },
-        STAGE: {
+        stage: {
             id: 286,
             values: {
                 Adult: 3640,
@@ -180,10 +180,10 @@ define(['morel', 'helpers/log'], function () {
                 Emergent: 3645
             }
         },
-        CERTAIN: {
+        certain: {
             id: 223
         },
-        TAXON: {
+        taxon: {
             values: {
                 1: 4617,
                 2: 4696,

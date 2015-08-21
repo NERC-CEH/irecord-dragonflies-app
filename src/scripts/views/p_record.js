@@ -330,8 +330,7 @@ define([
 
         updateDateButton: function () {
             var value = this.model.get('date');
-            var text = value || '';
-            this.$dateButton.html(text);
+            this.$dateButton.html(value || '');
         },
 
         /**
@@ -350,7 +349,7 @@ define([
          */
         updateNumberButton: function () {
             var value = this.occurrence.get('number');
-            this.$numberButton.html(value);
+            this.$numberButton.html(value || '');
         },
 
         /**
@@ -358,7 +357,7 @@ define([
          */
         updateStageButton: function () {
             var value = this.occurrence.get('stage');
-            this.$stageButton.html(value);
+            this.$stageButton.html(value || '');
         },
 
         /**
@@ -368,7 +367,7 @@ define([
             var value = this.model.get('comment');
             var ellipsis = value && value.length > 20 ? '...' : '';
             value = value ? value.substring(0, 20) + ellipsis : ''; //cut it down a bit
-            this.$commentButton.html(value);
+            this.$commentButton.html(value || '');
         },
 
         /**

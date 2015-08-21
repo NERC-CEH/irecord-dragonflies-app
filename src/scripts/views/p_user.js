@@ -141,9 +141,17 @@ define([
                     };
 
                     if (app.models.user.hasSignIn()) {
+                        //append user details
+                        sample.set('name', app.models.user.get('name'));
+                        sample.set('surname', app.models.user.get('surname'));
+                        sample.set('email', app.models.user.get('email'));
                         app.recordManager.sync(sample, callback);
                     } else {
-                        contactDetailsDialog(function () {
+                        contactDetailsDialog(function (email, name, surname) {
+                            //append user details
+                            sample.set('name', name);
+                            sample.set('surname', surname);
+                            sample.set('email', email);
                             app.recordManager.sync(sample, callback);
                         });
                     }
