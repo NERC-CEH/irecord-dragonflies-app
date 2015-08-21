@@ -7,7 +7,7 @@
 </div>
 
 <div data-role="content">
-    <ul data-role="listview" data-inset="true" style="max-width:800px;">
+    <ul data-role="listview">
         <li>
             <strong>We are very grateful for all the people that helped to
                 create this app:</strong>

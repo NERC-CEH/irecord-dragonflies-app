@@ -1,4 +1,4 @@
-<ul data-role="listview" data-inset="true" class="ui-alt-icon ui-nodisc-icon">
+<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon listview-top">
     <li>
         <a href="#number/multi/adult/<%- obj.id %>" data-stage="adult" class="number-button"
            data-role="button" data-icon="carat-r" data-iconpos="right">
@@ -43,7 +43,7 @@
     </li>
 </ul>
 
-<ul data-role="listview" data-inset="true" class="ui-nodisc-icon ui-alt-icon">
+<ul data-role="listview" class="ui-nodisc-icon ui-alt-icon listview-top">
     <li>
         <a href="#comment/multi/<%- obj.id %>" id="species-comment-button"
            class="ui-icon-comment">

@@ -16,8 +16,7 @@
             <input class="img-picker-file" type="file" accept="png|jpg|gif|jpeg" data-role="none"/>
             <div class="img-picker-display"></div>
         </div>
-        <ul data-role="listview" data-inset="true"
-            class="core-inputs ui-nodisc-icon ui-alt-icon">
+        <ul data-role="listview" class="core-inputs ui-nodisc-icon ui-alt-icon listview-top">
             <li>
                 <a href="#location" id="location-button"
                    class="record-button ui-icon-location">
@@ -34,8 +33,7 @@
             </li>
         </ul>
     </div>
-    <ul data-role="listview" data-inset="true"
-        class="ui-nodisc-icon ui-alt-icon">
+    <ul data-role="listview" class="ui-nodisc-icon ui-alt-icon listview-top">
         <li>
             <a href="#number" id="number-button"
                class="record-button">

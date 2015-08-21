@@ -15,8 +15,7 @@
             of a site. You can build up a list of the species seen, alter
             the numbers of each species stage as you go along and more.
     </div>
-    <ul data-role="listview" data-inset="true"
-        class="core-inputs ui-nodisc-icon ui-alt-icon">
+    <ul data-role="listview" class="core-inputs ui-nodisc-icon ui-alt-icon listview-top">
         <li>
             <a href="#location/multi" id="record-multi-location"
                class="record-button ui-icon-location">

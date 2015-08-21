@@ -21,7 +21,8 @@
         </div>
         <div id="gps" class="ui-body-d ui-content">
             <div id="location-gps-placeholder"></div>
-            <button id="gps-button">Locate</button>
+            <button id="gps-button"
+                    class="ui-nodisc-icon ui-alt-icon ui-btn ui-icon-location ui-btn-icon-right">Locate</button>
         </div>
         <div id="map" class="ui-body-d ui-content">
             <div class="info-message" id="map-message">
@@ -36,7 +37,8 @@
             </div>
             <input type="text" id="grid-ref" placeholder="Grid Reference"/>
             <input type="text" id="location-name" placeholder="Location Name (optional)"/>
-            <input type="button" id="grid-ref-set" value="Set"/>
+            <button id="grid-ref-set"
+                    class="ui-nodisc-icon ui-alt-icon ui-btn ui-icon-check ui-btn-icon-right">Set</button>
         </div>
     </div>
 </div>

@@ -14,17 +14,23 @@
     <div data-role="navbar" data-iconpos="left">
         <ul>
             <li>
-                <button id="gallery-button">Gallery</button>
+                <button id="gallery-button"
+                        class="ui-btn ui-alt-icon ui-nodisc-icon ui-icon-eye ui-btn-icon-right">Gallery</button>
             </li>
             <li>
-                <button id="species-map-button">Distribution</button>
+                <button id="species-map-button"
+                        class="ui-btn ui-alt-icon ui-nodisc-icon ui-icon-location ui-btn-icon-right">Distribution</button>
             </li>
         </ul>
     </div>
     <% } %>
 
-    <ul id="species-map" data-role="listview" data-inset="true" style="max-width: 800px; display: none">
-        <li >
+    <ul data-role="listview">
+        <li style="border-top: none;">
+            <div class="common-name"><%- common_name %></div>
+            <div class="taxon"><%- taxon %></div>
+        </li>
+        <li id="species-map" style="display: none">
             <div id="maps-holder" style="display:none"></div>
             <svg viewBox="0 0 400 500"  preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
                  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
@@ -35,13 +41,6 @@
                     <rect width="20" height="20" fill="#C2B855" y="0" x="0"></rect>
                 </g>
             </svg>
-        </li>
-    </ul>
-
-    <ul data-role="listview" data-inset="true" style="max-width:800px;">
-        <li>
-            <div class="common-name"><%- common_name %></div>
-            <div class="taxon"><%- taxon %></div>
         </li>
         <% if (!general) { %>
         <li id="species-flight"></li>
@@ -67,20 +66,17 @@
             <p><%- confusion_species %></p>
         </li>
         <li>
-            <a href="#record/<%- id %>" class="ui-btn ui-icon-plus ui-nodisc-icon
-            ui-alt-icon ui-btn-icon-right">
-                <center>Record Species</center></a>
+            <a href="#record/<%- id %>" class="ui-btn ui-mini ui-icon-plus ui-nodisc-icon
+            ui-alt-icon ui-btn-icon-right">Record Species</a>
         </li>
+        <% if (!general) { %>
+        <li>
+            <a href='#species-terms' class="ui-btn ui-mini ui-icon-info
+                ui-alt-icon ui-nodisc-icon ui-btn-icon-right">Species Terms</a>
+        </li>
+        <% } %>
       <% } %>
     </ul>
-    <% if (!general) { %>
-    <div data-role="navbar" data-iconpos="left">
-        <ul>
-            <li><a href='#species-terms' class="ui-btn ui-mini ui-icon-info
-            ui-alt-icon ui-nodisc-icon ui-btn-icon-right">Species Terms</a></li>
-        </ul>
-    </div>
-    <% } %>
 </center>
 
 

@@ -11,7 +11,7 @@
         <p>By using iRecord, you agree to these Terms and Conditions of Use. If you do not agree, please do not use the site.</p>
     </div>
 
-    <ol data-role="listview" data-inset="true" style="max-width:800px;">
+    <ol data-role="listview">
         <li>
             <p>When you use iRecord, you create and upload content - for instance, wildlife observations, photos of
             nature, your descriptions of it, and messages to the forums. By putting this information on the

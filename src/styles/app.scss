@@ -20,12 +20,35 @@ form, body {
 }
 
 .ui-page {
-  background: $page-color;
+  background: white;
 }
 
 button.header {
   padding: 0.5em 1em !important;
   width: 1.9em !important;
+}
+
+
+.ui-navbar button {
+  width: 100% !important;
+  border-left: 1px !important;
+}
+
+div.ui-btn,
+button.ui-btn {
+  width: 94%;
+  margin: 2% 3% 0;
+
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
+
+  border-right: none;
+  border-left: none;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 
 /* Buttons in fixed footer control group are shifted down. This lifts them up.*/
@@ -54,6 +77,18 @@ button.header {
 .ui-collapsible-content p,
 .ui-listview>li p {
   font-size: 90%;
+}
+
+.ui-content {
+  padding: 0;
+}
+
+.ui-content .ui-listview {
+  margin: 0 3%;
+}
+
+.ui-listview>.ui-li-static {
+  padding: .7em 3%;
 }
 
 img {
@@ -124,10 +159,13 @@ label, form label {
   text-shadow: none;
 }
 
-.ui-btn{
-  background-color: #F8F8F2;
-  color: #3D3D36;
-  border-color: rgba(202, 202, 202, 0.28);
+.ui-btn {
+  background-color: $button-color;
+}
+
+.ui-body-b .ui-btn,
+.ui-btn.ui-btn-b,{
+  background-color: #333 !important;
 }
 
 a.ui-btn > img {
@@ -164,4 +202,53 @@ a.ui-btn > img {
 
 .differences-table td {
   padding: 10px;
+}
+
+.listview-top {
+  margin-top: 25px !important;
+}
+
+.listview-full {
+  margin: 0 !important;
+}
+
+
+.ui-checkbox, .ui-radio {
+  margin: 0 3%;
+}
+
+.ui-checkbox .ui-btn {
+  border-radius: 0;
+  border-right: none;
+  border-left: none;
+}
+
+.ui-radio label {
+  border-right: none;
+  border-left: none;
+}
+
+.ui-controlgroup-controls {
+  margin: 0 3%;
+  border-radius: 0;
+}
+
+input,
+textarea {
+  width: 94% !important;
+  margin: 0 3% !important;
+  border-radius: 0 !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-left: none !important;
+}
+
+
+.ui-input-btn,
+.ui-input-text {
+  margin: 8px 3% 0!important
+}
+
+.ui-tabs {
+  padding: 0;
 }

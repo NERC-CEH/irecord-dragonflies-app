@@ -7,7 +7,7 @@
 </div>
 
 <div data-role="content">
-    <ul data-role="listview" data-inset="true" style="max-width:800px;">
+    <ul data-role="listview">
         <li>
             <p>Thank you for your interest in this Dragonfly Recording Scheme
                 and for your help in providing data on these species. This page explains

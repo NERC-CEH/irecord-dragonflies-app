@@ -14,7 +14,8 @@ define([
         tagName: 'ul',
 
         attributes: {
-            'data-role': 'listview'
+            'data-role': 'listview',
+            'class': 'listview-full'
         },
 
         /**

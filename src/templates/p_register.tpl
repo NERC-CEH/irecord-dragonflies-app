@@ -15,19 +15,25 @@
             download all of your records here.</p>
     </div>
 
-    <form id="register-form">
-        <input type="email" placeholder="Email" name="email" value="" required>
-        <input type="text" placeholder="Firstname" name="firstname" value="" required>
-        <input type="text" placeholder="Surname" name="secondname" value="" required>
-        <input type="password" placeholder="Password" name="password" value="" required>
-        <input type="password" placeholder="Confirm password" name="password-confirm" value="" required>
-        <br/>
+    <input type="email" placeholder="Email" name="email" value="" required>
+    <input type="text" placeholder="Firstname" name="firstname" value="" required>
+    <input type="text" placeholder="Surname" name="secondname" value="" required>
+    <input type="password" placeholder="Password" name="password" value="" required>
+    <input type="password" placeholder="Confirm password" name="password-confirm" value="" required>
+    <br/>
 
-        <a href="#terms" data-role="button" role="button">iRecord Terms and Conditions</a>
-        <label>
-            <input name="terms-agreement" id="terms-agreement" type="checkbox"> I agree to the iRecord Terms and Conditions
+    <ul data-role="listview">
+        <li>
+            <a href="#terms"
+               class="ui-nodisc-icon ui-alt-icon ui-btn ui-icon-carat-r ui-btn-icon-right">Terms and Conditions</a>
+        </li>
+    </ul>
+
+    <label id="certain-button-label">
+        <input name="terms-agreement" id="terms-agreement" type="checkbox"
+               data-iconpos="right"> I agree to Terms and Conditions
         </label>
-    </form>
-    <button id="register-button" disabled>Create Account</button>
+    <button id="register-button"
+            class="ui-nodisc-icon ui-alt-icon ui-btn ui-icon-plus ui-btn-icon-right" disabled>Create Account</button>
 
 </div>

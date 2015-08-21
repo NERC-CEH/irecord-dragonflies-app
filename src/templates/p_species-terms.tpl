@@ -7,7 +7,7 @@
 </div>
 
 <div data-role="content">
-    <ul data-role="listview" data-inset="true">
+    <ul data-role="listview">
         <li>
             <strong>Accessory genitalia </strong>
             <p>The structure on the underside of <b>S2</b>and <b>S3 </b>of the male's abdomen that holds sperm prior to

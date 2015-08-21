@@ -18,7 +18,7 @@ define(['jquery'], function ($) {
 
                 var message =
                     '<center><h3>Lovely jubbly, you are ready to go!</h3></center>';
-                app.message(message, 2000);
+                app.message(message, 3000);
 
                 callback && callback();
             }

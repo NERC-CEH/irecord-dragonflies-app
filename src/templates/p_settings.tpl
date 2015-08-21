@@ -17,7 +17,7 @@
         <p>You can set your default location that is used in species list filtering.</p>
     </div>
 
-    <ul data-role="listview" class="ui-nodisc-icon ui-alt-icon" data-inset="true">
+    <ul data-role="listview" class="ui-nodisc-icon ui-alt-icon">
         <li>
             <a href="#location/settings" id="settings-location-button"
                class="ui-icon-location">
