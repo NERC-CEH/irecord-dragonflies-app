@@ -34,7 +34,7 @@ define(['jquery', 'helpers/browser'], function ($, browser) {
                         '<ol>' +
                         '<li class="instruction">' +
                             '<img id="safari-add-homescreen" src="images/add_homescreen_1_android.png">' +
-                            '<p>Find <strong style="white-space: nowrap;">Browser Options</strong></p>' +
+                            '<p>Find <strong style="white-space: nowrap;">Browser Menu</strong></p>' +
                         '</li>' +
                         '<li class="instruction">' +
                             '<img id="safari-add-homescreen" src="images/Icon-48.png" style="margin-right: -2px;width: 29px;">' +

@@ -24,26 +24,10 @@
                 between the body and the node.</p>
         </li>
         <li>
-            <strong>Caudal lamella </strong>
-            <p>Appendage at the rear of damselfly <b>larvae
-                </b>(usually three), used for respiration and locomotion (plural:
-                lamellae).</p>
-        </li>
-        <li>
-            <strong>Cerci </strong>
-            <p>The upper pair of <b>anal appendages </b>on a dragonfly
-                <b>larva</b>.</p>
-        </li>
-        <li>
             <strong>Costa </strong>
             <p>The front vein, which forms the leading edge of the
                 wing.</p>
-        <li>
-            <strong>Epiproct </strong>
-            <p>The central <b>anal appendage </b>of a dragonfly <b>larva</b>.</p>
-        <li>
-            <strong>Exuvia </strong>
-            <p>The cast larval skin (plural: exuviae).</p>
+        </li>
         <li>
             <strong>Frons </strong>
             <p>The uppermost part of the front of the head ('face'),
@@ -53,27 +37,6 @@
             <strong>Immature </strong>
             <p>An adult that has not yet attained the full colouring
                 typically associated with sexual maturity.</p>
-        </li>
-        <li>
-            <strong>Jizz </strong>
-            <p>The often indefinable characteristic impression given by
-                an animal or plant, usually defined by shape or movement.</p>
-        </li>
-        <li>
-            <strong>Labium </strong>
-            <p>The extendable lower lip of the <b>larval </b>mouthparts,
-                sometimes termed the 'mask', used for catching prey.</p>
-        </li>
-        <li>
-            <strong>Larva (or nymph) </strong>
-            <p> The immature stage before becoming an adult
-                (plural: larvae).</p>
-        </li>
-        <li>
-            <strong>Metamorphosis </strong>
-            <p>The transition from <b>larva </b>to adult; this
-                is termed 'incomplete metamorphosis' in Dragonflies, since there is
-                no pupal stage.</p>
         </li>
         <li>
             <strong>Node (or nodus) </strong>
@@ -90,15 +53,6 @@
             <p>The blade-like egg-laying structure under <b>S8–10
                 </b>of female Dragonflies that deposits eggs into plant material or
                 substrates.</p>
-        </li>
-        <li>
-            <strong>Paraprocts </strong>
-            <p>The lower pair of <b>anal appendages </b>on a
-                dragonfly <b>larva</b></p>
-        </li>
-        <li>
-            <strong>Prementum </strong>
-            <p>The stalked base of the <b>labium</b>.</p>
         </li>
         <li>
             <strong>Pronotum </strong>
