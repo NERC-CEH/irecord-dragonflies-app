@@ -13,7 +13,7 @@
     <% if (!general) { %>
     <div data-role="navbar" data-iconpos="left">
         <ul>
-            <li>
+            <li style="border-right: 1px solid #dddddd;">
                 <button id="gallery-button"
                         class="ui-btn ui-alt-icon ui-nodisc-icon ui-icon-eye ui-btn-icon-right">Gallery</button>
             </li>

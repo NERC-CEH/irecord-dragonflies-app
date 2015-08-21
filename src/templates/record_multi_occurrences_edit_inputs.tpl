@@ -1,7 +1,7 @@
-<ul data-role="listview" data-inset="true" class="ui-alt-icon ui-nodisc-icon">
+<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon space-top">
     <li>
-        <a href="#number/multi/adult/<%- obj.id %>" data-stage="adult" class="number-button"
-           data-role="button" data-icon="carat-r" data-iconpos="right">
+        <a href="#number/multi/adult/<%- obj.id %>" data-stage="adult"
+           class="number-button">
             <h3 class="heading">Adults</h3>
             <p class="descript"></p>
         </a>
@@ -43,7 +43,7 @@
     </li>
 </ul>
 
-<ul data-role="listview" data-inset="true" class="ui-nodisc-icon ui-alt-icon">
+<ul data-role="listview" class="ui-nodisc-icon ui-alt-icon space-top">
     <li>
         <a href="#comment/multi/<%- obj.id %>" id="species-comment-button"
            class="ui-icon-comment">

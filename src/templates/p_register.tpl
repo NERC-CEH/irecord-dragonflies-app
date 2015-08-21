@@ -34,6 +34,7 @@
                data-iconpos="right"> I agree to Terms and Conditions
         </label>
     <button id="register-button"
-            class="ui-nodisc-icon ui-alt-icon ui-btn ui-icon-plus ui-btn-icon-right" disabled>Create Account</button>
+            class="ui-nodisc-icon ui-alt-icon ui-btn ui-icon-plus ui-btn-icon-right space-top space-bottom"
+            disabled>Create Account</button>
 
 </div>

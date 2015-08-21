@@ -8,14 +8,14 @@
 
 <div data-role="content">
     <div class="app-logo"></div>
-    <ul data-role="listview" class="listview-top">
+    <ul data-role="listview" class="space-top">
         <li>
             <a href='#species-info'
                class="ui-btn record-button ui-icon-carat-r ui-btn-icon-right
                ui-nodisc-icon ui-alt-icon">Species Info</a>
         </li>
     </ul>
-    <ul data-role="listview" class="listview-top">
+    <ul data-role="listview" class="space-top">
         <li>
             <a href='#about'
                class="ui-btn record-button ui-icon-info ui-btn-icon-right

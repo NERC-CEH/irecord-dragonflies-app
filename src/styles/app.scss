@@ -34,6 +34,7 @@ button.header {
   border-left: 1px !important;
 }
 
+
 div.ui-btn,
 button.ui-btn {
   width: 94%;
@@ -168,6 +169,10 @@ label, form label {
   background-color: #333 !important;
 }
 
+.ui-btn.ui-btn-active {
+  background-color: #38c !important;
+}
+
 a.ui-btn > img {
   margin-left: 3px;
   margin-top: 5px;
@@ -204,8 +209,12 @@ a.ui-btn > img {
   padding: 10px;
 }
 
-.listview-top {
+.space-top {
   margin-top: 25px !important;
+}
+
+.space-bottom {
+  margin-bottom: 25px !important;
 }
 
 .listview-full {

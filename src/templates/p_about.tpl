@@ -58,7 +58,7 @@
                 <a href="http://www.british-dragonflies.org.uk/">website</a>.</p>
         </li>
     </ul>
-    <ul data-role="listview" class="listview-top">
+    <ul data-role="listview" class="space-top">
         <% if (!app.browser.isIOS()) { %>
         <li>
             <strong>How to download the app?</strong>

@@ -8,7 +8,7 @@
 
 <div data-role="content">
 
-    <ul data-role="listview" class="listview-top">
+    <ul data-role="listview" class="space-top">
         <li>
             <a href='#species-differences'
                class="ui-btn record-button ui-icon-carat-r ui-btn-icon-right

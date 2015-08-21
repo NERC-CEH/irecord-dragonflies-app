@@ -7,13 +7,16 @@
 </div>
 
 <div data-role="content">
+    <div class="info-message">
+        <p>Please sign in with your iRecord account or register.</p>
+    </div>
     <input type="email" placeholder="Email" name="email" value="">
     <input type="password" placeholder="Password" name="password" value="">
 
     <button id="login-button"
             class="ui-nodisc-icon ui-alt-icon ui-btn ui-icon-carat-r ui-btn-icon-right">Sign in</button>
 
-    <ul data-role="listview" class="listview-top" data-split-icon="carat-r">
+    <ul data-role="listview" class="space-top" data-split-icon="carat-r">
         <li data-icon="carat-r" class="first">
             <a href="#register"
                class="ui-nodisc-icon ui-alt-icon ui-btn ui-icon-plus ui-btn-icon-right">Create new account</a>
