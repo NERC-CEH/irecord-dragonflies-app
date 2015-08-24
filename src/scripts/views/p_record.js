@@ -162,6 +162,8 @@ define([
          */
         save: function () {
             _log('views.RecordPage: saving record.', log.DEBUG);
+            var that = this;
+
             $.mobile.loading('show');
 
             if (!this.valid()) {
@@ -178,7 +180,14 @@ define([
 
                 morel.Geoloc.clear();
 
-                app.message("<center><h2>Record saved.</h2></center>");
+                app.message("<h2>Record saved</h2>");
+
+                if (window.navigator.onLine && app.models.user.hasSignIn() && app.models.user.get('autosync')) {
+                    app.recordManager.syncAll(function (sample) {
+                        app.models.user.appendSampleUser(sample);
+                    });
+                }
+
                 setTimeout(function () {
                     Backbone.history.navigate('list', {trigger: true});
                 }, 2000);

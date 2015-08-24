@@ -49,11 +49,10 @@ define([
 
             _log('views.LoginPage: start.', log.DEBUG);
             if (navigator.onLine) {
-                var form = jQuery('#login-form');
                 var person = {
                     //user logins
-                    'email': form.find('input[name=email]').val(),
-                    'password': form.find('input[name=password]').val(),
+                    'email': this.$el.find('input[name=email]').val(),
+                    'password': this.$el.find('input[name=password]').val(),
 
                     //app logins
                     'appname': app.CONF.morel.appname,

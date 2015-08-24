@@ -87,30 +87,35 @@ define([
         syncAll: function (e) {
             var $button = $(e.currentTarget);
 
-            function onSuccess() {
-               // app.views.userPage.renderList();
-            }
+            app.recordManager.on('sync:request', function () {
+                $button.addClass('sync-icon-reload');
+            });
 
-            function callback(err) {
+            app.recordManager.on('sync:err', function (err) {
                 $button.removeClass('sync-icon-reload');
-                if (err) {
-                    var message =
-                        "<center><h2>Error</h2></center> <br/>" +
-                        err.message || '<h3>Some problem occurred </h3>';
 
-                    app.message(message);
-                    return;
-                }
-                app.views.listPage.updateUserPageButton();
+                var message =
+                    "<center><h2>Error</h2></center> <br/>" +
+                    err.message || '<h3>Some problem occurred </h3>';
+
+                app.message(message);
+            });
+
+            app.recordManager.on('sync:done', function () {
+                $button.removeClass('sync-icon-reload');
+                app.message('<h2>All synchronised</h2>');
+            });
+
+
+            function onSample(sample) {
+                app.models.user.appendSampleUser(sample);
             }
 
             if (app.models.user.hasSignIn()) {
-                $button.addClass('sync-icon-reload');
-                app.recordManager.syncAll(onSuccess, callback);
+                app.recordManager.syncAll(onSample);
             } else {
                 contactDetailsDialog(function () {
-                    $button.addClass('sync-icon-reload');
-                    app.recordManager.syncAll(onSuccess, callback);
+                    app.recordManager.syncAll(onSample);
                 });
             }
         },
@@ -142,16 +147,12 @@ define([
 
                     if (app.models.user.hasSignIn()) {
                         //append user details
-                        sample.set('name', app.models.user.get('name'));
-                        sample.set('surname', app.models.user.get('surname'));
-                        sample.set('email', app.models.user.get('email'));
+                        app.models.user.appendSampleUser(sample);
                         app.recordManager.sync(sample, callback);
                     } else {
-                        contactDetailsDialog(function (email, name, surname) {
+                        contactDetailsDialog(function () {
                             //append user details
-                            sample.set('name', name);
-                            sample.set('surname', surname);
-                            sample.set('email', email);
+                            app.models.user.appendSampleUser(sample);
                             app.recordManager.sync(sample, callback);
                         });
                     }
@@ -216,7 +217,7 @@ define([
             this.$syncButton = this.$el.find('.sync');
 
             this.showSyncStatus();
-            this.model.on('change', this.render, this);
+            //this.model.on('change', this.render, this);
             this.model.on('sync:done', this.showSyncStatus, this);
             this.model.on('sync:error', this.showSyncStatus, this);
             this.model.on('sync:request', this.showSync, this);

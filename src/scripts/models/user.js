@@ -189,6 +189,14 @@ define([
         isSortScientific: function (multi) {
             var sort = this.get(multi ? 'sortMulti' : 'sort');
             return sort === 'scientific' || sort === 'scientific_r';
+        },
+
+        appendSampleUser: function (sample) {
+            sample.set('name', this.get('name'));
+            sample.set('surname', this.get('surname'));
+            sample.set('email', this.get('email'));
+
+            return sample;
         }
     });
 

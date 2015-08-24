@@ -13,7 +13,7 @@
 <div data-role="content">
     <div id="login-warning" class="warning-message">Looks like you have not Signed
         in to your iRecord account yet. Please do so, if you wish to have a full access
-        to your submitted records on iRecord.
+        to your submitted records on iRecord and auto synchronisation feature on.
         <a href='#login'
            class="ui-btn ui-alt-icon ui-nodisc-icon ui-icon-user ui-btn-icon-right">Sign in</a>
     </div>

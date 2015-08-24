@@ -85,6 +85,12 @@ define([
                 morel.Geoloc.clear();
                 that.model.offAll();
 
+                if (window.navigator.onLine && app.models.user.hasSignIn() && app.models.user.get('autosync')) {
+                    app.recordManager.syncAll(function (sample) {
+                        app.models.user.appendSampleUser(sample);
+                    });
+                }
+
                 app.message("<center><h2>Record saved.</h2></center>");
                 setTimeout(function () {
                     Backbone.history.navigate('list', {trigger: true});
