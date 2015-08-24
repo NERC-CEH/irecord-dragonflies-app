@@ -15,6 +15,7 @@ define([
 
         events: {
             'click #login-button': 'logInOut',
+            'click #reset-app-button': 'resetApp',
             'change input[type="checkbox"]': 'saveAutosync'
         },
 
@@ -92,6 +93,14 @@ define([
             } else {
                 Backbone.history.navigate('login', {trigger: true});
             }
+        },
+
+        /**
+         * Resets the app information messages.
+         */
+        resetApp: function () {
+            app.models.user.set('trips', []);
+            app.message('<h2>Done</h2>')
         }
     });
 

@@ -52,6 +52,10 @@ button.ui-btn {
   box-shadow: none;
 }
 
+.ui-btn-text-left {
+  text-align: left;
+}
+
 /* Buttons in fixed footer control group are shifted down. This lifts them up.*/
 .ui-controlgroup{
   margin: 0;
@@ -147,7 +151,7 @@ label, form label {
 .ui-loader{
   top: 27% !important;
   width: 13.5em;
-  margin-left: -7.5em;
+  //margin-left: -7.5em;
 }
 
 .ui-widget-content {

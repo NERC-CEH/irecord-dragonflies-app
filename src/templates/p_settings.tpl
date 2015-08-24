@@ -35,4 +35,7 @@
         <input id="autosync-button" type="checkbox"
                data-iconpos="right" checked> Autosync
     </label>
+
+    <button id="reset-app-button"
+            class="ui-btn ui-alt-icon ui-nodisc-icon ui-icon-back ui-btn-icon-right ui-btn-text-left">Reset instruction screens</button>
 </div>
