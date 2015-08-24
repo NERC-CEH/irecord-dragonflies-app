@@ -226,10 +226,9 @@ define([
              * Starts a geolocation service and modifies the DOM with new UI.
              */
             start: function () {
-                $.mobile.loading('show');
-
                 var that = this;
                 this.state = 'running';
+                that.updateButtonStatus();
 
                 function onUpdate(location) {
                     location = app.views.locationPage.geoloc.set({
@@ -243,18 +242,18 @@ define([
                 }
 
                 function callback(err, location) {
-                    $.mobile.loading('hide');
-
                     if (err) {
                         that.state = 'init';
+                        that.updateButtonStatus();
 
                         app.message(err.message);
                         app.views.locationPage.renderGPStab();
                         return;
                     }
 
-                    app.views.locationPage.$gpsButton.html('Improve');
                     that.state = 'finished';
+                    that.updateButtonStatus();
+
                     onUpdate(location);
                 }
 
@@ -266,13 +265,31 @@ define([
                 morel.Geoloc.run(onUpdate, callback, accuracyLimit);
             },
 
+            updateButtonStatus: function () {
+                var $button = app.views.locationPage.$gpsButton;
+                switch (this.state) {
+                    case 'running':
+                        $button.html('Stop');
+                        $button.removeClass('ui-icon-location');
+                        $button.addClass('sync-icon-reload');
+                        break;
+                    case 'finished':
+                        $button.html('Improve');
+                        $button.addClass('ui-icon-location');
+                        $button.removeClass('sync-icon-reload');
+                    default:
+                        $button.html('Locate');
+                        $button.addClass('ui-icon-location');
+                        $button.removeClass('sync-icon-reload');
+                }
+            },
+
             /**
              * Stops any geolocation service and modifies the DOM with new UI.
              */
             stop: function () {
-                $.mobile.loading('hide');
-
                 this.state = 'init';
+                this.updateButtonStatus();
 
                 //stop geoloc
                 morel.Geoloc.stop();
