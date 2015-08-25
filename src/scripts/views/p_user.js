@@ -91,19 +91,12 @@ define([
                 $button.addClass('sync-icon-reload');
             });
 
-            app.recordManager.on('sync:err', function (err) {
+            app.recordManager.on('sync:err', function () {
                 $button.removeClass('sync-icon-reload');
-
-                var message =
-                    "<center><h2>Error</h2></center> <br/>" +
-                    err.message || '<h3>Some problem occurred </h3>';
-
-                app.message(message);
             });
 
             app.recordManager.on('sync:done', function () {
                 $button.removeClass('sync-icon-reload');
-                app.message('<h2>All synchronised</h2>');
             });
 
 
@@ -111,11 +104,23 @@ define([
                 app.models.user.appendSampleUser(sample);
             }
 
+            function callback (err) {
+                if (err) {
+                    var message =
+                        "<center><h2>Error</h2></center> <br/>" +
+                        err.message || '<h3>Some problem occurred </h3>';
+
+                    app.message(message);
+                    return;
+                }
+                app.message('<h2>All synchronised</h2>');
+            }
+
             if (app.models.user.hasSignIn()) {
-                app.recordManager.syncAll(onSample);
+                app.recordManager.syncAll(onSample, callback);
             } else {
                 contactDetailsDialog(function () {
-                    app.recordManager.syncAll(onSample);
+                    app.recordManager.syncAll(onSample, callback);
                 });
             }
         },

@@ -62,10 +62,7 @@ define([
 
                 switch (app.CONF.LOGIN.STATUS) {
                     case true:
-                        this.loginSend(form, person);
-                        break;
-                    case 'simulate':
-                        this.loginSimulate(form, person);
+                        this.loginSend(person);
                         break;
                     case false:
                     default:
@@ -82,7 +79,7 @@ define([
          * @param form
          * @param person
          */
-        loginSend: function (form, person) {
+        loginSend: function (person) {
             $.mobile.loading('show');
             $.ajax({
                 url: app.CONF.LOGIN.URL,
@@ -101,7 +98,7 @@ define([
          * @param form
          * @param person
          */
-        loginSimulate: function (form, person) {
+        loginSimulate: function () {
             var selection =
                 "<h1>Simulate:</h1>" +
                 "<button id='simulate-success-button'>Success</button>" +

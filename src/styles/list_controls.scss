@@ -35,6 +35,12 @@ label.filter, label.sort {
   width: 30%;
 }
 
+#list-controls-button{
+  height: auto !important;
+  padding-top: 0.7em !important;
+  padding-bottom: 0.7em !important;
+}
+
 #list-controls-button.on:after {
   background-color: #3388cc;
 }

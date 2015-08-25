@@ -73,6 +73,7 @@ define([], function () {
         detect: detect,
         isMobile: isMobile,
         isIOS: isIOS,
+        isIPhone: isIPhone,
         isAndroidChrome: isAndroidChrome,
         getIOSVersion: getIOSVersion,
         isHomeMode: isHomeMode

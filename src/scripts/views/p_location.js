@@ -234,7 +234,7 @@ define([
                     location = app.views.locationPage.geoloc.set({
                         latitude: location.lat,
                         longitude: location.lon,
-                        accuracy: location.acc
+                        accuracy: parseInt(location.acc.toFixed(0))
                     });
 
                     //modify the UI

@@ -142,15 +142,17 @@ $width: 500vw;
   font-size: 0.9em;
 }
 
+$bottom: 16vh;
+
 .first .message {
   text-align: right;
-  bottom: 16vh;
+  bottom: $bottom;
   right: 14px;
 }
 
 .second .message {
   text-align: left;
-  bottom: 16vh;
+  bottom: $bottom;
   left: 14px;
 }
 
@@ -162,13 +164,13 @@ $width: 500vw;
 
 .fourth .message {
   text-align: right;
-  bottom: 16vh;
+  bottom: $bottom;
   right: 14px;
 }
 
 .fifth .message {
   text-align: left;
-  bottom: 16vh;
+  bottom: $bottom;
   left: 14px;
 }
 
