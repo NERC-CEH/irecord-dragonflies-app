@@ -265,3 +265,7 @@ textarea {
 .ui-tabs {
   padding: 0;
 }
+
+.no-top-border .ui-first-child {
+  border-top: none;
+}

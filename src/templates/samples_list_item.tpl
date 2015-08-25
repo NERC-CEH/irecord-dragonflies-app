@@ -15,5 +15,4 @@
         <p><i><%- obj.common_name %></i></p>
     <% } %>
 </a>
-<a href="#user" class="delete-button ui-icon-delete"
-   data-id="<%- obj.id %>">Delete</a>
+<a href="#record-info/<%- obj.id %>" class="ui-alt-icon ui-nodisc-icon ui-icon-info">Info</a>

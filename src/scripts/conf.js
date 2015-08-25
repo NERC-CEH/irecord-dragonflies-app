@@ -175,7 +175,7 @@ define(['morel', 'helpers/log'], function () {
                 Adult: 3640,
                 Copulating: 3641,
                 Ovipositing: 3642,
-                Larva: 3643,
+                Larvae: 3643,
                 Exuviae: 3644,
                 Emergent: 3645
             }

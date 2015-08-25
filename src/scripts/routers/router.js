@@ -8,6 +8,7 @@ define([
     'views/p_list',
     'views/p_species',
     'views/p_user',
+    'views/p_record_info',
     'views/p_settings',
     'views/p_login',
     'views/p_register',
@@ -22,7 +23,7 @@ define([
     'views/p_stage',
     'views/p_comment',
     'helpers/browser'
-], function(ext, Page, WelcomePage, ListPage, SpeciesPage, UserPage, SettingsPage, LoginPage, RegisterPage,
+], function(ext, Page, WelcomePage, ListPage, SpeciesPage, UserPage, RecordInfoPage, SettingsPage, LoginPage, RegisterPage,
             RecordPage, RecordMultiPage, RecordMultiOccurrencesPage, RecordMultiOccurrencesEditPage,
             RecordMultiListPage, DatePage, LocationPage, NumberPage, StagePage,
             CommentPage, browser) {
@@ -250,6 +251,18 @@ define([
 
                 this.changePage(app.views.recordPage);
                 app.views.recordPage.update(prevPageID, parseInt(id));
+            },
+
+            "record-info/:id": function (id) {
+                var that = this;
+                if (!app.views.recordInfoPage) {
+                    app.views.recordInfoPage = new RecordInfoPage();
+                }
+
+                app.recordManager.get(id, function (err, model) {
+                    that.changePage(app.views.recordInfoPage);
+                    app.views.recordInfoPage.update(model);
+                });
             },
 
             "info": function () {

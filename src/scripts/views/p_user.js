@@ -164,8 +164,7 @@ define([
                 });
             } else {
                 //offline
-                app.message("<center><h2>Sorry</h2></center>" +
-                    "<br/><h3>Looks like you are offline!</h3>");
+                app.message("<h2>You are offline</h2>");
             }
         },
 
