@@ -7,7 +7,7 @@
 </div>
 
 <div data-role="content">
-    <img src="../images/BRC_approved_logo.png" class="brc-approved-logo"/>
+    <img src="images/BRC_approved_logo.png" class="brc-approved-logo"/>
 
     <ul data-role="listview">
         <li>

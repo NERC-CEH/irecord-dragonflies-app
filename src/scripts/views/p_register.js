@@ -73,8 +73,8 @@ define([
         this.email = this.$el.find('input[name=email]').val(); //save it for future
 
         //app logins
-        data.append('appname', morel.auth.CONF.APPNAME);
-        data.append('appsecret', morel.auth.CONF.APPSECRET);
+        data.append('appname', app.CONF.morel.appname);
+        data.append('appsecret', app.CONF.morel.appsecret);
 
         $.ajax({
           url: app.CONF.LOGIN.URL,

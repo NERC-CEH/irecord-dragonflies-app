@@ -129,9 +129,12 @@ browser) {
          * Shows the user around the page.
          */
         trip: function () {
+            var callback = function () {
+                app.views.listPage.$footer.hide();
+            };
             var downloaded = app.models.user.get('downloaded-app');
             if (!downloaded && browser.isIOS() && browser.isHomeMode()) {
-                download();
+                download(callback);
             }
         },
 

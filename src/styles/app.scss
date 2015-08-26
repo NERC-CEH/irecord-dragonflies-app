@@ -79,9 +79,14 @@ button.ui-btn {
   color: #ffffff !important;
   text-shadow: none !important;
 }
+.ui-collapsible {
+  padding-right: 10px;
+}
+
 .ui-collapsible-content p,
 .ui-listview>li p {
   font-size: 90%;
+  white-space: normal;
 }
 
 .ui-content {
@@ -266,6 +271,20 @@ textarea {
   padding: 0;
 }
 
-.no-top-border .ui-first-child {
+.no-top-border .ui-first-child,
+.no-top-border .ui-collapsible-heading a{
   border-top: none;
+}
+
+.no-bottom-border .ui-first-child,
+.no-bottom-border .ui-collapsible-heading a{
+  border-bottom: none;
+}
+
+.no-top-margin h3.ui-collapsible-heading {
+  margin-top: 0;
+}
+
+.no-bottom-margin h3.ui-collapsible-heading {
+  margin-bottom: 0;
 }

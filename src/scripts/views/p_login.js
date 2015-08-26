@@ -164,8 +164,7 @@ define([
             var response = xhr.responseText == "Missing name parameter" ? 'Bad Username or Password' : xhr.responseText;
             app.message(
                 '<center><h2>Error</h2></center><br/>' +
-                '<h3>Some problem occurred.</h3>' +
-                (response || ''), 3000);
+                (response || '<h3>Some problem occurred.</h3>'), 3000);
         },
 
         /**

@@ -23,13 +23,13 @@ define([
 
             this.render();
 
-            /**
-             * iOS viewport toolbar problem fix:
-             * http://nicolas-hoizey.com/2015/02/viewport-height-is-taller-than-the-visible-part-of-the-document-in-some-mobile-browsers.html
-             */
-            if (app.browser.isIOS() && app.browser.isIPhone){
-                this.$el.find('div[data-role="content"]').css('margin-top', -52);
-            }
+            ///**
+            // * iOS viewport toolbar problem fix:
+            // * http://nicolas-hoizey.com/2015/02/viewport-height-is-taller-than-the-visible-part-of-the-document-in-some-mobile-browsers.html
+            // */
+            //if (app.browser.isIOS() && app.browser.isIPhone){
+            //    this.$el.find('div[data-role="content"]').css('margin-top', -52);
+            //}
 
             this.$progressCircles = this.$el.find('.progress .circle');
 

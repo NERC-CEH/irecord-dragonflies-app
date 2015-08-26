@@ -127,7 +127,7 @@ define([
 
                 var sref = location.latitude + ', ' + location.longitude;
                 this.model.set('location', sref);
-                this.model.set('location_accuracy', location.accuracy);
+                this.model.set('location_accuracy', parseInt(location.accuracy.toFixed(0)));
                 this.model.set('location_name', location.name);
 
                 app.models.user.saveLocation(location);
@@ -234,7 +234,7 @@ define([
                     location = app.views.locationPage.geoloc.set({
                         latitude: location.lat,
                         longitude: location.lon,
-                        accuracy: parseInt(location.acc.toFixed(0))
+                        accuracy: location.acc
                     });
 
                     //modify the UI
