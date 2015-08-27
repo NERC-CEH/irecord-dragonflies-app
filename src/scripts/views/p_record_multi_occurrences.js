@@ -76,9 +76,7 @@ define([
 
             function callback(err) {
                 if (err) {
-                    var message = "<center><h2>Error</h2></center>" +
-                        "<p>" + err.message + "</p>";
-                    app.message(message);
+                    app.message(err);
                     return;
                 }
 

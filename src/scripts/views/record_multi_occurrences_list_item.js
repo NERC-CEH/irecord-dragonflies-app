@@ -62,7 +62,10 @@ define([
 
                 var callback = function (err, data, fileType) {
                     morel.Image.resize(data, fileType, 800, 800, function (err, image, data) {
-                        that.model.images.set(new morel.Image(data));
+                        that.model.images.set(new morel.Image({
+                            data: data,
+                            type: fileType
+                        }));
 
                         that.$imgPickerDisplay.empty().append(image);
                         that.$imgPickerDisplay.addClass('selected');

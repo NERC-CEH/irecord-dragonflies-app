@@ -20,6 +20,15 @@ define(['jquery', 'jquery.mobile'], function ($, jqm) {
             return;
         }
 
+        if (typeof text !== 'string') {
+            text =
+                "<h2>Sorry :(</h2>" +
+                '<p>' +
+                    (text.message || 'Some problem occurred') +
+                    (text.number ? ' <small><i>(code: ' + text.number + ')</i></small>' : '') +
+                '</p>';
+        }
+
         var messageId = 'loaderMessage';
         var html = '<div id="' + messageId + '">' + (callback ? CLOSE_HTML : '') + text + '</div>';
 

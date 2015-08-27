@@ -69,8 +69,7 @@ define([
                         _log('views.LoginPage: unknown feature state', log.WARNING);
                 }
             } else {
-                app.message("<center><h2>Sorry</h2></center>" +
-                    "<br/><h3>Looks like you are offline!</h3>");
+                app.message("<h2>You are offline!</h2>");
             }
         },
 
@@ -162,9 +161,8 @@ define([
         onLoginError: function (xhr, ajaxOptions, thrownError) {
             _log("views.LoginPage: ERROR " + xhr.status + " " + thrownError + ".", log.ERROR);
             var response = xhr.responseText == "Missing name parameter" ? 'Bad Username or Password' : xhr.responseText;
-            app.message(
-                '<center><h2>Error</h2></center><br/>' +
-                (response || '<h3>Some problem occurred.</h3>'), 3000);
+
+            app.message({message: response});
         },
 
         /**

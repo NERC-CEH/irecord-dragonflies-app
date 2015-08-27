@@ -118,7 +118,7 @@ browser) {
             function onSuccess(err, samples) {
                 var unsent = 0;
                 samples.each(function (sample) {
-                    if (!sample.warehouse_id) unsent++;
+                    if (sample.getSyncStatus() === morel.LOCAL) unsent++;
                 });
                 that.$userPageButton.toggleClass('running', unsent > 0);
             }

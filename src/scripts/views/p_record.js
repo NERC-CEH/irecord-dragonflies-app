@@ -88,8 +88,9 @@ define([
             var specie = app.collections.species.find({id: speciesID});
             this.occurrence = new morel.Occurrence({
                 attributes: {
-                    'taxon': speciesID,
-                    'number': 'Present'
+                    taxon: speciesID,
+                    number: 'Present',
+                    certain: true
                 }
             });
 
@@ -141,7 +142,7 @@ define([
             function callback(err, location) {
                 if (err) {
                     if (err.number != morel.Geoloc.TIMEOUT_ERR) {
-                        app.message(err.message);
+                        app.message(err);
                     }
                     that.model.set('location_accuracy', -1); //stopped
                     return;
@@ -162,7 +163,6 @@ define([
          */
         save: function () {
             _log('views.RecordPage: saving record.', log.DEBUG);
-            var that = this;
 
             $.mobile.loading('show');
 
@@ -172,9 +172,7 @@ define([
 
             function callback(err) {
                 if (err) {
-                    var message = "<center><h2>Error</h2></center>" +
-                        "<p>" + err.message + "</p>";
-                    app.message(message);
+                    app.message(err);
                     return;
                 }
 
@@ -199,7 +197,7 @@ define([
 
         saveCertain: function (e) {
             var checked = $(e.target).prop('checked');
-            this.model.set('certain', checked);
+            this.occurrence.set('certain', checked);
         },
 
         /**
@@ -217,7 +215,10 @@ define([
 
                 var callback = function (err, data, fileType) {
                     morel.Image.resize(data, fileType, 800, 800, function (err, image, data) {
-                        that.occurrence.images.set(new morel.Image(data));
+                        that.occurrence.images.set(new morel.Image({
+                            data: data,
+                            type: fileType
+                        }));
 
                         that.$imgPickerDisplay.empty().append(image);
                         that.$imgPickerDisplay.addClass('selected');
@@ -243,7 +244,7 @@ define([
             if (accuracy === -1 || accuracy > app.CONF.GPS_ACCURACY_LIMIT) {
                 //redirect to location page
                 Backbone.history.navigate('location', {trigger: true});
-                return morel.FALSE;
+                return false;
             }
 
             //validate the rest
@@ -258,10 +259,10 @@ define([
 
                 message += "</ul>";
                 app.message(message);
-                return morel.FALSE;
+                return false;
             }
 
-            return morel.TRUE;
+            return true;
         },
 
         /**

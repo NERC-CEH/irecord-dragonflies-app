@@ -114,7 +114,7 @@ define([
       user.email = app.views.registerPage.email;
       app.models.user.signIn(user);
 
-      app.message('<center><h2>Success</h2></center> <br/><h3>A confirmation email sent.</h3>');
+      app.message('<h2>Success</h2><p>A confirmation email sent.</p>');
       setTimeout(function () {
         window.history.go(-2);
       }, 3000);
@@ -128,8 +128,7 @@ define([
         log.ERROR);
 
       $.mobile.loading('hide');
-      app.message('<center><h2>Error</h2></center>' +
-      '<br/>' + xhr.responseText);
+      app.message({message: xhr.responseText});
     }
 
   });

@@ -49,7 +49,7 @@ define([
             var that = this;
             app.recordManager.getAll(function (err, samples) {
                 if (err) {
-                    app.message(err.message);
+                    app.message(err);
                     return;
                 }
                 that.listView = new SamplesList({
@@ -85,43 +85,44 @@ define([
          * Recursively sends all the saved user records.
          */
         syncAll: function (e) {
-            var $button = $(e.currentTarget);
-
-            app.recordManager.on('sync:request', function () {
-                $button.addClass('sync-icon-reload');
-            });
-
-            app.recordManager.on('sync:err', function () {
-                $button.removeClass('sync-icon-reload');
-            });
-
-            app.recordManager.on('sync:done', function () {
-                $button.removeClass('sync-icon-reload');
-            });
-
-
             function onSample(sample) {
                 app.models.user.appendSampleUser(sample);
             }
 
-            function callback (err) {
+            function callback(err) {
                 if (err) {
-                    var message =
-                        "<center><h2>Error</h2></center> <br/>" +
-                        err.message || '<h3>Some problem occurred </h3>';
-
-                    app.message(message);
+                    app.message(err);
                     return;
                 }
                 app.message('<h2>All synchronised</h2>');
             }
 
-            if (app.models.user.hasSignIn()) {
-                app.recordManager.syncAll(onSample, callback);
-            } else {
-                contactDetailsDialog(function () {
-                    app.recordManager.syncAll(onSample, callback);
+            if (navigator.onLine) {
+                var $button = $(e.currentTarget);
+
+                app.recordManager.on('sync:request', function () {
+                    $button.addClass('sync-icon-reload');
                 });
+
+                app.recordManager.on('sync:err', function () {
+                    $button.removeClass('sync-icon-reload');
+                });
+
+                app.recordManager.on('sync:done', function () {
+                    $button.removeClass('sync-icon-reload');
+                });
+
+
+                if (app.models.user.hasSignIn()) {
+                    app.recordManager.syncAll(onSample, callback);
+                } else {
+                    contactDetailsDialog(function () {
+                        app.recordManager.syncAll(onSample, callback);
+                    });
+                }
+            } else {
+                //offline
+                app.message("<h2>You are offline</h2>");
             }
         },
 
@@ -141,14 +142,15 @@ define([
                 app.recordManager.get(sampleID, function (err, sample) {
                     callback = function (err) {
                         if (err) {
-                            var message =
-                                "<center><h2>Error</h2></center> <br/>" +
-                                err.message || '<h3>Some problem occurred </h3>';
-
-                            app.message(message);
+                            app.message(err);
                             return;
                         }
                     };
+
+                    //one way sync (submit) if user is not signed in
+                    if (sample.getSyncStatus() != morel.LOCAL) {
+                        return;
+                    }
 
                     if (app.models.user.hasSignIn()) {
                         //append user details
@@ -251,7 +253,7 @@ define([
         },
 
         showSyncStatus: function () {
-            if (this.model.warehouse_id) {
+            if (this.model.getSyncStatus() === morel.SYNCED) {
                 //on cloud
                 this.$syncButton.removeClass('sync-icon-reload');
                 this.$syncButton.removeClass('sync-icon-local');
