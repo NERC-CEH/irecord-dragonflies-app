@@ -204,6 +204,11 @@ define([
 
         renderList: function () {
             var that = this;
+            this.collection.sort(function (a, b) {
+                a = a.get('date').split('/');
+                b = b.get('date').split('/');
+                return new Date(a[2], a[1], a[0]) < new Date(b[2], b[1], b[0]);
+            });
             this.collection.each(function (sample) {
                 var sampleView = new SamplesListItem({
                     model: sample
