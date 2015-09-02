@@ -45,6 +45,7 @@ define([
             this.set('name', '');
             this.set('surname', '');
             this.save();
+            this.trigger('logout');
         },
 
         /**
@@ -56,7 +57,8 @@ define([
         signIn: function (user) {
             this.set('secret', user.secret || '');
             this.setContactDetails(user);
-            this.save()
+            this.save();
+            this.trigger('login');
         },
 
         /**
@@ -192,7 +194,7 @@ define([
         },
 
         appendSampleUser: function (sample) {
-            sample.set('name', this.get('name'));
+            sample.set('name', this.get('name') || '_');
             sample.set('surname', this.get('surname'));
             sample.set('email', this.get('email'));
 

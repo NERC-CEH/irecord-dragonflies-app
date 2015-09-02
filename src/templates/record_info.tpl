@@ -5,7 +5,7 @@
     </li>
     <li>
         <strong>Location</strong>
-        <div class="info"><%- obj.latitude %>, <%- obj.latitude %></div>
+        <div class="info"><%- obj.latitude %>, <%- obj.longitude %></div>
     </li>
     <% if (obj.recorded_all === false || obj.recorded_all === true) { %>
         <li>

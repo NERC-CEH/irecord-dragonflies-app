@@ -3,14 +3,14 @@
         <a href='#' data-rel='back' class="ui-btn ui-icon-carat-l ui-nodisc-icon
         ui-alt-icon ui-btn-icon-notext">Back</a>
     </div>
-    <h1>Species Terms</h1>
+    <h1>Technical Terms</h1>
 </div>
 
 <div data-role="content">
     <ul data-role="listview">
         <li>
             <strong>Accessory genitalia </strong>
-            <p>The structure on the underside of <b>S2</b>and <b>S3 </b>of the male's abdomen that holds sperm prior to
+            <p>The structure on the underside of <b>S2</b> and <b>S3 </b>of the male's abdomen that holds sperm prior to
                 copulation.</p>
         </li>
         <li>
@@ -24,9 +24,22 @@
                 between the body and the node.</p>
         </li>
         <li>
+            <strong>Copulating pair</strong>
+            <p>Male and female mating in the 'wheel' position.</p>
+        </li>
+        <li>
             <strong>Costa </strong>
             <p>The front vein, which forms the leading edge of the
                 wing.</p>
+        </li>
+        <li>
+            <strong>Emergent</strong>
+            <p>Adult that has recently emerged from water, showing
+                reflective wings, white wing-spots and weak flight.</p>
+        </li>
+        <li>
+            <strong>Exuviae</strong>
+            <p>Larval skins after adults have emerged.</p>
         </li>
         <li>
             <strong>Frons </strong>
@@ -47,6 +60,11 @@
             <strong>Obelisk position </strong>
             <p>Position adopted by some dragonflies where
                 the abdomen is pointed towards the sun to avoid overheating.</p>
+        </li>
+        <li>
+            <strong>Ovipositing</strong>
+            <p>Laying eggs into plant material, debris or water, alone or with
+                males still attached.</p>
         </li>
         <li>
             <strong>Ovipositor </strong>
@@ -74,6 +92,12 @@
             <strong>Shoulder stripes </strong>
             <p>The pair of stripes on the top of the thorax,
                 technically known as antehumeral stripes.</p>
+        </li>
+        <li>
+            <strong>Tandem</strong>
+            <p>A pair of dragonflies with the male clasping the female behind
+                the head are said to be 'in tandem'; they may go on to copulate
+                or oviposit.</p>
         </li>
         <li>
             <strong>Teneral </strong>

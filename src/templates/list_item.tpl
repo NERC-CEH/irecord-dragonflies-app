@@ -1,4 +1,4 @@
-<a href="#species/<%- id %>" class="<%- favourite ? 'favourite': '' %>">
+<a href="#species/<%- id %>" class="species <%- favourite ? 'favourite': '' %>">
     <img src="<%- profile_pic %>"/>
     <% if (app.models.user.isSortScientific()) { %>
       <p class="species-list-main-name"><i><%- taxon %></i></p>

@@ -22,7 +22,7 @@
         <li>
             <a href='#species-terms'
                class="ui-btn record-button ui-icon-info ui-btn-icon-right
-               ui-nodisc-icon ui-alt-icon">Species Terms</a>
+               ui-nodisc-icon ui-alt-icon">Technical Terms</a>
         </li>
     </ul>
 </div>

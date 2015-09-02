@@ -141,9 +141,6 @@ define([
 
             function callback(err, location) {
                 if (err) {
-                    if (err.number != morel.Geoloc.TIMEOUT_ERR) {
-                        app.message(err);
-                    }
                     that.model.set('location_accuracy', -1); //stopped
                     return;
                 }
@@ -396,7 +393,7 @@ define([
                         '<center><h2>Recording species</h2></center>' +
                         '<p>Use this to submit <b>individual</b> sightings of dragonflies. </p>' +
                         '<p>For recording multiple species from an area, go back to the ' +
-                        '<b style="white-space: nowrap">home page</b> and click a ' +
+                        '<b style="white-space: nowrap">home page</b> and click the ' +
                         '<b style="white-space: nowrap">double-plus button</b> (top-right).</p>' +
                         '<button id="' + okBtnID + '">OK</button>' +
                 '</div>';

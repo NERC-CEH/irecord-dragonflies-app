@@ -101,7 +101,7 @@ define([
             for (var i = 0; i < this.collection.length; i++) {
                 occurrence = this.collection.data[i];
                 specie = species.find(function(model) {
-                    return model.get('warehouse_id') === occurrence.get('taxon');
+                    return model.get('id') === occurrence.get('taxon');
                 });
                 if (specie) {
                     species.remove(specie);

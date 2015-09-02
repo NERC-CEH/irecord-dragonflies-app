@@ -16,6 +16,17 @@
   height: 20px;
 }
 
+.species {
+  padding-left: 7.25em !important;
+  padding-right: 1.5em !important;
+}
+
+.species img {
+  height: 4.5em;
+  width: 6em;
+
+  max-width: none !important;
+}
 
 /* This is needed for expanding header not to make a gap in the list
  if the list is left and returned. */

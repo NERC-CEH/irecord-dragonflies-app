@@ -47,9 +47,10 @@ define([
          */
         routes: {
             "": function () {
+
                 var trips = app.models.user.get('trips');
 
-                if (trips && (trips.indexOf('welcome') >= 0)) {
+                if (!browser.isMobile() || (trips && (trips.indexOf('welcome') >= 0))) {
                     Backbone.history.navigate('list', {trigger: true});
                     return;
                 }

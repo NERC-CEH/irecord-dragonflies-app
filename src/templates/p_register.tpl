@@ -15,11 +15,11 @@
             download all of your records here.</p>
     </div>
 
-    <input type="email" placeholder="Email" name="email" value="" required>
-    <input type="text" placeholder="Firstname" name="firstname" value="" required>
-    <input type="text" placeholder="Surname" name="secondname" value="" required>
-    <input type="password" placeholder="Password" name="password" value="" required>
-    <input type="password" placeholder="Confirm password" name="password-confirm" value="" required>
+    <input type="text" data-role="none" placeholder="Email" name="email" value="" required>
+    <input type="text" data-role="none" placeholder="Firstname" name="firstname" value="" required>
+    <input type="text" data-role="none" placeholder="Surname" name="secondname" value="" required>
+    <input type="password" data-role="none" placeholder="Password" name="password" value="" required>
+    <input type="password" data-role="none" placeholder="Confirm password" name="password-confirm" value="" required>
     <br/>
 
     <ul data-role="listview">
@@ -34,7 +34,7 @@
                data-iconpos="right"> I agree to Terms and Conditions
         </label>
     <button id="register-button"
-            class="ui-nodisc-icon ui-alt-icon ui-btn ui-icon-plus ui-btn-icon-right space-top space-bottom"
+            class="ui-btn ui-btn-inset ui-btn-narrow space-top space-bottom"
             disabled>Create Account</button>
 
 </div>

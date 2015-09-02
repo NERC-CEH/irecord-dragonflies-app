@@ -8,13 +8,10 @@ define([
         var message =
             '<h3>Your details:</h3>' +
 
-            '<input type="email" name="user-email" placeholder="Email" data-mini="true">' +
-            '<input type="text" name="user-name" placeholder="Name" data-mini="true">' +
-            '<input type="text" name="user-surname" placeholder="Surname" data-mini="true">' +
-            '<button id="' + personalDetailsButtonID + '" data-mini="true">Sync</button>' +
-
-            '<center><h4>or</h4></center>' +
-            '<a href="#login" data-role="button" data-mini="true">Sign in</a>';
+            '<input type="text" class="dark-border" name="user-email" placeholder="Email" data-role="none">' +
+            '<input type="text" class="dark-border" name="user-name" placeholder="Name" data-role="none">' +
+            '<input type="text" class="dark-border" name="user-surname" placeholder="Surname" data-role="none">' +
+            '<button id="' + personalDetailsButtonID + '">Sync</button>';
 
         app.message(message, 0, true);
 
@@ -58,7 +55,7 @@ define([
         var $inputEmail = $('[name="user-email"] ');
         $inputEmail.focusout(function () {
             var valid = validateEmail($(this).val());
-            var $inputBox = $('div.ui-input-text').has('[name="user-email"] ');
+            var $inputBox = $('[name="user-email"]');
             if (!valid) {
                 $inputBox.addClass('input-error');
             } else {

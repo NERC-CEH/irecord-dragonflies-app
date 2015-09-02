@@ -57,7 +57,7 @@ browser) {
 
             //disable/enable downloading
             this.$footer = this.$el.find('#list-footer');
-            if (app.models.user.get('downloaded-app')) {
+            if (!browser.isMobile() || app.models.user.get('downloaded-app')) {
               this.$footer.hide();
             }
 

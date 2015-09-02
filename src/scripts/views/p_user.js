@@ -63,7 +63,7 @@ define([
          * Renders the user login information.
          */
         renderUserControls: function () {
-            if (app.models.user.hasSignIn()){
+            if (app.models.user.hasSignIn()) {
                 //logged in
                 var name = app.models.user.get('name');
                 var surname = app.models.user.get('surname');
@@ -78,7 +78,7 @@ define([
 
         appendEventListeners: function () {
             this.appendBackButtonListeners();
-            this.listenTo(this.model, 'change:secret', this.renderUserControls);
+            this.listenTo(this.model, 'login logout', this.renderUserControls);
         },
 
         /**

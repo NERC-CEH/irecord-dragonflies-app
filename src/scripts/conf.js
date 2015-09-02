@@ -22,7 +22,7 @@ define(['morel', 'helpers/log'], function () {
         },
         LOGIN: {
             STATUS: true,
-            URL: "http://192.171.199.230/dragonfly/user/mobile/register",
+            URL: "http://192.171.199.230/mobile-drupal/user/mobile/register",
             TIMEOUT: 80000
         },
         REGISTER: {
@@ -111,7 +111,7 @@ define(['morel', 'helpers/log'], function () {
 
     //morel configuration
     app.CONF.morel = {
-        url: 'http://192.171.199.230/dragonfly/mobile/submit',
+        url: 'http://192.171.199.230/mobile-drupal/mobile/submit',
         appname: "test",
         appsecret: "mytest",
         website_id: 99,

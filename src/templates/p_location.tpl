@@ -22,7 +22,7 @@
         <div id="gps" class="ui-body-d ui-content">
             <div id="location-gps-placeholder"></div>
             <button id="gps-button"
-                    class="ui-nodisc-icon ui-alt-icon ui-btn ui-icon-location ui-btn-icon-right">Locate</button>
+                    class="ui-btn ui-btn-inset ui-btn-narrow">Locate</button>
         </div>
         <div id="map" class="ui-body-d ui-content">
             <div class="info-message" id="map-message">
@@ -35,10 +35,10 @@
                 <p>Please provide a GB Grid Reference.
                     <br/> e.g. <i>"TQ 28170 77103"</i></p>
             </div>
-            <input type="text" id="grid-ref" placeholder="Grid Reference"/>
-            <input type="text" id="location-name" placeholder="Location Name (optional)"/>
+            <input type="text" id="grid-ref" data-role="none" placeholder="Grid Reference"/>
+            <input type="text" id="location-name" data-role="none" placeholder="Location Name (optional)"/>
             <button id="grid-ref-set"
-                    class="ui-nodisc-icon ui-alt-icon ui-btn ui-icon-check ui-btn-icon-right">Set</button>
+                    class="ui-btn ui-btn-inset ui-btn-narrow">Set</button>
         </div>
     </div>
 </div>

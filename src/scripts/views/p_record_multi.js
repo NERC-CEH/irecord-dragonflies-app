@@ -70,9 +70,6 @@ define([
 
             function callback(err, location) {
                 if (err) {
-                    if (err.number != morel.Geoloc.TIMEOUT_ERR) {
-                        app.message(err.message);
-                    }
                     that.model.set('location_accuracy', -1); //stopped
                     return;
                 }

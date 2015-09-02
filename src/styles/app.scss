@@ -38,7 +38,7 @@ button.header {
 div.ui-btn,
 button.ui-btn {
   width: 94%;
-  margin: 2% 3% 0;
+  margin: 2% 3% 2%;
 
   -webkit-border-radius: 0 !important;
   -moz-border-radius: 0 !important;
@@ -253,14 +253,31 @@ a.ui-btn > img {
 
 input,
 textarea {
+  border-width: 1px;
+  border-color: rgb(221, 221, 221);
+  background-color: transparent;
+  height: 2em !important;
   width: 94% !important;
-  margin: 0 3% !important;
+  margin: .5em 3% !important;
   border-radius: 0 !important;
   border-right: none !important;
   border-top: none !important;
   border-left: none !important;
 }
 
+input.dark-border {
+  color: white;
+  border-color: #585858;
+}
+
+.ui-checkbox input,
+.ui-radio input {
+  top: 10%;
+}
+
+input:focus {
+  outline:none !important
+}
 
 .ui-input-btn,
 .ui-input-text {
@@ -287,4 +304,17 @@ textarea {
 
 .no-bottom-margin h3.ui-collapsible-heading {
   margin-bottom: 0;
+}
+
+.ui-btn-inset {
+  background-color: $header-color !important;
+  color: white !important;
+  text-shadow: none !important;
+  width: 50%;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.ui-btn-narrow {
+  max-width: 400px;
 }

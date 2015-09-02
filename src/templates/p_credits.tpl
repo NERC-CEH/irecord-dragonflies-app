@@ -19,10 +19,10 @@
                     <p>Karolis Kazlauskis (CEH, app development)</p>
                 </li>
                 <li>
-                    <p>Claire Install (BDS, app species information and corrections)</p>
+                    <p>Dave Smallshire (BDS, app corrections)</p>
                 </li>
                 <li>
-                    <p>Dave Smallshire (BDS, app corrections)</p>
+                    <p>Claire Install (BDS, app species information and corrections)</p>
                 </li>
                 <li>
                     <p>Jim Bacon (CEH, app development support)</p>

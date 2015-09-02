@@ -10,11 +10,25 @@
     <ul data-role="listview">
         <li>
             <p>Dragonfly records are vital in order to accurately determine their distribution
-                and numbers, and to help advise conservation for the species that need it. </p>
+                and numbers, and to advise on conservation for those species that need it. </p>
+
+            <p>Anyone can contribute to the dragonfly dataset and thereby enhance
+                our knowledge of dragonflies. The basic information needed to
+                make a record must answer four simple questions: What species?
+                Where was it seen? When was it seen? Who saw it?</p>
+            <p>
+                Extra value can be added to a record if you count or estimate
+                the numbers present. Even more valuable is evidence of breeding,
+                so please submit records of mating pairs, egg-laying (ovipositing),
+                larvae (nymphs), exuviae (larval skins) and newly-emerged
+                dragonflies (emergents).
+            </p>
 
             <p>Any records you submit using the <i>iRecord Dragonfly</i> app will be reviewed and
-                verified by an expert before being added to iRecord <a href="www.brc.ac.uk/irecord">website</a>
+                verified by an expert before being added to the iRecord <a href="www.brc.ac.uk/irecord">website</a>
                 and also shared at 1km resolution via the NBN Gateway in the Dragonfly Recording Network dataset.</p>
+
+            <p>How the BDS uses records is explained in the DragonflyWatch strategy.</p>
 
             <p>Thank you for taking part!</p>
         </li>
@@ -31,19 +45,19 @@
             <div data-role="collapsible" class="no-top-border no-top-margin"
                  data-inset="false" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
                 <h3>How to make a multi record</h3>
-                <p>Please press a <b>double plus</b> button top-right of the <a href="#list">home</a> page
-                    and add your <b>location</b> and <b>date</b>. When done, press <b>Next</b>
-                    button (top-right) and make a sighted species list by pressing <b>plus</b>
-                    button and selecting species from the list. To change the number of species
-                    seen in different stages, press on the saved species listing (below plus button)
-                    and fill in the details.</p>
+                <p>Press the <b>double plus</b> button at the top-right of the <a href="#list">home</a> page
+                    and add your <b>location</b> and <b>date</b>. When done, press the <b>Next</b>
+                    button (top-right) and make a list of the species seen by pressing the <b>plus</b>
+                    button and selecting species from the list. By default, each species shows <i>Ad: Present</i>
+                    To change the number of adults or other life stages, press on the saved species listing (below plus button)
+                    and fill in the details for each life stage observed.</p>
 
-                <p>When finished, press a black <b>Save</b> button (top-right). You will be then asked
-                whether you have recorded all the species seen.</p>
+                <p>When finished, press the black <b>Save</b> button (top-right). You will be then asked
+                whether you have recorded all the species seen during your visit.</p>
             </div>
             <div data-role="collapsible" data-inset="false" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
                 <h3>How to sign in/out or register</h3>
-                <p>Go to <a href="#settings">user settings</a> page
+                <p>Go to the <a href="#settings">user settings</a> page
                     (top-right of <a href="#user">user</a> page) and follow the instructions.</p>
             </div>
             <div data-role="collapsible"
@@ -54,7 +68,7 @@
                     <em style="color:red">red</em> cloud icon (saved locally) will become
                     <em style="color:green">green</em> (synced to the database).</p>
 
-                <p>If you have signed in to iRecord account and there is a network connection,
+                <p>If you have signed in to your iRecord account and there is a network connection,
                     the records will be automatically synchronised to the database
                     in the background. </p>
                 <p>If you have switched the auto synchronisation off on the
@@ -62,26 +76,26 @@
                     then by pressing a saved record with a <em style="color:red">red</em> cloud icon
                     and filling in your contact details will submit the record to the database.</p>
             </div>
-            <% if (!app.browser.isIOS()) { %>
+            <% if (app.browser.isMobile() && !app.browser.isIOS()) { %>
                 <div data-role="collapsible" data-inset="false" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
                     <h3>How to download the app</h3>
-                    <p>This mobile application is web based, in other words - it is a
+                    <p>This mobile application is web based, i.e. - it is a
                         website made for mobile devices. This means that it is hosted
-                        on BDS server and not Google Play store or similar place. To save such a
-                        website as an app, you need to bookmark it to your home screen.</p>
+                        on the BDS server and not Google Play Store or similar place. To save this
+                        website as an app, you need to bookmark it to your home screen, as follows.</p>
 
                     <p>1. Navigate to <a href="#list">home page</a></p>
                     <p>2. Find and open your <strong>Browser Menu</strong></p>
-                    <p>3. Tap <strong>Add to Home Screen</strong> option</p>
+                    <p>3. Tap thw <strong>Add to Home Screen</strong> option</p>
                 </div>
             <% } %>
         </li>
         <li>
             <strong>The British Dragonfly Society</strong>
-            <p>The BDS is a social conservation organisation, supporting an ever-growing
-                network of over 1,500 dragonfly professionals and volunteers, experts and enthusiasts,
-                all working to survey, monitor, research and conserve dragonflies, learn more about
-                them and secure their future in the British Isles.</p>
+            <p>The BDS is supporting a network of dragonfly professionals and volunteers,
+                experts and enthusiasts, all working to survey, monitor,
+                research and conserve dragonflies, learn more about
+                them and secure their future in Britain.</p>
         </li>
         <li>
             <strong>Further information</strong>

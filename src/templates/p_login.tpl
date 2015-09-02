@@ -10,11 +10,11 @@
     <div class="info-message">
         <p>Please sign in with your iRecord account or register.</p>
     </div>
-    <input type="email" placeholder="Email" name="email" value="">
-    <input type="password" placeholder="Password" name="password" value="">
+    <input type="text" data-role="none" placeholder="Email" name="email">
+    <input type="password" data-role="none" placeholder="Password" name="password">
 
     <button id="login-button"
-            class="ui-nodisc-icon ui-alt-icon ui-btn ui-icon-carat-r ui-btn-icon-right">Sign in</button>
+            class="ui-btn ui-btn-inset ui-btn-narrow">Sign in</button>
 
     <ul data-role="listview" class="space-top" data-split-icon="carat-r">
         <li data-icon="carat-r" class="first">

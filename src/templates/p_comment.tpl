@@ -13,5 +13,5 @@
     <div class="info-message">
         <p>Please add any extra info about this record.</p>
     </div>
-    <textarea id="record-comment" cols="80" rows="4"></textarea>
+    <textarea id="record-comment" cols="80" rows="4" placeholder="Add a note"></textarea>
 </div>

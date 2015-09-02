@@ -132,7 +132,8 @@ $photo-picker-height: 20vh;
 }
 
 textarea#record-comment {
-  height:70vh !important;
+  box-shadow: none;
+  height: 15vh!important
 }
 
 #record-multi-location.none:after,
@@ -156,5 +157,6 @@ textarea#record-comment {
 #certain-button-label {
   border-top: none;
   font-size: 0.9em;
+  padding-bottom: 1em;
   padding-left: 16px;
 }
