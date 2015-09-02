@@ -206,8 +206,12 @@ define([
             var that = this;
             this.collection.sort(function (a, b) {
                 a = a.get('date').split('/');
+                a = new Date(a[2], a[1], a[0]);
+
                 b = b.get('date').split('/');
-                return new Date(a[2], a[1], a[0]) < new Date(b[2], b[1], b[0]);
+                b = new Date(b[2], b[1], b[0]);
+
+                return (a<b)-(a>b) ;
             });
             this.collection.each(function (sample) {
                 var sampleView = new SamplesListItem({
