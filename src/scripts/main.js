@@ -23,6 +23,8 @@
             'backbone.localStorage': 'libs/backbone.localStorage-min',
             'tripjs': 'libs/trip.min',
             'touchswipe': 'libs/jquery.touchSwipe.min',
+            'plugin':'libs/jquery.plugin.min',
+            'datepick':'libs/jquery.datepick.min',
             'ga': '//www.google-analytics.com/analytics'
         },
         shim: {
@@ -32,6 +34,7 @@
             'morel': {deps: ['IndexedDBShim']},
             'photoswipe': {deps: ['jquery', 'klass'], exports : 'Code.PhotoSwipe'},
             'topojson': {deps: ['d3']},
+            'datepick': {deps: ['plugin']},
             'ga': {exports: "__ga__"}
         },
         waitSeconds: 20

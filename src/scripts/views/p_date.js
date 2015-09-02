@@ -5,6 +5,7 @@ define([
     'views/_page',
     'templates',
     'morel',
+    'datepick',
     'conf'
 ], function (DefaultPage) {
     'use strict';
@@ -24,6 +25,10 @@ define([
             this.render();
 
             this.$input = $('#record-date');
+
+            this.$input.datepick({
+                dateFormat: 'yyyy-mm-dd'
+            });
 
             this.appendEventListeners();
         },

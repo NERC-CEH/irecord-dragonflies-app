@@ -4,4 +4,7 @@
 dist
 node_modules
 bower_components
-src/scripts/libs
+!src/scripts/libs
+src/scripts/libs/*
+!src/scripts/libs/datepick/
+

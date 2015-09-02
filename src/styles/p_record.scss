@@ -161,3 +161,37 @@ textarea#record-comment {
   padding-bottom: 1em;
   padding-left: 16px;
 }
+
+/** Date **/
+.datepick {
+  border: none;
+  margin: 10px 10px;
+}
+
+.datepick-nav,
+.datepick-ctrl{
+  display: none;
+}
+
+.datepick-month {
+  border: none;
+}
+
+.datepick-month th {
+  background-color: $header-color;
+}
+
+.datepick-month td .datepick-weekend {
+  background-color: #F1EFEF;
+}
+
+.datepick-month a,
+.datepick-month-header {
+  background-color: white;
+}
+
+.datepick-month-header select {
+  background-color: $header-color;
+  color: white;
+  width: 49%;
+}
