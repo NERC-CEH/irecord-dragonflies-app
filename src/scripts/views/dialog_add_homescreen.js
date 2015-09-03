@@ -13,11 +13,11 @@ define(['jquery', 'helpers/browser'], function ($, browser) {
                         '<center><h2>Download instructions</h2></center>' +
                         '<ol>' +
                         '<li class="instruction">' +
-                            '<img id="safari-add-homescreen" src="images/add_homescreen_1.png">' +
+                            '<img src="images/add_homescreen_1.png">' +
                             '<p>Click <b style="white-space: nowrap;">Sharing button</b></p>' +
                         '</li>' +
                         '<li class="instruction">' +
-                            '<img id="safari-add-homescreen" src="images/add_homescreen_2.png">' +
+                            '<img src="images/add_homescreen_2.png">' +
                             '<p>Tap <b style="white-space: nowrap;">Add to home screen</b></p>' +
                         '</li>' +
                         '<li class="instruction">' +
@@ -33,11 +33,11 @@ define(['jquery', 'helpers/browser'], function ($, browser) {
                         '<center><h2>Download instructions</h2></center>' +
                         '<ol>' +
                         '<li class="instruction">' +
-                            '<img id="safari-add-homescreen" src="images/add_homescreen_1_android.png">' +
+                            (browser.is('chrome') ? '<img src="images/add_homescreen_1_android.png">' : '') +
                             '<p>Find <strong style="white-space: nowrap;">Browser Menu</strong></p>' +
                         '</li>' +
                         '<li class="instruction">' +
-                            '<img id="safari-add-homescreen" src="images/Icon-48.png" style="margin-right: -2px;width: 29px;">' +
+                            '<img src="images/Icon-48.png" style="margin-right: -2px;width: 29px;">' +
                             '<p>Tap <strong style="white-space: nowrap;">Add to Home Screen</strong></p>' +
                         '</li>' +
                         '</ol>' +

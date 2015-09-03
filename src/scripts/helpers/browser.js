@@ -70,6 +70,7 @@ define([], function () {
     };
 
     return {
+        is: is,
         detect: detect,
         isMobile: isMobile,
         isIOS: isIOS,
