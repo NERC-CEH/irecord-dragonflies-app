@@ -22,7 +22,7 @@ define(['morel', 'helpers/log'], function () {
         },
         LOGIN: {
             STATUS: true,
-            URL: "http://192.171.199.230/mobile-drupal/user/mobile/register",
+            URL: "http://192.171.199.230/irecord7/user/mobile/register",
             TIMEOUT: 80000
         },
         REGISTER: {
@@ -113,124 +113,124 @@ define(['morel', 'helpers/log'], function () {
 
     //morel configuration
     app.CONF.morel = {
-        url: 'http://192.171.199.230/mobile-drupal/mobile/submit',
+        url: 'http://192.171.199.230/irecord7/mobile/submit',
         appname: "test",
         appsecret: "mytest",
-        website_id: 99,
-        survey_id: 178,
+        website_id: 23,
+        survey_id: 267,
         Storage: morel.DatabaseStorage
     };
 
     $.extend(true, morel.Sample.keys, {
         name: {
-            id: 12
+            id: 574
         },
         surname: {
-            id: 13
+            id: 575
         },
         email: {
-            id: 9
+            id: 572
         },
         location_accuracy: {
-            id: 273
+            id: 576
         },
         recorded_all: {
-            id: 115
+            id: 573
         }
     });
 
     var numberRanges = {
-        '1': 760,
-        '2-5': 761,
-        '6-20': 762,
-        '21-100': 763,
-        '101-500': 764,
-        '500+': 765,
-        'Present': 766 //default
+        '1': 665,
+        '2-5': 666,
+        '6-20': 667,
+        '21-100': 668,
+        '101-500': 669,
+        '500+': 670,
+        'Present': 671 //default
     };
 
     $.extend(true, morel.Occurrence.keys, {
         number: {
-            id: 285, values: numberRanges
+            id: 391, values: numberRanges
         },
         adult: {
-            id: 48, values: numberRanges
+            id: 397, values: numberRanges
         },
         copulating: {
-            id: 49, values: numberRanges
+            id: 396, values: numberRanges
         },
         ovipositing: {
-            id: 50, values: numberRanges
+            id: 395, values: numberRanges
         },
         larvae: {
-            id: 51, values: numberRanges
+            id: 394, values: numberRanges
         },
         exuviae: {
-            id: 52, values: numberRanges
+            id: 393, values: numberRanges
         },
         emergent: {
-            id: 53, values: numberRanges
+            id: 392, values: numberRanges
         },
         stage: {
-            id: 286,
+            id: 390,
             values: {
-                Adult: 3640,
-                Copulating: 3641,
-                Ovipositing: 3642,
-                Larvae: 3643,
-                Exuviae: 3644,
-                Emergent: 3645
+                Adult: 4838,
+                Copulating: 4839,
+                Ovipositing: 4840,
+                Larvae: 4841,
+                Exuviae: 4841,
+                Emergent: 4843
             }
         },
         certain: {
-            id: 223
+            id: 398
         },
         taxon: {
             values: {
-                1: 112974,
-                2: 112968,
-                3: 112970,
-                4: 112972,
-                5: 112928,
-                6: 112930,
-                7: 112992,
-                8: 112932,
-                9: 112934,
-                10: 112938,
-                11: 112940,
-                12: 112942,
-                13: 112944,
-                14: 112952,
-                15: 112954,
-                16: 112956,
-                17: 112964,
-                18: 112966,
-                19: 112994,
-                20: 112906,
-                21: 112908,
-                22: 112910,
-                23: 112912,
-                24: 112916,
-                25: 112918,
-                26: 112914,
-                27: 112920,
-                28: 112924,
-                29: 112926,
-                30: 112960,
-                31: 112946,
-                32: 112948,
-                33: 112996,
-                34: 112998,
-                35: 112976,
-                36: 112978,
-                37: 112980,
-                38: 112982,
-                39: 112984,
-                40: 112986,
-                41: 113002,
-                42: 113006,
-                43: 113010,
-                44: 113012,
+                1: 272198,
+                2: 272192,
+                3: 272194,
+                4: 272196,
+                5: 272152,
+                6: 272154,
+                7: 272216,
+                8: 272156,
+                9: 272158,
+                10: 272162,
+                11: 272164,
+                12: 272166,
+                13: 272168,
+                14: 272174,
+                15: 272178,
+                16: 272180,
+                17: 272188,
+                18: 272190,
+                19: 272218,
+                20: 272130,
+                21: 272132,
+                22: 272134,
+                23: 272136,
+                24: 272140,
+                25: 272142,
+                26: 272138,
+                27: 272144,
+                28: 272148,
+                29: 272150,
+                30: 272184,
+                31: 272170,
+                32: 272172,
+                33: 272220,
+                34: 272222,
+                35: 272200,
+                36: 272202,
+                37: 272204,
+                38: 272206,
+                39: 272208,
+                40: 272210,
+                41: 272226,
+                42: 272228,
+                43: 272234,
+                44: 272236,
                 45: 878675
             }
         }
