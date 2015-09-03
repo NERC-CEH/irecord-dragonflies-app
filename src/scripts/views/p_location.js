@@ -108,11 +108,17 @@ define([
             var p = new LatLon(location.latitude, location.longitude, LatLon.datum.WGS84);
             var grid = OsGridRef.latLonToOsGrid(p);
             var gref = grid.toString();
+            var type = 'Grid Ref';
+            //if not in UK
+            if (!gref) {
+                type = 'Coordinates';
+                gref = location.latitude.toFixed(4) + ', ' + location.longitude.toFixed(4);
+            }
 
             this.$locationMessage.show();
             this.$locationMessage.removeClass();
             this.$locationMessage.addClass('success-message');
-            this.$locationMessage.empty().append('<p>Grid Ref:<br/>' + gref + '</p>');
+            this.$locationMessage.empty().append('<p>' + type + ':<br/>' + gref + '</p>');
         },
 
 

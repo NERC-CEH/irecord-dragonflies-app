@@ -40,11 +40,22 @@ define([
 
             this.model = model;
 
-            var location = this.model.get('location').split(',');
+            var location = this.model.get('location');
+            location = {
+                latitude: parseFloat(location.split(',')[0]),
+                longitude: parseFloat(location.split(',')[1])
+            };
+            var p = new LatLon(location.latitude, location.longitude, LatLon.datum.WGS84);
+            var grid = OsGridRef.latLonToOsGrid(p);
+            grid = grid.toString();
+            //if not in UK
+            if (!grid) {
+                grid = location.latitude.toFixed(4) + ', ' + location.longitude.toFixed(4);
+            }
+
             var templateData = {
                 date: this.model.get('date'),
-                latitude: parseFloat(location[0]).toFixed(4),
-                longitude: parseFloat(location[1]).toFixed(4),
+                location: grid,
                 comment: this.model.get('comment'),
                 recorded_all: this.model.get('recorded_all'),
                 occurrences: []

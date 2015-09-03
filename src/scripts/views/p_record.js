@@ -313,12 +313,16 @@ define([
 
                     var value = this.model.get('location');
                     var location = {
-                        latitude: value.split(',')[0],
-                        longitude: value.split(',')[1]
+                        latitude: parseFloat(value.split(',')[0]),
+                        longitude: parseFloat(value.split(',')[1])
                     };
                     var p = new LatLon(location.latitude, location.longitude, LatLon.datum.WGS84);
                     var grid = OsGridRef.latLonToOsGrid(p);
                     text = grid.toString();
+                    //if not in UK
+                    if (!text) {
+                        text = location.latitude.toFixed(4) + ', ' + location.longitude.toFixed(4);
+                    }
                     break;
                 case (accuracy == 0):
                     //running
