@@ -3,6 +3,7 @@
  *****************************************************************************/
 define([
     'views/_page',
+    'helpers/browser',
     'templates',
     'morel',
     'datepick',
@@ -26,10 +27,11 @@ define([
 
             this.$input = $('#record-date');
 
-            this.$input.datepick({
-                dateFormat: 'yyyy-mm-dd'
-            });
-
+            if (!browser.isMobile()) {
+                this.$input.datepick({
+                    dateFormat: 'yyyy-mm-dd'
+                });
+            }
             this.appendEventListeners();
         },
 

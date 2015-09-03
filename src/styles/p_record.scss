@@ -90,6 +90,7 @@ input.numberInput{
 $photo-picker-height: 20vh;
 
 .img-picker {
+  overflow: hidden;
   margin-left: 1em;
   display: inline-block;
   position: relative;
@@ -108,7 +109,7 @@ $photo-picker-height: 20vh;
 }
 
 .img-picker-display {
-  height: $photo-picker-height;
+  height: $photo-picker-height - 2vh;
 
   overflow: hidden;
 
