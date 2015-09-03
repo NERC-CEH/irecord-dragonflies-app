@@ -244,7 +244,7 @@ define([
             templateData.id = this.model.id;
             templateData.date = this.model.get('date');
 
-            if (this.model.occurrences.length <= 1) {
+            if (!this.model.get('recorded_all')) {
                 var occurrence = this.model.occurrences.getFirst(),
                     speciesID = occurrence.get('taxon');
                 var specie = app.collections.species.find({id: speciesID});

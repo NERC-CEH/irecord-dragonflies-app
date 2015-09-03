@@ -103,6 +103,8 @@ $photo-picker-height: 20vh;
   position: absolute;
   padding: .4em;
   opacity: 0;
+  margin: 0 !important;
+  height: inherit !important;
 }
 
 .img-picker-display {
