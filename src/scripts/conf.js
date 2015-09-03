@@ -35,7 +35,8 @@ define(['morel', 'helpers/log'], function () {
             zoom: 5,
             zoomControl: true,
             zoomControlOptions: {
-                style: 1
+                style: 2,
+                position: 5
             },
             panControl: false,
             linksControl: false,
@@ -45,7 +46,8 @@ define(['morel', 'helpers/log'], function () {
             rotateControl: false,
             mapTypeControl: true,
             mapTypeControlOptions: {
-                style: 1
+                style: 1,
+                position: 7
             },
             styles: [
                 {

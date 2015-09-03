@@ -3,10 +3,26 @@
  *****************************************************************************/
 
 /* For Google maps */
+
+#map-canvas {
+  overflow-y: hidden;
+
+  height: 90vh;
+  width: 100%;
+}
+
 #map-canvas img{
   max-width: inherit;
 }
 
 #location-opts {
+  overflow-y: hidden;
+
   margin-top: 4px;
+}
+
+#location .ui-content {
+  overflow-y: hidden;
+  height: 95vh;
+  padding: 0;
 }

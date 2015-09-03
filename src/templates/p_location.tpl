@@ -28,7 +28,7 @@
             <div class="info-message" id="map-message">
                 <p>Please tap on the map to select your location. </p>
             </div>
-            <div id="map-canvas" style="width:100%; height: 60vh;"></div>
+            <div id="map-canvas"></div>
         </div>
         <div id="gref" class="ui-body-d ui-content">
             <div class="info-message" id="gref-message">
