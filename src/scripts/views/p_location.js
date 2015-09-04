@@ -236,6 +236,9 @@ define([
                 this.state = 'running';
                 that.updateButtonStatus();
 
+                var $gpsTab = $('#location #ui-id-1');
+                $gpsTab.addClass('running');
+
                 function onUpdate(location) {
                     location = app.views.locationPage.geoloc.set({
                         latitude: location.lat,
@@ -248,6 +251,7 @@ define([
                 }
 
                 function callback(err, location) {
+                    $gpsTab.removeClass('running');
                     if (err) {
                         that.state = 'init';
                         that.updateButtonStatus();
@@ -294,6 +298,9 @@ define([
              * Stops any geolocation service and modifies the DOM with new UI.
              */
             stop: function () {
+                var $gpsTab = $('#location #ui-id-1');
+                $gpsTab.removeClass('running');
+
                 this.state = 'init';
                 this.updateButtonStatus();
 

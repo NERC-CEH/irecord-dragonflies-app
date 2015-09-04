@@ -35,6 +35,6 @@
         </label>
     <button id="register-button"
             class="ui-btn ui-btn-inset ui-btn-narrow space-top space-bottom"
-            disabled>Create Account</button>
+            disabled>Create</button>
 
 </div>

@@ -36,6 +36,6 @@
                data-iconpos="right" checked> Autosync
     </label>
 
-    <button id="reset-app-button"
+    <button id="reset-app-button" style="width: 94%;"
             class="ui-btn ui-alt-icon ui-nodisc-icon ui-icon-back ui-btn-icon-right ui-btn-text-left">Reset instruction screens</button>
 </div>
