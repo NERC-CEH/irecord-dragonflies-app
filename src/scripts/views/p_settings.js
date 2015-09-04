@@ -5,7 +5,7 @@ define([
     'views/_page',
     'templates',
     'latlon'
-], function (DefaultPage, contactDetailsDialog) {
+], function (DefaultPage) {
     'use strict';
 
     var Page = DefaultPage.extend({

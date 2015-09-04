@@ -5,9 +5,8 @@ define([
     'backbone',
     'models/species_list_sorts',
     'models/species_list_filters',
-    'views/list_item',
     'templates'
-], function (Backbone, sorts, filters, SpeciesListItemView) {
+], function (Backbone, sorts, filters) {
     'use strict';
 
     var View = Backbone.View.extend({
@@ -163,6 +162,22 @@ define([
             });
 
             return group;
+        }
+    });
+
+    var SpeciesListItemView = Backbone.View.extend({
+        tagName: "li",
+
+        template: app.templates.list_item,
+
+        /**
+         * Renders the individual list item representing the species.
+         *
+         * @returns {SpeciesListItemView}
+         */
+        render: function () {
+            this.$el.html(this.template(this.model.attributes));
+            return this;
         }
     });
 

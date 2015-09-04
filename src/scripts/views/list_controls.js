@@ -1,5 +1,5 @@
 /******************************************************************************
- * Species list control view used in ListPage view.
+ * Species list controls view used in ListPage view.
  *****************************************************************************/
 define([
     'backbone',

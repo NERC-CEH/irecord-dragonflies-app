@@ -5,9 +5,8 @@ define([
     'backbone',
     'models/species_list_sorts',
     'models/species_list_filters',
-    'views/record_multi_list_item',
     'templates'
-], function (Backbone, sorts, filters, RecordMultiListItemView) {
+], function (Backbone, sorts, filters) {
     'use strict';
 
     var View = Backbone.View.extend({
@@ -187,6 +186,32 @@ define([
             });
 
             return group;
+        }
+    });
+
+    var RecordMultiListItemView = Backbone.View.extend({
+        tagName: "li",
+
+        attributes: {
+            "data-corners": false,
+            "data-shadow": false,
+            "data-iconshadow": true,
+            "data-wrapperels": "div",
+            "data-icon": "arrow-r",
+            "data-iconpos": "right",
+            "data-theme": "c"
+        },
+
+        template: app.templates.record_multi_list_item,
+
+        /**
+         * Renders the individual list item representing the species.
+         *
+         * @returns {SpeciesListItemView}
+         */
+        render: function () {
+            this.$el.html(this.template(this.model.attributes));
+            return this;
         }
     });
 

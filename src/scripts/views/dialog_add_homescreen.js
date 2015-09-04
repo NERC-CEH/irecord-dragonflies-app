@@ -1,5 +1,5 @@
 /******************************************************************************
- * Asks the user to start an appcache download process.
+ * Dialog to show the user how to bookmark the web page to home screen.
  *****************************************************************************/
 define(['jquery', 'helpers/browser'], function ($, browser) {
     var Dialog = function (callback) {
