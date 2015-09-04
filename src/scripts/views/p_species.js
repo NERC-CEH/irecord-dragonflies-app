@@ -299,8 +299,37 @@ define([
          * @returns {SpeciesProfile}
          */
         render: function () {
+            var species = this.compileConfusionSpecies(this.model.get('confusion_species'));
+            this.model.set('confusion_species', species);
             this.$el.html(this.template(this.model.attributes));
             return this;
+        },
+
+        compileConfusionSpecies: function (species) {
+            var common_name = '',
+                specie = null,
+                ids = species.match(/[0-9]+/g),
+                replacements = {};
+
+            if (!ids || species.search('<a') >= 0) {
+                return species;
+            }
+
+            //generate id replacements
+            for (var i = 0; i < ids.length; i++) {
+                specie = app.collections.species.get(parseInt(ids[i]));
+                common_name = specie && specie.get('common_name') || '';
+
+                if (common_name) {
+                    replacements[ids[i]] = '<a href="#species/' + ids[i] + '">' + common_name + '</a>'
+                }
+            }
+
+            for (var id in replacements) {
+                species = species.replace(id, replacements[id]);
+            }
+
+            return species;
         }
     });
 

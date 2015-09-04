@@ -319,3 +319,13 @@ input:focus {
 .ui-btn-narrow {
   max-width: 400px;
 }
+
+/** Links **/
+
+.ui-page-theme-a a:visited, html .ui-bar-a a:visited, html .ui-body-a a:visited, html body .ui-group-theme-a a:visited {
+  color: #887F2D;
+}
+.ui-page-theme-a a, html .ui-bar-a a, html .ui-body-a a, html body .ui-group-theme-a a {
+  color: #887F2D;
+  text-decoration: none;
+}

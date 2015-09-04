@@ -25,7 +25,7 @@
             </p>
 
             <p>Any records you submit using the <i>iRecord Dragonfly</i> app will be reviewed and
-                verified by an expert before being added to the iRecord <a href="www.brc.ac.uk/irecord">website</a>
+                verified by an expert before being added to the iRecord <a href="http://www.brc.ac.uk/irecord">website</a>
                 and also shared at 1km resolution via the NBN Gateway in the Dragonfly Recording Network dataset.</p>
 
             <p>How the BDS uses records is explained in the DragonflyWatch strategy.</p>

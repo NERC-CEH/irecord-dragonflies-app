@@ -61,9 +61,9 @@
         </li>
         <% } %>
         <% if (confusion_species) { %>
-        <li>
+        <li class="confusion-species">
             <strong>Confusion Species</strong>:
-            <p><%- confusion_species %></p>
+            <p><%= confusion_species %></p>
         </li>
         <li>
             <a href="#record/<%- id %>" class="ui-btn ui-mini ui-icon-plus ui-nodisc-icon

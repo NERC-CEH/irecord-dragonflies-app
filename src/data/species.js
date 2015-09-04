@@ -15,7 +15,7 @@ app.data.species = [
       "Quartl"
     ], 
     "common_name": "Willow Emerald Damselfly", 
-    "confusion_species": "Emerald Damselfly, Scarce Emerald Damselfly and Southern Emerald Damselfly.", 
+    "confusion_species": "4, 3 and 2", 
     "gallery_sex": [
       "MALE"
     ], 
@@ -48,7 +48,7 @@ app.data.species = [
       "Piotr Mikolajczuk"
     ], 
     "common_name": "Southern Emerald Damselfly", 
-    "confusion_species": "Emerald Damselfly, Scarce Emerald Damselfly, Willow Emerald Damselfly and female Beautiful and Banded Demoiselles.", 
+    "confusion_species": "4, 3, 1, female 6 and female 5.", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -83,7 +83,7 @@ app.data.species = [
       "Alain Auffret"
     ], 
     "common_name": "Scarce Emerald Damselfly", 
-    "confusion_species": "Emerald Damselfly, Southern Emerald Damselfly and Willow Emerald Damselfly.", 
+    "confusion_species": "4, 2 and 1.", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -118,7 +118,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Emerald Damselfly", 
-    "confusion_species": "Scarce Emerald Damselfly, Southern Emerald Damselfly, Willow Emerald Damselfly, female Beautiful and Banded Demoiselles.", 
+    "confusion_species": "3, 2, 1, female 6 and female 5.", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -153,7 +153,7 @@ app.data.species = [
       "Neil Malton"
     ], 
     "common_name": "Banded Demoiselle", 
-    "confusion_species": "Beautiful Demoiselle, Emerald Damselflies (all species).", 
+    "confusion_species": "6, 1, 2, 3 and 4.", 
     "gallery_sex": [
       "FEMALE", 
       "FEMALE"
@@ -188,7 +188,7 @@ app.data.species = [
       "Dave Smallshire"
     ], 
     "common_name": "Beautiful Demoiselle", 
-    "confusion_species": "Banded Demoiselle, Emerald Damselflies (all species).", 
+    "confusion_species": "5, 1, 2, 3 and 4.", 
     "gallery_sex": [
       "FEMALE", 
       "PAIR"
@@ -223,7 +223,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "White-legged Damselfly", 
-    "confusion_species": "Azure Damselfly and Common Blue Damselfly.", 
+    "confusion_species": "11 and 14.", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -258,7 +258,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Small Red Damselfly", 
-    "confusion_species": "Large Red Damselfly, female Southern Damselfly, Common Darter.", 
+    "confusion_species": "19, female 10 and 44.", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -293,7 +293,7 @@ app.data.species = [
       "Damian Pinguey"
     ], 
     "common_name": "Northern Damselfly", 
-    "confusion_species": "Azure Damselfly, Common Blue Damselfly, melanogastrum form of the Small Red Damselfly (out of area Southern Damelfly, Dainty Damselfly)", 
+    "confusion_species": "11, 14 and melanogastrum form of the 8 (out of area 10, 13).", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -328,7 +328,7 @@ app.data.species = [
       "Pam Taylor"
     ], 
     "common_name": "Southern Damselfly", 
-    "confusion_species": "Azure Damselfly, Common Blue Damselfly, melanogastrum form of the Small Red Damselfly (out of area Northern Damelfly, Dainty Damselfly)", 
+    "confusion_species": "11, 14 and melanogastrum form of the 8 (out of area 9, 13).", 
     "gallery_sex": [
       "FEMALE", 
       "PAIR"
@@ -363,7 +363,7 @@ app.data.species = [
       "Jules Oliver"
     ], 
     "common_name": "Azure Damselfly", 
-    "confusion_species": "Common Blue Damselfly, Variable Damelfly, Northern Damselfly, Southern Damselfly, Dainty Damselfly, Blue-tailed Damselfly.", 
+    "confusion_species": "14, 12, 9, 10, 13 and 17.", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -398,7 +398,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Variable Damselfly", 
-    "confusion_species": "Azure Damselfy, Dainty Damselfly, Common Blue Damselfly, Blue-tailed Damselfly (out of area or habitat Northern Damselfly and Southern Damselfly)", 
+    "confusion_species": "11, 13, 14 and 17 (out of area or habitat 9 and 10).", 
     "gallery_sex": [
       "FEMALE", 
       "PAIR"
@@ -433,7 +433,7 @@ app.data.species = [
       "Dave Smallshire"
     ], 
     "common_name": "Dainty Damselfly", 
-    "confusion_species": "Common Blue Damselfly, Variable Damselfly, Azure Damselfly, Blue-tailed Damselfly (out of area - Northern Damselfly, Southern Damselfly)", 
+    "confusion_species": "14, 12, 11 and 17 (out of area \u2013 9 and 10).", 
     "gallery_sex": [
       "MALE", 
       "FEMALE"
@@ -454,7 +454,7 @@ app.data.species = [
     }, 
     "taxon": "Coenagrion scitulum", 
     "id": 13, 
-    "distribution": "Found in Essex during 1946\u00e2\u20ac\u201c1952, when its known breeding sites were then destroyed during the catastrophic floods of winter 1952\u00e2\u20ac\u201c53. Recently (June 2010) re-discovered in Kent, where apparently breeding (two exuviae found).", 
+    "distribution": "Found in Essex during 1946-1952, when its known breeding sites were then destroyed during the catastrophic floods of winter 1952-53. Recently (June 2010) re-discovered in Kent, where apparently breeding (two exuviae found).", 
     "type": "zygoptera"
   }, 
   {
@@ -468,7 +468,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Common Blue Damselfly", 
-    "confusion_species": "Azure Damselfly, Variable Damselfly, Dainty Damselfly, Southern Damselfly, Northern Damselfly, Blue-tailed Damselfly.", 
+    "confusion_species": "11, 12, 13, 10, 9 and 17.", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -502,7 +502,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Red-eyed Damselfly", 
-    "confusion_species": "Small Red-eyed Damselfly, Blue-tailed Damselfly, (different habitat - Scarce Blue-tailed Damselfly).", 
+    "confusion_species": "16,  and 17 (different habitat \u2013 18).", 
     "gallery_sex": [
       "MALE"
     ], 
@@ -535,7 +535,7 @@ app.data.species = [
       "Erland Neilsen"
     ], 
     "common_name": "Small Red-eyed Damselfly", 
-    "confusion_species": "Red-eyed Damselfly, Blue-tailed Damselfly, Scarce Blue-tailed Damselfly.", 
+    "confusion_species": "15, 17 and 18.", 
     "gallery_sex": [
       "FEMALE", 
       "FEMALE"
@@ -570,7 +570,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Blue-tailed Damselfly", 
-    "confusion_species": "Scarce Blue-tailed Damselfly, Red-eyed Damselfly, mall Red-eyed Damselfly.", 
+    "confusion_species": "18, 15 and male 15.", 
     "gallery_sex": [
       "FEMALE", 
       "FEMALE"
@@ -604,7 +604,7 @@ app.data.species = [
       "Dave Smallshire"
     ], 
     "common_name": "Scarce Blue-tailed Damselfly", 
-    "confusion_species": "Blue-tailed Damselfly, Red-eyed Damselfly, Small Red-eyed Damselfly.", 
+    "confusion_species": "17, 15 and 16.", 
     "gallery_sex": [
       "FEMALE"
     ], 
@@ -637,7 +637,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Large Red Damselfly", 
-    "confusion_species": "Small Red Damselfly, Common Darter, Red-eyed Damselfly.", 
+    "confusion_species": "8, 44 and 15.", 
     "gallery_sex": [
       "FEMALE", 
       "FEMALE"
@@ -672,7 +672,7 @@ app.data.species = [
       "Fre\u00cc\u0081de\u00cc\u0081ric Barszezak"
     ], 
     "common_name": "Southern Migrant Hawker", 
-    "confusion_species": "Migrant Hawker, Common Hawker, Southern Hawker.", 
+    "confusion_species": "25, 24 and 22.", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -707,7 +707,7 @@ app.data.species = [
       "Konrad Schultz"
     ], 
     "common_name": "Azure Hawker", 
-    "confusion_species": "Migrant Hawker, Common Hawker, Hairy Dragonfly.", 
+    "confusion_species": "25, 24 and 29.", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -742,7 +742,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Southern Hawker", 
-    "confusion_species": "Migrant Hawker, Common Hawker, Hairy Dragonfly, Emperor and Golden-ringed Dragonfly.", 
+    "confusion_species": "25, 24, 29, 27 and 31.", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -777,7 +777,7 @@ app.data.species = [
       "Mark Tyrrell"
     ], 
     "common_name": "Brown Hawker", 
-    "confusion_species": "Norfolk Hawker.", 
+    "confusion_species": 26.0, 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -812,7 +812,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Common Hawker", 
-    "confusion_species": "Migrant Hawker, Southern Hawker, Hairy Dragonfly and Azure Hawker.", 
+    "confusion_species": "25, 22, 29 and 21.", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -847,7 +847,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Migrant Hawker", 
-    "confusion_species": "Common Hawker, Southern Hawker, Southern Migrant Hawker and Hairy Dragonfly.", 
+    "confusion_species": "24, 22, 20 and 29.", 
     "gallery_sex": [
       "MALE", 
       "MALE"
@@ -881,7 +881,7 @@ app.data.species = [
       "Hugh J Griffiths"
     ], 
     "common_name": "Norfolk Hawker", 
-    "confusion_species": "Brown Hawker.", 
+    "confusion_species": 23.0, 
     "gallery_sex": [
       "FEMALE"
     ], 
@@ -914,7 +914,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Emperor Dragonfly", 
-    "confusion_species": "Lesser Emperor, Vagrant Emperor.", 
+    "confusion_species": 28.0, 
     "gallery_sex": [
       "MALE", 
       "FEMALE"
@@ -949,7 +949,7 @@ app.data.species = [
       "Jean-Franc\u00cc\u00a7ois Bousquet"
     ], 
     "common_name": "Lesser Emperor", 
-    "confusion_species": "Emperor, Vagrant Emperor.", 
+    "confusion_species": "Vagrant Emperor.", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -984,7 +984,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Hairy Dragonfly", 
-    "confusion_species": "Southern Hawker, Migrant Hawker, Common Hawker and Southern Migrant Hawker.", 
+    "confusion_species": "22, 25, 24 and 20.", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -1019,7 +1019,7 @@ app.data.species = [
       "Lisa Ollson"
     ], 
     "common_name": "Common Club-tail", 
-    "confusion_species": "Golden-ringed Dragonfly, Black-tailed Skimmer.", 
+    "confusion_species": "31 and 39.", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -1054,7 +1054,7 @@ app.data.species = [
       "Guy Freeman"
     ], 
     "common_name": "Golden-ringed Dragonfly", 
-    "confusion_species": "Female and immature hawkers", 
+    "confusion_species": "Female and immature hawkers.", 
     "gallery_sex": [
       "MALE", 
       "FEMALE"
@@ -1089,7 +1089,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Downy Emerald", 
-    "confusion_species": "Brilliant Emerald and Northern Emerald.", 
+    "confusion_species": "34 and 33.", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -1124,7 +1124,7 @@ app.data.species = [
       "Pat Batty"
     ], 
     "common_name": "Northern Emerald", 
-    "confusion_species": "Brilliant Emerald and Downy Emerald.", 
+    "confusion_species": "34 and 32.", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -1159,7 +1159,7 @@ app.data.species = [
       "Pierre Papon"
     ], 
     "common_name": "Brilliant Emerald", 
-    "confusion_species": "Northern Emerald and Downy Emerald.", 
+    "confusion_species": "33 and 32.", 
     "gallery_sex": [
       "MALE", 
       "FEMALE"
@@ -1185,7 +1185,7 @@ app.data.species = [
   }, 
   {
     "profile_pic": "images/Leucorrhinia_dubia_m_1_David_Kitching_.jpg", 
-    "description": "The White-faced Darter is a small dark dragonfly, with a pale creamy white frons. The wings have small black patches at the base and dark brown pterostigma. The male has a narrow black abdomen, with red and orange markings. The thorax is black with faint red antehumeral stripes and lateral markings. The female is patterned like the male but yellow replaces the red markings.", 
+    "description": "The 35 is a small dark dragonfly, with a pale creamy white frons. The wings have small black patches at the base and dark brown pterostigma. The male has a narrow black abdomen, with red and orange markings. The thorax is black with faint red antehumeral stripes and lateral markings. The female is patterned like the male but yellow replaces the red markings.", 
     "habitat": "The White Faced Darter is a highly localised species of lowland peatbogs. It requires relatively deep, oligotrophic, acidic bog pools with considerable rafts of Sphagnum at the edges in which to breed. Larvae also occur among waterlogged Sphagnum in depressions devoid of standing water. The larvae live within the matrix of submerged and floating Sphagnum and are confined to waters without fish. Away from its aquatic habitat it also requires scrub or woodland, which provides important roosting and feeding sites.", 
     "map": "images/Leucorrhinia_dubia_new_final_.svg", 
     "general": "", 
@@ -1193,7 +1193,7 @@ app.data.species = [
       "B. Tettenborn"
     ], 
     "common_name": "White-faced Darter", 
-    "confusion_species": "Black Darter.", 
+    "confusion_species": 41.0, 
     "gallery_sex": [
       "MALE"
     ], 
@@ -1212,7 +1212,7 @@ app.data.species = [
     }, 
     "taxon": "Leucorrhinia dubia", 
     "id": 35, 
-    "distribution": "In Britain the White-faced Darter is found at isolated sites from the Midlands to north Scotland and Chartley Moss is currently the most southerly site in the UK. Major strongholds for the species occur in the highlands of Scotland. The populations in both Inverness-shire and Ross-shire are particularly important.", 
+    "distribution": "In Britain the 35 is found at isolated sites from the Midlands to north Scotland and Chartley Moss is currently the most southerly site in the UK. Major strongholds for the species occur in the highlands of Scotland. The populations in both Inverness-shire and Ross-shire are particularly important.", 
     "type": "anisoptera"
   }, 
   {
@@ -1226,7 +1226,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Broad-bodied Chaser", 
-    "confusion_species": "Scarce Chaser, Four-spotted Chaser, Keeled Skimmer and Black-tailed Skimmer.", 
+    "confusion_species": "37, 38, 40 and 39.", 
     "gallery_sex": [
       "FEMALE", 
       "TENERAL"
@@ -1261,7 +1261,7 @@ app.data.species = [
       "John Luck"
     ], 
     "common_name": "Scarce Chaser", 
-    "confusion_species": "Broad-bodied Chaser, Four-spotted Chaser, Keeled Skimmer and Black-tailed Skimmer.", 
+    "confusion_species": "36, 38, 40 and 39.", 
     "gallery_sex": [
       "TENERAL MALE", 
       "MALE"
@@ -1296,7 +1296,7 @@ app.data.species = [
       "Neil Malton"
     ], 
     "common_name": "Four-spotted Chaser", 
-    "confusion_species": "Broad-bodied Chaser and Scarce Chaser.", 
+    "confusion_species": "36 and 37.", 
     "gallery_sex": [
       "MALE", 
       "MALE"
@@ -1330,7 +1330,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Black-tailed Skimmer", 
-    "confusion_species": "Broad-bodied Chaser, Four-spotted Chaser, Scarce Chaser and Keeled Skimmer.", 
+    "confusion_species": "36, 38, 37 and 40.", 
     "gallery_sex": [
       "FEMALE"
     ], 
@@ -1363,7 +1363,7 @@ app.data.species = [
       "Christian Fischer"
     ], 
     "common_name": "Keeled Skimmer", 
-    "confusion_species": "Broad-bodied Chaser, Scarce Chaser, Black-tailed Skimmer, Common Darter and Black Darter.", 
+    "confusion_species": "36, 37, 39, 44 and 41.", 
     "gallery_sex": [
       "MALE", 
       "FEMALE"
@@ -1398,7 +1398,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Black Darter", 
-    "confusion_species": "Ruddy Darter, Common Darter, White-faced Darter and Keeled Skimmer.", 
+    "confusion_species": "43, 44, 35 and 40.", 
     "gallery_sex": [
       "FEMALE", 
       "TENERAL MALE"
@@ -1432,7 +1432,7 @@ app.data.species = [
       "David Marquina Reyes"
     ], 
     "common_name": "Red-veined Darter", 
-    "confusion_species": "Common Darter, Ruddy Darter, Yellow-winged Darter, Southern Darter and Keeled Skimmer.", 
+    "confusion_species": "44, 43, Yellow-winged Darter, Southern Darter and 40.", 
     "gallery_sex": [
       "MALE"
     ], 
@@ -1465,7 +1465,7 @@ app.data.species = [
       "Peter Hunt"
     ], 
     "common_name": "Ruddy Darter", 
-    "confusion_species": "Common Darter, Red-veined Darter, Yellow-winged Darter, Southern Darter and Keeled Skimmer.", 
+    "confusion_species": "44, 42, Yellow-winged Darter, Southern Darter and 40.", 
     "gallery_sex": [
       "FEMALE", 
       "MALE"
@@ -1500,7 +1500,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Common Darter", 
-    "confusion_species": "Ruddy Darter, Red-veined Darter, Yellow-winged Darter, Southern Darter, White-faced Darter and Keeled Skimmer.", 
+    "confusion_species": "43, 42, Yellow-winged Darter, Southern Darter,  35 and 40.", 
     "gallery_sex": [
       "OLD FEMALE", 
       "MALE"

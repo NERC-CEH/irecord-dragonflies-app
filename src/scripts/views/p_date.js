@@ -8,7 +8,7 @@ define([
     'morel',
     'datepick',
     'conf'
-], function (DefaultPage) {
+], function (DefaultPage, browser) {
     'use strict';
 
     var Page = DefaultPage.extend({
