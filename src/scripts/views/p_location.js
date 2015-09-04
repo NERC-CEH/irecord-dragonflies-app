@@ -76,7 +76,7 @@ define([
          */
         renderGPStab: function (location) {
             var template = app.templates.location_gps,
-                accuracy = location && location.accuracy;
+                accuracy = location && (location.accuracy || location.acc);
 
             this.$locationGPSPlaceholder.html(template({
                 state: this.geoloc.state,
@@ -236,17 +236,11 @@ define([
                 this.state = 'running';
                 that.updateButtonStatus();
 
-                var $gpsTab = $('#location #ui-id-1');
+                var $gpsTab = $('#location-opts a.gps');
                 $gpsTab.addClass('running');
 
                 function onUpdate(location) {
-                    location = app.views.locationPage.geoloc.set({
-                        latitude: location.lat,
-                        longitude: location.lon,
-                        accuracy: location.acc
-                    });
-
-                    //modify the UI
+                   //modify the UI
                     app.views.locationPage.renderGPStab(location);
                 }
 
@@ -264,6 +258,12 @@ define([
                     that.state = 'finished';
                     that.updateButtonStatus();
 
+                    app.views.locationPage.geoloc.set({
+                        latitude: location.lat,
+                        longitude: location.lon,
+                        accuracy: location.acc
+                    });
+
                     onUpdate(location);
                 }
 
@@ -280,17 +280,12 @@ define([
                 switch (this.state) {
                     case 'running':
                         $button.html('Stop');
-                        $button.removeClass('ui-icon-location');
-                        $button.addClass('sync-icon-reload');
                         break;
                     case 'finished':
                         $button.html('Improve');
-                        $button.addClass('ui-icon-location');
-                        $button.removeClass('sync-icon-reload');
+                        break;
                     default:
                         $button.html('Locate');
-                        $button.addClass('ui-icon-location');
-                        $button.removeClass('sync-icon-reload');
                 }
             },
 
@@ -298,7 +293,7 @@ define([
              * Stops any geolocation service and modifies the DOM with new UI.
              */
             stop: function () {
-                var $gpsTab = $('#location #ui-id-1');
+                var $gpsTab = $('#location-opts a.gps');
                 $gpsTab.removeClass('running');
 
                 this.state = 'init';

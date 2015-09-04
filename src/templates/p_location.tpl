@@ -14,7 +14,7 @@
     <div data-role="tabs" id="location-opts">
         <div data-role="navbar">
             <ul>
-                <li><a href="#gps" data-ajax="false" class="ui-btn-active">GPS</a></li>
+                <li><a href="#gps" data-ajax="false" class="gps">GPS</a></li>
                 <li><a href="#map" data-ajax="false">Map</a></li>
                 <li><a href="#gref" data-ajax="false">Grid Ref</a></li>
             </ul>
