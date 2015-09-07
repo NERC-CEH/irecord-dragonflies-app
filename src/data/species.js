@@ -570,7 +570,7 @@ app.data.species = [
       "David Kitching"
     ], 
     "common_name": "Blue-tailed Damselfly", 
-    "confusion_species": "18, 15 and male 15.", 
+    "confusion_species": "18 and 15.",
     "gallery_sex": [
       "FEMALE", 
       "FEMALE"

@@ -9,7 +9,7 @@
     <div class="info-message">
         <p>How many individuals of this type?</p>
     </div>
-    <button id="clear-number-button" data-icon="delete" data-iconpos="right">Clear</button>
+    <button id="clear-number-button" style="width: 94%" data-icon="delete" data-iconpos="right">Clear</button>
 
     <fieldset data-role="controlgroup" data-iconpos="right">
         <input type="radio" name="number" id="radio-choice-1" value="1">

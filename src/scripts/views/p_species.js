@@ -37,6 +37,8 @@ define([
         },
 
         update: function (speciesID) {
+            scrollTo(0, 0); //needs to go up if the profile has changed
+
             this.model = app.collections.species.find({id: speciesID});
 
             var $heading = $('#species_heading');
@@ -74,6 +76,9 @@ define([
 
         appendEventListeners: function () {
             this.appendBackButtonListeners();
+            $(window).on("resize", $.proxy(function () {
+                this.updateFlightData();
+            }, this));
         },
 
         /**
@@ -107,7 +112,7 @@ define([
             var flight_data = app.data.flight[speciesID];
 
             if (flight_data == null) {
-                _log('species: no filght data was found for: ' + speciesID, log.ERROR);
+                _log('species: no flight data was found for: ' + speciesID, log.ERROR);
                 return;
             }
 
@@ -121,6 +126,14 @@ define([
                 });
             }
             this.renderFlightData(data);
+        },
+
+        updateFlightData: function () {
+            var page = Backbone.history.getFragment();
+            if (page.indexOf('species') >= 0) {
+                _log('views.SpeciesPage: updating flight data', log.DEBUG);
+                this.addFlightData();
+            }
         },
 
         /**
@@ -185,7 +198,7 @@ define([
 
 
             // Add an SVG element with the desired dimensions and margin.
-            var graph = d3.select("#species-flight").append("svg:svg")
+            var graph = d3.select("#species-flight").html('').append("svg:svg")
                 .attr("width", WIDTH + MARGINS.right + MARGINS.left)
                 .attr("height", HEIGHT + MARGINS.top + MARGINS.bottom)
                 .append("svg:g");
@@ -308,8 +321,14 @@ define([
         compileConfusionSpecies: function (species) {
             var common_name = '',
                 specie = null,
-                ids = species.match(/[0-9]+/g),
+                ids = [],
                 replacements = {};
+
+            //if only one species then it comes as a numeber and not a string
+            if (typeof species === 'number') {
+                species = '' + species;
+            }
+            ids = species.match(/[0-9]+/g);
 
             if (!ids || species.search('<a') >= 0) {
                 return species;

@@ -5,6 +5,8 @@
 /* Flight Graph */
 #species-flight {
   height: 12vh;
+  min-height: 70px;
+  padding-top: 0;
 }
 .axis path, .axis line {
   fill: none;
