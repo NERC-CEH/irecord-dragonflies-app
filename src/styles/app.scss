@@ -329,3 +329,17 @@ input:focus {
   color: #887F2D;
   text-decoration: none;
 }
+
+.wide .ui-controlgroup-controls {
+  width: 100% !important;
+}
+
+.wide .ui-controlgroup-controls .ui-btn {
+  width: 29% !important;
+  margin-right: 1px !important;
+}
+
+.loading img.loader {
+  opacity: 0.9;
+  width: 20px;
+}
