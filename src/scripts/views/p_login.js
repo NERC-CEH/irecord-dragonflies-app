@@ -3,8 +3,9 @@
  *****************************************************************************/
 define([
     'views/_page',
+    'helpers/validate',
     'templates'
-], function (DefaultPage) {
+], function (DefaultPage, validate) {
     'use strict';
 
     var Page = DefaultPage.extend({
@@ -45,10 +46,22 @@ define([
          * appname and appsecret for the mentioned module.
          */
         login: function () {
-            //todo: add validation
-
             _log('views.LoginPage: start.', log.DEBUG);
+
             if (navigator.onLine) {
+
+                //validate
+                var $inputEmail = $('[name="email"] ');
+                $inputEmail.focusout(function () {
+                    var valid = validate.email($(this).val());
+                    var $inputBox = $('[name="email"]');
+                    if (!valid) {
+                        $inputBox.addClass('input-error');
+                    } else {
+                        $inputBox.removeClass('input-error');
+                    }
+                });
+
                 var person = {
                     //user logins
                     'email': this.$el.find('input[name=email]').val(),
@@ -60,13 +73,15 @@ define([
                 };
                 this.email = person.email; //save email for successful login
 
-                switch (app.CONF.LOGIN.STATUS) {
-                    case true:
-                        this.loginSend(person);
-                        break;
-                    case false:
-                    default:
-                        _log('views.LoginPage: unknown feature state', log.WARNING);
+                if (validate.email(person.email)) {
+                    switch (app.CONF.LOGIN.STATUS) {
+                        case true:
+                            this.loginSend(person);
+                            break;
+                        case false:
+                        default:
+                            _log('views.LoginPage: unknown feature state', log.WARNING);
+                    }
                 }
             } else {
                 app.message("<h2>You are offline!</h2>");

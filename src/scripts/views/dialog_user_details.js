@@ -4,8 +4,9 @@
 define([
     'jquery',
     'jquery.mobile',
+    'helpers/validate',
     'models/user'
-], function ($, jqm) {
+], function ($, jqm, validate) {
     var ContactDetailsDialog = function (callback) {
         var personalDetailsButtonID = "personal-details-dialog-button";
         var message =
@@ -50,14 +51,14 @@ define([
                 if (!name || !surname) {
                     return false;
                 }
-                return validateEmail(email);
+                return validate.email(email);
             }
         });
 
         //email check
         var $inputEmail = $('[name="user-email"] ');
         $inputEmail.focusout(function () {
-            var valid = validateEmail($(this).val());
+            var valid = validate.email($(this).val());
             var $inputBox = $('[name="user-email"]');
             if (!valid) {
                 $inputBox.addClass('input-error');
@@ -66,11 +67,6 @@ define([
             }
         });
     };
-
-    function validateEmail(email) {
-        var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
-    }
 
     return ContactDetailsDialog;
 });
