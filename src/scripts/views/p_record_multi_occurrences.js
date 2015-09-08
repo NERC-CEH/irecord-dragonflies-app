@@ -81,7 +81,6 @@ define([
                 }
 
                 morel.Geoloc.clear();
-                that.model.offAll();
 
                 if (window.navigator.onLine && app.models.user.hasSignIn() && app.models.user.get('autosync')) {
                     app.recordManager.syncAll(function (sample) {
@@ -100,14 +99,15 @@ define([
 
             var message =
                 '<h3><center>Did you record all species present?</center></h3>' +
+                '<fieldset data-role="controlgroup" data-type="horizontal" class="wide">' +
+                    '<button id="' + yesButtonID + '"' +
+                    'class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ' +
+                    'ui-mini">Yes</button>' +
 
-                '<button id="' + yesButtonID + '" style="width:43%"' +
-                'class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ' +
-                'ui-mini">Yes</button>' +
-
-                '<button id="' + noButtonID + '" style="width:43%"' +
-                'class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left ' +
-                'ui-mini">No</button>';
+                    '<button id="' + noButtonID + '"' +
+                    'class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left ' +
+                    'ui-mini">No</button>' +
+                '</fielset>';
 
             app.message(message, 0);
 

@@ -191,11 +191,14 @@ define([
 
         initialize: function () {
             this.render();
-            //update view on saved samples update
+            //update view on collection change
+            this.collection.on('reset', this.render, this);
             this.collection.on('update', this.render, this);
         },
 
         render: function () {
+            _log('views.SamplesList: render', log.DEBUG);
+
             this.$el.html(this.template());
             this.$list = this.$el.find('#samples-list');
             this.renderList();
@@ -232,7 +235,7 @@ define([
             this.$syncButton = this.$el.find('.sync');
 
             this.showSyncStatus();
-            //this.model.on('change', this.render, this);
+           // this.model.on('change', this.render, this);
             this.model.on('sync:done', this.showSyncStatus, this);
             this.model.on('sync:error', this.showSyncStatus, this);
             this.model.on('sync:request', this.showSync, this);
@@ -240,6 +243,8 @@ define([
         },
 
         render: function () {
+            _log('views.SamplesListItem: render', log.DEBUG);
+
             var templateData = {};
             templateData.id = this.model.id;
             templateData.date = this.model.get('date');

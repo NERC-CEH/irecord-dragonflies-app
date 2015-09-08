@@ -1,7 +1,7 @@
 <a href="#record/multi/occurrences/<%- id %>" data-id="<%- id %>"
    class="record-multi-occurrences-list-item">
     <div class="img-picker multi">
-        <input class="img-picker-file" type="file" accept="png|jpg|gif|jpeg" data-role="none"/>
+        <input class="img-picker-file" type="file" accept="image/*" data-role="none"/>
 
         <% if (img) { %>
             <div class="img-picker-display" style="background-image: none; border: 0px; height: 75px; width: 75px;">

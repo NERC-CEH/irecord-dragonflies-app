@@ -13,7 +13,7 @@
     <div class="core-inputs">
         <h3 id='record_species'></h3>
         <div class="img-picker">
-            <input class="img-picker-file" type="file" accept="png|jpg|gif|jpeg" data-role="none"/>
+            <input class="img-picker-file" type="file" accept="image/*" data-role="none"/>
             <div class="img-picker-display"></div>
         </div>
         <ul data-role="listview" class="core-inputs ui-nodisc-icon ui-alt-icon space-top">
