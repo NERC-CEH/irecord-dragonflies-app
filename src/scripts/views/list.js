@@ -5,8 +5,9 @@ define([
     'backbone',
     'models/species_list_sorts',
     'models/species_list_filters',
+    'helpers/gallery',
     'templates'
-], function (Backbone, sorts, filters) {
+], function (Backbone, sorts, filters, Gallery) {
     'use strict';
 
     var View = Backbone.View.extend({
@@ -170,6 +171,10 @@ define([
 
         template: app.templates.list_item,
 
+        events: {
+            'click img': 'showGallery'
+        },
+
         /**
          * Renders the individual list item representing the species.
          *
@@ -178,6 +183,11 @@ define([
         render: function () {
             this.$el.html(this.template(this.model.attributes));
             return this;
+        },
+
+        showGallery: function (e) {
+            (new Gallery(this.model)).show(0);
+            e.preventDefault();
         }
     });
 

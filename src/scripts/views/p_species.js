@@ -3,10 +3,10 @@
  *****************************************************************************/
 define([
     'views/_page',
-    'photoswipe',
+    'helpers/gallery',
     'templates',
     'd3'
-], function (Page, PhotoSwipe) {
+], function (Page, Gallery) {
     'use strict';
 
     var SpeciesPage = Page.extend({
@@ -18,8 +18,7 @@ define([
             'click #species-profile-fav-button': 'toggleSpeciesFavourite',
             'click #species-map': 'toggleMap',
             'click #species-map-button': 'toggleMap',
-            'click #gallery-button': 'showGallery',
-            'click #profile_pic': 'showGallery'
+            'click #gallery-button': 'showGallery'
         },
 
         initialize: function () {
@@ -58,10 +57,8 @@ define([
                 $favButton.removeClass("on");
             }
 
-            //add Gallery
-            this.initGallery();
-
-
+            //photos
+            this.gallery = null;
             this.startSwipe();
 
             //add Flight profile
@@ -110,7 +107,7 @@ define([
                 if (app.browser.isMobile()) {
                     imgs.find('img').on('tap', function (e) {
                         var id = $(this).data('id');
-                        that.gallery.show(id);
+                        that.showGallery(id);
                     });
                 }
             });
@@ -379,60 +376,19 @@ define([
         /**
          * Launches the species gallery viewing.
          */
-        showGallery: function () {
-            if ($('.gallery')) {
-                this.gallery.show(0);
+        showGallery: function (id) {
+            this.gallery || this._initGallery();
+
+            //prevents id being not number or out of range
+            if (id < this.gallery.originalImages.length) {
+                this.gallery.show(id);
             } else {
-                app.message('I have no pictures to show :(');
+                this.gallery.show(0);
             }
         },
 
-        /**
-         * Initializes the species gallery.
-         */
-        initGallery: function () {
-            var images = [],
-                img = {},
-                gallery = this.model.get('gallery'),
-                gallery_authors = this.model.get('gallery_authors'),
-                gallery_sex = this.model.get('gallery_sex'),
-                profile_pic_sex = this.model.get('profile_pic_sex'),
-                profile_pic_author = this.model.get('profile_pic_author');
-
-            //build image array
-            img = image(this.model.get('profile_pic'), profile_pic_author, profile_pic_sex);
-            images.push(img);
-            for (var i = 0; i < gallery.length; i++) {
-                img = image(gallery[i], gallery_authors[i], gallery_sex[i]);
-                images.push(img);
-            }
-
-            function image (url, author, sex) {
-                return {
-                    url: url,
-                    caption: sex + '  Ⓒ ' + author
-                };
-            }
-
-            this.gallery = PhotoSwipe.attach(images,
-                {
-                    jQueryMobile: true,
-                    preventSlideshow: true,
-                    allowUserZoom: true,
-                    loop: true,
-                    captionAndToolbarAutoHideDelay: 0,
-                    enableMouseWheel: true,
-                    enableKeyboard: true,
-
-                    preventHide: false,
-                    getImageSource: function(obj){
-                        return obj.url;
-                    },
-                    getImageCaption: function(obj){
-                        return obj.caption;
-                    }
-                }
-            );
+        _initGallery: function () {
+            this.gallery = new Gallery(this.model);
         }
     });
 
