@@ -1,16 +1,19 @@
-<center>
-    <img id='profile_pic' src="<%- profile_pic %>">
-
-    <div class="gallery" id="species_gallery" style="display:none">
-        <a href="<%- profile_pic %>">
-            <img src="<%- profile_pic %>" alt="<%- profile_pic_sex %> &nbsp&nbsp &copy; <%- profile_pic_author %>">
-        </a>
-        <% _.each( _.zip(gallery, gallery_authors, gallery_sex), function ( pic ) { %>
-        <a href="<%- pic[0] %>"><img src="<%- pic[0] %>" alt="<%- pic[2] %> &nbsp&nbsp &copy; <%- pic[1] %>"/></a>
+<div class="gallery" id="species_gallery">
+    <div class="images">
+        <img src="<%- profile_pic %>" data-id="0" alt="<%- profile_pic_sex %> &nbsp&nbsp &copy; <%- profile_pic_author %>">
+        <% _.each( _.zip(gallery, gallery_authors, gallery_sex), function ( pic, id) { %>
+            <img src="<%- pic[0] %>" data-id="<%- id + 1 %>" alt="<%- pic[2] %> &nbsp&nbsp &copy; <%- pic[1] %>"/>
         <% }); %>
     </div>
-
-    <% if (!general) { %>
+    <div class="progress">
+        <div class="circle circle-full" data-id="0"></div>
+        <% _.each(gallery, function ( pic, key ) { %>
+        <div class="circle" data-id="<%- key + 1 %>"></div>
+        <% }); %>
+    </div>
+</div>
+<center>
+   <% if (!general) { %>
     <div data-role="navbar" data-iconpos="left">
         <ul>
             <li style="border-right: 1px solid #dddddd;">

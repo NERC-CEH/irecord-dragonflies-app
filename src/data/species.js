@@ -560,26 +560,23 @@ app.data.species = [
     "type": "zygoptera"
   }, 
   {
-    "profile_pic": "images/ischnura_elegans_m_David_Kitching.jpg", 
+    "profile_pic": "images/ischnura_elegans_m_Aiwok.jpg", 
     "description": "Mature males always have a blue spot at the \"tail\" (S8), blue ante-humeral stripes on the thorax and blue eyes. Females vary with at least 5 different colour forms. The thoracic markings and the tail spot are violet in the immature form violacea, but salmon pink thorax and blue spot in the form \"rufescens\". When mature the female may be blue (like the male) in the form \"typica\", olive green thorax and brown spot in the form \"infuscans\" or pale brown thorax and brown spot in the form \"infuscans-obseleta\". Male and female both have bi-coloured pterostigma on the front wings.", 
     "habitat": "Found in a very wide range of lowland habitats including brackish or polluted water where it may be the only species present.", 
     "map": "images/Ischnura_elegans_new_final_.svg", 
     "general": "", 
     "gallery_authors": [
-      "David Kitching", 
       "David Kitching"
     ], 
     "common_name": "Blue-tailed Damselfly", 
-    "confusion_species": "18 and 15.",
+    "confusion_species": "18 and 15.", 
     "gallery_sex": [
-      "FEMALE", 
       "FEMALE"
     ], 
     "gallery": [
-      "images/Ischnura_elegans_f_rufescens_David_Kitching.jpg", 
-      "images/Ischnura_elegans_f_infuscans_David_Kitching.jpg"
+      "images/ischnura_elegans_normal_blue_f_David_Kitching.jpg"
     ], 
-    "profile_pic_author": "David Kitching", 
+    "profile_pic_author": "Aiwok", 
     "profile_pic_sex": "MALE", 
     "colour": {
       "blue": 1, 

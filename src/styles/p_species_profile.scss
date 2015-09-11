@@ -56,3 +56,35 @@ div.taxon {
 .confusion-species a {
   font-weight: normal;
 }
+
+/* Gallery */
+.gallery {
+  position: relative;
+}
+
+.gallery .images {
+  height: 60vw;
+  max-height: 400px;
+  position: relative;
+  overflow: hidden;
+  background-color: #3C3C3C;
+}
+
+.gallery .images img {
+  float: left;
+}
+
+.gallery .progress {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding-left: 45%;
+
+  background-color: rgba(10,10,10,0.3);
+}
+
+.gallery .progress .circle {
+  background: rgba(255,255,255,.25);
+}

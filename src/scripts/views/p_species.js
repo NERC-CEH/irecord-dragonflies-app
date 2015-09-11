@@ -3,10 +3,10 @@
  *****************************************************************************/
 define([
     'views/_page',
+    'photoswipe',
     'templates',
-    'd3',
-    'photoswipe'
-], function (Page) {
+    'd3'
+], function (Page, PhotoSwipe) {
     'use strict';
 
     var SpeciesPage = Page.extend({
@@ -61,6 +61,9 @@ define([
             //add Gallery
             this.initGallery();
 
+
+            this.startSwipe();
+
             //add Flight profile
             this.addFlightData();
 
@@ -72,6 +75,107 @@ define([
             $.get(this.model.attributes.map, function(data) {
                 $mapsHolder.append(new XMLSerializer().serializeToString(data.documentElement));
             });
+        },
+
+        startSwipe: function () {
+            var that = this,
+                WIDTH = $('#species').width(),
+                currentImg = 0,
+                maxImages = this.model.get('gallery').length + 1,
+                speed = 500,
+                imgs = null,
+
+                swipeOptions = {
+                    triggerOnTouchEnd: false,
+                    swipeStatus: swipeStatus,
+                    allowPageScroll: "vertical",
+                    threshold: 75
+                };
+
+            var $img = $('#species_gallery .images img');
+            $img.attr('style','width:' + WIDTH);
+
+            var $progressCircles = this.$el.find('.gallery .progress div');
+
+            $(function () {
+                imgs = $('#species_gallery .images');
+                imgs.width(maxImages * WIDTH);
+                imgs.swipe(swipeOptions);
+
+                /**
+                 * Tap handler for touchswipe does not work on Desktop computers -
+                 * it is always fired even if we are swiping.
+                 * Therfore, we disable gallery launch for non touch devices.
+                 */
+                if (app.browser.isMobile()) {
+                    imgs.find('img').on('tap', function (e) {
+                        var id = $(this).data('id');
+                        that.gallery.show(id);
+                    });
+                }
+            });
+
+
+            /**
+             * Catch each phase of the swipe.
+             * move : we drag the div
+             * cancel : we animate back to where we were
+             * end : we animate to the next image
+             */
+            function swipeStatus(event, phase, direction, distance) {
+                //If we are moving before swipe, and we are going L or R in X mode, or U or D in Y mode then drag.
+                if (phase == "move" && (direction == "left" || direction == "right")) {
+                    var duration = 0;
+
+                    if (direction == "left") {
+                        scrollImages((WIDTH * currentImg) + distance, duration);
+                    } else if (direction == "right") {
+                        scrollImages((WIDTH * currentImg) - distance, duration);
+                    }
+
+                } else if (phase == "cancel") {
+                    scrollImages(WIDTH * currentImg, speed);
+                } else if (phase == "end") {
+                    if (direction == "right") {
+                        previousImage();
+                    } else if (direction == "left") {
+                        nextImage();
+                    }
+                }
+            }
+
+            function previousImage() {
+                currentImg = Math.max(currentImg - 1, 0);
+                scrollImages(WIDTH * currentImg, speed);
+                updateCircleProgress(currentImg);
+            }
+
+            function nextImage() {
+                currentImg = Math.min(currentImg + 1, maxImages - 1);
+                scrollImages(WIDTH * currentImg, speed);
+                updateCircleProgress(currentImg);
+            }
+
+            /**
+             * Manually update the position of the imgs on drag
+             */
+            function scrollImages(distance, duration) {
+                imgs.css("transition-duration", (duration / 1000).toFixed(1) + "s");
+
+                //inverse the number we set in the css
+                var value = (distance < 0 ? "" : "-") + Math.abs(distance).toString();
+                imgs.css("transform", "translate(" + value + "px,0)");
+            }
+
+            var updateCircleProgress = function(number) {
+                $progressCircles.each(function () {
+                    if ($(this).data('id') !== number) {
+                        $(this).removeClass('circle-full');
+                    } else {
+                        $(this).addClass('circle-full');
+                    }
+                })
+            }
         },
 
         appendEventListeners: function () {
@@ -287,19 +391,48 @@ define([
          * Initializes the species gallery.
          */
         initGallery: function () {
-            var images = $('#species_gallery a');
+            var images = [],
+                img = {},
+                gallery = this.model.get('gallery'),
+                gallery_authors = this.model.get('gallery_authors'),
+                gallery_sex = this.model.get('gallery_sex'),
+                profile_pic_sex = this.model.get('profile_pic_sex'),
+                profile_pic_author = this.model.get('profile_pic_author');
 
-            if (images.length > 0) {
-                this.gallery = images.photoSwipe({
+            //build image array
+            img = image(this.model.get('profile_pic'), profile_pic_author, profile_pic_sex);
+            images.push(img);
+            for (var i = 0; i < gallery.length; i++) {
+                img = image(gallery[i], gallery_authors[i], gallery_sex[i]);
+                images.push(img);
+            }
+
+            function image (url, author, sex) {
+                return {
+                    url: url,
+                    caption: sex + '  Ⓒ ' + author
+                };
+            }
+
+            this.gallery = PhotoSwipe.attach(images,
+                {
                     jQueryMobile: true,
                     preventSlideshow: true,
                     allowUserZoom: true,
                     loop: true,
                     captionAndToolbarAutoHideDelay: 0,
                     enableMouseWheel: true,
-                    enableKeyboard: true
-                });
-            }
+                    enableKeyboard: true,
+
+                    preventHide: false,
+                    getImageSource: function(obj){
+                        return obj.url;
+                    },
+                    getImageCaption: function(obj){
+                        return obj.caption;
+                    }
+                }
+            );
         }
     });
 
