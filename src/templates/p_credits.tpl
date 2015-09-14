@@ -46,6 +46,7 @@
             <ul>
                 <li><p>Alan Davies</p></li>
                 <li><p>António A Gonçalves</p></li>
+                <li><p>B. Tettenborn</p></li>
                 <li><p>Damian Pinguey</p></li>
                 <li><p>Dave Ashton</p></li>
                 <li><p>Dave Mitchell</p></li>
@@ -65,6 +66,7 @@
                 <li><p>Mark Tyrrell</p></li>
                 <li><p>Martin D Parr</p></li>
                 <li><p>Montse Poch</p></li>
+                <li><p>Nadine Mitschunas</p></li>
                 <li><p>Neil Malton</p></li>
                 <li><p>Nik Janssen</p></li>
                 <li><p>Pam Taylor</p></li>
@@ -72,6 +74,7 @@
                 <li><p>Paul Ashton</p></li>
                 <li><p>Peter Hunt</p></li>
                 <li><p>Piet Spaans</p></li>
+                <li><p>Piotr Mikolajczuk</p></li>
                 <li><p>Quartl</p></li>
                 <li><p>Robert Geerts</p></li>
                 <li><p>Stan and Dee Maddams</p></li>
