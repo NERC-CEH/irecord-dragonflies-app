@@ -45,6 +45,8 @@ This will create a `dist` folder with the app code and its dependencies.
 node app.js
 ```
 
+Note: Make sure the server MIME has **application/json** 
+
 
 ## Bugs and feature requests
 
