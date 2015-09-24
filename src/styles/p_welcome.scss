@@ -11,10 +11,9 @@ $width: 500vw;
 }
 
 #welcome-footer {
-  width: 50%;
+  width: 100%;
 
   margin-left: auto;
-  margin-right: auto;
   margin-bottom: 10px;
   background-color: rgba(0,0,0,0) !important;
 }
@@ -60,9 +59,11 @@ $width: 500vw;
   color: rgb(51, 38, 38);
   background-color: rgba(245,245,245,.86);
   border-color: #E8E8E8;
-  width: 100%;
+  max-width: 500px;
+  width:100%;
   height: 56px;
-  margin: 0;
+  display: block;
+  margin: 0 auto;
 }
 
 .progress {
