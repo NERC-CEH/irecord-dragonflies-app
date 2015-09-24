@@ -86,7 +86,9 @@ browser) {
         toggleListControls: function (e) {
             if (this.listControlsView.$el.is(":hidden")) {
                 this.listControlsView.$el.slideDown("slow");
+                this.$list.addClass("ui-state-disabled");
             } else {
+                this.$list.removeClass("ui-state-disabled");
                 this.listControlsView.$el.slideUp("slow");
             }
         },
