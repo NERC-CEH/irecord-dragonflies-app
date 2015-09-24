@@ -3,7 +3,7 @@
 This is a British Dragonfly identification and recording mobile web application. 
 HTML5 based offline mobile app linked to [iRecord](http://www.brc.ac.uk/irecord/) website.
 
-Live: [British Dragonfly Society](http://www.british-dragonflies.org.uk/mobile)
+Live: [iRecord Dragonflies](http://www.irecord.org.uk/dragonflies)
 
 
 ## Configuration

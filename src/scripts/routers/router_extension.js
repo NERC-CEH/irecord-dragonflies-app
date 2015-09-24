@@ -52,7 +52,7 @@ define([
                 }
 
                 this.trigger.apply(this, ['route:' + name].concat(args));
-
+                this.trigger('route', name, args);
                 Backbone.history.trigger('route', this, name, args);
             }, this));
 

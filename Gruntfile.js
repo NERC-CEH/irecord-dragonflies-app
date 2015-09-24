@@ -78,6 +78,14 @@ module.exports = function (grunt) {
                         expand: true, flatten: true
                     }
                 ]
+            },
+
+            test: {
+                files: [
+                    {
+                        src: "test/*", dest: 'dist/scripts/'
+                    }
+                ]
             }
         },
 
@@ -322,6 +330,6 @@ module.exports = function (grunt) {
 
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask('init', ['bower', 'replace:indexedDBShim', 'replace:latlon', 'uglify']);
-    grunt.registerTask('build', ['copy', 'sass', 'cssmin', 'jst', 'replace:main', 'requirejs']);
+    grunt.registerTask('build', ['copy:main', 'sass', 'cssmin', 'jst', 'replace:main', 'requirejs']);
     grunt.registerTask('default', ['init', 'build']);
 };
