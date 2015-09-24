@@ -17,5 +17,7 @@
         <a href='#login'
            class="ui-btn ui-alt-icon ui-nodisc-icon ui-icon-user ui-btn-icon-right">Sign in</a>
     </div>
-    <div id="samples-list-placeholder"></div>
+    <div id="samples-list-placeholder">
+        <img class="loading" src="styles/images/ajax-loader.gif"/>
+    </div>
 </div>
