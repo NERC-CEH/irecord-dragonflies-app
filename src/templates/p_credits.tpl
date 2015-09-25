@@ -25,6 +25,9 @@
                     <p>Claire Install (BDS, app species information and corrections)</p>
                 </li>
                 <li>
+                    <p>Genevieve Dalley (BDS, app video)</p>
+                </li>
+                <li>
                     <p>Jim Bacon (CEH, app development support)</p>
                 </li>
                 <li>
