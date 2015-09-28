@@ -29,10 +29,18 @@ cd irecord-dragonfly-app && npm install
 ```
 
 - Build the library: 
+`Production`
 
 ```bash
 grunt
 ```
+
+`Testing/development` 
+
+```bash
+grunt bower dev
+```
+
 
 This will create a `dist` folder with the app code and its dependencies.
 

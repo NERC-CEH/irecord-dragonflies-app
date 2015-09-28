@@ -1,6 +1,7 @@
 module.exports = function (grunt) {
     var DEST = 'dist/scripts/';
     var CONF_NAME = 'conf.js';
+    var CONF_DEV_NAME = 'conf-dev.js';
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -143,7 +144,7 @@ module.exports = function (grunt) {
             },
             //App NAME and VERSION
             main: {
-                src: [DEST + CONF_NAME],
+                src: [DEST + CONF_NAME, DEST + CONF_DEV_NAME],
                 overwrite: true, // overwrite matched source files
                 replacements: [{
                     from: /(app.VERSION =).*version grunt replaced/g, // string replacement
@@ -154,6 +155,25 @@ module.exports = function (grunt) {
                         to: '$1 \'<%= pkg.name %>\';'
                     }
                 ]
+            },
+
+            //App configuration
+            config: {
+                src: [DEST + 'main.js'],
+                overwrite: true, // overwrite matched source files
+                replacements: [{
+                    from: /\'conf\': \'.*\'/g, // string replacement
+                    to: '\'conf\': \'conf\''
+                }]
+            },
+
+            dev_config: {
+                src: [DEST + 'main.js'],
+                overwrite: true, // overwrite matched source files
+                replacements: [{
+                    from: /\'conf\': \'.*\'/g, // string replacement
+                    to: '\'conf\': \'conf-dev\''
+                }]
             }
         },
 
@@ -305,7 +325,7 @@ module.exports = function (grunt) {
                 options: {
                     verbose: true,
                     baseUrl: "dist/scripts/",
-                    mainConfigFile: 'src/scripts/main.js',
+                    mainConfigFile: 'dist/scripts/main.js',
                     name: "main",
                     out: "dist/scripts/main-built.js",
 
@@ -329,7 +349,30 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
 
     // the default task can be run just by typing "grunt" on the command line
-    grunt.registerTask('init', ['bower', 'replace:indexedDBShim', 'replace:latlon', 'uglify']);
-    grunt.registerTask('build', ['copy:main', 'sass', 'cssmin', 'jst', 'replace:main', 'requirejs']);
-    grunt.registerTask('default', ['init', 'build']);
+    grunt.registerTask('init', [
+        'replace:indexedDBShim',
+        'replace:latlon',
+        'uglify',
+        'copy:main',
+        'sass',
+        'cssmin',
+        'jst',
+        'replace:main'
+    ]);
+    grunt.registerTask('build', [
+        'init',
+        'replace:config',
+        'requirejs'
+    ]);
+    grunt.registerTask('default', [
+        'bower',
+        'build'
+    ]);
+
+    //Development run
+    grunt.registerTask('dev', [
+        'init',
+        'replace:dev_config',
+        'requirejs'
+    ]);
 };

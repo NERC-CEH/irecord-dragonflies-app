@@ -22,7 +22,7 @@ define(['morel', 'helpers/log'], function () {
         },
         LOGIN: {
             STATUS: true,
-            URL: "http://www.brc.ac.uk/irecord/user/mobile/register",
+            URL: "http://192.171.199.230/irecord7/user/mobile/register",
             TIMEOUT: 80000
         },
         REGISTER: {
@@ -113,29 +113,29 @@ define(['morel', 'helpers/log'], function () {
 
     //morel configuration
     app.CONF.morel = {
-        url: 'http://www.brc.ac.uk/irecord/mobile/submit',
-        appname: "ird",
-        appsecret: "irdpass",
+        url: 'http://192.171.199.230/irecord7/mobile/submit',
+        appname: "test",
+        appsecret: "mytest",
         website_id: 23,
-        survey_id: 350,
+        survey_id: 267,
         Storage: morel.DatabaseStorage
     };
 
     $.extend(true, morel.Sample.keys, {
         name: {
-            id: 6
+            id: 574
         },
         surname: {
-            id: 7
+            id: 575
         },
         email: {
-            id: 8
+            id: 572
         },
         location_accuracy: {
-            id: 282
+            id: 576
         },
         recorded_all: {
-            id: 62
+            id: 573
         }
     });
 
@@ -151,39 +151,39 @@ define(['morel', 'helpers/log'], function () {
 
     $.extend(true, morel.Occurrence.keys, {
         number: {
-            id: 505, values: numberRanges
+            id: 391, values: numberRanges
         },
         adult: {
-            id: 34, values: numberRanges
+            id: 397, values: numberRanges
         },
         copulating: {
-            id: 35, values: numberRanges
+            id: 396, values: numberRanges
         },
         ovipositing: {
-            id: 36, values: numberRanges
+            id: 395, values: numberRanges
         },
         larvae: {
-            id: 37, values: numberRanges
+            id: 394, values: numberRanges
         },
         exuviae: {
-            id: 38, values: numberRanges
+            id: 393, values: numberRanges
         },
         emergent: {
-            id: 39, values: numberRanges
+            id: 392, values: numberRanges
         },
         stage: {
-            id: 506,
+            id: 390,
             values: {
-                Adult: 5703,
-                Copulating: 5704,
-                Ovipositing: 5705,
-                Larvae: 5706,
-                Exuviae: 5707,
-                Emergent: 5708
+                Adult: 4838,
+                Copulating: 4839,
+                Ovipositing: 4840,
+                Larvae: 4841,
+                Exuviae: 4841,
+                Emergent: 4843
             }
         },
         certain: {
-            id: 54
+            id: 398
         },
         taxon: {
             values: {
@@ -231,7 +231,7 @@ define(['morel', 'helpers/log'], function () {
                 42: 272228,
                 43: 272234,
                 44: 272236,
-                45: 107
+                45: 878675
             }
         }
     });

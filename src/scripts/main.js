@@ -5,6 +5,7 @@
     require.config({
         baseUrl: "scripts/",
         paths: {
+            'conf': '', //replaced with grunt
             'jquery': 'libs/jquery.min',
             'jquery.mobile': 'libs/jquery.mobile-1.4.5.min',
             'IndexedDBShim': 'libs/IndexedDBShim.min',
