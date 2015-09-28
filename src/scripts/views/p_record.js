@@ -4,7 +4,6 @@
 define([
     'views/_page',
     'morel',
-    'views/contact_details_dialog',
     'templates',
     'conf'
 ], function (DefaultPage, morel, contactDetailsDialog) {

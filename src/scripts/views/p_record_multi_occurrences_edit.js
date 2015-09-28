@@ -5,8 +5,7 @@ define([
     'views/_page',
     'templates',
     'morel',
-    'conf',
-    'helpers/jqm-spinbox'
+    'conf'
 ], function(DefaultPage) {
     'use strict';
 
