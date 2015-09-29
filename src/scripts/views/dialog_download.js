@@ -2,7 +2,7 @@
  * Asks the user to start an appcache download process.
  *****************************************************************************/
 define(['jquery'], function ($) {
-    var Download = function (callback) {
+    var Download = function (callback, silent) {
         //for some unknown reason on timeout the popup does not disappear
         setTimeout(function () {
             function onSuccess() {
@@ -27,7 +27,7 @@ define(['jquery'], function ($) {
                 _log(error, log.ERROR);
             }
 
-            startManifestDownload('appcache', onSuccess, onError);
+            startManifestDownload('appcache', onSuccess, onError, silent);
         }, 500);
     };
 
@@ -40,7 +40,7 @@ define(['jquery'], function ($) {
      * @param callback
      * @param onError
      */
-    function startManifestDownload (id, callback, onError) {
+    function startManifestDownload (id, callback, onError, silent) {
         /*todo: Add better offline handling:
          If there is a network connection, but it cannot reach any
          Internet, it will carry on loading the page, where it should stop it
@@ -53,8 +53,14 @@ define(['jquery'], function ($) {
                 //update
                 frame.contentWindow.applicationCache.update();
             } else {
+                var frameHtml = '<iframe id="' + id + '" src="' + src + '" width="215px" height="215px" scrolling="no" frameBorder="0"></iframe>';
+
                 //init
-                app.message('<iframe id="' + id + '" src="' + src + '" width="215px" height="215px" scrolling="no" frameBorder="0"></iframe>', 0);
+                if (silent) {
+                    $('body').append('<div style="display:none">' + frameHtml + '</div>')
+                } else {
+                    app.message(frameHtml, 0);
+                }
                 frame = document.getElementById(id);
 
                 //After frame loading set up its controllers/callbacks

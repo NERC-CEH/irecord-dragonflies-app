@@ -59,7 +59,7 @@
                   switch (e.type) {
                     case 'error':
                       var reason = e.originalEvent.message;
-                      if (e.originalEvent.message.search('exceed quota') >= 0) {
+                      if (reason && reason.search('exceed quota') >= 0) {
                         reason = 'Not enough space! </br>' +
                         'Try clearing your browser history.'
                       }

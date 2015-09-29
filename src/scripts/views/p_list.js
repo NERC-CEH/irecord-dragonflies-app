@@ -11,7 +11,7 @@ define([
     'tripjs',
     'templates'
 ], function (DefaultPage, ListView, ListControlsView, download, addHomescreenDialog,
-browser) {
+             browser) {
     'use strict';
 
     var Page = DefaultPage.extend({
@@ -57,8 +57,15 @@ browser) {
 
             //disable/enable downloading
             this.$footer = this.$el.find('#list-footer');
-            if (!browser.isMobile() || app.models.user.get('downloaded-app')) {
-              this.$footer.hide();
+
+            var downloaded = app.models.user.get('downloaded-app');
+            if (!browser.isMobile()) {
+                this.$footer.hide();
+
+                //silent desktop download
+                if (!downloaded) {
+                    download(null, true);
+                }
             }
 
             return this;
@@ -142,7 +149,7 @@ browser) {
 
         tripDownload: function () {
             var callback = function () {
-              app.views.listPage.$footer.hide();
+                app.views.listPage.$footer.hide();
             };
             addHomescreenDialog(function () {
                 if (app.CONF.OFFLINE.STATUS) {
