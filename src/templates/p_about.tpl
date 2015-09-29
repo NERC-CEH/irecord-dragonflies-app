@@ -28,7 +28,7 @@
                 verified by an expert before being added to the iRecord <a href="http://www.brc.ac.uk/irecord">website</a>
                 and also shared at 1km resolution via the NBN Gateway in the Dragonfly Recording Network dataset.</p>
 
-            <p>How the BDS uses records is explained in the DragonflyWatch strategy.</p>
+            <p>How the <a href="http://www.british-dragonflies.org.uk/">BDS</a> uses records is explained in the DragonflyWatch strategy.</p>
 
             <p>Thank you for taking part!</p>
         </li>
@@ -92,7 +92,7 @@
         </li>
         <li>
             <strong>The British Dragonfly Society</strong>
-            <p>The BDS is supporting a network of dragonfly professionals and volunteers,
+            <p>The <a href="http://www.british-dragonflies.org.uk/">BDS</a> is supporting a network of dragonfly professionals and volunteers,
                 experts and enthusiasts, all working to survey, monitor,
                 research and conserve dragonflies, learn more about
                 them and secure their future in Britain.</p>
