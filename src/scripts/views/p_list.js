@@ -59,13 +59,13 @@ define([
             this.$footer = this.$el.find('#list-footer');
 
             var downloaded = app.models.user.get('downloaded-app');
-            if (!browser.isMobile()) {
+            if (downloaded) {
                 this.$footer.hide();
 
-                //silent desktop download
-                if (!downloaded) {
-                    download(null, true);
-                }
+            //silent desktop download
+            } else if (!browser.isMobile()) {
+                this.$footer.hide();
+                download(null, true);
             }
 
             return this;
