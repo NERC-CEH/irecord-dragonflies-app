@@ -22,7 +22,7 @@ define(['morel', 'helpers/log'], function () {
         },
         LOGIN: {
             STATUS: true,
-            URL: "http://www.brc.ac.uk/irecord/user/mobile/register",
+            URL: "https://www.brc.ac.uk/irecord/user/mobile/register",
             TIMEOUT: 80000
         },
         REGISTER: {
@@ -113,7 +113,7 @@ define(['morel', 'helpers/log'], function () {
 
     //morel configuration
     app.CONF.morel = {
-        url: 'http://www.brc.ac.uk/irecord/mobile/submit',
+        url: 'https://www.brc.ac.uk/irecord/mobile/submit',
         appname: "ird",
         appsecret: "irdpass",
         website_id: 23,
@@ -183,7 +183,11 @@ define(['morel', 'helpers/log'], function () {
             }
         },
         certain: {
-            id: 54
+            id: 32,
+            values: {
+                'true': 663,
+                'false': 664
+            }
         },
         taxon: {
             values: {
