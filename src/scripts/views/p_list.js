@@ -84,6 +84,7 @@ define([
         appendEventListeners: function () {
             this.listenTo(app.models.user, 'change:filters', this.updateListControlsButton);
             app.recordManager.on('update', this.updateUserPageButton, this);
+            app.recordManager.on('sync:done', this.updateUserPageButton, this);
             this.appendBackButtonListeners();
         },
 
