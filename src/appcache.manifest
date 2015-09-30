@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#2
+#0
 
 CACHE:
 styles/main.min.css
@@ -179,6 +179,7 @@ images/anatomy.png
 images/anatomy2.png
 
 images/ajax-loader.gif
+styles/images/ajax-loader.gif
 images/app_logo.png
 images/BRC_approved_logo.png
 images/country_coastline.svg
