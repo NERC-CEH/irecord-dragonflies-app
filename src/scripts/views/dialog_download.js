@@ -12,7 +12,11 @@ define(['jquery'], function ($) {
                 //Send update to Google Analytics
                 if (app.CONF.GA.STATUS){
                     require(['ga'], function (ga) {
-                        ga('send', 'event', 'app', 'downloadSuccess');
+                        if (app.browser.isMobile()){
+                            ga('send', 'event', 'app', 'downloadSuccess');
+                        } else {
+                            ga('send', 'event', 'app', 'downloadDesktopSuccess');
+                        }
                     });
                 }
 
