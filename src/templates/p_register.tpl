@@ -16,10 +16,10 @@
     </div>
 
     <input type="text" data-role="none" placeholder="Email" name="email" value="" required>
-    <input type="text" data-role="none" placeholder="Firstname" name="firstname" value="" required>
-    <input type="text" data-role="none" placeholder="Surname" name="secondname" value="" required>
-    <input type="password" data-role="none" placeholder="Password" name="password" value="" required>
-    <input type="password" data-role="none" placeholder="Confirm password" name="password-confirm" value="" required>
+    <input type="text" data-role="none" placeholder="Firstname" name="name" value="" required>
+    <input type="text" data-role="none" placeholder="Surname" name="surname" value="" required>
+    <input type="password" data-role="none" placeholder="Password" name="pass" value="" required>
+    <input type="password" data-role="none" placeholder="Confirm password" name="passConf" value="" required>
     <br/>
 
     <ul data-role="listview">
