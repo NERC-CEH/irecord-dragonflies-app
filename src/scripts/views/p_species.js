@@ -66,8 +66,10 @@ define([
 
             //add Map
             var $mapsHolder = $('#maps-holder');
+            $mapsHolder.empty();
+
             $.get("images/country_coastline.svg", function(data) {
-                $mapsHolder.html(new XMLSerializer().serializeToString(data.documentElement));
+                $mapsHolder.append(new XMLSerializer().serializeToString(data.documentElement));
             });
             $.get(this.model.attributes.map, function(data) {
                 $mapsHolder.append(new XMLSerializer().serializeToString(data.documentElement));
