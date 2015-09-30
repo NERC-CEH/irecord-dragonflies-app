@@ -142,6 +142,10 @@ define([
                 xhr.responseText,
                 log.ERROR);
 
+            if (xhr.status === 409) {
+                xhr.responseText = 'An account with this email already exists.'
+            }
+
             $.mobile.loading('hide');
             app.message({message: xhr.responseText});
         }
