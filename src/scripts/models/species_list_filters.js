@@ -76,10 +76,20 @@ define([], function () {
                             var initCancelBtnId = "init-cancel-button";
 
                             var message =
-                                '<h3><center>Please set your location first.</center></h3></br>' +
+                                '<h2>Location filter</h2>' +
 
-                                '<button id="' + initBtn + '" class="ui-btn">Set Location</button>' +
-                                '<button id="' + initCancelBtnId + '" class="ui-btn">Cancel</button>';
+                                '<p>This will filter the species list by your location. ' +
+                                'Please set your location for the first time and try the filter again.</p>' +
+
+                                '<fieldset data-role="controlgroup" data-type="horizontal" class="wide">' +
+                                '<button id="' + initBtn + '"' +
+                                'class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left ' +
+                                'ui-mini">Set</button>' +
+
+                                '<button id="' + initCancelBtnId + '"' +
+                                'class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left ' +
+                                'ui-mini">Cancel</button>' +
+                                '</fielset>';
 
                             app.message(message, 0);
 
