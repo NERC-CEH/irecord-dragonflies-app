@@ -35,7 +35,18 @@
     <img src="images/app_logo.png" />
     <img src="images/sponsor_logo.png" style="width: 70%"/>
     <br/>
-    <img src="images/ajax-loader.gif" class="loader"/>
+    <div class="loader">
+      <img src="images/ajax-loader.gif" />
+      <div class="error"><!-- Error while loading --></div>
+      <noscript>
+        <style type="text/css">
+          .loader img {display:none;}
+        </style>
+        <div class="error">
+          Oh no! Looks like you don't have javascript enabled.
+        </div>
+      </noscript>
+    </div>
   </div>
 
   <script src="scripts/libs/require.min.js" data-main="scripts/main-built"></script>

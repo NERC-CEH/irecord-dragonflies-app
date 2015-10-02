@@ -339,8 +339,13 @@ input:focus {
   margin-right: 1px !important;
 }
 
-.loading img.loader {
+.loading .loader img {
   width: 50px;
+}
+
+.loading .loader .error {
+    margin-top: 20px;
+    color: #E85454;
 }
 
 ul.credits {

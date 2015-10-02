@@ -332,7 +332,7 @@ define([
                     text = 'Locating..';
                     break;
                 default:
-                    _log('views.RecordPage: ERROR no such GPS button state: ' + accuracy, log.WARNING);
+                    _log('views.RecordPage: no such GPS button state: ' + accuracy, log.WARNING);
             }
 
             this.$locationButton.find('.descript').html(text);

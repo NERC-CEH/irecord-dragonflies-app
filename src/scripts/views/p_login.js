@@ -174,7 +174,14 @@ define([
          * @param thrownError
          */
         onLoginError: function (xhr, ajaxOptions, thrownError) {
-            _log("views.LoginPage: ERROR " + xhr.status + " " + thrownError + ".", log.ERROR);
+            switch (xhr.status) {
+                case 401:
+                    //unauthorised
+                    break;
+                default:
+                    _log("views.LoginPage: " + xhr.status + " " + thrownError + ".", log.ERROR);
+            }
+
             var response = '';
             if (xhr.responseText == "Missing name parameter" || xhr.responseText.indexOf('Bad') >= 0) {
               response = 'Bad Username or Password';

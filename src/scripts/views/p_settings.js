@@ -58,6 +58,9 @@ define([
 
         updateLocationButton: function () {
             var value = this.model.get('location');
+            if (!value) {
+                return;
+            }
             var location = {
                 latitude: value.split(',')[0],
                 longitude: value.split(',')[1]

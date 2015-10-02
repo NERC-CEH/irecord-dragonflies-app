@@ -63,7 +63,7 @@ define([
          * appname and appsecret for the mentioned module.
          */
         register: function () {
-            _log('register: start.');
+            _log('views.registerPage: registration submit.', log.DEBUG);
             if (navigator.onLine) {
                 var data = new FormData();
 
@@ -120,8 +120,7 @@ define([
         },
 
         onSuccess: function (data) {
-            _log('register: success.');
-            $.mobile.loading('hide');
+            _log('views.registerPage: registration sucess.', log.DEBUG);
 
             var user = app.views.loginPage.extractUserDetails(data);
             user.email = app.views.registerPage.email;
@@ -136,17 +135,23 @@ define([
         },
 
         onError: function (xhr, ajaxOptions, thrownError) {
-            _log("register: ERROR " +
-                xhr.status + " " +
-                thrownError + " " +
-                xhr.responseText,
-                log.ERROR);
+            switch(xhr.status) {
+                case 409:
+                    //existing email
+                    xhr.responseText = 'An account with this email already exists.'
+                    break;
+                case 401:
+                    //Invalid password
+                    break;
+                default:
+                    _log("views.registerPage: " +
+                        xhr.status + " " +
+                        thrownError + " " +
+                        xhr.responseText,
+                        log.ERROR);
 
-            if (xhr.status === 409) {
-                xhr.responseText = 'An account with this email already exists.'
             }
 
-            $.mobile.loading('hide');
             app.message({message: xhr.responseText});
         }
 

@@ -37,6 +37,7 @@ define([
                     require(['ga'], function(ga) {
                         ga('set', 'appName', app.NAME);
                         ga('set', 'appVersion', app.VERSION);
+                        ga('set', 'dimension1', morel.VERSION);
                     });
                 }
 
@@ -69,6 +70,28 @@ define([
                 //turn off the loading splash screen
                 $('div.loading').css('display', 'none');
                 $('body').removeClass('loading');
+
+                //add more variables to Google Analytics
+                if (app.CONF.GA.STATUS) {
+                    require(['ga'], function(ga) {
+                        var userFilters = app.models.user.get('filters');
+                        var favourites = userFilters.favouritesGroup && userFilters.favouritesGroup.length,
+                            type = userFilters.typeGroup && userFilters.typeGroup.length,
+                            location = userFilters.probabilityGroup && userFilters.probabilityGroup.length,
+                            color = userFilters.colorGroup && userFilters.colorGroup.length;
+
+                        ga('set', {
+                            'dimension2': (app.models.user.hasSignIn() ? 'signed': ''),
+                            'dimension3': app.models.user.get('autosync') ? 'sync': '',
+                            'dimension4': app.models.user.get('sort'),
+
+                            'metric1': favourites,
+                            'metric2': type,
+                            'metric3': location,
+                            'metric4': color
+                        });
+                    });
+                }
             }
         };
         return App;
