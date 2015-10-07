@@ -32,6 +32,7 @@ define(['jquery'], function ($) {
 
             function onError(error) {
                 _log(error, log.ERROR);
+                app.message(error);
             }
 
             startManifestDownload('appcache', onSuccess, onError, silent);
