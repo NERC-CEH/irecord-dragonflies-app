@@ -2,8 +2,8 @@
 	"name": "irecord-dragonflies",
 	"title": "iRecord Dragonflies",
 	"description": "iRecord Dragonflies mobile web application.",
-	"version": "1.0.1",
-	"homepage": "http://www.irecord.org.uk/dragonflies",
+	"version": "1.1.0",
+	"homepage": "http://irecord.org.uk/dragonflies",
 	"author": {
 		"name": "Karolis Kazlauskis",
 		"email": "karkaz@ceh.ac.uk",
