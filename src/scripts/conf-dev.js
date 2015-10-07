@@ -17,7 +17,7 @@ define(['morel', 'helpers/log'], function () {
         },
         GA: {
             //Google Analytics settings
-            STATUS: true,
+            STATUS: false,
             ID: 'UA-58378803-2'
         },
         LOGIN: {
@@ -134,8 +134,19 @@ define(['morel', 'helpers/log'], function () {
         location_accuracy: {
             id: 576
         },
+        location_name: {
+            id: 274
+        },
         recorded_all: {
             id: 573
+        },
+        survey_area: {
+            id: 323,
+            values: {
+                'point': 3068,
+                '100m': 3069,
+                '1km': 3070
+            }
         }
     });
 

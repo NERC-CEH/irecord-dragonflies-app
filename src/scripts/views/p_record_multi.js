@@ -14,6 +14,10 @@ define([
 
         template: app.templates.p_record_multi,
 
+        events: {
+            'change input[type=radio]': 'setSurveyArea'
+        },
+
         initialize: function () {
             _log('views.RecordMultiPage: initialize', log.DEBUG);
 
@@ -45,10 +49,13 @@ define([
                     this.initRecording();
                 default:
             }
+
+            this.trip();
         },
 
         initRecording: function () {
             this.model = new morel.Sample();
+            this.model.set('survey_area', 'point');
             app.models.sampleMulti = this.model;
 
             this.model.on('change:comment', this.updateCommentButton, this);
@@ -160,6 +167,42 @@ define([
             var ellipsis = value && value.length > 20 ? '...' : '';
             value = value ? value.substring(0, 20) + ellipsis : ''; //cut it down a bit
             this.$commentButton.html(value);
+        },
+
+        /**
+         * Updates sample level survey area attribute.
+         */
+        setSurveyArea: function (e) {
+            this.model.set('survey_area', $(e.currentTarget).val());
+        },
+
+        /**
+         * Shows the user around the page.
+         */
+        trip: function () {
+            var finishedTrips = app.models.user.get('trips') || [];
+            if (finishedTrips.indexOf('record-multi') < 0) {
+                finishedTrips.push('record-multi');
+                app.models.user.set('trips', finishedTrips);
+                app.models.user.save();
+
+                var okBtnID = 'OK-dialog-button';
+                var  message =
+                    '<div class="add-homescreen">' +
+                    '<center><h2>Multi Recording</h2></center>' +
+                    '<p>Use this to record all of the dragonflies you see during a walk/survey ' +
+                    'of a site. You can build up a list of the species seen, alter ' +
+                    'the numbers of each species stage as you go along and more.</p>' +
+                    '<button id="' + okBtnID + '">OK</button>' +
+                    '</div>';
+
+                app.message(message, 0);
+
+                $('#' + okBtnID).on('click', function () {
+                    $.mobile.loading('hide');
+                });
+            }
+
         }
     });
 

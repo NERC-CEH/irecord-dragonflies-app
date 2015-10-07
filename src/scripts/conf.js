@@ -134,8 +134,19 @@ define(['morel', 'helpers/log'], function () {
         location_accuracy: {
             id: 282
         },
+        location_name: {
+            id: 274
+        },
         recorded_all: {
             id: 62
+        },
+        survey_area: {
+            id: 323,
+            values: {
+                'point': 3068,
+                '100m': 3069,
+                '1km': 3070
+            }
         }
     });
 

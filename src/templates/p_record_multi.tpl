@@ -11,10 +11,20 @@
 </div>
 <div data-role="content">
     <div class="info-message">
-        <p>Use this to record all of the dragonflies you see during a walk/survey
-            of a site. You can build up a list of the species seen, alter
-            the numbers of each species stage as you go along and more.
+        <p>Please select the approximate size of your survey area:</p>
     </div>
+
+    <fieldset data-role="controlgroup" data-iconpos="right">
+        <input type="radio" name="survey-area" id="survey-area-point" value="point" checked="checked">
+        <label for="survey-area-point">Point location</label>
+
+        <input type="radio" name="survey-area" id="survey-area-100m" value="100m">
+        <label for="survey-area-100m">100m x 100m</label>
+
+        <input type="radio" name="survey-area" id="survey-area-1km" value="1km">
+        <label for="survey-area-1km">1km x 1km</label>
+    </fieldset>
+
     <ul data-role="listview" class="core-inputs ui-nodisc-icon ui-alt-icon space-top">
         <li>
             <a href="#location/multi" id="record-multi-location"
