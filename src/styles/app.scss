@@ -109,6 +109,10 @@ label, form label {
   width: auto;
 }
 
+.ui-mobile label {
+  font-size: 15px;
+}
+
 /* Increase label width compared to standard jQM. */
 @media (min-width: 28em) {
   .ui-field-contain > label,
@@ -273,7 +277,7 @@ input.dark-border {
 
 .ui-checkbox input,
 .ui-radio input {
-  top: 10%;
+  top: 0;
 }
 
 input:focus {
