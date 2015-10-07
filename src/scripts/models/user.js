@@ -3,10 +3,11 @@
  *****************************************************************************/
 define([
     'backbone',
+    'helpers/location',
     'backbone.localStorage',
     'conf',
     'latlon'
-], function (Backbone) {
+], function (Backbone, locHelp) {
     'use strict';
 
     var User = Backbone.Model.extend({
@@ -17,8 +18,7 @@ define([
             surname: '',
             email: '',
             secret: '',
-            location: null,
-            location_acc: -1,
+            locations: [],
             autosync: true,
             sort: 'common_name',
             sortMulti: 'common_name',
@@ -83,10 +83,28 @@ define([
          *
          * @param location
          */
-        saveLocation: function (location) {
-            this.set('location', location.latitude + ', ' + location.longitude);
-            this.set('location_acc', location.accuracy);
-            this.save();
+        setLocation: function (location) {
+            var MAX_LENGTH = 3; //max number of locations to store
+            var locations = this.get('locations'),
+                exists = false;
+
+            //check if exists
+            locations.forEach(function (loc) {
+                if (loc.latitude === location.latitude && loc.longitude === location.longitude) {
+                    exists = true;
+                }
+            });
+
+            if (!exists) {
+                //add
+                locations.splice(0, 0, location);
+                if (locations.length > MAX_LENGTH) {
+                    locations.length = MAX_LENGTH
+                }
+                this.set('locations', locations);
+                this.trigger('change:locations');
+                this.save();
+            }
         },
 
         /**
@@ -95,18 +113,16 @@ define([
          * @param geoloc
          * @returns {*}
          */
-        getLocationSref: function (geoloc) {
+        getLocationSref: function (location) {
             var LOCATION_GRANULARITY = 2; //Precision of returned grid reference (6 digits = metres).
 
-            geoloc = geoloc || this.get('location');
-            if (!geoloc) {
+            location = location || this.get('locations')[0];
+            if (!location) {
                 return null;
             }
-            //get translated geoloc
-            var p = new LatLon(geoloc.split(',')[0], geoloc.split(',')[1], LatLon.datum.WGS84);
-            var grid = OsGridRef.latLonToOsGrid(p);
-            var gref = grid.toString(LOCATION_GRANULARITY);
-            _log('models.User: converted geoloc to sref -  ' + gref + ".", log.DEBUG);
+
+            //get translated location
+            var gref = locHelp.coord2grid(location, LOCATION_GRANULARITY);
 
             //remove the spaces
             return gref.replace(/ /g, '');
