@@ -17,6 +17,7 @@
                 <li><a href="#gps" data-ajax="false" class="gps">GPS</a></li>
                 <li><a href="#map" data-ajax="false">Map</a></li>
                 <li><a href="#gref" data-ajax="false">Grid Ref</a></li>
+                <li><a href="#previous" data-ajax="false">Past</a></li>
             </ul>
         </div>
         <div id="gps" class="ui-body-d ui-content">
@@ -40,5 +41,10 @@
             <button id="grid-ref-set"
                     class="ui-btn ui-btn-inset ui-btn-narrow">Set</button>
         </div>
-    </div>
+        <div id="previous" class="ui-body-d ui-content">
+            <div class="info-message" id="previous-location-message">
+                <p>Please tap on your previous location. </p>
+            </div>
+            <div id="user-locations"></div>
+        </div>
 </div>

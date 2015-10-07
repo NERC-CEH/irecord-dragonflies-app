@@ -3,10 +3,11 @@
  *****************************************************************************/
 define([
     'views/_page',
+    'helpers/location',
     'templates',
     'latlon',
     'conf'
-], function (DefaultPage) {
+], function (DefaultPage, locHelp) {
 
     'use strict';
 
@@ -55,16 +56,28 @@ define([
 
         render: function () {
             _log('views.LocationPage: render', log.DEBUG);
+            var that = this;
 
             this.$el.html(this.template());
             $('body').append($(this.el));
 
             $('#location-opts').tabs().tabs( "option", "disabled", [1] ); //disable map
 
-            this.$locationMessage = $('#location-message');
-            this.$coordinates = $('#coordinates');
-            this.$locationGPSPlaceholder = $('#location-gps-placeholder');
-            this.$gpsButton = $('#gps-button');
+            this.$locationMessage = this.$el.find('#location-message');
+            this.$previousLocationMessage = this.$el.find('#previous-location-message');
+            this.$coordinates = this.$el.find('#coordinates');
+            this.$locationGPSPlaceholder = this.$el.find('#location-gps-placeholder');
+            this.$gpsButton = this.$el.find('#gps-button');
+
+            var userLocationsView = new UserLocationsView({
+                model: app.models.user,
+                onLocationClick: function (location) {
+                    that.$previousLocationMessage.remove();
+                    that.set(location.latitude, location.longitude, location.accuracy, location.name);
+                    that.updateLocationMessage();
+                }
+            });
+            $('#user-locations').html(userLocationsView.render().$el);
             return this;
         },
 
@@ -104,13 +117,12 @@ define([
          */
         updateLocationMessage: function () {
             //convert coords to Grid Ref
-            var location = this.get();
-            var p = new LatLon(location.latitude, location.longitude, LatLon.datum.WGS84);
-            var grid = OsGridRef.latLonToOsGrid(p);
-            var gref = grid.toString();
+            var location = this.get(),
+                gref = locHelp.coord2grid(location);
+
             var type = 'Grid Ref';
             //if not in UK
-            if (!gref) {
+            if (!gref && location) {
                 type = 'Coordinates';
                 gref = location.latitude.toFixed(4) + ', ' + location.longitude.toFixed(4);
             }
@@ -136,7 +148,7 @@ define([
                 this.model.set('location_accuracy', parseInt(location.accuracy.toFixed(0)));
                 this.model.set('location_name', location.name);
 
-                app.models.user.saveLocation(location);
+                app.models.user.setLocation(location);
             } else {
                 _log('views.LocationPage: invalid location to set', log.WARNING);
             }
@@ -154,7 +166,7 @@ define([
         set: function (latitude, longitude, accuracy, name) {
             this.latitude = latitude;
             this.longitude = longitude;
-            this.accuracy = accuracy;
+            this.accuracy = accuracy || -1;
             this.name = name || ''
         },
 
@@ -250,7 +262,9 @@ define([
                         that.state = 'init';
                         that.updateButtonStatus();
 
-                        app.message(err.message);
+                        if (err.number != morel.Geoloc.TIMEOUT_ERR){
+                            app.message(err.message);
+                        }
                         app.views.locationPage.renderGPStab();
                         return;
                     }
@@ -407,32 +421,12 @@ define([
             var val = $('#grid-ref').val();
             var name = $('#location-name').val();
 
-            var gridref = OsGridRef.parse(val);
-            gridref = normalizeGridRef(gridref);
-
-            if (!isNaN(gridref.easting) && !isNaN(gridref.northing)) {
-                var latLon = OsGridRef.osGridToLatLon(gridref, LatLon.datum.WGS84);
+            var latLon = locHelp.grid2coord(val);
+            if (latLon) {
                 this.set(latLon.lat, latLon.lon, 1, name);
 
                 $('#gref-message').hide();
                 this.updateLocationMessage();
-            }
-
-            function normalizeGridRef(gridref) {
-                // normalise to 1m grid, rounding up to centre of grid square:
-                var e = gridref.easting;
-                var n = gridref.northing;
-
-                switch (gridref.easting.toString().length) {
-                    case 1: e += '50000'; n += '50000'; break;
-                    case 2: e += '5000'; n += '5000'; break;
-                    case 3: e += '500'; n += '500'; break;
-                    case 4: e += '50'; n += '50'; break;
-                    case 5: e += '5'; n += '5'; break;
-                    case 6: break; // 10-digit refs are already 1m
-                    default: return new OsGridRef(NaN, NaN);
-                }
-                return new OsGridRef(e, n);
             }
         },
 
@@ -446,6 +440,54 @@ define([
             script.type = 'text/javascript';
             script.src = src;
             document.body.appendChild(script);
+        }
+    });
+
+    var UserLocationsView = Backbone.View.extend({
+        tagName: 'ul',
+        attributes: {
+            'data-role': 'listview'
+        },
+
+        initialize: function (options) {
+            this.model = options.model;
+            this.onLocationClick = options.onLocationClick;
+            this.model.on('change:locations', this.update, this);
+        },
+
+        render: function () {
+            var that = this;
+
+            //update previous locations
+            var previousLocations = this.model.get('locations');
+            previousLocations.forEach(function (location, index) {
+                //convert coords to Grid Ref
+                var gref = locHelp.coord2grid(location);
+
+                //if not in UK
+                if (!gref) {
+                    gref = location.latitude.toFixed(4) + ', ' + location.longitude.toFixed(4);
+                }
+
+                that.$el.append('<li data-id="' + index + '">' +
+                    (location.name ? '<strong>' + location.name + '</strong>' : '') +
+                    '<p>' + gref + '</p></li>')
+            });
+
+            this.$el.find('li').on('click', function (e) {
+                var locations = app.models.user.get('locations'),
+                    id = $(this).data('id');
+
+                that.onLocationClick(locations[id]);
+            });
+
+            return this;
+        },
+
+        update: function () {
+            this.$el.empty();
+            this.render();
+            this.$el.listview('refresh');
         }
     });
 
