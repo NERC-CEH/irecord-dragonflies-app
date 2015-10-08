@@ -1,10 +1,10 @@
 ![iRecord Dragonfly](https://github.com/NERC-CEH/irecord-dragonfly-app/blob/master/src/images/app_logo.png)
 
 This is a British Dragonfly identification and recording mobile web application. 
-HTML5 based offline mobile app linked to [iRecord](http://www.brc.ac.uk/irecord/) website.
+HTML5 based offline-first web app linked to [iRecord](http://www.brc.ac.uk/irecord/) website.
 
-Live: [iRecord Dragonflies](http://www.irecord.org.uk/dragonflies)
-Project: [homepage](http://www.brc.ac.uk/article/irecord-dragonflies-mobile-app)
+Live: [iRecord Dragonflies](http://irecord.org.uk/dragonflies)
+Project: [homepage](http://www.brc.ac.uk/app/irecord-dragonflies)
 
 ## Configuration
 
@@ -58,7 +58,7 @@ Note: Make sure the server MIME has **application/json**
 
 ## Bugs and feature requests
 
-Have a bug or a feature request? search for existing and closed issues. [Please open a new issue](https://github.com/NERC-CEH/mobile_dragonfly/issues).
+Have a bug or a feature request? search for existing and closed issues. [Please open a new issue](https://github.com/NERC-CEH/irecord-dragonfly-app/issues).
 
 
 ## Creators
