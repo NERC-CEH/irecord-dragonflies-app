@@ -4,8 +4,8 @@
 define(['morel', 'helpers/log'], function () {
     app = window.app || {};
 
-    app.VERSION = '0'; //version grunt replaced
-    app.NAME = 'app'; //name grunt replaced
+    app.VERSION = '{APP_VER}'; //replaced on build
+    app.NAME = '{APP_NAME}'; //replaced on build
 
     app.CONF = {
         GPS_ACCURACY_LIMIT: 100,

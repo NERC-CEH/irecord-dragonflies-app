@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#1.1.0
+#v{APP_VER} - replaced on build
 
 CACHE:
 styles/main.min.css

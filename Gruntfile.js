@@ -1,7 +1,9 @@
 module.exports = function (grunt) {
-    var DEST = 'dist/scripts/';
-    var CONF_NAME = 'conf.js';
-    var CONF_DEV_NAME = 'conf-dev.js';
+    var DEST = 'dist/',
+        SCRIPTS = 'dist/scripts/',
+        CONF_NAME = 'conf.js',
+        CONF_DEV_NAME = 'conf-dev.js',
+        MANIFEST_NAME = 'appcache.manifest';
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -144,22 +146,26 @@ module.exports = function (grunt) {
             },
             //App NAME and VERSION
             main: {
-                src: [DEST + CONF_NAME, DEST + CONF_DEV_NAME],
+                src: [
+                    SCRIPTS + CONF_NAME,
+                    SCRIPTS + CONF_DEV_NAME,
+                    DEST + MANIFEST_NAME
+                ],
                 overwrite: true, // overwrite matched source files
                 replacements: [{
-                    from: /(app.VERSION =).*version grunt replaced/g, // string replacement
-                    to: '$1 \'<%= pkg.version %>\';'
-                },
+                        from: /{APP_VER}/g, // string replacement
+                        to: '<%= pkg.version %>'
+                    },
                     {
-                        from: /(app.NAME =).*name grunt replaced/g,  // string replacement
-                        to: '$1 \'<%= pkg.name %>\';'
+                        from: /{APP_NAME}/g,  // string replacement
+                        to: '<%= pkg.name %>'
                     }
                 ]
             },
 
             //App configuration
             config: {
-                src: [DEST + 'main.js'],
+                src: [SCRIPTS + 'main.js'],
                 overwrite: true, // overwrite matched source files
                 replacements: [{
                     from: /\'conf\': \'.*\'/g, // string replacement
@@ -168,7 +174,7 @@ module.exports = function (grunt) {
             },
 
             dev_config: {
-                src: [DEST + 'main.js'],
+                src: [SCRIPTS + 'main.js'],
                 overwrite: true, // overwrite matched source files
                 replacements: [{
                     from: /\'conf\': \'.*\'/g, // string replacement
