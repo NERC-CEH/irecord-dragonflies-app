@@ -65,8 +65,17 @@ define([], function () {
     };
 
     var isHomeMode = function () {
-        return window.navigator.standalone ||
-            (window.external && window.external.msIsSiteMode && window.external.msIsSiteMode());
+        try {
+            var iOS = window.navigator.standalone,
+                IE = (window.external && window.external.msIsSiteMode && window.external.msIsSiteMode());
+
+            return iOS || IE;
+        } catch (err) {
+            _log(err, log.ERROR);
+
+            return false;
+        }
+
     };
 
     return {
