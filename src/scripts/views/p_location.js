@@ -41,7 +41,7 @@ define([
                  dummyText controls the caching of the file - always get fresh
                  */
                 var dummyText = '&' + (new Date()).getTime();
-                this.loadScript('http://maps.googleapis.com/maps/api/js?sensor=false&' +
+                this.loadScript('https://maps.googleapis.com/maps/api/js?sensor=false&' +
                     'callback=app.views.locationPage.initializeMap' +
                     dummyText
                 );
@@ -336,7 +336,7 @@ define([
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(-25.363, 131.044),
                 map: this.map,
-                icon: 'http://maps.google.com/mapfiles/marker_green.png',
+                icon: 'https://maps.google.com/mapfiles/marker_green.png',
                 draggable: true
             });
             marker.setVisible(false);

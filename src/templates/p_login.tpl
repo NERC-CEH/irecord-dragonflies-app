@@ -22,7 +22,7 @@
                class="ui-nodisc-icon ui-alt-icon ui-btn ui-icon-plus ui-btn-icon-right">Create new account</a>
         </li>
         <li data-icon="carat-r" class="last">
-            <a href="http://www.brc.ac.uk/irecord/user/password"
+            <a href="https://www.brc.ac.uk/irecord/user/password"
                class="ui-nodisc-icon ui-alt-icon ui-btn ui-icon-edit ui-btn-icon-right"
                rel="external">Request new password</a>
         </li>

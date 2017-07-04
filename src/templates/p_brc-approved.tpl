@@ -32,7 +32,7 @@
         <li>
             <p><strong>About BRC</strong></p>
             <p>
-                The <a href="http://www.brc.ac.uk" rel="external">Biological Records Centre</a> (BRC), established in 1964, is a national
+                The <a href="https://www.brc.ac.uk" rel="external">Biological Records Centre</a> (BRC), established in 1964, is a national
                 focus in the UK for terrestrial and freshwater species recording.
                 BRC works closely with the voluntary recording community, principally
                 through support of national recording schemes and societies. BRC is
@@ -45,7 +45,7 @@
             <p><strong>Which app should I use?</strong></p>
 
             <p>You might have noticed that several of
-                <a href="http://www.brc.ac.uk/apps" rel="external">BRC apps</a>
+                <a href="https://www.brc.ac.uk/apps" rel="external">BRC apps</a>
                 feature some of the same species?  We have introduced the BRC Approved
                 logo to signify that data from our apps all go to the same place.
                 Therefore, you are free to choose which app you use to record a given species.
